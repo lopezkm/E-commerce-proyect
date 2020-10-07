@@ -2,6 +2,7 @@ import React from 'react';
 import ProductCard from './product_card';
 import sc from '../styles/catalogue.module.css'
 
+
 const Catalogue = () => {
     const arr = [
         {
