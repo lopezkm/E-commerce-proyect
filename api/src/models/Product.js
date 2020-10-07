@@ -11,31 +11,38 @@ module.exports = (sequelize) => {
     description: {
       type: DataTypes.TEXT,
       allowNull: false,
-      defaultValue: 'Sin descripción'
+      defaultValue: 'no description'
     },
     price: {
       type: DataTypes.FLOAT,
       allowNull: false,
+      defaultValue: 0
     },
     stock: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      defaultValue: 0
     },
     media: {
       type: DataTypes.STRING,
       allowNull: false,
+      defaultValue: 'game media'
     },
     developer: {
       type: DataTypes.STRING,
       allowNull: false,
+      defaultValue: 'developer'
     },
     publisher: {
       type: DataTypes.STRING,
       allowNull: false,
+      defaultValue: 'publisher'
     },
     publishDate: {
       type: DataTypes.DATE,
       allowNull: false,
+      defaultValue: DataTypes.NOW
     },
   });
 };
+
