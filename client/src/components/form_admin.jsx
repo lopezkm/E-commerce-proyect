@@ -1,6 +1,6 @@
 import React from 'react';
 import { Nav, Form, Button, Navbar, FormControl } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 const FormAdmin = () => {
     return (

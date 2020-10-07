@@ -1,23 +1,33 @@
 import React from 'react';
 import ProdCard from './components/product_card.jsx';
+import Product from './components/product.jsx';
 import './App.css';
 import SearchBar from './components/search_bar.jsx';
 import FormAdmin from './components/form_admin.jsx';
 import IMG from './punisher.jpg';
+import IMG2 from './punisher2.jpg';
+import IMG3 from './punisher3.jpg';
+import { Route } from 'react-router-dom';
 
 function App() {
   return (
-    <div>
+    <div className= 'container-fluid'>
       <SearchBar/>
-      <ProdCard
-      media= {IMG}
-      name= { 'PUNISHER III'}
-      price= { 200 }
-      developer= {'Huguito el mas grande'}
-      />
-      <FormAdmin/>
+      <Route path ='/product/:id' render={() => <Product 
+        name = {'Punisher'}
+        description = {'Incredible game'}
+        price = {250} 
+        stock = {15} 
+        media = {[IMG, IMG2, IMG3]} 
+        developer = {'Frank Bonomo'} 
+        publisher = {'NINTENDO'} 
+        publishDate = {'March 12 - 2007'}
+      />}/>
     </div>
   );
 }
+
+
+
 
 export default App;
