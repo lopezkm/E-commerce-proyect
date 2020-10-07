@@ -1,13 +1,15 @@
 import React from 'react';
 import Product from './components/product.jsx';
 import IMG from './punisher.jpg';
+import IMG2 from './punisher2.jpg'
+import IMG3 from './punisher3.jpg'
 
 
 function App() {
   return (
     <div>
       <Product
-      media= {IMG}
+      media= {[IMG, IMG2, IMG3]}
       name= { 'PUNISHER III'}
       price= { 200 }
       description = {'Hermoso Producto, no puede estar mas bueno para viciar toda la noche'}
