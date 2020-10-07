@@ -1,24 +1,21 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Product from './components/product.jsx';
+import IMG from './punisher.jpg';
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Product
+      media= {IMG}
+      name= { 'PUNISHER III'}
+      price= { 200 }
+      description = {'Hermoso Producto, no puede estar mas bueno para viciar toda la noche'}
+      stock= {7 + 'unidades'}
+      developer= {'Huguito el mas grande'}
+      publisher= {'Nintendo'}
+      publishDate= {'17 de Octubre de 2004'}
+      />
     </div>
   );
 }
