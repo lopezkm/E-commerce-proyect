@@ -1,7 +1,5 @@
 import React from 'react';
-import { Card, Button, Carousel } from 'react-bootstrap'
-import 'bootstrap/dist/css/bootstrap.min.css';
-
+import { Card, Button, Carousel } from 'react-bootstrap';
 
 
 const Product = ({ name, description, price, stock, media, developer, publisher, publishDate }) => {
