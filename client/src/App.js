@@ -1,11 +1,14 @@
 import React from 'react';
+
+import './App.css';
+import SearchBar from './components/search_bar.jsx'
 import Product from './components/product.jsx';
 import IMG from './punisher.jpg';
-
 
 function App() {
   return (
     <div>
+      <SearchBar/>
       <Product
       media= {IMG}
       name= { 'PUNISHER III'}
