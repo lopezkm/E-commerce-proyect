@@ -8,11 +8,16 @@ import IMG from './punisher.jpg';
 import IMG2 from './punisher2.jpg';
 import IMG3 from './punisher3.jpg';
 import { Route } from 'react-router-dom';
+import Catalogue from './components/catalogue.jsx'
+import 'bootstrap/dist/css/bootstrap.min.css'; 
 
 function App() {
   return (
     <div className= 'container-fluid'>
       <SearchBar/>
+      <Route 
+        path="/products" render={() => <Catalogue/>}
+      />
       <Route path ='/product/:id' render={() => <Product 
         name = {'Punisher'}
         description = {'Incredible game'}
