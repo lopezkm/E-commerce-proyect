@@ -62,7 +62,7 @@ server.get('/', (req, res) =>{
 
 		if(!categories) return res.sendStatus( 404 );
 		res.status( 200 ).send( categories );
-	})
+	});
 });
 
 module.exports = server;

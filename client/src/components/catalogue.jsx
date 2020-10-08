@@ -1,7 +1,17 @@
 import React from 'react';
 import ProductCard from './product_card';
-import sc from '../styles/catalogue.module.css'
+import { Container, Row, Col } from 'react-bootstrap';
+import sc from '../styles/catalogue.module.css'; 
 
+const postMethod = {
+    method: 'POST',
+    body: JSON.stringify({name:"So",description:"ter"})
+} 
+
+function getCategories() {
+    fetch('http://localhost:3000/products/category', {postMethod}).then(prueba => console.log(prueba));
+    fetch('http://localhost:3000/products/category').then(prueba => console.log(prueba))
+}
 
 const Catalogue = () => {
     const arr = [
@@ -56,16 +66,25 @@ const Catalogue = () => {
     ]
     /* Recordatorio: agregar los estilos denuevo a productCard */
     return (
-        <div className={sc.container}>
-            {arr.map(game => {
-                return <ProductCard 
-                    name={game.name}
-                    price={game.price}
-                    developer={game.developer}
-                    media={game.media}
-                />
-            })}
-        </div>
+        <Container fluid>
+            <Row>
+                <Col xs={2}><button onClick={() => getCategories()}>Prueba</button></Col>
+                <Col xs={10}>
+                    <Row>
+                        {arr.map(game => {
+                            return <Col xs={2}>
+                                <ProductCard
+                                name={game.name}
+                                price={game.price}
+                                developer={game.developer}
+                                media={game.media}
+                                />
+                            </Col>
+                        })}
+                    </Row>
+                </Col>
+            </Row>
+        </Container>
     );
 };
 
