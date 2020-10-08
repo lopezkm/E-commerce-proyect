@@ -85,4 +85,17 @@ server.delete( '/:idProduct/category/:idCategory', ( request, response, next ) =
 		} );
 } );
 
+server.delete("/:id", (req, res) => {
+	let { id } = req.params;
+	Product.findByPk(id)
+		.then(product => {
+			if (!product) {
+				return res.status(404).send("El producto a eliminar no existe.");
+			}
+
+			product.destroy()
+			.then(() => res.sendStatus(200));
+		});
+});
+
 module.exports = server;
