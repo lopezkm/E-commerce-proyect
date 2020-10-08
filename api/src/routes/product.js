@@ -64,6 +64,32 @@ server.post('/', (request, response) => {
 	.catch(() => response.status(409).send('El producto que intenta ingresar ya existe'));
 });
 
+server.put('/:id', (request, response) => {
+	const {id} = request.params;
+	let { name, description, price, stock, media, developer, publisher, publishDate } = request.body;
+	Product.findByPk(id)
+	.then(product => {
+		if(!product) {
+			return response.status(404).send('El producto a modificar no existe')
+		}
+		
+		name = name || product.name;
+		description = description || product.description;
+		price = price || product.price;
+		stock = stock || product.stock;
+		media = media || product.media;
+		developer = developer || product.developer;
+		publisher = publisher || product.publisher; 
+		publishDate = publishDate || product.publishDate;
+		
+		return product.update({ name, description, price, stock, media, developer, publisher, publishDate })
+	})
+	.then( product => {
+		return response.status(200).send(product)
+	})
+	.catch(err => response.status(401).send('Hiciste algo mal urita mocha'))
+});
+
 server.delete( '/:idProduct/category/:idCategory', ( request, response, next ) => {
 	const { idProduct, idCategory } = request.params;
 	const promises = [ ];
