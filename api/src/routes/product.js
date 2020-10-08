@@ -1,6 +1,7 @@
 const server = require( 'express' ).Router( );
 const { Product, Category } = require( '../db.js' );
 const Promise = require( 'bluebird' );
+const { request, response } = require('express');
 
 server.get( '/', ( request, response, next ) => {
 	Product.findAll( )
@@ -42,6 +43,26 @@ server.post( '/:idProduct/category/:idCategory', ( request, response, next ) => 
 				} );
 		} );
 } );
+
+server.post('/', (request, response) => {
+	const { name, description, price, stock, media, developer, publisher, publishDate} = request.body;
+	if(!name || !description || !price || !stock || !media || !developer || !publisher || !publishDate){
+		return response.status(400).send('Verifique que todos los campos esten completos');
+	}
+
+	Product.create({
+		name,
+		description,
+		price, 
+		stock, 
+		media, 
+		developer, 
+		publisher, 
+		publishDate
+	})
+	.then(product => response.status(201).send(product))
+	.catch(() => response.status(409).send('El producto que intenta ingresar ya existe'));
+});
 
 server.delete( '/:idProduct/category/:idCategory', ( request, response, next ) => {
 	const { idProduct, idCategory } = request.params;
