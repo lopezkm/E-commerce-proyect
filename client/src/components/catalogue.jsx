@@ -15,7 +15,7 @@ const postMethod = {
 
 function getCategories() {
     fetch('http://localhost:3000/products/category', postMethod).then(prueba => console.log("Listo"))
-    .then(() => fetch('http://localhost:3000/products/category').then(prueba => console.log(prueba)))
+    .then(() => fetch('http://localhost:3000/products/category').then(prueba => prueba.json().then(data => console.log(data))))
 }
 
 const Catalogue = () => {
