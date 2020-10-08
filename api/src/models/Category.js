@@ -4,7 +4,7 @@ const { DataTypes } = require( 'sequelize' );
 // Luego le injectamos la conexión a sequelize
 
 module.exports = ( sequelize ) => {
-	sequelize.define( 'categories', {
+	sequelize.define( 'category', {
 		name: {
 			type: DataTypes.STRING,
 			allowNull: false,
@@ -13,8 +13,7 @@ module.exports = ( sequelize ) => {
 		description: {
 			type: DataTypes.TEXT,
 			allowNull: false,
-			unique: false,
-			defaultValue: 'Sin descripción'
+			unique: false
 		}
 	} );
 };
