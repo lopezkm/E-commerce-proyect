@@ -41,7 +41,7 @@ server.put("/:id", (req, res) => {
 		});
 });
 
-server.get( '/:categoryName', async ( request, response ) => {
+server.get( '/:categoryName', ( request, response ) => {
 	const categoryName = request.params.categoryName.toUpperCase( );
 	
 	Category.findOne( { where: { name: categoryName } } )
