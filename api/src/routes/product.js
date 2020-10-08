@@ -9,6 +9,19 @@ server.get( '/', ( request, response, next ) => {
 		} );
 } );
 
+server.get( '/:id', ( request, response, next ) => {
+	const { id } = request.params;
+	
+	Product.findByPk( id )
+		.then( ( product ) => {
+			if ( !product ) {
+				return response.sendStatus( 404 );
+			}
+			
+			response.send( product );
+		} );
+} );
+
 server.post( '/:idProduct/category/:idCategory', ( request, response, next ) => {
 	const { idProduct, idCategory } = request.params;
 	const promises = [ ];
