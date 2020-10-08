@@ -13,7 +13,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
-    <div className= 'container-fluid'> {/* El container fluid esta colocando espacios en los lados de la NavBar. Quitarlo si la quieren a pantalla completa. */}
+    <div className= 'container-fluid' style={{ padding: 0}}>
       <NavBar/>
       <Route 
         path="/products" render={() => <Catalogue/>}
