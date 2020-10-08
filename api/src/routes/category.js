@@ -25,4 +25,19 @@ server.delete("/:id", (req, res) => {
         });
 });
 
+server.put("/:id", (req, res) => {
+    let { id } = req.params;
+    let { name, description } = req.body;
+    name = name.toUpperCase();
+    Category.findByPk(id)
+        .then(category => {
+            if (!category) {
+                return res.status(404).send("La categoría a modificar no existe.");
+            }
+            
+            name = name || category.name;
+            description = description || category.description;
+            category.update({ name, description }).then(() => res.sendStatus(200));
+        });
+})
 module.exports = server;
