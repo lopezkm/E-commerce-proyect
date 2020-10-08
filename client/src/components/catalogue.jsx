@@ -3,14 +3,19 @@ import ProductCard from './product_card';
 import { Container, Row, Col } from 'react-bootstrap';
 import sc from '../styles/catalogue.module.css'; 
 
+var aux = {name:"Shooter",description:"Tiros"};
 const postMethod = {
     method: 'POST',
-    body: JSON.stringify({name:"So",description:"ter"})
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(aux)
 } 
 
 function getCategories() {
-    fetch('http://localhost:3000/products/category', {postMethod}).then(prueba => console.log(prueba));
-    fetch('http://localhost:3000/products/category').then(prueba => console.log(prueba))
+    fetch('http://localhost:3000/products/category', postMethod).then(prueba => console.log("Listo"))
+    .then(() => fetch('http://localhost:3000/products/category').then(prueba => console.log(prueba)))
 }
 
 const Catalogue = () => {

@@ -59,7 +59,7 @@ server.get('/', (req, res) =>{
 
 	Category.findAll()
 	.then(categories =>{
-
+		console.log(categories);
 		if(!categories) return res.sendStatus( 404 );
 		res.status( 200 ).send( categories );
 	});
