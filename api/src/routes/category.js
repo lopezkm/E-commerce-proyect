@@ -3,7 +3,6 @@ const { Product, Category } = require('../db.js');
 
 server.post("/", (req, res) => {
 	let {name, description} = req.body;
-	console.log(req.body);
 	name = name.toUpperCase();
 	Category.create({
 		name: name,
