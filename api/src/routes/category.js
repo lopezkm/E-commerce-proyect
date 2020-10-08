@@ -55,4 +55,14 @@ server.get( '/:categoryName', ( request, response ) => {
 		} );
 } );
 
+server.get('/', (req, res) =>{
+
+	Category.findAll()
+	.then(categories =>{
+
+		if(!categories) return res.sendStatus( 404 );
+		res.status( 200 ).send( categories );
+	})
+});
+
 module.exports = server;
