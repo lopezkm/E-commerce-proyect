@@ -11,7 +11,7 @@ server.delete("/:id", (req, res) => {
             }
 
             category.destroy()
-            res.sendStatus(200)
+            .then(() => res.sendStatus(200));
         })
 })
 
