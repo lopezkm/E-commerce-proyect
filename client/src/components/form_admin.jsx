@@ -1,6 +1,10 @@
 import React from 'react';
 import { Nav, Form, Button, Navbar, FormControl } from 'react-bootstrap';
-
+const catTest = [
+    { name: 'Shooter', description: 'descripcion' },
+    { name: 'Terror', description: 'descripcion' },
+    { name: 'Primera Persona', description: 'descripcion' }
+];
 
 const FormAdmin = () => {
     return (
@@ -48,6 +52,15 @@ const FormAdmin = () => {
                     <br/>
                     <Form.Label>Fecha de lanzamiento:</Form.Label>
                     <Form.Control type="date" placeholder="Fecha de lanzamiento" />
+                    <br/>
+                    <Form.Control as="select" multiple>
+                        {
+                            catTest.map(cat => (
+                                <option>{cat.name}</option>
+                            ))
+                        }
+
+                    </Form.Control>
                 </Form.Group>
 
                 <Button variant="primary" type="submit">
