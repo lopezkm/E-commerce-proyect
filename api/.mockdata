@@ -1,0 +1,220 @@
+const Product = [
+	{
+		name: 'I Am Dead',
+		description: `Un fascinante juego de puzles y aventuras, obra de los creadores de Hohokum y Wilmot's Warehouse, en el que tendrás que explorar la vida después de la muerte y la isla de Shelmerston`,
+		price: 3.99,
+		stock: 100,
+		media: '>>>> Arreglar <<<<',
+		developer: 'Hollow Ponds',
+		publisher: 'Annapurna Interactive',
+		publishDate: '10-08-2020'
+	},
+	{
+		name: 'MAFIA: Definitive Edition',
+		description: `Tras un inesperado percance con la mafia, el taxista Tommy Angelo entra a regañadientes en el mundo del crimen organizado. A pesar de su reticencia inicial, las ventajas de unirse a la familia Salieri son demasiadas como para ignorarlas.`,
+		price: 38.99,
+		stock: 100,
+		media: '>>>> Arreglar <<<<',
+		developer: 'Hangar 13',
+		publisher: '2K',
+		publishDate: '09-24-2020'
+	},
+	{
+		name: 'Rocket League',
+		description: `Tras un inesperado percance con la mafia, el taxista Tommy Angelo entra a regañadientes en el mundo del crimen organizado. A pesar de su reticencia inicial, las ventajas de unirse a la familia Salieri son demasiadas como para ignorarlas.`,
+		price: 4.99,
+		stock: 100,
+		media: '>>>> Arreglar <<<<',
+		developer: 'Psyonix LLC',
+		publisher: 'Psyonix LLC',
+		publishDate: '07-07-2015'
+	},
+	{
+		name: 'Rogue Company',
+		description: `Hay que salvar el mundo y solo los mejores pueden hacerlo. Ponte en la piel de uno de los agentes de élite de Rogue Company y ve a la guerra en una serie de modos de juego diferentes. ¡Es hora de ser un mercenario!`,
+		price: 0,
+		stock: 100,
+		media: '>>>> Arreglar <<<<',
+		developer: 'First Watch Games',
+		publisher: 'Hi-Rez Studios',
+		publishDate: '10-02-2020'
+	},
+	{
+		name: 'Bugsnax',
+		description: `Somos lo que comemos. Bugsnax te embarca en una extravagante aventura hacia la Isla Snaktooth, hogar de las legendarias criaturas mitad insecto y mitad bocado que responden al nombre de Bugsnax.`,
+		price: 4.24,
+		stock: 100,
+		media: '>>>> Arreglar <<<<',
+		developer: 'Young Horses',
+		publisher: 'Young Horses',
+		publishDate: '11-12-2020'
+	},
+	{
+		name: 'Star Wars: Squadrons',
+		description: `Domina el arte del combate con cazas estelares en la experiencia auténtica de pilotaje de STAR WARS™: Squadrons. Abróchate el cinturón y siente la adrenalina de los combates espaciales en primera persona junto a tu escuadrón.`,
+		price: 39.99,
+		stock: 100,
+		media: '>>>> Arreglar <<<<',
+		developer: 'Motive Studios',
+		publisher: 'Electronic Arts',
+		publishDate: '10-02-2020'
+	},
+	{
+		name: 'The Witcher III: Wild Hunt',
+		description: `Mientras la guerra hace estragos en los reinos del norte, acepta el contrato más importante de tu vida: encontrar a la niña de la profecía, un arma viviente capaz de alterar el mundo tal y como lo conocemos.`,
+		price: 19.96,
+		stock: 100,
+		media: '>>>> Arreglar <<<<',
+		developer: 'CD PROJEKT RED',
+		publisher: 'CD PROJEKT S.A.',
+		publishDate: '05-18-2015'
+	},
+	{
+		name: 'Grand Theft Auto V',
+		description: `Un joven estafador callejero, un ladrón de bancos retirado y un psicópata aterrador se meten en un lío, y tendrán que llevar a cabo una serie de peligrosos golpes para sobrevivir en una ciudad en la que no pueden confiar en nadie, y mucho menos los unos en los otros.`,
+		price: 10.99,
+		stock: 100,
+		media: '>>>> Arreglar <<<<',
+		developer: 'Rockstar Games',
+		publisher: 'Rockstar Games',
+		publishDate: '09-17-2013'
+	},
+	{
+		name: 'Civilization VI',
+		description: `Civilization VI ofrece nuevas maneras de interactuar con tu mundo, expandir tu imperio a través del mapa, fomentar el progreso de tu cultura y competir contra los líderes más importantes de la historia para crear una civilización que resista el paso del tiempo.`,
+		price: 7.99,
+		stock: 100,
+		media: '>>>> Arreglar <<<<',
+		developer: 'Firaxis Games',
+		publisher: '2K',
+		publishDate: '10-21-2016'
+	},
+	{
+		name: 'Smite',
+		description: `¡Únete a más de 35 millones de jugadores en SMITE, el campo de batalla de los dioses! Usa el martillo de Thor, petrifica a tus enemigos con Medusa o lanza tus poderes divinos con uno de los más de 100 dioses.`,
+		price: 0.0,
+		stock: 100,
+		media: '>>>> Arreglar <<<<',
+		developer: 'Titan Forge Games',
+		publisher: 'Hi-Rez Studios',
+		publishDate: '05-25-2014'
+	},
+	{
+		name: 'Assassin\'s Creed Rogue',
+		description: `Presentamos Assassin's Creed Rogue, el capítulo más oscuro de la franquicia de Assassin's Creed hasta la fecha. Como Shay, vivirás la lenta transformación de Asesino a cazador de Asesinos.`,
+		price: 16.08,
+		stock: 100,
+		media: '>>>> Arreglar <<<<',
+		developer: 'Ubisoft',
+		publisher: 'Ubisoft',
+		publishDate: '11-11-2014'
+	},
+	{
+		name: 'Borderlands 2',
+		description: `Es hora de partirle la cara a Jack el Guapo. Reúne a tus amigos y corre desbocado a través del mundo recogiendo infinidad de botines y armas en un esfuerzo por salvar Pandora de las sucias garras de la Corporación Hyperion.`,
+		price: 15.99,
+		stock: 100,
+		media: '>>>> Arreglar <<<<',
+		developer: 'Gearbox Software',
+		publisher: '2K',
+		publishDate: '09-18-2012'
+	},
+	{
+		name: 'Primordials',
+		description: `Primordials es un juego de estrategia 1 vs. 1 en el que los jugadores dirigen reinos y forman ejércitos para ir a la guerra y aumentar su poder e influencia.`,
+		price: 2.99,
+		stock: 100,
+		media: '>>>> Arreglar <<<<',
+		developer: 'GLOBAL DODO ENTERTAINMENT d.o.o.',
+		publisher: 'WIREGAMES d.o.o.',
+		publishDate: '10-06-2020'
+	}
+];
+
+const Category = [
+	{
+		name: 'Cooperativo',
+		description: 'Colabora con otros jugadores para ganar.'
+	},
+	{
+		name: 'Acción',
+		description: 'Pon a prueba tu velocidad, destreza y tiempo de reacción.'
+	},
+	{
+		name: 'Aventura',
+		description: 'Investiga, explora, soluciona problemas, etc.'
+	},
+	{
+		name: 'Por turnos',
+		description: 'Pon aprueba tu análisis y tu capacidad para resolver problemas.'
+	},
+	{
+		name: 'Estrategia',
+		description: 'Perfecto para demostrar tu inteligencia y habilidades de planificación.'
+	},
+	{
+		name: 'Competitivo',
+		description: 'Compite contra otros jugadores para ganar.'
+	},
+	{
+		name: 'Multijugador',
+		description: 'Vive una experiencia increíble compartiendo con otros jugadores.'
+	},
+	{
+		name: 'Un jugador',
+		description: 'No habrá nadie que te pueda molestar.'
+	},
+	{
+		name: 'Rol',
+		description: 'Desempeña un rol'
+	},
+	{
+		name: 'Mundo abierto',
+		description: 'Disfruta de todo un mundo para explorar e interactuar'
+	},
+	{
+		name: 'Disparos',
+		description: 'Mata a tus enemigos llenándolos de plomo'
+	},
+	{
+		name: 'Comedia',
+		description: 'Soltarás mas de una caracajada cuando estés jugando.'
+	},
+	{
+		name: 'Indie',
+		description: 'Innovadores juegos de manos de pequeños grupos de desarrolladores.'
+	},
+	{
+		name: 'Rompecabezas',
+		description: 'Te toparás con distintos acertijos que deberás resolver.'
+	},
+	{
+		name: 'Carreras',
+		description: 'Súbete a tu vehículo y compite en una pista de carreras a máxima velocidad.'
+	},
+	{
+		name: 'Supervivencia',
+		description: 'Lucha para sobrevivir en un ambiente hostil y lleno de desafíos.'
+	}
+];
+
+const ProductCategory = [
+	{
+		categoryId: 1,
+		productId: 1
+	},
+	{
+		categoryId: 1,
+		productId: 4
+	},
+	{
+		categoryId: 3,
+		productId: 4
+	}
+];
+
+module.exports = {
+	Product,
+	Category,
+	ProductCategory
+};
