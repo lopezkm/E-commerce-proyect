@@ -1,7 +1,6 @@
 const server = require( 'express' ).Router( );
 const { Product, Category } = require( '../db.js' );
 const Promise = require( 'bluebird' );
-const { request, response } = require('express');
 
 server.get( '/', ( request, response, next ) => {
 	Product.findAll( )
