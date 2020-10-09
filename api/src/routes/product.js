@@ -6,8 +6,9 @@ const { request, response } = require('express');
 server.get( '/', ( request, response, next ) => {
 	Product.findAll( )
 		.then( ( products ) => {
-			response.send( products );
-		} );
+			response.status( 200 ).send( products );
+		} )
+		.catch( next );
 } );
 
 server.get( '/:id', ( request, response, next ) => {
