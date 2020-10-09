@@ -55,7 +55,6 @@ server.get( '/:categoryName', ( request, response ) => {
 		} );
 } );
 
-<<<<<<< HEAD
 server.get( '/', ( req, res ) => {
 	Category.findAll( )
 		.then( categories => {
@@ -66,16 +65,5 @@ server.get( '/', ( req, res ) => {
 			res.status( 200 ).send( categories );
 		} );
 } );
-=======
-server.get('/', (req, res) =>{
-
-	Category.findAll()
-	.then(categories =>{
-		console.log(categories);
-		if(!categories) return res.sendStatus( 404 );
-		res.status( 200 ).send( categories );
-	});
-});
->>>>>>> 4c268ec85b9e6cdbf041009bc303b771d31d3336
 
 module.exports = server;
