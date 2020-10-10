@@ -42,10 +42,13 @@ sequelize.models = Object.fromEntries( capsEntries );
 *		      y creamos las relaciones entre estos ]    
 * ================================================================================= */
 
-const { Product, Category, ProductCategory } = sequelize.models;
+const { Product, Category, Media, ProductCategory, ProductMedia } = sequelize.models;
 
 Product.belongsToMany( Category, { through: ProductCategory } );
 Category.belongsToMany( Product, { through: ProductCategory } );
+
+Product.belongsToMany( Media, { through: ProductMedia } );
+Media.belongsToMany( Product, { through: ProductMedia, foreignKey: 'mediaId' } );
 
 /* =================================================================================
 * 		[ Creamos un callback para la inserción de datos de prueba luego 
@@ -57,7 +60,7 @@ Category.belongsToMany( Product, { through: ProductCategory } );
 		return;
 	}
 	
-	sequelize.afterBulkSync( ( ) => {
+	sequelize.afterBulkSync( async ( ) => {
 		const mockData = require( '../.mockdata' );
 		
 		Object.keys( sequelize.models ).forEach( model => {
