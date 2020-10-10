@@ -20,7 +20,7 @@ const SearchBar = () => {
                 placeholder="Search your game" 
                 className="mr-sm-2"  
                 name="searchInput" 
-                onChange={handleInputChange}/>
+                onChange={() => handleInputChange()}/>
             <Button variant="outline-info">Search</Button>
         </Form>
     );
