@@ -1,8 +1,8 @@
 const { Router } = require( 'express' );
 
-const productRouter = require( './product.js' );
-const categoryRouter = require( './category.js' );
-const searchRouter = require( './search.js' );
+const productRouter     = require( './product.js' );
+const categoryRouter    = require( './category.js' );
+const searchRouter      = require( './search.js' );
 
 const router = Router( );
 

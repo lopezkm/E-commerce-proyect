@@ -1,44 +1,24 @@
-const server = require('express').Router();
-const { Product, Category } = require('../db.js');
+const server = require( 'express' ).Router( );
+const { Category } = require( '../db.js' );
 
-server.post("/", (req, res) => {
-	let {name, description} = req.body;
-	name = name.toUpperCase();
-	Category.create({
-		name: name,
-		description: description 
-	}).then(() => res.sendStatus(200))
-	.catch(() => res.status(409).send("La categoría a crear ya existe."));
-});
+/* =================================================================================
+* 		[ Obtención de todas las categorías ]
+* ================================================================================= */
 
-server.delete("/:id", (req, res) => {
-	let { id } = req.params;
-	Category.findByPk(id)
-		.then(category => {
-			if (!category) {
-				return res.status(404).send("La categoría a eliminar no existe.");
-			}
-
-			category.destroy()
-			.then(() => res.sendStatus(200));
-		});
-});
-
-server.put("/:id", (req, res) => {
-	let { id } = req.params;
-	let { name, description } = req.body;
-	name = name.toUpperCase();
-	Category.findByPk(id)
-		.then(category => {
-			if (!category) {
-				return res.status(404).send("La categoría a modificar no existe.");
+server.get( '/', ( request, response ) => {
+	Category.findAll( )
+		.then( categories => {
+			if ( !categories ) {
+				return response.sendStatus( 404 );
 			}
 			
-			name = name || category.name;
-			description = description || category.description;
-			category.update({ name, description }).then(() => res.sendStatus(200));
-		});
-});
+			response.status( 200 ).send( categories );
+		} );
+} );
+
+/* =================================================================================
+* 		[ Búsqueda de categorías por nombre ]
+* ================================================================================= */
 
 server.get( '/:categoryName', ( request, response ) => {
 	const categoryName = request.params.categoryName.toUpperCase( );
@@ -55,15 +35,62 @@ server.get( '/:categoryName', ( request, response ) => {
 		} );
 } );
 
-server.get( '/', ( req, res ) => {
-	Category.findAll( )
-		.then( categories => {
-			if ( !categories ) {
-				return res.sendStatus( 404 );
+/* =================================================================================
+* 		[ Creación de una ategoría ]
+* ================================================================================= */
+
+server.post( '/', ( request, response ) => {
+	let { name, description } = request.body;
+	
+	name = name.toUpperCase( );
+	
+	Category.create( {
+			name: name,
+			description: description 
+		} )
+		.then( ( ) => response.sendStatus( 200 ) )
+		.catch( ( ) => response.status( 409 ).send( 'La categoría ya existe' ) );
+} );
+
+/* =================================================================================
+* 		[ Modificación de una categoría ]
+* ================================================================================= */
+
+server.put( '/:id', ( request, response ) => {
+	let { id } = request.params;
+	
+	Category.findByPk( id )
+		.then( category => {
+			if ( !category ) {
+				return response.status( 404 ).send( 'Categoría inexistente' );
 			}
 			
-			res.status( 200 ).send( categories );
+			category.update( { ...request.body } )
+				.then( category => response.status( 200 ).send( category ) )
+				.catch( error => response.status( 400 ).send( error ) );
 		} );
 } );
+
+/* =================================================================================
+* 		[ Eliminación de una categoría ]
+* ================================================================================= */
+
+server.delete( '/:id', ( request, response ) => {
+	let { id } = request.params;
+	
+	Category.findByPk( id )
+		.then( category => {
+			if ( !category ) {
+				return response.status( 404 ).send( 'Categoría inexistente' );
+			}
+
+			category.destroy( )
+				.then( ( ) => response.sendStatus( 200 ) );
+		} );
+} );
+
+/* =================================================================================
+* 		[ Exportamos nuestras rutas ]
+* ================================================================================= */
 
 module.exports = server;
