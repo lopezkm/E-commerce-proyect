@@ -30,24 +30,24 @@ const Product = [
 		publishDate: '07-07-2015'
 	},
 	{
-		name: 'Rogue Company',
-		description: `Hay que salvar el mundo y solo los mejores pueden hacerlo. Ponte en la piel de uno de los agentes de élite de Rogue Company y ve a la guerra en una serie de modos de juego diferentes. ¡Es hora de ser un mercenario!`,
-		price: 0,
+		name: 'PLAYERUNKNOWN\'S BATTLEGROUNDS',
+		description: `Un shooter basado en el modo Battle Royale. Comenzando de la nada, los jugadores tendran que luchar uno contra el otro para localizar armas y suministros para ser el único sobreviviente.`,
+		price: 29.99,
 		stock: 100,
 		media: '>>>> Arreglar <<<<',
-		developer: 'First Watch Games',
-		publisher: 'Hi-Rez Studios',
-		publishDate: '10-02-2020'
+		developer: 'PUBG Corporation',
+		publisher: 'PUBG Corporation',
+		publishDate: '12-21-2017'
 	},
 	{
-		name: 'Bugsnax',
-		description: `Somos lo que comemos. Bugsnax te embarca en una extravagante aventura hacia la Isla Snaktooth, hogar de las legendarias criaturas mitad insecto y mitad bocado que responden al nombre de Bugsnax.`,
-		price: 4.24,
+		name: 'Sea of Thieves',
+		description: `Vivirás la experiencia esencial de la vida como pirata, desde navegar y pelear, hasta explorar y saquear: todo lo que necesitas para sentirte como todo un pirata y convertirte en una leyenda por derecho propio.`,
+		price: 39.99,
 		stock: 100,
 		media: '>>>> Arreglar <<<<',
-		developer: 'Young Horses',
-		publisher: 'Young Horses',
-		publishDate: '11-12-2020'
+		developer: 'Rate Ltd',
+		publisher: 'Xbox Game Studios',
+		publishDate: '06-03-2020'
 	},
 	{
 		name: 'Star Wars: Squadrons',
@@ -90,14 +90,14 @@ const Product = [
 		publishDate: '10-21-2016'
 	},
 	{
-		name: 'Smite',
-		description: `¡Únete a más de 35 millones de jugadores en SMITE, el campo de batalla de los dioses! Usa el martillo de Thor, petrifica a tus enemigos con Medusa o lanza tus poderes divinos con uno de los más de 100 dioses.`,
-		price: 0.0,
+		name: 'GRIP: Combat Racing',
+		description: `GRIP es un juego de carreras de combate a tope de alto octanaje donde irás armado hasta los dientes con armamento pesado y competirás a una velocidad atroz.`,
+		price: 6.0,
 		stock: 100,
 		media: '>>>> Arreglar <<<<',
-		developer: 'Titan Forge Games',
-		publisher: 'Hi-Rez Studios',
-		publishDate: '05-25-2014'
+		developer: 'Caged Element Inc.',
+		publisher: 'Wired Productions',
+		publishDate: '11-06-2018'
 	},
 	{
 		name: 'Assassin\'s Creed Rogue',
@@ -128,14 +128,80 @@ const Product = [
 		developer: 'GLOBAL DODO ENTERTAINMENT d.o.o.',
 		publisher: 'WIREGAMES d.o.o.',
 		publishDate: '10-06-2020'
+	},
+	{
+		name: 'Raft',
+		description: `Raft te lanza a ti y a tus amigos a una aventura oceánica épica. Solo o juntos, los jugadores luchan por sobrevivir a un peligroso viaje a través de un vasto mar.`,
+		price: 13.39,
+		stock: 100,
+		media: '>>>> Arreglar <<<<',
+		developer: 'Redbeet Interactive',
+		publisher: 'Axolot Games',
+		publishDate: '05-23-2018'
+	},
+	{
+		name: 'Titanfall 2: Ultimate Edition',
+		description: `En el corazón de la Frontera, piloto y titán deben colaborar para sobrevivir en una batalla desigual. ¡Pide el despliegue de tu titán y prepárate para un frenético shooter en primera persona con Titanfall™ 2! La secuela te trae una nueva campaña de Un jugador que explora el vínculo entre piloto y titán.`,
+		price: 19.99,
+		stock: 100,
+		media: '>>>> Arreglar <<<<',
+		developer: 'Respawn Entertainment',
+		publisher: 'Electronic Arts',
+		publishDate: '10-28-2016'
+	},
+	{
+		name: 'Fall Guys: Ultimate Knockout',
+		description: `Un juego con hasta 60 jugadores de enfrentamiento todos contra todos que se desarrolla ronda tras ronda entre un caos creciente hasta que solo queda un único vencedor.`,
+		price: 19.99,
+		stock: 100,
+		media: '>>>> Arreglar <<<<',
+		developer: 'Mediatonic',
+		publisher: 'Developer Digital',
+		publishDate: '06-04-2020'
+	},
+	{
+		name: 'Phasmophobia',
+		description: `Un juego de horror cooperativo en línea. La actividad paranormal va en aumento y depende de ti y de tu equipo utilizar todo el equipo de caza de fantasmas a tu disposición para reunir la mayor cantidad de evidencia posible.`,
+		price: 13.99,
+		stock: 100,
+		media: '>>>> Arreglar <<<<',
+		developer: 'Kinetic Games',
+		publisher: 'Kinetic Games',
+		publishDate: '09-18-2020'
+	},
+	{
+		name: 'Among Us',
+		description: `Un juego multijugador tanto en línea como local de donde deberás trabajar en equipo para descubrir a los impostores... ¡en el espacio!`,
+		price: 4.99,
+		stock: 100,
+		media: '>>>> Arreglar <<<<',
+		developer: 'Innersloth',
+		publisher: 'Innersloth',
+		publishDate: '11-16-2018'
+	},
+	{
+		name: 'Worms W.M.D',
+		description: `Gracias a su precioso aspecto 2D dibujado a mano, nuevas armas, la nueva función de fabricación, vehículos y edificios, además del regreso de queridas armas y mecánicas de juego clásicas, Worms W.M.D es la mejor experiencia de Worms jamás vista.`,
+		price: 7.49,
+		stock: 100,
+		media: '>>>> Arreglar <<<<',
+		developer: 'Team17 Digital Ltd',
+		publisher: 'Team17 Digital Ltd',
+		publishDate: '08-23-2016'
+	},
+	{
+		name: 'Rust',
+		description: `El único objetivo en Rust es sobrevivir: superar luchas como el hambre, la sed y el frío, construir un refugio y... protegerte de otros jugadores!`,
+		price: 39.99,
+		stock: 100,
+		media: '>>>> Arreglar <<<<',
+		developer: 'Facepunch Studios',
+		publisher: 'Facepunch Studios',
+		publishDate: '02-08-2018'
 	}
 ];
 
 const Category = [
-	{
-		name: 'Cooperativo',
-		description: 'Colabora con otros jugadores para ganar.'
-	},
 	{
 		name: 'Acción',
 		description: 'Pon a prueba tu velocidad, destreza y tiempo de reacción.'
@@ -145,71 +211,666 @@ const Category = [
 		description: 'Investiga, explora, soluciona problemas, etc.'
 	},
 	{
-		name: 'Por turnos',
-		description: 'Pon aprueba tu análisis y tu capacidad para resolver problemas.'
+		name: 'Carreras',
+		description: 'Súbete a tu vehículo y compite en una pista de carreras a máxima velocidad.'
 	},
 	{
-		name: 'Estrategia',
-		description: 'Perfecto para demostrar tu inteligencia y habilidades de planificación.'
+		name: 'Colorido',
+		description: 'Colorido y amigable para todas las edades.'
 	},
 	{
 		name: 'Competitivo',
 		description: 'Compite contra otros jugadores para ganar.'
 	},
 	{
-		name: 'Multijugador',
-		description: 'Vive una experiencia increíble compartiendo con otros jugadores.'
+		name: 'Cooperativo',
+		description: 'Colabora con otros jugadores para ganar.'
 	},
 	{
-		name: 'Un jugador',
-		description: 'No habrá nadie que te pueda molestar.'
-	},
-	{
-		name: 'Rol',
-		description: 'Desempeña un rol'
-	},
-	{
-		name: 'Mundo abierto',
-		description: 'Disfruta de todo un mundo para explorar e interactuar'
+		name: 'Crimen',
+		description: 'Podras cometer aquello que en el mundo real no puedes hacer.'
 	},
 	{
 		name: 'Disparos',
-		description: 'Mata a tus enemigos llenándolos de plomo'
+		description: 'Mata a tus enemigos llenándolos de plomo.'
 	},
 	{
-		name: 'Comedia',
+		name: 'Divertido',
 		description: 'Soltarás mas de una caracajada cuando estés jugando.'
+	},
+	{
+		name: 'Espacio',
+		description: 'Ambientado en el espacio exterior.'
+	},
+	{
+		name: 'Estrategia',
+		description: 'Perfecto para demostrar tu inteligencia y habilidades de planificación.'
 	},
 	{
 		name: 'Indie',
 		description: 'Innovadores juegos de manos de pequeños grupos de desarrolladores.'
 	},
 	{
+		name: 'Multijugador',
+		description: 'Vive una experiencia increíble compartiendo con otros jugadores.'
+	},
+	{
+		name: 'Mundo abierto',
+		description: 'Disfruta de todo un mundo para explorar e interactuar'
+	},
+	{
+		name: 'Parkour',
+		description: 'Disfruta de saltar y realizar acrobacias sin igual.'
+	},
+	{
+		name: 'Por turnos',
+		description: 'Pon aprueba tu análisis y tu capacidad para resolver problemas.'
+	},
+	{
+		name: 'Primera persona',
+		description: 'Puedes visualizar el juego en modo primera persona.'
+	},
+	{
+		name: 'Realidad Virtual',
+		description: 'Podrás optar por una experiencia más real utilizando tu dispositivo de RV.'
+	},
+	{
+		name: 'Rol',
+		description: 'Desempeña un rol.'
+	},
+	{
 		name: 'Rompecabezas',
 		description: 'Te toparás con distintos acertijos que deberás resolver.'
 	},
 	{
-		name: 'Carreras',
-		description: 'Súbete a tu vehículo y compite en una pista de carreras a máxima velocidad.'
-	},
-	{
 		name: 'Supervivencia',
 		description: 'Lucha para sobrevivir en un ambiente hostil y lleno de desafíos.'
+	},
+	{
+		name: 'Tercera persona',
+		description: 'Puedes visualizar el juego en modo tercera persona.'
+	},
+	{
+		name: 'Terror',
+		description: 'Prepárate para llevarte unos buenos sustos.'
+	},
+	{
+		name: 'Un jugador',
+		description: 'No habrá nadie que te pueda molestar.'
 	}
 ];
 
 const ProductCategory = [
+ 	/*
+ 		Accion
+ 	*/
+ 	{
+ 		categoryId: 1,
+		productId: 2
+	},
 	{
 		categoryId: 1,
+		productId: 3
+	},
+	{
+		categoryId: 1,
+		productId: 4
+	},
+	{
+		categoryId: 1,
+		productId: 5
+	},
+	{
+		categoryId: 1,
+		productId: 6
+	},
+	{
+		categoryId: 1,
+		productId: 7
+	},
+	{
+		categoryId: 1,
+		productId: 8
+	},
+	{
+		categoryId: 1,
+		productId: 10
+	},
+	{
+		categoryId: 1,
+		productId: 11
+	},
+	{
+		categoryId: 1,
+		productId: 12
+	},
+	{
+		categoryId: 1,
+		productId: 15
+	},
+	{
+		categoryId: 1,
+		productId: 17
+	},
+	{
+		categoryId: 1,
+		productId: 19
+	},
+	
+	/*
+		Aventura
+	*/
+	{
+		categoryId: 2,
 		productId: 1
 	},
 	{
-		categoryId: 1,
-		productId: 4
+		categoryId: 2,
+		productId: 2
+	},
+	{
+		categoryId: 2,
+		productId: 5
+	},
+	{
+		categoryId: 2,
+		productId: 7
+	},
+	{
+		categoryId: 2,
+		productId: 8
+	},
+	{
+		categoryId: 2,
+		productId: 11
+	},
+	{
+		categoryId: 2,
+		productId: 12
+	},
+	{
+		categoryId: 2,
+		productId: 14
+	},
+	{
+		categoryId: 2,
+		productId: 20
+	},
+	
+	/*
+		Carreras
+	*/
+	{
+		categoryId: 3,
+		productId: 3
 	},
 	{
 		categoryId: 3,
+		productId: 8
+	},
+	{
+		categoryId: 3,
+		productId: 10
+	},
+	
+	/*
+		Colorido
+	*/
+	{
+		categoryId: 4,
+		productId: 16
+	},
+	{
+		categoryId: 4,
+		productId: 18
+	},
+	
+	/*
+		Competitivo
+	*/
+	{
+		categoryId: 5,
+		productId: 3
+	},
+	{
+		categoryId: 5,
 		productId: 4
+	},
+	{
+		categoryId: 5,
+		productId: 6
+	},
+	{
+		categoryId: 5,
+		productId: 8
+	},
+	{
+		categoryId: 5,
+		productId: 9
+	},
+	{
+		categoryId: 5,
+		productId: 10
+	},
+	{
+		categoryId: 5,
+		productId: 16
+	},
+	{
+		categoryId: 5,
+		productId: 19
+	},
+	
+	/*
+		Cooperativo
+	*/
+	{
+		categoryId: 6,
+		productId: 3
+	},
+	{
+		categoryId: 6,
+		productId: 4
+	},
+	{
+		categoryId: 6,
+		productId: 5
+	},
+	{
+		categoryId: 6,
+		productId: 6
+	},
+	{
+		categoryId: 6,
+		productId: 8
+	},
+	{
+		categoryId: 6,
+		productId: 9
+	},
+	{
+		categoryId: 6,
+		productId: 12
+	},
+	{
+		categoryId: 6,
+		productId: 16
+	},
+	{
+		categoryId: 6,
+		productId: 17
+	},
+	{
+		categoryId: 6,
+		productId: 18
+	},
+	{
+		categoryId: 6,
+		productId: 19
+	},
+	{
+		categoryId: 6,
+		productId: 20
+	},
+	
+	/*
+		Disparos
+	*/
+	{
+		categoryId: 7,
+		productId: 2
+	},
+	{
+		categoryId: 7,
+		productId: 4
+	},
+	{
+		categoryId: 7,
+		productId: 6
+	},
+	{
+		categoryId: 7,
+		productId: 8
+	},
+	{
+		categoryId: 7,
+		productId: 10
+	},
+	{
+		categoryId: 7,
+		productId: 12
+	},
+	{
+		categoryId: 7,
+		productId: 15
+	},
+	{
+		categoryId: 7,
+		productId: 20
+	},
+	
+	/*
+		Divertido
+	*/
+	{
+		categoryId: 8,
+		productId: 5
+	},
+	{
+		categoryId: 8,
+		productId: 12
+	},
+	{
+		categoryId: 8,
+		productId: 16
+	},
+	{
+		categoryId: 8,
+		productId: 18
+	},
+	{
+		categoryId: 8,
+		productId: 19
+	},
+	
+	/*
+		Estrategia
+	*/
+	{
+		categoryId: 9,
+		productId: 4
+	},
+	{
+		categoryId: 9,
+		productId: 9
+	},
+	{
+		categoryId: 9,
+		productId: 13
+	},
+	{
+		categoryId: 9,
+		productId: 19
+	},
+	
+	/*
+		Indie
+	*/
+	{
+		categoryId: 10,
+		productId: 1
+	},
+	{
+		categoryId: 10,
+		productId: 3
+	},
+	{
+		categoryId: 10,
+		productId: 10
+	},
+	{
+		categoryId: 10,
+		productId: 16
+	},
+	
+	/*
+		Multijugador
+	*/
+	{
+		categoryId: 11,
+		productId: 3
+	},
+	{
+		categoryId: 11,
+		productId: 4
+	},
+	{
+		categoryId: 11,
+		productId: 5
+	},
+	{
+		categoryId: 11,
+		productId: 6
+	},
+	{
+		categoryId: 11,
+		productId: 8
+	},
+	{
+		categoryId: 11,
+		productId: 9
+	},
+	{
+		categoryId: 11,
+		productId: 10
+	},
+	{
+		categoryId: 11,
+		productId: 12
+	},
+	{
+		categoryId: 11,
+		productId: 13
+	},
+	{
+		categoryId: 11,
+		productId: 15
+	},
+	{
+		categoryId: 11,
+		productId: 16
+	},
+	{
+		categoryId: 11,
+		productId: 17
+	},
+	{
+		categoryId: 11,
+		productId: 18
+	},
+	{
+		categoryId: 11,
+		productId: 19
+	},
+	{
+		categoryId: 11,
+		productId: 20
+	},
+	
+	/*
+		Mundo abierto
+	*/
+	{
+		categoryId: 12,
+		productId: 2
+	},
+	{
+		categoryId: 12,
+		productId: 5
+	},
+	{
+		categoryId: 12,
+		productId: 6
+	},
+	{
+		categoryId: 12,
+		productId: 7
+	},
+	{
+		categoryId: 12,
+		productId: 8
+	},
+	{
+		categoryId: 12,
+		productId: 9
+	},
+	{
+		categoryId: 12,
+		productId: 11
+	},
+	{
+		categoryId: 12,
+		productId: 12
+	},
+	{
+		categoryId: 12,
+		productId: 20
+	},
+	
+	/*
+		Parkour
+	*/
+	{
+		categoryId: 13,
+		productId: 11
+	},
+	{
+		categoryId: 13,
+		productId: 15
+	},
+	
+	/*
+		Por turnos
+	*/
+	{
+		categoryId: 14,
+		productId: 9
+	},
+	{
+		categoryId: 14,
+		productId: 19
+	},
+	
+	/*
+		Primera Persona
+	*/
+	{
+		categoryId: 15,
+		productId: 2
+	},
+	{
+		categoryId: 15,
+		productId: 4
+	},
+	{
+		categoryId: 15,
+		productId: 8
+	},
+	{
+		categoryId: 15,
+		productId: 12
+	},
+	{
+		categoryId: 15,
+		productId: 14
+	},
+	{
+		categoryId: 15,
+		productId: 17
+	},
+	{
+		categoryId: 15,
+		productId: 20
+	},
+	
+	/*
+		Rol
+	*/
+	{
+		categoryId: 16,
+		productId: 7
+	},
+	{
+		categoryId: 16,
+		productId: 12
+	},
+	
+	/*
+		Supervivencia
+	*/
+	{
+		categoryId: 17,
+		productId: 4
+	},
+	{
+		categoryId: 17,
+		productId: 14
+	},
+	{
+		categoryId: 17,
+		productId: 18
+	},
+	{
+		categoryId: 17,
+		productId: 20
+	},
+	
+	/*
+		Tercera persona
+	*/
+	{
+		categoryId: 18,
+		productId: 2
+	},
+	{
+		categoryId: 18,
+		productId: 4
+	},
+	{
+		categoryId: 18,
+		productId: 8
+	},
+	{
+		categoryId: 18,
+		productId: 11
+	},
+	{
+		categoryId: 18,
+		productId: 16
+	},
+	
+	/*
+		Terror
+	*/
+	{
+		categoryId: 19,
+		productId: 17
+	},
+	
+	/*
+		Un jugador
+	*/
+	{
+		categoryId: 20,
+		productId: 1
+	},
+	{
+		categoryId: 20,
+		productId: 2
+	},
+	{
+		categoryId: 20,
+		productId: 7
+	},
+	{
+		categoryId: 20,
+		productId: 8
+	},
+	{
+		categoryId: 20,
+		productId: 9
+	},
+	{
+		categoryId: 20,
+		productId: 10
+	},
+	{
+		categoryId: 20,
+		productId: 11
+	},
+	{
+		categoryId: 20,
+		productId: 12
 	}
 ];
 
