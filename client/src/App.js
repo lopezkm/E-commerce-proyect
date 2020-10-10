@@ -9,7 +9,8 @@ import IMG2 from './punisher2.jpg';
 import IMG3 from './punisher3.jpg';
 import { Route } from 'react-router-dom';
 import Catalogue from './components/catalogue.jsx'
-import 'bootstrap/dist/css/bootstrap.min.css'; 
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './styles/global.css' 
 
 function App() {
   return (

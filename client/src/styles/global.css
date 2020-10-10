@@ -1,0 +1,28 @@
+/* Colors */
+/* Fonts */
+.product_card-card {
+  margin-top: 5%;
+  border-radius: 3%;
+  color: white;
+  background-color: #323232;
+  font-family: "Barlow", sans-serif;
+}
+
+.product_card-card-header {
+  padding: 0%;
+}
+
+.product_card-card-img {
+  border-radius: 3% 3% 0% 0%;
+  width: 100%;
+}
+
+.product_card-card-title {
+  font-family: "Kanit", sans-serif;
+  font-size: 1.9rem !important;
+}
+
+.product_card-card-body {
+  min-height: 4.6rem;
+  text-align: center;
+}
