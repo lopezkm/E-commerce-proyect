@@ -1,10 +1,13 @@
+/* =================================================================================
+* 		[ Carga de Productos ]
+* ================================================================================= */
+
 const Product = [
 	{
 		name: 'I Am Dead',
 		description: `Un fascinante juego de puzles y aventuras, obra de los creadores de Hohokum y Wilmot's Warehouse, en el que tendrás que explorar la vida después de la muerte y la isla de Shelmerston`,
 		price: 3.99,
 		stock: 100,
-		media: '>>>> Arreglar <<<<',
 		developer: 'Hollow Ponds',
 		publisher: 'Annapurna Interactive',
 		publishDate: '10-08-2020'
@@ -14,7 +17,6 @@ const Product = [
 		description: `Tras un inesperado percance con la mafia, el taxista Tommy Angelo entra a regañadientes en el mundo del crimen organizado. A pesar de su reticencia inicial, las ventajas de unirse a la familia Salieri son demasiadas como para ignorarlas.`,
 		price: 38.99,
 		stock: 100,
-		media: '>>>> Arreglar <<<<',
 		developer: 'Hangar 13',
 		publisher: '2K',
 		publishDate: '09-24-2020'
@@ -24,7 +26,6 @@ const Product = [
 		description: `Tras un inesperado percance con la mafia, el taxista Tommy Angelo entra a regañadientes en el mundo del crimen organizado. A pesar de su reticencia inicial, las ventajas de unirse a la familia Salieri son demasiadas como para ignorarlas.`,
 		price: 4.99,
 		stock: 100,
-		media: '>>>> Arreglar <<<<',
 		developer: 'Psyonix LLC',
 		publisher: 'Psyonix LLC',
 		publishDate: '07-07-2015'
@@ -34,7 +35,6 @@ const Product = [
 		description: `Un shooter basado en el modo Battle Royale. Comenzando de la nada, los jugadores tendran que luchar uno contra el otro para localizar armas y suministros para ser el único sobreviviente.`,
 		price: 29.99,
 		stock: 100,
-		media: '>>>> Arreglar <<<<',
 		developer: 'PUBG Corporation',
 		publisher: 'PUBG Corporation',
 		publishDate: '12-21-2017'
@@ -44,7 +44,6 @@ const Product = [
 		description: `Vivirás la experiencia esencial de la vida como pirata, desde navegar y pelear, hasta explorar y saquear: todo lo que necesitas para sentirte como todo un pirata y convertirte en una leyenda por derecho propio.`,
 		price: 39.99,
 		stock: 100,
-		media: '>>>> Arreglar <<<<',
 		developer: 'Rate Ltd',
 		publisher: 'Xbox Game Studios',
 		publishDate: '06-03-2020'
@@ -54,7 +53,6 @@ const Product = [
 		description: `Domina el arte del combate con cazas estelares en la experiencia auténtica de pilotaje de STAR WARS™: Squadrons. Abróchate el cinturón y siente la adrenalina de los combates espaciales en primera persona junto a tu escuadrón.`,
 		price: 39.99,
 		stock: 100,
-		media: '>>>> Arreglar <<<<',
 		developer: 'Motive Studios',
 		publisher: 'Electronic Arts',
 		publishDate: '10-02-2020'
@@ -64,7 +62,6 @@ const Product = [
 		description: `Mientras la guerra hace estragos en los reinos del norte, acepta el contrato más importante de tu vida: encontrar a la niña de la profecía, un arma viviente capaz de alterar el mundo tal y como lo conocemos.`,
 		price: 19.96,
 		stock: 100,
-		media: '>>>> Arreglar <<<<',
 		developer: 'CD PROJEKT RED',
 		publisher: 'CD PROJEKT S.A.',
 		publishDate: '05-18-2015'
@@ -74,7 +71,6 @@ const Product = [
 		description: `Un joven estafador callejero, un ladrón de bancos retirado y un psicópata aterrador se meten en un lío, y tendrán que llevar a cabo una serie de peligrosos golpes para sobrevivir en una ciudad en la que no pueden confiar en nadie, y mucho menos los unos en los otros.`,
 		price: 10.99,
 		stock: 100,
-		media: '>>>> Arreglar <<<<',
 		developer: 'Rockstar Games',
 		publisher: 'Rockstar Games',
 		publishDate: '09-17-2013'
@@ -84,7 +80,6 @@ const Product = [
 		description: `Civilization VI ofrece nuevas maneras de interactuar con tu mundo, expandir tu imperio a través del mapa, fomentar el progreso de tu cultura y competir contra los líderes más importantes de la historia para crear una civilización que resista el paso del tiempo.`,
 		price: 7.99,
 		stock: 100,
-		media: '>>>> Arreglar <<<<',
 		developer: 'Firaxis Games',
 		publisher: '2K',
 		publishDate: '10-21-2016'
@@ -94,7 +89,6 @@ const Product = [
 		description: `GRIP es un juego de carreras de combate a tope de alto octanaje donde irás armado hasta los dientes con armamento pesado y competirás a una velocidad atroz.`,
 		price: 6.0,
 		stock: 100,
-		media: '>>>> Arreglar <<<<',
 		developer: 'Caged Element Inc.',
 		publisher: 'Wired Productions',
 		publishDate: '11-06-2018'
@@ -104,7 +98,6 @@ const Product = [
 		description: `Presentamos Assassin's Creed Rogue, el capítulo más oscuro de la franquicia de Assassin's Creed hasta la fecha. Como Shay, vivirás la lenta transformación de Asesino a cazador de Asesinos.`,
 		price: 16.08,
 		stock: 100,
-		media: '>>>> Arreglar <<<<',
 		developer: 'Ubisoft',
 		publisher: 'Ubisoft',
 		publishDate: '11-11-2014'
@@ -114,7 +107,6 @@ const Product = [
 		description: `Es hora de partirle la cara a Jack el Guapo. Reúne a tus amigos y corre desbocado a través del mundo recogiendo infinidad de botines y armas en un esfuerzo por salvar Pandora de las sucias garras de la Corporación Hyperion.`,
 		price: 15.99,
 		stock: 100,
-		media: '>>>> Arreglar <<<<',
 		developer: 'Gearbox Software',
 		publisher: '2K',
 		publishDate: '09-18-2012'
@@ -124,7 +116,6 @@ const Product = [
 		description: `Primordials es un juego de estrategia 1 vs. 1 en el que los jugadores dirigen reinos y forman ejércitos para ir a la guerra y aumentar su poder e influencia.`,
 		price: 2.99,
 		stock: 100,
-		media: '>>>> Arreglar <<<<',
 		developer: 'GLOBAL DODO ENTERTAINMENT d.o.o.',
 		publisher: 'WIREGAMES d.o.o.',
 		publishDate: '10-06-2020'
@@ -134,7 +125,6 @@ const Product = [
 		description: `Raft te lanza a ti y a tus amigos a una aventura oceánica épica. Solo o juntos, los jugadores luchan por sobrevivir a un peligroso viaje a través de un vasto mar.`,
 		price: 13.39,
 		stock: 100,
-		media: '>>>> Arreglar <<<<',
 		developer: 'Redbeet Interactive',
 		publisher: 'Axolot Games',
 		publishDate: '05-23-2018'
@@ -144,7 +134,6 @@ const Product = [
 		description: `En el corazón de la Frontera, piloto y titán deben colaborar para sobrevivir en una batalla desigual. ¡Pide el despliegue de tu titán y prepárate para un frenético shooter en primera persona con Titanfall™ 2! La secuela te trae una nueva campaña de Un jugador que explora el vínculo entre piloto y titán.`,
 		price: 19.99,
 		stock: 100,
-		media: '>>>> Arreglar <<<<',
 		developer: 'Respawn Entertainment',
 		publisher: 'Electronic Arts',
 		publishDate: '10-28-2016'
@@ -154,7 +143,6 @@ const Product = [
 		description: `Un juego con hasta 60 jugadores de enfrentamiento todos contra todos que se desarrolla ronda tras ronda entre un caos creciente hasta que solo queda un único vencedor.`,
 		price: 19.99,
 		stock: 100,
-		media: '>>>> Arreglar <<<<',
 		developer: 'Mediatonic',
 		publisher: 'Developer Digital',
 		publishDate: '06-04-2020'
@@ -164,7 +152,6 @@ const Product = [
 		description: `Un juego de horror cooperativo en línea. La actividad paranormal va en aumento y depende de ti y de tu equipo utilizar todo el equipo de caza de fantasmas a tu disposición para reunir la mayor cantidad de evidencia posible.`,
 		price: 13.99,
 		stock: 100,
-		media: '>>>> Arreglar <<<<',
 		developer: 'Kinetic Games',
 		publisher: 'Kinetic Games',
 		publishDate: '09-18-2020'
@@ -174,7 +161,6 @@ const Product = [
 		description: `Un juego multijugador tanto en línea como local de donde deberás trabajar en equipo para descubrir a los impostores... ¡en el espacio!`,
 		price: 4.99,
 		stock: 100,
-		media: '>>>> Arreglar <<<<',
 		developer: 'Innersloth',
 		publisher: 'Innersloth',
 		publishDate: '11-16-2018'
@@ -184,7 +170,6 @@ const Product = [
 		description: `Gracias a su precioso aspecto 2D dibujado a mano, nuevas armas, la nueva función de fabricación, vehículos y edificios, además del regreso de queridas armas y mecánicas de juego clásicas, Worms W.M.D es la mejor experiencia de Worms jamás vista.`,
 		price: 7.49,
 		stock: 100,
-		media: '>>>> Arreglar <<<<',
 		developer: 'Team17 Digital Ltd',
 		publisher: 'Team17 Digital Ltd',
 		publishDate: '08-23-2016'
@@ -194,12 +179,15 @@ const Product = [
 		description: `El único objetivo en Rust es sobrevivir: superar luchas como el hambre, la sed y el frío, construir un refugio y... protegerte de otros jugadores!`,
 		price: 39.99,
 		stock: 100,
-		media: '>>>> Arreglar <<<<',
 		developer: 'Facepunch Studios',
 		publisher: 'Facepunch Studios',
 		publishDate: '02-08-2018'
 	}
 ];
+
+/* =================================================================================
+* 		[ Carga de Categorías ]
+* ================================================================================= */
 
 const Category = [
 	{
@@ -299,6 +287,1056 @@ const Category = [
 		description: 'No habrá nadie que te pueda molestar.'
 	}
 ];
+
+/* =================================================================================
+* 		[ Carga de Media ( Imágenes/Archivos ) ]
+* ================================================================================= */
+
+const Media = [
+	/*
+		I Am Dead
+	*/
+	{
+		type: 'video',
+		path: 'uploads/d1cfd667d87bf42fee7b4730d89f6d98.webp',
+		width: 854,
+		height: 480
+	},
+	{
+		type: 'video',
+		path: 'uploads/639c2caa8bbe737878bfc9db070da818.webp',
+		width: 1920,
+		height: 1080
+	},
+	{
+		type: 'image',
+		path: 'uploads/c5440ed31702154a7581fb17b7b34da0.jpg',
+		width: 600,
+		height: 337
+	},
+	{
+		type: 'image',
+		path: 'uploads/d1f35615d213806cc79d52379f8a7fbc.jpg',
+		width: 1920,
+		height: 1080
+	},
+	{
+		type: 'image',
+		path: 'uploads/15b82a76c3726338a835ae4bc4188fd1.jpg',
+		width: 600,
+		height: 337
+	},
+	{
+		type: 'image',
+		path: 'uploads/1e22e5af17b0c476152b280b44065a8c.jpg',
+		width: 1920,
+		height: 1080
+	},
+	{
+		type: 'image',
+		path: 'uploads/6bcdc44c8d6099bd583cc077255f17a7.jpg',
+		width: 600,
+		height: 337
+	},
+	{
+		type: 'image',
+		path: 'uploads/a9984673292011dc3450053978e95962.jpg',
+		width: 1920,
+		height: 1080
+	},
+	
+	/*
+		MAFIA
+	*/
+	{
+		type: 'video',
+		path: 'uploads/0cb83aec3fb2b6a9396b536c49706112.webp',
+		width: 854,
+		height: 480
+	},
+	{
+		type: 'video',
+		path: 'uploads/70dc3412744db60ea3a2b0e8bfe6707f.webp',
+		width: 1920,
+		height: 1080
+	},
+	{
+		type: 'image',
+		path: 'uploads/e6607a77bb69b924a09042cdd732b232.jpg',
+		width: 600,
+		height: 337
+	},
+	{
+		type: 'image',
+		path: 'uploads/58ad1b7789a2f8fab0084ad6cef6b2f7.jpg',
+		width: 1920,
+		height: 1080
+	},
+	{
+		type: 'image',
+		path: 'uploads/9f08eb141d0bd3fbc95335cb096263ec.jpg',
+		width: 600,
+		height: 337
+	},
+	{
+		type: 'image',
+		path: 'uploads/5aed1da19d25b757411a1958c7843d81.jpg',
+		width: 1920,
+		height: 1080
+	},
+	{
+		type: 'image',
+		path: 'uploads/f73d8372d6dd3bf710b3d0a97f5860fe.jpg',
+		width: 600,
+		height: 337
+	},
+	{
+		type: 'image',
+		path: 'uploads/30f0e8ae45453591b5382e63fb981b83.jpg',
+		width: 1920,
+		height: 1080
+	},
+	
+	/*
+		Rocket League
+	*/
+	{
+		type: 'video-small',
+		path: 'uploads/1095e6749093597871d5ae11998cf3d8.webp',
+		width: 854,
+		height: 480
+	},
+	{
+		type: 'video-big',
+		path: 'uploads/e08cbd0f8a5f4ac3c54a506c7e519d63.webp',
+		width: 1920,
+		height: 1080
+	},
+	{
+		type: 'image-small',
+		path: 'uploads/814f6d07be2e356b069f28fc8680b423.jpg',
+		width: 600,
+		height: 337
+	},
+	{
+		type: 'image-big',
+		path: 'uploads/2d92c6a0949c901e49e625f8365ecda5.jpg',
+		width: 1920,
+		height: 1080
+	},
+	{
+		type: 'image-small',
+		path: 'uploads/dda8cec12f49b21e8373ade0b8f57172.jpg',
+		width: 600,
+		height: 337
+	},
+	{
+		type: 'image-big',
+		path: 'uploads/029dc3fa0b98cad55ab2a9bc36be5c0a.jpg',
+		width: 1920,
+		height: 1080
+	},
+	{
+		type: 'image-small',
+		path: 'uploads/9a901226cd38853227d5a3fae4cadfd7.jpg',
+		width: 600,
+		height: 337
+	},
+	{
+		type: 'image-big',
+		path: 'uploads/904ff520dfdf821ba0d03687f136538f.jpg',
+		width: 1920,
+		height: 1080
+	},
+	
+	/*
+		PUBG
+	*/
+	{
+		type: 'video-small',
+		path: 'uploads/6d9d402e29a2f5bc005df7ee41ecdb05.webp',
+		width: 854,
+		height: 480
+	},
+	{
+		type: 'video-big',
+		path: 'uploads/6ca38ddf8de0ad86c6354b728ed9a4c7.webp',
+		width: 1920,
+		height: 1080
+	},
+	{
+		type: 'image-small',
+		path: 'uploads/4c0cda85f977a57631c40b39f85bcfe4.jpg',
+		width: 600,
+		height: 337
+	},
+	{
+		type: 'image-big',
+		path: 'uploads/238af00d1c6e5e16dd6245ab32a32f8d.jpg',
+		width: 1920,
+		height: 1080
+	},
+	{
+		type: 'image-small',
+		path: 'uploads/820c7724a3065b8bf8ba3d271bfe4fd0.jpg',
+		width: 600,
+		height: 337
+	},
+	{
+		type: 'image-big',
+		path: 'uploads/396c8d817fabf639bb460b2eec4dfc4c.jpg',
+		width: 1920,
+		height: 1080
+	},
+	{
+		type: 'image-small',
+		path: 'uploads/bbd376bce98ed8a869a36644cf32ffd3.jpg',
+		width: 600,
+		height: 337
+	},
+	{
+		type: 'image-big',
+		path: 'uploads/04d180c08830ff5bd8caf96628504509.jpg',
+		width: 1920,
+		height: 1080
+	},
+	
+	/*
+		Sea of Thieves
+	*/
+	{
+		type: 'video-small',
+		path: 'uploads/7626f0aa452ccd50da1a1f06c9f8aac9.webp',
+		width: 854,
+		height: 480
+	},
+	{
+		type: 'video-big',
+		path: 'uploads/7ff1273b600f86ead1da51d04960147f.webp',
+		width: 1920,
+		height: 1080
+	},
+	{
+		type: 'image-small',
+		path: 'uploads/37175cca0e3ae1ec809351e151ab7f39.jpg',
+		width: 600,
+		height: 337
+	},
+	{
+		type: 'image-big',
+		path: 'uploads/b6a10c6fdfc9fac7d4ee6b9b3bfa2f51.jpg',
+		width: 1920,
+		height: 1080
+	},
+	{
+		type: 'image-small',
+		path: 'uploads/f3ca5f8c236366a6d4f9551ffcc3cba2.jpg',
+		width: 600,
+		height: 337
+	},
+	{
+		type: 'image-big',
+		path: 'uploads/8e2500672051821c1ba019f77ef223ab.jpg',
+		width: 1920,
+		height: 1080
+	},
+	{
+		type: 'image-small',
+		path: 'uploads/35364f2f971dc81cc8df72c7ec0393fd.jpg',
+		width: 600,
+		height: 337
+	},
+	{
+		type: 'image-big',
+		path: 'uploads/0e8c1bd759f21b0ece10fa2dda985e5f.jpg',
+		width: 1920,
+		height: 1080
+	},
+	
+	/*
+		Star Wars
+	*/
+	{
+		type: 'video-small',
+		path: 'uploads/8d0db2590cf849f7c68ec997d0ad815a.webp',
+		width: 854,
+		height: 480
+	},
+	{
+		type: 'video-big',
+		path: 'uploads/424937271770bc4e3702e41667307052.webp',
+		width: 1920,
+		height: 1080
+	},
+	{
+		type: 'image-small',
+		path: 'uploads/431047b1de56abafce7cb29e4fd6a53a.jpg',
+		width: 600,
+		height: 337
+	},
+	{
+		type: 'image-big',
+		path: 'uploads/68dce62c9d653294d32a383ba90a6ce7.jpg',
+		width: 1920,
+		height: 1080
+	},
+	{
+		type: 'image-small',
+		path: 'uploads/bebac5de245f7711f6d7b5331930fadf.jpg',
+		width: 600,
+		height: 337
+	},
+	{
+		type: 'image-big',
+		path: 'uploads/7018e94be5affd6cb7a04fcba23f06d6.jpg',
+		width: 1920,
+		height: 1080
+	},
+	{
+		type: 'image-small',
+		path: 'uploads/c030b99c6b819a2eb8263ef4cd0df9e7.jpg',
+		width: 600,
+		height: 337
+	},
+	{
+		type: 'image-big',
+		path: 'uploads/6ba9036a9463927903d12c4732ee4dd4.jpg',
+		width: 1920,
+		height: 1080
+	},
+	
+	/*
+		The Witcher III
+	*/
+	{
+		type: 'video-small',
+		path: 'uploads/effd0b7f4f2f58556353a218a4c4c359.webp',
+		width: 854,
+		height: 480
+	},
+	{
+		type: 'video-big',
+		path: 'uploads/f52f3d49f85243b87c369cc281997bf4.webp',
+		width: 1920,
+		height: 1080
+	},
+	{
+		type: 'image-small',
+		path: 'uploads/885b1ce7af3a03865d4dc2e2e149db32.jpg',
+		width: 600,
+		height: 337
+	},
+	{
+		type: 'image-big',
+		path: 'uploads/6288d52c21248bbae150075f07e76b10.jpg',
+		width: 1920,
+		height: 1080
+	},
+	{
+		type: 'image-small',
+		path: 'uploads/4ab4bd388deff744b48ae0e99dbf4404.jpg',
+		width: 600,
+		height: 337
+	},
+	{
+		type: 'image-big',
+		path: 'uploads/558b01ab255eef3d600faafb4c74a9ce.jpg',
+		width: 1920,
+		height: 1080
+	},
+	{
+		type: 'image-small',
+		path: 'uploads/a9e6f7081e103a22a3a5e5e062a9f225.jpg',
+		width: 600,
+		height: 337
+	},
+	{
+		type: 'image-big',
+		path: 'uploads/63214b2b114edadc128dfd3ff0344ce8.jpg',
+		width: 1920,
+		height: 1080
+	},
+	
+	/*
+		GTA V
+	*/
+	{
+		type: 'video-small',
+		path: 'uploads/dfb5607e17272e43718dc2958bfe52b0.webp',
+		width: 854,
+		height: 480
+	},
+	{
+		type: 'video-big',
+		path: 'uploads/4f0f6fa23e50342fbd1c234063020dc4.webp',
+		width: 1920,
+		height: 1080
+	},
+	{
+		type: 'image-small',
+		path: 'uploads/c616cb657f386dc9c32f6790b43e809c.jpg',
+		width: 600,
+		height: 337
+	},
+	{
+		type: 'image-big',
+		path: 'uploads/40c7f1c1972eaaee521f034207821acb.jpg',
+		width: 1920,
+		height: 1080
+	},
+	{
+		type: 'image-small',
+		path: 'uploads/57baee5110b93622a79461c436f180f3.jpg',
+		width: 600,
+		height: 337
+	},
+	{
+		type: 'image-big',
+		path: 'uploads/1290aa3001822f4d5eec43c6174ff8d9.jpg',
+		width: 1920,
+		height: 1080
+	},
+	{
+		type: 'image-small',
+		path: 'uploads/21dfd3b3861b8191e520d200f5062749.jpg',
+		width: 600,
+		height: 337
+	},
+	{
+		type: 'image-big',
+		path: 'uploads/60ba3a7b364399caf1869ff3b2e1c480.jpg',
+		width: 1920,
+		height: 1080
+	},
+	
+	/*
+		Civilization VI
+	*/
+	{
+		type: 'video-small',
+		path: 'uploads/21a6716a8ad70db714ddcc0128e8edad.webp',
+		width: 854,
+		height: 480
+	},
+	{
+		type: 'video-big',
+		path: 'uploads/e7fbdddce76909cc757e57310043d60c.webp',
+		width: 1920,
+		height: 1080
+	},
+	{
+		type: 'image-small',
+		path: 'uploads/87fa46a1e6f96171f1509df65745997d.jpg',
+		width: 600,
+		height: 337
+	},
+	{
+		type: 'image-big',
+		path: 'uploads/abbdadfd8dd3df63bdf6451eb0db129a.jpg',
+		width: 1920,
+		height: 1080
+	},
+	{
+		type: 'image-small',
+		path: 'uploads/c5cbaa8914ae248a93a4f965de9795ee.jpg',
+		width: 600,
+		height: 337
+	},
+	{
+		type: 'image-big',
+		path: 'uploads/cb3b6ba704dbc498dbbc6090992b2e67.jpg',
+		width: 1920,
+		height: 1080
+	},
+	{
+		type: 'image-small',
+		path: 'uploads/cee21e66555595213f7816ef8b161882.jpg',
+		width: 600,
+		height: 337
+	},
+	{
+		type: 'image-big',
+		path: 'uploads/228362402849bc383cb38e59b8c037e1.jpg',
+		width: 1920,
+		height: 1080
+	},
+	
+	/*
+		GRIP
+	*/
+	{
+		type: 'video-small',
+		path: 'uploads/1199d289827b6ad236162f4e94127600.webp',
+		width: 854,
+		height: 480
+	},
+	{
+		type: 'video-big',
+		path: 'uploads/b81d01ba47b9896e2a871726af83a5e6.webp',
+		width: 1920,
+		height: 1080
+	},
+	{
+		type: 'image-small',
+		path: 'uploads/7dcb40c2415c428c94ccb56b754d0fbf.jpg',
+		width: 600,
+		height: 337
+	},
+	{
+		type: 'image-big',
+		path: 'uploads/0ad3136d8385151fbf2b104d0391dfea.jpg',
+		width: 1920,
+		height: 1080
+	},
+	{
+		type: 'image-small',
+		path: 'uploads/afe36dc1fb22c2043f98894d98d9c4e7.jpg',
+		width: 600,
+		height: 337
+	},
+	{
+		type: 'image-big',
+		path: 'uploads/efdb2e7753e53bde9a64b1af32b1fef4.jpg',
+		width: 1920,
+		height: 1080
+	},
+	{
+		type: 'image-small',
+		path: 'uploads/cc17b679a8dcdbf96004e04cfada1b0b.jpg',
+		width: 600,
+		height: 337
+	},
+	{
+		type: 'image-big',
+		path: 'uploads/3c1bfb3fe3f402753e4defe8dd916df5.jpg',
+		width: 1920,
+		height: 1080
+	},
+	
+	/*
+		Assassins Creed
+	*/
+	{
+		type: 'video-small',
+		path: 'uploads/2f1847e2004d202b6638bee865caa8a6.webp',
+		width: 854,
+		height: 480
+	},
+	{
+		type: 'video-big',
+		path: 'uploads/cccd5c0ddc6fc8518341f65f31139a09.webp',
+		width: 1920,
+		height: 1080
+	},
+	{
+		type: 'image-small',
+		path: 'uploads/5528d11b5ea819579fc1acaef47f037e.jpg',
+		width: 600,
+		height: 337
+	},
+	{
+		type: 'image-big',
+		path: 'uploads/698eb95f085e94bf55299cfe6005e788.jpg',
+		width: 1920,
+		height: 1080
+	},
+	{
+		type: 'image-small',
+		path: 'uploads/9a9b7bfb824559412bd3c25f012bc9bb.jpg',
+		width: 600,
+		height: 337
+	},
+	{
+		type: 'image-big',
+		path: 'uploads/b4f0901059186c736b6bdc0657f312cc.jpg',
+		width: 1920,
+		height: 1080
+	},
+	{
+		type: 'image-small',
+		path: 'uploads/ff349653d06e8fb0207613a25da9d0b8.jpg',
+		width: 600,
+		height: 337
+	},
+	{
+		type: 'image-big',
+		path: 'uploads/6f8e355eca4d00697a233d182d49fd1e.jpg',
+		width: 1920,
+		height: 1080
+	},
+	
+	/*
+		Borderlands 2
+	*/
+	{
+		type: 'video-small',
+		path: 'uploads/38563a68caffd93e1c7bf238733b7885.webp',
+		width: 854,
+		height: 480
+	},
+	{
+		type: 'video-big',
+		path: 'uploads/42b6ff46a509ac8148985871da9f720d.webp',
+		width: 1920,
+		height: 1080
+	},
+	{
+		type: 'image-small',
+		path: 'uploads/f459884a74d9bc58a7131c1ec12d702c.jpg',
+		width: 600,
+		height: 337
+	},
+	{
+		type: 'image-big',
+		path: 'uploads/5521490b40e99b23d94affbe35a2d75c.jpg',
+		width: 1920,
+		height: 1080
+	},
+	{
+		type: 'image-small',
+		path: 'uploads/94461a85b3d6402e556f3a12461eee0d.jpg',
+		width: 600,
+		height: 337
+	},
+	{
+		type: 'image-big',
+		path: 'uploads/0b25864597229e4a452e07cd3f6f4712.jpg',
+		width: 1920,
+		height: 1080
+	},
+	{
+		type: 'image-small',
+		path: 'uploads/be56538c77b5ae952eb92868a5710d33.jpg',
+		width: 600,
+		height: 337
+	},
+	{
+		type: 'image-big',
+		path: 'uploads/76c534da821d09d7452a1c922b93e3e0.jpg',
+		width: 1920,
+		height: 1080
+	},
+	
+	/*
+		Primordials
+	*/
+	{
+		type: 'video-small',
+		path: 'uploads/ee86f154f4864e2545db61b233e070c7.webp',
+		width: 854,
+		height: 480
+	},
+	{
+		type: 'video-big',
+		path: 'uploads/08f0fcd2eeb74a7cbba26db7171308e9.webp',
+		width: 1920,
+		height: 1080
+	},
+	{
+		type: 'image-small',
+		path: 'uploads/3388d7c3de75c773c5db00f71f755755.jpg',
+		width: 600,
+		height: 337
+	},
+	{
+		type: 'image-big',
+		path: 'uploads/f6bad21ec941beffe34f64afd775c4fb.jpg',
+		width: 1920,
+		height: 1080
+	},
+	{
+		type: 'image-small',
+		path: 'uploads/8c8093c8c7609b9cd594f661b360b4ff.jpg',
+		width: 600,
+		height: 337
+	},
+	{
+		type: 'image-big',
+		path: 'uploads/f00362e59cd4b45a58fb35661f79dd15.jpg',
+		width: 1920,
+		height: 1080
+	},
+	{
+		type: 'image-small',
+		path: 'uploads/5344ed77966070aecee489f9d00f9cee.jpg',
+		width: 600,
+		height: 337
+	},
+	{
+		type: 'image-big',
+		path: 'uploads/b0ec745753213d41ff145eb7d8cda5ca.jpg',
+		width: 1920,
+		height: 1080
+	},
+	
+	/*
+		Raft
+	*/
+	{
+		type: 'video-small',
+		path: 'uploads/787f5e11d469706592786c372fec71e5.webp',
+		width: 854,
+		height: 480
+	},
+	{
+		type: 'video-big',
+		path: 'uploads/7e8af0d5d9e4ef022962141ae3105752.webp',
+		width: 1920,
+		height: 1080
+	},
+	{
+		type: 'image-small',
+		path: 'uploads/621f50971fd089f21e3e0321da97653c.jpg',
+		width: 600,
+		height: 337
+	},
+	{
+		type: 'image-big',
+		path: 'uploads/388cf828538a647847c563a8bcc988f9.jpg',
+		width: 1920,
+		height: 1080
+	},
+	{
+		type: 'image-small',
+		path: 'uploads/2173551f9b0f308ba3e5a9e83a5f2898.jpg',
+		width: 600,
+		height: 337
+	},
+	{
+		type: 'image-big',
+		path: 'uploads/b9dbbce7bce1b50f081f0dad9477ee64.jpg',
+		width: 1920,
+		height: 1080
+	},
+	{
+		type: 'image-small',
+		path: 'uploads/c4b5542594d20f2e1596317fbae7d7d9.jpg',
+		width: 600,
+		height: 337
+	},
+	{
+		type: 'image-big',
+		path: 'uploads/49fb5559879f22c707a7c490f8930f0a.jpg',
+		width: 1920,
+		height: 1080
+	},
+	
+	/*
+		Titanfall 2
+	*/
+	{
+		type: 'video-small',
+		path: 'uploads/50064dedb531ad5541ae34d56a211b11.webp',
+		width: 854,
+		height: 480
+	},
+	{
+		type: 'video-big',
+		path: 'uploads/309b36ff538ce8faee863985ff349597.webp',
+		width: 1920,
+		height: 1080
+	},
+	{
+		type: 'image-small',
+		path: 'uploads/fda04155c109dd145440f72e998ce1a4.jpg',
+		width: 600,
+		height: 337
+	},
+	{
+		type: 'image-big',
+		path: 'uploads/4e30eb6644554b8b56e36ae9037c9262.jpg',
+		width: 1920,
+		height: 1080
+	},
+	{
+		type: 'image-small',
+		path: 'uploads/0645bffa52272ca8fe70c4cc36f214d7.jpg',
+		width: 600,
+		height: 337
+	},
+	{
+		type: 'image-big',
+		path: 'uploads/5d4493f382ce111504f80842497da31e.jpg',
+		width: 1920,
+		height: 1080
+	},
+	{
+		type: 'image-small',
+		path: 'uploads/7fd61ebd4dfc5cd1f2feaddfaea2d33c.jpg',
+		width: 600,
+		height: 337
+	},
+	{
+		type: 'image-big',
+		path: 'uploads/70328664021056555dca804aca73d1fa.jpg',
+		width: 1920,
+		height: 1080
+	},
+	
+	/*
+		Fall Guys
+	*/
+	{
+		type: 'video-small',
+		path: 'uploads/e7af0b6a5e98d6a10bd25cf3c2e9a22a.webp',
+		width: 854,
+		height: 480
+	},
+	{
+		type: 'video-big',
+		path: 'uploads/685fb0186acde387be7769afde8195dc.webp',
+		width: 1920,
+		height: 1080
+	},
+	{
+		type: 'image-small',
+		path: 'uploads/95fd588af3f9fb40e93cdee1f2b46d95.jpg',
+		width: 600,
+		height: 337
+	},
+	{
+		type: 'image-big',
+		path: 'uploads/6fd1e6cf7588166357b50cb97fc7ca3d.jpg',
+		width: 1920,
+		height: 1080
+	},
+	{
+		type: 'image-small',
+		path: 'uploads/9700387e61280b1e261aa41758771b9f.jpg',
+		width: 600,
+		height: 337
+	},
+	{
+		type: 'image-big',
+		path: 'uploads/2ecb82c2741b5482131c5ecc6ee2fb2e.jpg',
+		width: 1920,
+		height: 1080
+	},
+	{
+		type: 'image-small',
+		path: 'uploads/aacd635d07cde5185ac84eec8cea3ee9.jpg',
+		width: 600,
+		height: 337
+	},
+	{
+		type: 'image-big',
+		path: 'uploads/d06273f6afab732acf8d6c87c5695336.jpg',
+		width: 1920,
+		height: 1080
+	},
+	
+	/*
+		Phasmophobia
+	*/
+	{
+		type: 'video-small',
+		path: 'uploads/e6e6541e7a57284af79faf07ca78b292.webp',
+		width: 854,
+		height: 480
+	},
+	{
+		type: 'video-big',
+		path: 'uploads/53e048c1f6ca1046715047f342c19de4.webp',
+		width: 1920,
+		height: 1080
+	},
+	{
+		type: 'image-small',
+		path: 'uploads/32e3332aa82a5be0561339be6db3e563.jpg',
+		width: 600,
+		height: 337
+	},
+	{
+		type: 'image-big',
+		path: 'uploads/d8e5a560359545d73c36842997a5156a.jpg',
+		width: 1920,
+		height: 1080
+	},
+	{
+		type: 'image-small',
+		path: 'uploads/23611a6468af4707488532edb8a0e48f.jpg',
+		width: 600,
+		height: 337
+	},
+	{
+		type: 'image-big',
+		path: 'uploads/81265c8e90a82d40da8e660c8ee21d3c.jpg',
+		width: 1920,
+		height: 1080
+	},
+	{
+		type: 'image-small',
+		path: 'uploads/88bffee1b42f1f9ae9c4d6829adeb029.jpg',
+		width: 600,
+		height: 337
+	},
+	{
+		type: 'image-big',
+		path: 'uploads/7d825cbc0c223c35568f1484c7692533.jpg',
+		width: 1920,
+		height: 1080
+	},
+	
+	/*
+		Among Us
+	*/
+	{
+		type: 'video-small',
+		path: 'uploads/7ab58fd373348e6cc4b5944b69247d68.webp',
+		width: 854,
+		height: 480
+	},
+	{
+		type: 'video-big',
+		path: 'uploads/0d78c30c13307775df6b722c906e89f2.webp',
+		width: 1920,
+		height: 1080
+	},
+	{
+		type: 'image-small',
+		path: 'uploads/37a83cf80cb5b1006eab5be5766b7ee5.jpg',
+		width: 600,
+		height: 337
+	},
+	{
+		type: 'image-big',
+		path: 'uploads/124eee0fc5e00ee30341f48c5bb04412.jpg',
+		width: 1920,
+		height: 1080
+	},
+	{
+		type: 'image-small',
+		path: 'uploads/f4bfb591236c77d33dc075796df72b32.jpg',
+		width: 600,
+		height: 337
+	},
+	{
+		type: 'image-big',
+		path: 'uploads/7202bc0cb7066323f7e613e10e399ba9.jpg',
+		width: 1920,
+		height: 1080
+	},
+	{
+		type: 'image-small',
+		path: 'uploads/9f766fbe8b0706669edb2fb37e8d51cf.jpg',
+		width: 600,
+		height: 337
+	},
+	{
+		type: 'image-big',
+		path: 'uploads/e2c1d5a49a7e555df2394680421237c3.jpg',
+		width: 1920,
+		height: 1080
+	},
+	
+	/*
+		Worms
+	*/
+	{
+		type: 'video-small',
+		path: 'uploads/f107f6fd33a2b15129f127e8d7af4801.webp',
+		width: 854,
+		height: 480
+	},
+	{
+		type: 'video-big',
+		path: 'uploads/7b8a3b7c9c544ebb43c4779ffe6f0231.webp',
+		width: 1920,
+		height: 1080
+	},
+	{
+		type: 'image-small',
+		path: 'uploads/b1cac7cd33d0f2d89f0cdd9ec93f5a9f.jpg',
+		width: 600,
+		height: 337
+	},
+	{
+		type: 'image-big',
+		path: 'uploads/e3b375b90f051518510b25b159ebbe28.jpg',
+		width: 1920,
+		height: 1080
+	},
+	{
+		type: 'image-small',
+		path: 'uploads/9ca8b9736893eaa6ee7329c3931d5dd3.jpg',
+		width: 600,
+		height: 337
+	},
+	{
+		type: 'image-big',
+		path: 'uploads/29664349afd7450640c4b0735282b7e5.jpg',
+		width: 1920,
+		height: 1080
+	},
+	{
+		type: 'image-small',
+		path: 'uploads/f15ae68baf6e17f24399bdc17557b961.jpg',
+		width: 600,
+		height: 337
+	},
+	{
+		type: 'image-big',
+		path: 'uploads/8500ee33a84041d52ad1f19b4dd2d5cd.jpg',
+		width: 1920,
+		height: 1080
+	},
+	
+	/*
+		Rust
+	*/
+	{
+		type: 'video-small',
+		path: 'uploads/592b30a2cfbc451f601242f4eb1aa777.webp',
+		width: 854,
+		height: 480
+	},
+	{
+		type: 'video-big',
+		path: 'uploads/54740822e824a52d7544c7818b959705.webp',
+		width: 1920,
+		height: 1080
+	},
+	{
+		type: 'image-small',
+		path: 'uploads/a7156947618bff10bd68d72680013394.jpg',
+		width: 600,
+		height: 337
+	},
+	{
+		type: 'image-big',
+		path: 'uploads/e2c599047a18ccc11db370c6ad0615db.jpg',
+		width: 1920,
+		height: 1080
+	},
+	{
+		type: 'image-small',
+		path: 'uploads/71755b0b1adfc01f718e89df0f9eff66.jpg',
+		width: 600,
+		height: 337
+	},
+	{
+		type: 'image-big',
+		path: 'uploads/ab689e6039d0213f4ab45e15c14764c0.jpg',
+		width: 1920,
+		height: 1080
+	},
+	{
+		type: 'image-small',
+		path: 'uploads/a058c1d43e86929a6e2a732b0ce67531.jpg',
+		width: 600,
+		height: 337
+	},
+	{
+		type: 'image-big',
+		path: 'uploads/5484a53f800d383decc36e8318b5843b.jpg',
+		width: 1920,
+		height: 1080
+	},
+];
+
+/* =================================================================================
+* 		[ Creación de relaciones entre Productos y Categorías ]
+* ================================================================================= */
 
 const ProductCategory = [
  	/*
@@ -874,8 +1912,740 @@ const ProductCategory = [
 	}
 ];
 
+/* =================================================================================
+* 		[ Creación de relaciones entre Productos y Media ]
+* ================================================================================= */
+
+const ProductMedia = [
+	/*
+		I Am Dead
+	*/
+	{
+		productId: 1,
+		mediaId: 1
+	},
+	{
+		productId: 1,
+		mediaId: 2
+	},
+	{
+		productId: 1,
+		mediaId: 3
+	},
+	{
+		productId: 1,
+		mediaId: 4
+	},
+	{
+		productId: 1,
+		mediaId: 5
+	},
+	{
+		productId: 1,
+		mediaId: 6
+	},
+	{
+		productId: 1,
+		mediaId: 7
+	},
+	{
+		productId: 1,
+		mediaId: 8
+	},
+
+	/*
+		MAFIA
+	*/
+	{
+		productId: 2,
+		mediaId: 9
+	},
+	{
+		productId: 2,
+		mediaId: 10
+	},
+	{
+		productId: 2,
+		mediaId: 11
+	},
+	{
+		productId: 2,
+		mediaId: 12
+	},
+	{
+		productId: 2,
+		mediaId: 13
+	},
+	{
+		productId: 2,
+		mediaId: 14
+	},
+	{
+		productId: 2,
+		mediaId: 15
+	},
+	{
+		productId: 2,
+		mediaId: 16
+	},
+
+	/*
+		Rocket League
+	*/
+	{
+		productId: 3,
+		mediaId: 17
+	},
+	{
+		productId: 3,
+		mediaId: 18
+	},
+	{
+		productId: 3,
+		mediaId: 19
+	},
+	{
+		productId: 3,
+		mediaId: 20
+	},
+	{
+		productId: 3,
+		mediaId: 21
+	},
+	{
+		productId: 3,
+		mediaId: 22
+	},
+	{
+		productId: 3,
+		mediaId: 23
+	},
+	{
+		productId: 3,
+		mediaId: 24
+	},
+
+	/*
+		PUBG
+	*/
+	{
+		productId: 4,
+		mediaId: 25
+	},
+	{
+		productId: 4,
+		mediaId: 26
+	},
+	{
+		productId: 4,
+		mediaId: 27
+	},
+	{
+		productId: 4,
+		mediaId: 28
+	},
+	{
+		productId: 4,
+		mediaId: 29
+	},
+	{
+		productId: 4,
+		mediaId: 30
+	},
+	{
+		productId: 4,
+		mediaId: 31
+	},
+	{
+		productId: 4,
+		mediaId: 32
+	},
+
+	/*
+		Sea of Thieves
+	*/
+	{
+		productId: 5,
+		mediaId: 33
+	},
+	{
+		productId: 5,
+		mediaId: 34
+	},
+	{
+		productId: 5,
+		mediaId: 35
+	},
+	{
+		productId: 5,
+		mediaId: 36
+	},
+	{
+		productId: 5,
+		mediaId: 37
+	},
+	{
+		productId: 5,
+		mediaId: 38
+	},
+	{
+		productId: 5,
+		mediaId: 39
+	},
+	{
+		productId: 5,
+		mediaId: 40
+	},
+
+	/*
+		Star Wars
+	*/
+	{
+		productId: 6,
+		mediaId: 41
+	},
+	{
+		productId: 6,
+		mediaId: 42
+	},
+	{
+		productId: 6,
+		mediaId: 43
+	},
+	{
+		productId: 6,
+		mediaId: 44
+	},
+	{
+		productId: 6,
+		mediaId: 45
+	},
+	{
+		productId: 6,
+		mediaId: 46
+	},
+	{
+		productId: 6,
+		mediaId: 47
+	},
+	{
+		productId: 6,
+		mediaId: 48
+	},
+
+	/*
+		The Witcher III
+	*/
+	{
+		productId: 7,
+		mediaId: 49
+	},
+	{
+		productId: 7,
+		mediaId: 50
+	},
+	{
+		productId: 7,
+		mediaId: 51
+	},
+	{
+		productId: 7,
+		mediaId: 52
+	},
+	{
+		productId: 7,
+		mediaId: 53
+	},
+	{
+		productId: 7,
+		mediaId: 54
+	},
+	{
+		productId: 7,
+		mediaId: 55
+	},
+	{
+		productId: 7,
+		mediaId: 56
+	},
+
+	/*
+		GTA V
+	*/
+	{
+		productId: 8,
+		mediaId: 57
+	},
+	{
+		productId: 8,
+		mediaId: 58
+	},
+	{
+		productId: 8,
+		mediaId: 59
+	},
+	{
+		productId: 8,
+		mediaId: 60
+	},
+	{
+		productId: 8,
+		mediaId: 61
+	},
+	{
+		productId: 8,
+		mediaId: 62
+	},
+	{
+		productId: 8,
+		mediaId: 63
+	},
+	{
+		productId: 8,
+		mediaId: 64
+	},
+
+	/*
+		Civilization
+	*/
+	{
+		productId: 9,
+		mediaId: 65
+	},
+	{
+		productId: 9,
+		mediaId: 66
+	},
+	{
+		productId: 9,
+		mediaId: 67
+	},
+	{
+		productId: 9,
+		mediaId: 68
+	},
+	{
+		productId: 9,
+		mediaId: 69
+	},
+	{
+		productId: 9,
+		mediaId: 70
+	},
+	{
+		productId: 9,
+		mediaId: 71
+	},
+	{
+		productId: 9,
+		mediaId: 72
+	},
+
+	/*
+		GRIP
+	*/
+	{
+		productId: 10,
+		mediaId: 73
+	},
+	{
+		productId: 10,
+		mediaId: 74
+	},
+	{
+		productId: 10,
+		mediaId: 75
+	},
+	{
+		productId: 10,
+		mediaId: 76
+	},
+	{
+		productId: 10,
+		mediaId: 77
+	},
+	{
+		productId: 10,
+		mediaId: 78
+	},
+	{
+		productId: 10,
+		mediaId: 79
+	},
+	{
+		productId: 10,
+		mediaId: 80
+	},
+
+	/*
+		Assassins Creed
+	*/
+	{
+		productId: 11,
+		mediaId: 81
+	},
+	{
+		productId: 11,
+		mediaId: 82
+	},
+	{
+		productId: 11,
+		mediaId: 83
+	},
+	{
+		productId: 11,
+		mediaId: 84
+	},
+	{
+		productId: 11,
+		mediaId: 85
+	},
+	{
+		productId: 11,
+		mediaId: 86
+	},
+	{
+		productId: 11,
+		mediaId: 87
+	},
+	{
+		productId: 11,
+		mediaId: 88
+	},
+
+	/*
+		Borderlands 2
+	*/
+	{
+		productId: 12,
+		mediaId: 89
+	},
+	{
+		productId: 12,
+		mediaId: 90
+	},
+	{
+		productId: 12,
+		mediaId: 91
+	},
+	{
+		productId: 12,
+		mediaId: 92
+	},
+	{
+		productId: 12,
+		mediaId: 93
+	},
+	{
+		productId: 12,
+		mediaId: 94
+	},
+	{
+		productId: 12,
+		mediaId: 95
+	},
+	{
+		productId: 12,
+		mediaId: 96
+	},
+
+	/*
+		Primordials
+	*/
+	{
+		productId: 13,
+		mediaId: 97
+	},
+	{
+		productId: 13,
+		mediaId: 98
+	},
+	{
+		productId: 13,
+		mediaId: 99
+	},
+	{
+		productId: 13,
+		mediaId: 100
+	},
+	{
+		productId: 13,
+		mediaId: 101
+	},
+	{
+		productId: 13,
+		mediaId: 102
+	},
+	{
+		productId: 13,
+		mediaId: 103
+	},
+	{
+		productId: 13,
+		mediaId: 104
+	},
+
+	/*
+		Raft
+	*/
+	{
+		productId: 14,
+		mediaId: 105
+	},
+	{
+		productId: 14,
+		mediaId: 106
+	},
+	{
+		productId: 14,
+		mediaId: 107
+	},
+	{
+		productId: 14,
+		mediaId: 108
+	},
+	{
+		productId: 14,
+		mediaId: 109
+	},
+	{
+		productId: 14,
+		mediaId: 110
+	},
+	{
+		productId: 14,
+		mediaId: 111
+	},
+	{
+		productId: 14,
+		mediaId: 112
+	},
+
+	/*
+		Titanfall 2
+	*/
+	{
+		productId: 15,
+		mediaId: 113
+	},
+	{
+		productId: 15,
+		mediaId: 114
+	},
+	{
+		productId: 15,
+		mediaId: 115
+	},
+	{
+		productId: 15,
+		mediaId: 116
+	},
+	{
+		productId: 15,
+		mediaId: 117
+	},
+	{
+		productId: 15,
+		mediaId: 118
+	},
+	{
+		productId: 15,
+		mediaId: 119
+	},
+	{
+		productId: 15,
+		mediaId: 120
+	},
+
+	/*
+		Fall Guys
+	*/
+	{
+		productId: 16,
+		mediaId: 121
+	},
+	{
+		productId: 16,
+		mediaId: 122
+	},
+	{
+		productId: 16,
+		mediaId: 123
+	},
+	{
+		productId: 16,
+		mediaId: 124
+	},
+	{
+		productId: 16,
+		mediaId: 125
+	},
+	{
+		productId: 16,
+		mediaId: 126
+	},
+	{
+		productId: 16,
+		mediaId: 127
+	},
+	{
+		productId: 16,
+		mediaId: 128
+	},
+
+	/*
+		Phasmophobia
+	*/
+	{
+		productId: 17,
+		mediaId: 129
+	},
+	{
+		productId: 17,
+		mediaId: 130
+	},
+	{
+		productId: 17,
+		mediaId: 131
+	},
+	{
+		productId: 17,
+		mediaId: 132
+	},
+	{
+		productId: 17,
+		mediaId: 133
+	},
+	{
+		productId: 17,
+		mediaId: 134
+	},
+	{
+		productId: 17,
+		mediaId: 135
+	},
+	{
+		productId: 17,
+		mediaId: 136
+	},
+
+	/*
+		Among Us
+	*/
+	{
+		productId: 18,
+		mediaId: 137
+	},
+	{
+		productId: 18,
+		mediaId: 138
+	},
+	{
+		productId: 18,
+		mediaId: 139
+	},
+	{
+		productId: 18,
+		mediaId: 140
+	},
+	{
+		productId: 18,
+		mediaId: 141
+	},
+	{
+		productId: 18,
+		mediaId: 142
+	},
+	{
+		productId: 18,
+		mediaId: 143
+	},
+	{
+		productId: 18,
+		mediaId: 144
+	},
+
+	/*
+		Worms
+	*/
+	{
+		productId: 19,
+		mediaId: 145
+	},
+	{
+		productId: 19,
+		mediaId: 146
+	},
+	{
+		productId: 19,
+		mediaId: 147
+	},
+	{
+		productId: 19,
+		mediaId: 148
+	},
+	{
+		productId: 19,
+		mediaId: 149
+	},
+	{
+		productId: 19,
+		mediaId: 150
+	},
+	{
+		productId: 19,
+		mediaId: 151
+	},
+	{
+		productId: 19,
+		mediaId: 152
+	},
+
+	/*
+		Rust
+	*/
+	{
+		productId: 20,
+		mediaId: 153
+	},
+	{
+		productId: 20,
+		mediaId: 154
+	},
+	{
+		productId: 20,
+		mediaId: 155
+	},
+	{
+		productId: 20,
+		mediaId: 156
+	},
+	{
+		productId: 20,
+		mediaId: 157
+	},
+	{
+		productId: 20,
+		mediaId: 158
+	},
+	{
+		productId: 20,
+		mediaId: 159
+	},
+	{
+		productId: 20,
+		mediaId: 160
+	}
+];
+
+/* =================================================================================
+* 		[ Exportamos los objetos creados anteriormente ]
+* ================================================================================= */
+
 module.exports = {
 	Product,
 	Category,
-	ProductCategory
+	Media,
+	ProductCategory,
+	ProductMedia
 };
