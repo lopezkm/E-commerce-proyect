@@ -24,8 +24,8 @@ const FormAddCategory = () => {
             name: formInput.categoryName,
             description: formInput.categoryDescription
         })
-        .then(x => console.log("Paso bien", x))// Respuesta del servidor
-        .catch(e => console.log('error ura calva!!', e))
+        .then(response => console.log(response))// Respuesta del servidor
+        .catch(e => console.log(e))
     } 
 
     return (

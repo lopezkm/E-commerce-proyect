@@ -50,6 +50,9 @@ Category.belongsToMany( Product, { through: ProductCategory } );
 Product.belongsToMany( Media, { through: ProductMedia } );
 Media.belongsToMany( Product, { through: ProductMedia, foreignKey: 'mediaId' } );
 
+/* Product.hasMany(Media);
+Media.belongsTo(Product); */
+
 /* =================================================================================
 * 		[ Creamos un callback para la inserción de datos de prueba luego 
 *			    de que Sequelize haya terminado de sincronizar ]    
