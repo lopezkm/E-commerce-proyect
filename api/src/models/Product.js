@@ -20,10 +20,6 @@ module.exports = ( sequelize ) => {
 			type: DataTypes.INTEGER,
 			allowNull: false
 		},
-		media: {
-			type: DataTypes.STRING,
-			allowNull: false
-		},
 		developer: {
 			type: DataTypes.STRING,
 			allowNull: false

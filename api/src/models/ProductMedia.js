@@ -1,7 +1,7 @@
 const { DataTypes } = require( 'sequelize' );
 
 module.exports = ( sequelize ) => {
-	sequelize.define( 'ProductCategory', {
+	sequelize.define( 'ProductMedia', {
 		productId: {
 			type: DataTypes.INTEGER,
 			references: {
@@ -9,15 +9,15 @@ module.exports = ( sequelize ) => {
 				key: 'id'
 			}
 		},
-		categoryId: {
+		mediaId: {
 			type: DataTypes.INTEGER,
 			references: {
-				model: 'Category',
+				model: 'Media',
 				key: 'id'
 			}
 		}
 	}, {
 		timestamps: false,
-		tableName: 'product_category'
+		tableName: 'product_media'
 	} );
 };
