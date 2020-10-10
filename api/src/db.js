@@ -1,45 +1,81 @@
-require('dotenv').config();
-const { Sequelize } = require('sequelize');
-const fs = require('fs');
-const path = require('path');
-const {
-	DB_USER, DB_PASSWORD, DB_HOST,
-} = process.env;
+require( 'dotenv' ).config( );
 
-const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/development`, {
-	logging: false, // set to console.log to see the raw SQL queries
-	native: false, // Poner en falso si funciona mal
-});
-const basename = path.basename(__filename);
+const { Sequelize } = require( 'sequelize' );
 
-const modelDefiners = [];
+const fs = require( 'fs' );
+const path = require( 'path' );
+const basename = path.basename( __filename );
 
-// Leemos todos los archivos de la carpeta Models, los requerimos y agregamos al arreglo modelDefiners
-fs.readdirSync(path.join(__dirname, '/models'))
-	.filter((file) => (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js'))
-	.forEach((file) => {
-		modelDefiners.push(require(path.join(__dirname, '/models', file)));
-	});
+/* =================================================================================
+* 		[ Creamos la conexión con la base de datos ]
+* ================================================================================= */
 
-// Injectamos la conexion (sequelize) a todos los modelos
-modelDefiners.forEach(model => model(sequelize));
-// Capitalizamos los nombres de los modelos ie: product => Product
-let entries = Object.entries(sequelize.models);
-let capsEntries = entries.map((entry) => [entry[0][0].toUpperCase() + entry[0].slice(1), entry[1]]);
-sequelize.models = Object.fromEntries(capsEntries);
+const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
 
-// En sequelize.models están todos los modelos importados como propiedades
-// Para relacionarlos hacemos un destructuring
+const sequelize = new Sequelize( `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/development`, {
+	logging: false,
+	native: false
+} );
 
-const { Product, Category } = sequelize.models;
+/* =================================================================================
+* 		[ Leemos todos los modelos definidos, capitalizamos sus
+*		   nombres  y los agregamos a los modelos de Sequelize ]    
+* ================================================================================= */
 
-// Aca vendrian las relaciones
-// Product.hasMany(Reviews);
+const modelDefiners = [ ];
 
-Product.belongsToMany( Category, { through: 'product_category' } );
-Category.belongsToMany( Product, { through: 'product_category' } );
+fs.readdirSync( path.join( __dirname, '/models' ) )
+	.filter( ( file ) => ( file.indexOf( '.' ) !== 0 ) && ( file !== basename ) && ( file.slice( -3 ) === '.js' ) )
+	.forEach( ( file ) => {
+		modelDefiners.push( require( path.join( __dirname, '/models', file ) ) );
+	} );
+
+modelDefiners.forEach( model => model( sequelize ) );
+
+let entries = Object.entries( sequelize.models );
+let capsEntries = entries.map( ( entry ) => [ entry[ 0 ][ 0 ].toUpperCase( ) + entry[ 0 ].slice( 1 ), entry[ 1 ] ] );
+
+sequelize.models = Object.fromEntries( capsEntries );
+
+/* =================================================================================
+* 		[ Aplicamos destructuring para obtener los modelos
+*		      y creamos las relaciones entre estos ]    
+* ================================================================================= */
+
+const { Product, Category, Media, ProductCategory, ProductMedia } = sequelize.models;
+
+Product.belongsToMany( Category, { through: ProductCategory } );
+Category.belongsToMany( Product, { through: ProductCategory } );
+
+Product.belongsToMany( Media, { through: ProductMedia } );
+Media.belongsToMany( Product, { through: ProductMedia, foreignKey: 'mediaId' } );
+
+/* =================================================================================
+* 		[ Creamos un callback para la inserción de datos de prueba luego 
+*			    de que Sequelize haya terminado de sincronizar ]    
+* ================================================================================= */
+
+( function( ) { 
+	if ( process.env.NODE_ENV && ( process.env.NODE_ENV !== 'development' ) ) {
+		return;
+	}
+	
+	sequelize.afterBulkSync( async ( ) => {
+		const mockData = require( '../.mockdata' );
+		
+		Object.keys( sequelize.models ).forEach( model => {
+			if ( mockData.hasOwnProperty( model ) ) {
+				sequelize.models[ model ].bulkCreate( mockData[ model ] );
+			}
+		} );
+	} );
+} )( );
+
+/* =================================================================================
+* 		[ Exportamos los modelos y la conexión ]    
+* ================================================================================= */
 
 module.exports = {
-	...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
-	conn: sequelize,     // para importart la conexión { conn } = require('./db.js');
+	...sequelize.models,
+	conn: sequelize
 };

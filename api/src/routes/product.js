@@ -1,19 +1,37 @@
 const server = require( 'express' ).Router( );
-const { Product, Category } = require( '../db.js' );
 const Promise = require( 'bluebird' );
-const { request, response } = require('express');
+const { Product, Category, Media } = require( '../db.js' );
+
+/* =================================================================================
+* 		[ Obtención de todos los productos ]
+* ================================================================================= */
 
 server.get( '/', ( request, response, next ) => {
-	Product.findAll( )
+	Product.findAll( {
+			include: [
+				{ model: Media },
+				{ model: Category }
+			]
+		} )
 		.then( ( products ) => {
-			response.send( products );
-		} );
+			response.status( 200 ).send( products );
+		} )
+		.catch( next );
 } );
+
+/* =================================================================================
+* 		[ Búsqueda de un producto por identificador ]
+* ================================================================================= */
 
 server.get( '/:id', ( request, response, next ) => {
 	const { id } = request.params;
 	
-	Product.findByPk( id )
+	Product.findByPk( id, {
+			include: [
+				{ model: Media },
+				{ model: Category }
+			]
+		} )
 		.then( ( product ) => {
 			if ( !product ) {
 				return response.sendStatus( 404 );
@@ -22,6 +40,10 @@ server.get( '/:id', ( request, response, next ) => {
 			response.send( product );
 		} );
 } );
+
+/* =================================================================================
+* 		[ Creación de la relación entre un producto y una categoría ]
+* ================================================================================= */
 
 server.post( '/:idProduct/category/:idCategory', ( request, response, next ) => {
 	const { idProduct, idCategory } = request.params;
@@ -44,51 +66,9 @@ server.post( '/:idProduct/category/:idCategory', ( request, response, next ) => 
 		} );
 } );
 
-server.post('/', (request, response) => {
-	const { name, description, price, stock, media, developer, publisher, publishDate} = request.body;
-	if(!name || !description || !price || !stock || !media || !developer || !publisher || !publishDate){
-		return response.status(400).send('Verifique que todos los campos esten completos');
-	}
-
-	Product.create({
-		name,
-		description,
-		price, 
-		stock, 
-		media, 
-		developer, 
-		publisher, 
-		publishDate
-	})
-	.then(product => response.status(201).send(product))
-	.catch(() => response.status(409).send('El producto que intenta ingresar ya existe'));
-});
-
-server.put('/:id', (request, response) => {
-	const {id} = request.params;
-	let { name, description, price, stock, media, developer, publisher, publishDate } = request.body;
-	Product.findByPk(id)
-	.then(product => {
-		if(!product) {
-			return response.status(404).send('El producto a modificar no existe')
-		}
-		
-		name = name || product.name;
-		description = description || product.description;
-		price = price || product.price;
-		stock = stock || product.stock;
-		media = media || product.media;
-		developer = developer || product.developer;
-		publisher = publisher || product.publisher; 
-		publishDate = publishDate || product.publishDate;
-		
-		return product.update({ name, description, price, stock, media, developer, publisher, publishDate })
-	})
-	.then( product => {
-		return response.status(200).send(product)
-	})
-	.catch(err => response.status(401).send('Hiciste algo mal urita mocha'))
-});
+/* =================================================================================
+* 		[ Eliminación de la relación entre un producto y una categoría ]
+* ================================================================================= */
 
 server.delete( '/:idProduct/category/:idCategory', ( request, response, next ) => {
 	const { idProduct, idCategory } = request.params;
@@ -111,17 +91,62 @@ server.delete( '/:idProduct/category/:idCategory', ( request, response, next ) =
 		} );
 } );
 
-server.delete("/:id", (req, res) => {
-	let { id } = req.params;
-	Product.findByPk(id)
-		.then(product => {
-			if (!product) {
-				return res.status(404).send("El producto a eliminar no existe.");
-			}
+/* =================================================================================
+* 		[ Creación de un producto ]
+* ================================================================================= */
 
-			product.destroy()
-			.then(() => res.sendStatus(200));
-		});
-});
+server.post( '/', ( request, response ) => {
+	Product.create( {
+			...request.body
+		} )
+		.then( product => {
+			if ( !product ) {
+				return response.sendStatus( 400 );
+			}
+			
+			return product
+		} )
+		.catch( error => response.status( 400 ).send( error ) );
+} );
+
+/* =================================================================================
+* 		[ Modificación de un producto ]
+* ================================================================================= */
+
+server.put( '/:id', ( request, response ) => {
+	const { id } = request.params;
+	
+	Product.findByPk( id )
+		.then( product => {
+			if ( !product ) {
+				return response.sendStatus( 404 );
+			}
+			
+			return product.update( { ...request.body } );
+		} )
+		.catch( error => response.status( 400 ).send( error ) );
+} );
+
+/* =================================================================================
+* 		[ Eliminación de un producto ]
+* ================================================================================= */
+
+server.delete( '/:id', ( request, response ) => {
+	let { id } = request.params;
+	
+	Product.findByPk( id )
+		.then( product => {
+			if ( !product ) {
+				return response.sendStatus( 404 );
+			}
+			
+			product.destroy( )
+				.then( ( ) => res.sendStatus( 200 ) );
+		} );
+} );
+
+/* =================================================================================
+* 		[ Exportamos nuestras rutas ]
+* ================================================================================= */
 
 module.exports = server;
