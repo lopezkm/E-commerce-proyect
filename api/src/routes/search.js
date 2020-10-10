@@ -1,7 +1,6 @@
 const server = require( 'express' ).Router( );
 const { Product } = require( '../db.js' );
 const { Op } = require( 'sequelize' );
-const Promise = require( 'bluebird' );
 
 server.get( '/search', ( request, response, next ) => {
 	const { query } = request.query;
