@@ -7,7 +7,6 @@ const searchRouter      = require( './search.js' );
 
 const router = Router( );
 
-// Carga las distintas rutas en el router
 router.use( '/products/category', categoryRouter );
 router.use( '/products', productRouter );
 router.use( '/medias', mediaRouter );
