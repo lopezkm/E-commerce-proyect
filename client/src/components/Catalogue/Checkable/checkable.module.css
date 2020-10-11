@@ -1,0 +1,23 @@
+.checkable
+{
+	display: flex;
+	flex-flow: row no-wrap;
+	align-items: center;
+	justify-content: space-between;
+	user-select: none;
+	cursor: pointer;
+	padding: 10px 20px;
+	font-weight: 700;
+	font-size: 0.85rem;
+	border-radius: 5px;
+	color: #555;
+	background-color: #f8f8f8;
+}
+
+.active
+{
+	color: #fff;
+	
+	border-color: #323232;
+	background-color: #323232;
+}

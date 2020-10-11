@@ -5,7 +5,7 @@ import './App.css';
 import NavBar from './components/nav_bar.jsx';
 import FormAdmin from './components/form_admin.jsx';
 import { Route } from 'react-router-dom';
-import Catalogue from './components/catalogue.jsx'
+import Catalogue from './components/Catalogue/catalogue.jsx'
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 import FormAdd from './components/form_add_category.jsx'
 
@@ -15,7 +15,7 @@ function App() {
 			<Route path="/" component={ NavBar } />
 			
 			<Route exact path="/categories" component={ FormAdd } />
-			<Route exact path="/catalogue" component={ Catalogue } />
+			<Route exact path="/products" component={ Catalogue } />
 			<Route exact path ='/product/:productId' render={ ( { match } ) =>
 				<Product 
 					productId = { match.params.productId }

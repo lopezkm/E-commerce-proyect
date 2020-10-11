@@ -1,0 +1,26 @@
+.categoriesList
+{
+	width: 100%;
+}
+
+.categoriesList > div
+{
+	margin-bottom: 10px;
+}
+
+.expandButton
+{
+	border: none;
+	width: 100%;
+	border-radius: 5px;
+	padding: 5px;
+	
+	font-weight: 700;
+	color: #fff;
+	background-color: #007dfc;
+}
+
+.expandButton:focus
+{
+	outline: none;
+}
