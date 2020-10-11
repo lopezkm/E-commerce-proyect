@@ -1,5 +1,6 @@
 import React from 'react';
 import { Form, Button, FormControl } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import Result from './search_results'
 import axios from 'axios';
 let result;
@@ -32,7 +33,10 @@ const SearchBar = ({ findProducts }) => {
                 className="mr-sm-2"  
                 name="searchInput" 
                 onChange={(event) => handleInputChange(event)}/>
-            <Button type="submit" variant="outline-info">Search</Button>
+            <Link to="/searched">
+              <Button type="submit" variant="outline-info" >Search</Button>
+            </Link>
+
         </Form>
     );
 };
