@@ -9,8 +9,13 @@ import IMG2 from './punisher2.jpg';
 import IMG3 from './punisher3.jpg';
 import { Route } from 'react-router-dom';
 import Catalogue from './components/catalogue.jsx'
+<<<<<<< HEAD
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 import FormAdd from './components/form_add_category.jsx'
+=======
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './styles/global.css' 
+>>>>>>> a907fcc34bc159c489a270c45525ea01e6091951
 
 function App() {
   return (
