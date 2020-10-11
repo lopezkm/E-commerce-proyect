@@ -10,11 +10,13 @@ import IMG3 from './punisher3.jpg';
 import { Route } from 'react-router-dom';
 import Catalogue from './components/catalogue.jsx'
 import 'bootstrap/dist/css/bootstrap.min.css'; 
+import FormAdd from './components/form_add_category.jsx'
 
 function App() {
   return (
     <div className= 'container-fluid' style={{ padding: 0}}>
       <NavBar/>
+      <FormAdd/>
       <Route 
         path="/products" render={() => <Catalogue/>}
       />
