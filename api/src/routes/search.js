@@ -1,5 +1,5 @@
 const server = require( 'express' ).Router( );
-const { Product } = require( '../db.js' );
+const { Product, Media, Category } = require( '../db.js' );
 const { Op } = require( 'sequelize' );
 
 server.get( '/search', ( request, response, next ) => {
@@ -18,7 +18,12 @@ server.get( '/search', ( request, response, next ) => {
 				{ name: { [ Op.iLike ]: likeQuery } },
 				{ description: { [ Op.iLike ]: likeQuery } }
 			]
-		}
+		},
+		include: [
+			{ model: Media },
+			{ model: Category }
+		]
+
 	} ).then( ( products ) => {
 		if ( !products ) {
 			return response.sendStatus( 404 );
