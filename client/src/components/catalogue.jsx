@@ -86,7 +86,7 @@ function Catalogue( )
 										name={ p.name }
 										price={ p.price }
 										developer={ p.developer }
-										media={ p.media[ 1 ].path }
+										/* media={ p.media[ 1 ].path } */
 										key={ p.id }
 									/>
 								</Col>
