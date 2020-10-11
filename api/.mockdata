@@ -215,20 +215,12 @@ const Category = [
 		description: 'Colabora con otros jugadores para ganar.'
 	},
 	{
-		name: 'Crimen',
-		description: 'Podras cometer aquello que en el mundo real no puedes hacer.'
-	},
-	{
 		name: 'Disparos',
 		description: 'Mata a tus enemigos llenándolos de plomo.'
 	},
 	{
 		name: 'Divertido',
 		description: 'Soltarás mas de una caracajada cuando estés jugando.'
-	},
-	{
-		name: 'Espacio',
-		description: 'Ambientado en el espacio exterior.'
 	},
 	{
 		name: 'Estrategia',
@@ -259,16 +251,8 @@ const Category = [
 		description: 'Puedes visualizar el juego en modo primera persona.'
 	},
 	{
-		name: 'Realidad Virtual',
-		description: 'Podrás optar por una experiencia más real utilizando tu dispositivo de RV.'
-	},
-	{
 		name: 'Rol',
 		description: 'Desempeña un rol.'
-	},
-	{
-		name: 'Rompecabezas',
-		description: 'Te toparás con distintos acertijos que deberás resolver.'
 	},
 	{
 		name: 'Supervivencia',
