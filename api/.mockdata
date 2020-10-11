@@ -23,7 +23,7 @@ const Product = [
 	},
 	{
 		name: 'Rocket League',
-		description: `Tras un inesperado percance con la mafia, el taxista Tommy Angelo entra a regañadientes en el mundo del crimen organizado. A pesar de su reticencia inicial, las ventajas de unirse a la familia Salieri son demasiadas como para ignorarlas.`,
+		description: `Combina el fútbol de estilo arcade con el caos a cuatro ruedas, unos controles fáciles y una competición fluida y basada en la física.`,
 		price: 4.99,
 		stock: 100,
 		developer: 'Psyonix LLC',
@@ -298,13 +298,13 @@ const Media = [
 	*/
 	{
 		type: 'video',
-		path: 'uploads/d1cfd667d87bf42fee7b4730d89f6d98.webp',
+		path: 'uploads/d1cfd667d87bf42fee7b4730d89f6d98.webm',
 		width: 854,
 		height: 480
 	},
 	{
 		type: 'video',
-		path: 'uploads/639c2caa8bbe737878bfc9db070da818.webp',
+		path: 'uploads/639c2caa8bbe737878bfc9db070da818.webm',
 		width: 1920,
 		height: 1080
 	},
@@ -350,13 +350,13 @@ const Media = [
 	*/
 	{
 		type: 'video',
-		path: 'uploads/0cb83aec3fb2b6a9396b536c49706112.webp',
+		path: 'uploads/0cb83aec3fb2b6a9396b536c49706112.webm',
 		width: 854,
 		height: 480
 	},
 	{
 		type: 'video',
-		path: 'uploads/70dc3412744db60ea3a2b0e8bfe6707f.webp',
+		path: 'uploads/70dc3412744db60ea3a2b0e8bfe6707f.webm',
 		width: 1920,
 		height: 1080
 	},
@@ -402,13 +402,13 @@ const Media = [
 	*/
 	{
 		type: 'video-small',
-		path: 'uploads/1095e6749093597871d5ae11998cf3d8.webp',
+		path: 'uploads/1095e6749093597871d5ae11998cf3d8.webm',
 		width: 854,
 		height: 480
 	},
 	{
 		type: 'video-big',
-		path: 'uploads/e08cbd0f8a5f4ac3c54a506c7e519d63.webp',
+		path: 'uploads/e08cbd0f8a5f4ac3c54a506c7e519d63.webm',
 		width: 1920,
 		height: 1080
 	},
@@ -454,13 +454,13 @@ const Media = [
 	*/
 	{
 		type: 'video-small',
-		path: 'uploads/6d9d402e29a2f5bc005df7ee41ecdb05.webp',
+		path: 'uploads/6d9d402e29a2f5bc005df7ee41ecdb05.webm',
 		width: 854,
 		height: 480
 	},
 	{
 		type: 'video-big',
-		path: 'uploads/6ca38ddf8de0ad86c6354b728ed9a4c7.webp',
+		path: 'uploads/6ca38ddf8de0ad86c6354b728ed9a4c7.webm',
 		width: 1920,
 		height: 1080
 	},
@@ -506,13 +506,13 @@ const Media = [
 	*/
 	{
 		type: 'video-small',
-		path: 'uploads/7626f0aa452ccd50da1a1f06c9f8aac9.webp',
+		path: 'uploads/7626f0aa452ccd50da1a1f06c9f8aac9.webm',
 		width: 854,
 		height: 480
 	},
 	{
 		type: 'video-big',
-		path: 'uploads/7ff1273b600f86ead1da51d04960147f.webp',
+		path: 'uploads/7ff1273b600f86ead1da51d04960147f.webm',
 		width: 1920,
 		height: 1080
 	},
@@ -558,13 +558,13 @@ const Media = [
 	*/
 	{
 		type: 'video-small',
-		path: 'uploads/8d0db2590cf849f7c68ec997d0ad815a.webp',
+		path: 'uploads/8d0db2590cf849f7c68ec997d0ad815a.webm',
 		width: 854,
 		height: 480
 	},
 	{
 		type: 'video-big',
-		path: 'uploads/424937271770bc4e3702e41667307052.webp',
+		path: 'uploads/424937271770bc4e3702e41667307052.webm',
 		width: 1920,
 		height: 1080
 	},
@@ -610,13 +610,13 @@ const Media = [
 	*/
 	{
 		type: 'video-small',
-		path: 'uploads/effd0b7f4f2f58556353a218a4c4c359.webp',
+		path: 'uploads/effd0b7f4f2f58556353a218a4c4c359.webm',
 		width: 854,
 		height: 480
 	},
 	{
 		type: 'video-big',
-		path: 'uploads/f52f3d49f85243b87c369cc281997bf4.webp',
+		path: 'uploads/f52f3d49f85243b87c369cc281997bf4.webm',
 		width: 1920,
 		height: 1080
 	},
@@ -662,13 +662,13 @@ const Media = [
 	*/
 	{
 		type: 'video-small',
-		path: 'uploads/dfb5607e17272e43718dc2958bfe52b0.webp',
+		path: 'uploads/dfb5607e17272e43718dc2958bfe52b0.webm',
 		width: 854,
 		height: 480
 	},
 	{
 		type: 'video-big',
-		path: 'uploads/4f0f6fa23e50342fbd1c234063020dc4.webp',
+		path: 'uploads/4f0f6fa23e50342fbd1c234063020dc4.webm',
 		width: 1920,
 		height: 1080
 	},
@@ -714,13 +714,13 @@ const Media = [
 	*/
 	{
 		type: 'video-small',
-		path: 'uploads/21a6716a8ad70db714ddcc0128e8edad.webp',
+		path: 'uploads/21a6716a8ad70db714ddcc0128e8edad.webm',
 		width: 854,
 		height: 480
 	},
 	{
 		type: 'video-big',
-		path: 'uploads/e7fbdddce76909cc757e57310043d60c.webp',
+		path: 'uploads/e7fbdddce76909cc757e57310043d60c.webm',
 		width: 1920,
 		height: 1080
 	},
@@ -766,13 +766,13 @@ const Media = [
 	*/
 	{
 		type: 'video-small',
-		path: 'uploads/1199d289827b6ad236162f4e94127600.webp',
+		path: 'uploads/1199d289827b6ad236162f4e94127600.webm',
 		width: 854,
 		height: 480
 	},
 	{
 		type: 'video-big',
-		path: 'uploads/b81d01ba47b9896e2a871726af83a5e6.webp',
+		path: 'uploads/b81d01ba47b9896e2a871726af83a5e6.webm',
 		width: 1920,
 		height: 1080
 	},
@@ -818,13 +818,13 @@ const Media = [
 	*/
 	{
 		type: 'video-small',
-		path: 'uploads/2f1847e2004d202b6638bee865caa8a6.webp',
+		path: 'uploads/2f1847e2004d202b6638bee865caa8a6.webm',
 		width: 854,
 		height: 480
 	},
 	{
 		type: 'video-big',
-		path: 'uploads/cccd5c0ddc6fc8518341f65f31139a09.webp',
+		path: 'uploads/cccd5c0ddc6fc8518341f65f31139a09.webm',
 		width: 1920,
 		height: 1080
 	},
@@ -870,13 +870,13 @@ const Media = [
 	*/
 	{
 		type: 'video-small',
-		path: 'uploads/38563a68caffd93e1c7bf238733b7885.webp',
+		path: 'uploads/38563a68caffd93e1c7bf238733b7885.webm',
 		width: 854,
 		height: 480
 	},
 	{
 		type: 'video-big',
-		path: 'uploads/42b6ff46a509ac8148985871da9f720d.webp',
+		path: 'uploads/42b6ff46a509ac8148985871da9f720d.webm',
 		width: 1920,
 		height: 1080
 	},
@@ -922,13 +922,13 @@ const Media = [
 	*/
 	{
 		type: 'video-small',
-		path: 'uploads/ee86f154f4864e2545db61b233e070c7.webp',
+		path: 'uploads/ee86f154f4864e2545db61b233e070c7.webm',
 		width: 854,
 		height: 480
 	},
 	{
 		type: 'video-big',
-		path: 'uploads/08f0fcd2eeb74a7cbba26db7171308e9.webp',
+		path: 'uploads/08f0fcd2eeb74a7cbba26db7171308e9.webm',
 		width: 1920,
 		height: 1080
 	},
@@ -974,13 +974,13 @@ const Media = [
 	*/
 	{
 		type: 'video-small',
-		path: 'uploads/787f5e11d469706592786c372fec71e5.webp',
+		path: 'uploads/787f5e11d469706592786c372fec71e5.webm',
 		width: 854,
 		height: 480
 	},
 	{
 		type: 'video-big',
-		path: 'uploads/7e8af0d5d9e4ef022962141ae3105752.webp',
+		path: 'uploads/7e8af0d5d9e4ef022962141ae3105752.webm',
 		width: 1920,
 		height: 1080
 	},
@@ -1026,13 +1026,13 @@ const Media = [
 	*/
 	{
 		type: 'video-small',
-		path: 'uploads/50064dedb531ad5541ae34d56a211b11.webp',
+		path: 'uploads/50064dedb531ad5541ae34d56a211b11.webm',
 		width: 854,
 		height: 480
 	},
 	{
 		type: 'video-big',
-		path: 'uploads/309b36ff538ce8faee863985ff349597.webp',
+		path: 'uploads/309b36ff538ce8faee863985ff349597.webm',
 		width: 1920,
 		height: 1080
 	},
@@ -1078,13 +1078,13 @@ const Media = [
 	*/
 	{
 		type: 'video-small',
-		path: 'uploads/e7af0b6a5e98d6a10bd25cf3c2e9a22a.webp',
+		path: 'uploads/e7af0b6a5e98d6a10bd25cf3c2e9a22a.webm',
 		width: 854,
 		height: 480
 	},
 	{
 		type: 'video-big',
-		path: 'uploads/685fb0186acde387be7769afde8195dc.webp',
+		path: 'uploads/685fb0186acde387be7769afde8195dc.webm',
 		width: 1920,
 		height: 1080
 	},
@@ -1130,13 +1130,13 @@ const Media = [
 	*/
 	{
 		type: 'video-small',
-		path: 'uploads/e6e6541e7a57284af79faf07ca78b292.webp',
+		path: 'uploads/e6e6541e7a57284af79faf07ca78b292.webm',
 		width: 854,
 		height: 480
 	},
 	{
 		type: 'video-big',
-		path: 'uploads/53e048c1f6ca1046715047f342c19de4.webp',
+		path: 'uploads/53e048c1f6ca1046715047f342c19de4.webm',
 		width: 1920,
 		height: 1080
 	},
@@ -1182,13 +1182,13 @@ const Media = [
 	*/
 	{
 		type: 'video-small',
-		path: 'uploads/7ab58fd373348e6cc4b5944b69247d68.webp',
+		path: 'uploads/7ab58fd373348e6cc4b5944b69247d68.webm',
 		width: 854,
 		height: 480
 	},
 	{
 		type: 'video-big',
-		path: 'uploads/0d78c30c13307775df6b722c906e89f2.webp',
+		path: 'uploads/0d78c30c13307775df6b722c906e89f2.webm',
 		width: 1920,
 		height: 1080
 	},
@@ -1234,13 +1234,13 @@ const Media = [
 	*/
 	{
 		type: 'video-small',
-		path: 'uploads/f107f6fd33a2b15129f127e8d7af4801.webp',
+		path: 'uploads/f107f6fd33a2b15129f127e8d7af4801.webm',
 		width: 854,
 		height: 480
 	},
 	{
 		type: 'video-big',
-		path: 'uploads/7b8a3b7c9c544ebb43c4779ffe6f0231.webp',
+		path: 'uploads/7b8a3b7c9c544ebb43c4779ffe6f0231.webm',
 		width: 1920,
 		height: 1080
 	},
@@ -1286,13 +1286,13 @@ const Media = [
 	*/
 	{
 		type: 'video-small',
-		path: 'uploads/592b30a2cfbc451f601242f4eb1aa777.webp',
+		path: 'uploads/592b30a2cfbc451f601242f4eb1aa777.webm',
 		width: 854,
 		height: 480
 	},
 	{
 		type: 'video-big',
-		path: 'uploads/54740822e824a52d7544c7818b959705.webp',
+		path: 'uploads/54740822e824a52d7544c7818b959705.webm',
 		width: 1920,
 		height: 1080
 	},
