@@ -1,8 +1,10 @@
 import React from 'react';
 import { Form, Button, FormControl } from 'react-bootstrap';
+import Result from './search_results'
 import axios from 'axios';
+let result;
 
-const SearchBar = () => {
+const SearchBar = ({ findProducts }) => {
     const [input, setInput] = React.useState({
         searchInput: "",
     });
@@ -16,11 +18,11 @@ const SearchBar = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        axios.get( `http://localhost:3000/search?query=${input.searchInput}` )
-			.then( response => {
-                console.log(response);
-		});
-    }
+        findProducts( input.searchInput );
+        setInput({
+            searchInput: "",
+        }) 
+    };
 
     return (
         <Form onSubmit={(event) => handleSubmit(event)}>
