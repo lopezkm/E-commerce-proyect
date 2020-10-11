@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import ProductCard from './product_card';
 import { Container, Row, Col } from 'react-bootstrap';
-import sc from '../styles/catalogue.module.css';
 
 function Catalogue( )
 {
@@ -86,7 +85,7 @@ function Catalogue( )
 										name={ p.name }
 										price={ p.price }
 										developer={ p.developer }
-										media={ p.media[ 1 ].path }
+										/* media={ p.media[ 1 ].path } */
 										key={ p.id }
 									/>
 								</Col>

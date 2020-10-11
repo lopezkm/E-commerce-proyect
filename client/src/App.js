@@ -16,6 +16,9 @@ function App() {
     <div className= 'container-fluid' style={{ padding: 0}}>
       <NavBar/>
       <Route 
+        path='/Admin' render={() => <FormAdmin/>}
+      />
+      <Route 
         path="/products" render={() => <Catalogue/>}
       />
       <Route path ='/product/:id' render={() => <Product 
