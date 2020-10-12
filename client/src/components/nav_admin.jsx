@@ -5,15 +5,15 @@ const NavAdmin = () => {
 
     return (
         <div>
-            <Nav variant="pills">
+            <Nav fill variant="tabs">
                 <Nav.Item>
-                    <Nav.Link href="/Admin/create">Crear</Nav.Link>
+                    <Nav.Link href="/Admin/create" eventKey="1">Crear</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                    <Nav.Link href="/Admin/modify">Modificar</Nav.Link>
+                    <Nav.Link href="/Admin/modify" eventKey="2">Modificar</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                    <Nav.Link href="/Admin/delete">Borrar</Nav.Link>
+                    <Nav.Link href="/Admin/delete" eventKey="3">Borrar</Nav.Link>
                 </Nav.Item>
             </Nav>
         </div>
