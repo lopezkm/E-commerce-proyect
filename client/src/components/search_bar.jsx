@@ -7,8 +7,8 @@ let result;
 
 const SearchBar = ({ findProducts }) => {
     const [input, setInput] = React.useState({
-        searchInput: "",
-    });
+        searchInput: ""
+    })
 
     const handleInputChange = (event) =>{
         setInput({
@@ -20,9 +20,7 @@ const SearchBar = ({ findProducts }) => {
     const handleSubmit = (event) => {
         event.preventDefault();
         findProducts( input.searchInput );
-        setInput({
-            searchInput: "",
-        }) 
+        setInput({searchInput: ""})  
     };
 
     return (
@@ -33,10 +31,10 @@ const SearchBar = ({ findProducts }) => {
                 className="mr-sm-2"  
                 name="searchInput" 
                 onChange={(event) => handleInputChange(event)}/>
-            <Link to="/searched">
-              <Button type="submit" variant="outline-info" >Search</Button>
-            </Link>
-
+                <Link to={`/search/${input.searchInput}`}>
+                    <Button type="submit" variant="outline-info" >Search</Button>
+                </Link>
+            
         </Form>
     );
 };

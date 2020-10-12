@@ -1,17 +1,43 @@
-import React from 'react';
-import ProductCard from './product_card.jsx'
+import React, { useState, useEffect } from 'react';
+import ProductCard from './product_card.jsx';
+import axios from 'axios';
+
+let SaveData;
 
 const Result = ({ products }) => {
-    if(products.data){
+
+    const [result, setResult] = useState ("")
+    const [ loading, setLoading ] = useState( true );
+
+    if(SaveData !== products){
+        setLoading (true);
+        SaveData = products;
+    }  
+
+    const getResult = () => {
+        axios.get( `http://localhost:3000/search?query=${products}` )
+            .then( response => {
+                setResult(response);
+        });
+    };
+    
+    useEffect( () => {
+        getResult();
+        setLoading (false);
+
+    }, [ loading ]);
+
+    
+    if(result.data){
         return (
             <div>
                 {
-                    products.data.map(x =>{
+                    result.data.map(x =>{
                         return (
                             <ProductCard
                                 name={x.name}
                                 price={x.price}
-                                media={x.media[ 0 ].path}
+                                media={'/' + x.media[ 0 ].path}
                                 developer={x.developer}  
                                 key={x.id} 
                             />

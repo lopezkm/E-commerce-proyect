@@ -8,26 +8,14 @@ import Catalogue from './components/catalogue.jsx'
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 import FormAdd from './components/form_add_category.jsx'
 import Result from './components/search_results.jsx'
-import axios from 'axios';
 
 
 function App() {
-	const [products, setProducts] = useState({});
-	const [redirect, setRedirect] = useState({
-		validate: false
-	})
-
-	const findProducts = ( product ) => {
-        axios.get( `http://localhost:3000/search?query=${product}` )
-			.then( response => {
-				setProducts(response);
-		});	
-	};
-
+	
 	return (
 		<div className= 'container-fluid' style={{ padding: 0}}>
-			<Route path="/" render={() => <NavBar findProducts={findProducts}/>} />
-			<Route path="/searched" render={() => <Result products={products}/>} />
+			<Route path="/" component={() => <NavBar/>} />
+			<Route path="/search/:product" render={({ match }) => <Result products={ match.params.product }/>} />
 			<Route path='/admin' component={ FormAdmin } />
 			<Route exact path="/categories" component={ FormAdd } />
 			<Route exact path="/catalogue" component={ Catalogue } />
