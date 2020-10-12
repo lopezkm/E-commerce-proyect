@@ -1,45 +1,31 @@
-import React from 'react';
-import ProdCard from './components/product_card.jsx';
+import React, { useState } from 'react';
 import Product from './components/product.jsx';
 import './App.css';
 import NavBar from './components/nav_bar.jsx';
 import FormAdmin from './components/form_admin.jsx';
-import IMG from './punisher.jpg';
-import IMG2 from './punisher2.jpg';
-import IMG3 from './punisher3.jpg';
-import { Route } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 import Catalogue from './components/catalogue.jsx'
-<<<<<<< HEAD
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 import FormAdd from './components/form_add_category.jsx'
-=======
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './styles/global.css' 
->>>>>>> a907fcc34bc159c489a270c45525ea01e6091951
+import Result from './components/search_results.jsx'
+
 
 function App() {
-  return (
-    <div className= 'container-fluid' style={{ padding: 0}}>
-      <NavBar/>
-      <FormAdd/>
-      <Route 
-        path="/products" render={() => <Catalogue/>}
-      />
-      <Route path ='/product/:id' render={() => <Product 
-        name = {'Punisher'}
-        description = {'Incredible game'}
-        price = {250} 
-        stock = {15} 
-        media = {[IMG, IMG2, IMG3]} 
-        developer = {'Frank Bonomo'} 
-        publisher = {'NINTENDO'} 
-        publishDate = {'March 12 - 2007'}
-      />}/>
-    </div>
-  );
+	
+	return (
+		<div className= 'container-fluid' style={{ padding: 0}}>
+			<Route path="/" component={() => <NavBar/>} />
+			<Route path="/search/:product" render={({ match }) => <Result products={ match.params.product }/>} />
+			<Route path='/admin' component={ FormAdmin } />
+			<Route exact path="/categories" component={ FormAdd } />
+			<Route exact path="/catalogue" component={ Catalogue } />
+			<Route exact path ='/product/:productId' render={ ( { match } ) =>
+				<Product 
+					productId = { match.params.productId }
+				/>
+			} />
+		</div>
+	);
 }
-
-
-
 
 export default App;

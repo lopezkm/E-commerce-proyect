@@ -10,7 +10,7 @@ const router = Router( );
 // Carga las distintas rutas en el router
 router.use( '/products/category', categoryRouter );
 router.use( '/products', productRouter );
-router.use( '/media', mediaRouter );
+router.use( '/medias', mediaRouter );
 router.use( '/', searchRouter );
 
 module.exports = router;

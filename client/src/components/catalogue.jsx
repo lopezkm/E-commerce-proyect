@@ -3,7 +3,6 @@ import axios from 'axios';
 import ProductCard from './product_card';
 <<<<<<< HEAD
 import { Container, Row, Col } from 'react-bootstrap';
-import sc from '../styles/catalogue.module.css';
 
 function Catalogue( )
 {
@@ -12,21 +11,14 @@ function Catalogue( )
 	const [ loading, setLoading ] = useState( true );
 	const [ checkboxes, setCheckboxes ] = useState( { } );
 	
-	useEffect( ( ) => {
-		getCategories( );
-		getProducts( );
-		
-		setLoading( false );
-	}, [ loading ] );
-	
-	function getCategories( ) {
+	const getCategories = ( ) => {
 		axios.get( `http://localhost:3000/products/category/` )
 			.then( response => {
 				setCategories(  response.data );
 			} );
 	}
 	
-	function getProducts( ) {
+	const getProducts = ( ) => {
 		axios.get( `http://localhost:3000/products/` )
 			.then( response => {
 				let products = response.data;
@@ -37,7 +29,7 @@ function Catalogue( )
 					products = products.filter( p => {
 						return checked.every( cb => {
 							return p.categories.some( c => {
-								return c.id == cb;
+								return c.id.toString( ) === cb;
 							} );
 						} );
 					} );
@@ -47,8 +39,7 @@ function Catalogue( )
 			} );
 	}
 	
-	function onChangeHandler( e )
-	{
+	const onChangeHandler = ( e ) => {
 		const { value } = e.target;
 		
 		setCheckboxes( {
@@ -57,6 +48,13 @@ function Catalogue( )
 		
 		setLoading( true );
 	}
+	
+	useEffect( ( ) => {
+		getCategories( );
+		getProducts( );
+		
+		setLoading( false );
+	}, [ loading ] );
 	
 	return (
 		<Container fluid>
@@ -87,7 +85,7 @@ function Catalogue( )
 										name={ p.name }
 										price={ p.price }
 										developer={ p.developer }
-										/* media={ p.media[ 1 ].path } */
+										media={ p.media[ 0 ].path }
 										key={ p.id }
 									/>
 								</Col>
