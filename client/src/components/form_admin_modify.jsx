@@ -66,6 +66,7 @@ const FormAdminModify = () => {
     }
 
     const refreshData = (id) => {
+        
         axios.get(`http://localhost:3000/products/${id}`).then(response => {
             setInputAdminForm(response.data);
             setProductSelected(true);
@@ -74,7 +75,7 @@ const FormAdminModify = () => {
             let loadedCat = categories.filter((item) => {
                 return !prodCat.find(el => el.name === item.name);
             })  
-            setCategories(loadedCat);       
+            setCategories(loadedCat);   
         })
     }
 
@@ -95,16 +96,36 @@ const FormAdminModify = () => {
         formCheck.disabled = !formCheck.disabled
     }
 
-    const handleCategoryChange = () => {
+    const handleCategoryDelete = () => {
         let selector = document.getElementById("formProductCategories");
         categorySelectedToDelete = selector.options[selector.selectedIndex].id;
     }
 
-    const deleteCategoryProduct = (e, idC, idP) => {
-        e.preventDefault();
-       //axios.delete(`http://localhost:3000/products/${idP}/category/${idC}`) 
+    const handleCategoryAdd = () => {
+        let selector = document.getElementById("formCategories");
+        categorySelectedToAdd = selector.options[selector.selectedIndex].id;
     }
-    console.log(clickedOption);
+
+    const deleteCategoryProduct = (e, idC) => {
+        let selector = document.getElementById("productList");
+        let idP = selector.options[selector.selectedIndex].id;
+        e.preventDefault();
+        axios.delete(`http://localhost:3000/products/${idP}/category/${idC}`)
+        .then(res => {
+            if(!alert('Categoria eliminada!')) window.location.reload()
+        })
+    }
+
+    const addCategoryProduct = (e, idC) => {
+        let selector = document.getElementById("productList");
+        let idP = selector.options[selector.selectedIndex].id;
+        console.log(idC, 'ura', idP);
+        e.preventDefault();
+        axios.post(`http://localhost:3000/products/${idP}/category/${idC}`)
+        .then(() => {
+            if(!alert('Categoria agregada!')) window.location.reload()
+        })
+    }
 
     let showProducts = products.filter(product => product.name.toLowerCase().includes(inputSearch.searchInput.toLowerCase()))
 
@@ -231,9 +252,9 @@ const FormAdminModify = () => {
                         id="formPublishDate"
                         onChange={(event) => handleInputChangeForm(event)} disabled/>
                      <br />
-/******************/<Form.Label>Categorias del producto:</Form.Label>
+                    <Form.Label>Categorias del producto:</Form.Label>
                     <Form.Control as="select" multiple id="formProductCategories" 
-                        onClick={(e) => handleCategoryChange(e)}> 
+                        onClick={(e) => handleCategoryDelete(e)}> 
                         {
                             productCategories.map(cat => (
                                 <option id={cat.id}>{cat.name}</option>
@@ -241,20 +262,20 @@ const FormAdminModify = () => {
                         }
                     </Form.Control>  
                     <Button variant="danger" type="submit"
-                    onClick={(e) => deleteCategoryProduct(e, categorySelectedToDelete)}>
-                        Eliminar
-                    </Button>  
+                    onClick={(e) => deleteCategoryProduct(e, categorySelectedToDelete)}> Eliminar </Button>  
                     <br />
 
                     <Form.Label>Categorias disponibles:</Form.Label>
-                    <Form.Control as="select" multiple id="formCategories"> 
+                    <Form.Control as="select" multiple id="formCategories" 
+                        onClick={(e) => handleCategoryAdd(e)}> 
                         {
                             categories.map(cat => (
-                                <option> {cat.name} </option>
+                                <option id={cat.id}> {cat.name} </option>
                             ))
                         }
                     </Form.Control>
-                    <Button variant="success" type="submit"> Agregar </Button>  
+                    <Button variant="success" type="submit" 
+                    onClick={(e) => addCategoryProduct(e, categorySelectedToAdd)}> Agregar </Button>  
                 </Form.Group>
 
                 <Button variant="primary" type="submit">
