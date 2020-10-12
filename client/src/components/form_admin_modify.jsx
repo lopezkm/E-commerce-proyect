@@ -7,6 +7,7 @@ const FormAdminModify = () => {
 
     const [categories, setCategories] = useState([]);
     const [products, setProducts] = useState([]);
+    const [productCategories, setProductCategories] = useState ([]);
     const [loading, setLoading] = useState(true);
     const [productSelected, setProductSelected] = useState(false);
     const [inputSearch, setInputSearch] = useState({ searchInput: "" });
@@ -21,6 +22,8 @@ const FormAdminModify = () => {
     });
 
     let clickedOption;
+    let categorySelectedToDelete;
+    let categorySelectedToAdd;
 
     function getCategories() {
         axios.get(`http://localhost:3000/products/category/`)
@@ -54,7 +57,6 @@ const FormAdminModify = () => {
             ...inputSearch,
             [event.target.name]: event.target.value
         });
-
     };
 
     const handleSelectChange = (event) => {
@@ -67,6 +69,12 @@ const FormAdminModify = () => {
         axios.get(`http://localhost:3000/products/${id}`).then(response => {
             setInputAdminForm(response.data);
             setProductSelected(true);
+            setProductCategories(response.data.categories); 
+            let prodCat = response.data.categories;
+            let loadedCat = categories.filter((item) => {
+                return !prodCat.find(el => el.name === item.name);
+            })  
+            setCategories(loadedCat);       
         })
     }
 
@@ -86,6 +94,17 @@ const FormAdminModify = () => {
         let formCheck = document.getElementById(event.target.name);
         formCheck.disabled = !formCheck.disabled
     }
+
+    const handleCategoryChange = () => {
+        let selector = document.getElementById("formProductCategories");
+        categorySelectedToDelete = selector.options[selector.selectedIndex].id;
+    }
+
+    const deleteCategoryProduct = (e, idC, idP) => {
+        e.preventDefault();
+       //axios.delete(`http://localhost:3000/products/${idP}/category/${idC}`) 
+    }
+    console.log(clickedOption);
 
     let showProducts = products.filter(product => product.name.toLowerCase().includes(inputSearch.searchInput.toLowerCase()))
 
@@ -211,19 +230,31 @@ const FormAdminModify = () => {
                         name="publishDate"
                         id="formPublishDate"
                         onChange={(event) => handleInputChangeForm(event)} disabled/>
+                     <br />
+/******************/<Form.Label>Categorias del producto:</Form.Label>
+                    <Form.Control as="select" multiple id="formProductCategories" 
+                        onClick={(e) => handleCategoryChange(e)}> 
+                        {
+                            productCategories.map(cat => (
+                                <option id={cat.id}>{cat.name}</option>
+                            ))
+                        }
+                    </Form.Control>  
+                    <Button variant="danger" type="submit"
+                    onClick={(e) => deleteCategoryProduct(e, categorySelectedToDelete)}>
+                        Eliminar
+                    </Button>  
                     <br />
-                    <Form.Check 
-                        type="checkbox"
-                        name="formCategories"
-                        onChange={(event) => handleCheckChange(event)}
-                    />
-                    <Form.Control as="select" multiple id="formCategories" disabled> 
+
+                    <Form.Label>Categorias disponibles:</Form.Label>
+                    <Form.Control as="select" multiple id="formCategories"> 
                         {
                             categories.map(cat => (
-                                <option>{cat.name}</option>
+                                <option> {cat.name} </option>
                             ))
                         }
                     </Form.Control>
+                    <Button variant="success" type="submit"> Agregar </Button>  
                 </Form.Group>
 
                 <Button variant="primary" type="submit">
