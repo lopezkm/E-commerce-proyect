@@ -6,53 +6,57 @@ let SaveData;
 
 const Result = ({ products }) => {
 
-    const [result, setResult] = useState ("")
-    const [ loading, setLoading ] = useState( true );
+    const [result, setResult] = useState("")
+    const [loading, setLoading] = useState(true);
 
-    if(SaveData !== products){
-        setLoading (true);
+    if (SaveData !== products) {
+        setLoading(true);
         SaveData = products;
-    }  
-
-    const getResult = () => {
-        axios.get( `http://localhost:3000/search?query=${products}` )
-            .then( response => {
-                setResult(response);
-        });
-    };
-    
-    useEffect( () => {
-        getResult();
-        setLoading (false);
-
-    }, [ loading ]);
-
-    
-    if(result.data){
-        return (
-            <div>
-                {
-                    result.data.map(x =>{
-                        return (
-                            <ProductCard
-                                name={x.name}
-                                price={x.price}
-                                media={'/' + x.media[ 0 ].path}
-                                developer={x.developer}  
-                                key={x.id} 
-                            />
-                        )
-                    })
-                }
-            </div> 
-        );
     }
 
+    const getResult = () => {
+        axios.get(`http://localhost:3000/search?query=${products}`)
+            .then(response => {
+                setResult(response);
+            })
+    };
+
+    useEffect(() => {
+        getResult();
+        setLoading(false);
+
+    }, [loading]);
 
 
-    else{
-        return(
-            <h1>PAILA</h1>
+    if (result.data) {
+        if (result.data.length > 0) {
+            return (
+                <div>
+                    {
+                        result.data.map(x => {
+                            return (
+                                <ProductCard
+                                    name={x.name}
+                                    price={x.price}
+                                    media={'/' + x.media[0].path}
+                                    developer={x.developer}
+                                    key={x.id}
+                                />
+                            )
+                        })
+                    }
+                </div>
+            );
+        } else {
+            return (
+            <h1>No se encontraron resultados para: {products}</h1>
+            )
+        }
+    }
+
+    else {
+        return (
+            <h1>Cargando...</h1>
         )
     }
 };
