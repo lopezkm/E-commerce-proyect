@@ -5,7 +5,7 @@ const NavAdmin = () => {
 
     return (
         <div>
-            <Nav fill variant="tabs">
+            <Nav fill variant="tabs" className='navAdmin-container'>
                 <Nav.Item>
                     <Nav.Link href="/Admin/create" eventKey="1">Crear</Nav.Link>
                 </Nav.Item>

@@ -1,0 +1,38 @@
+.formAdmin-create-container{
+    background-color: $grey;
+    padding: 2rem 10% 0rem 10%;
+}
+
+.formAdmin-create-group{
+    color: white;
+    font-family: $barlow;
+    font-style: normal;
+    font-size: 1.8rem;
+        .form-control{
+            height: 3.6rem;;
+        }
+
+}
+
+.formAdmin-title{
+    color: white;
+    text-align: center;
+    font-family: $kanit;
+    padding-bottom: 0.5rem;
+    background-color: $black;
+    margin: 2rem 0rem;
+}
+
+/////////////Formulario para borrar///////////////
+
+.formAdmin-delete-container{
+    background-color: $grey;
+    font-family: $barlow;
+        .form-control{
+            font-size: 1.6rem !important;
+        }
+        #productList{
+            margin-top: 1rem;
+            min-height: 40vh;
+        }
+}

@@ -1,0 +1,18 @@
+.navAdmin-container{
+    background-color: $grey;
+    border-bottom: none !important;
+        .nav-link{
+            color: white;
+            font-family: $kanit;
+            margin-bottom: 0%;
+            border: transparent 2px solid;
+            &:hover{
+                border: $blue 2px solid;
+            }
+            &:focus{
+                background-color: rgba(134, 126, 126, 0.301);
+                color: white;
+            }
+        }
+}
+
