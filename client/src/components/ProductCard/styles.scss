@@ -8,7 +8,7 @@
 	font-family: $barlow;
 	background-color: $grey;
 	
-	@include shadow( $blur: 12px, $spread: 0px, $trans: .5 );
+	@include shadow( $blur: 10px, $spread: 0, $trans: .5 );
 }
 
 .productCard-card:hover
@@ -67,5 +67,5 @@
 	margin-top: 1.5rem;
 	font-size: 1.25rem;
 	font-weight: 600;
-	color: $blue;
+	color: $light-blue;
 }

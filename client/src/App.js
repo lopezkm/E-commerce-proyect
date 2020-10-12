@@ -16,8 +16,8 @@ import FormAdd from './components/form_add_category.jsx'
 import Result from './components/search_results.jsx'
 
 
-function App() {
-	
+function App( )
+{
 	return (
 		<div className= 'container-fluid' style={{ padding: 0}}>
 			<Route path="/" component={() => <NavBar/>} />
