@@ -16,14 +16,6 @@ function Catalogue( )
 	const [ expanded, setExpanded ] = useState( false );
 	const [ loading, setLoading ] = useState( { products: true, categories: true } );
 	
-	/*const onChangeHandler = ( status, id ) => {
-		setChecked( prevState => {
-			const pos = prevState.findIndex( c => c === id );
-			
-			return ( pos > -1 ) ? prevState.filter( c => c !== id ) : [ ...prevState, id ];
-		} );
-	};*/
-	
 	const onChangeHandler = useCallback( ( status, id ) => {
 		setChecked( prevState => {
 			const pos = prevState.findIndex( c => c === id );
@@ -74,7 +66,7 @@ function Catalogue( )
 						{
 							!loading.products ?
 								products.map( ( p, i ) => (
-									<Col xs={ 3 } key={ i } className='catalogue__product-col'>
+									<Col xs={ 10 } md={ 3 } key={ i } className='catalogue__product-col'>
 										<Link to={ `/product/${ p.id }` } className='catalogue__product-link'>
 											<ProductCard
 												key={ p.id }
@@ -93,9 +85,12 @@ function Catalogue( )
 				</Col>
 				<Col xs={ 2 }>
 					<div className='catalogue__categories-list'>
+						<div className='catalogue__categories-section-title'>
+							Categorías
+						</div>
 						{
 							categories.map( ( c, i ) => (
-								<div style={ { display: ( i < 7 || expanded ) ? 'block' : 'none' } }>
+								<div className='catalogue__categories-list-item' style={ { display: ( i < 7 || expanded ) ? 'block' : 'none' } }>
 									<Checkable
 										key = { i }
 										name = { c.name }

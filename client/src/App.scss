@@ -4,3 +4,9 @@
 @import './components/Catalogue/styles.scss';
 @import './components/Checkable/styles.scss';
 @import './components/ProductCard/styles.scss';
+@import './components/NavBar/styles.scss';
+@import './components/SearchBar/styles.scss';
+
+body{
+    background-color: $black;
+}
