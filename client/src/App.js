@@ -6,7 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.scss';
 
 import Product from './components/product.jsx';
-import NavBar from './components/nav_bar.jsx';
+import NavBar from './components/NavBar/nav_bar.jsx';
 import FormAdminCreate from './components/form_admin_create.jsx';
 import FormAdminDelete from './components/form_admin_delete.jsx';
 import FormAdminModify from './components/form_admin_modify.jsx';

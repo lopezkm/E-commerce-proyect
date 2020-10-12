@@ -74,7 +74,7 @@ function Catalogue( )
 						{
 							!loading.products ?
 								products.map( ( p, i ) => (
-									<Col xs={ 3 } key={ i } className='catalogue__product-col'>
+									<Col  xs={ 10 } md ={ 3 }  key={ i } className='catalogue__product-col'>
 										<Link to={ `/product/${ p.id }` } className='catalogue__product-link'>
 											<ProductCard
 												key={ p.id }
