@@ -1,5 +1,6 @@
 const server = require( 'express' ).Router( );
 const { Category } = require( '../db.js' );
+const { Op } = require( 'sequelize' );
 
 /* =================================================================================
 * 		[ Obtención de todas las categorías ]
@@ -17,13 +18,17 @@ server.get( '/', ( request, response ) => {
 } );
 
 /* =================================================================================
-* 		[ Búsqueda de categorías por nombre ]
+* 		[ Búsqueda de productos por nombre de categoría ]
 * ================================================================================= */
 
-server.get( '/:categoryName', ( request, response ) => {
-	const categoryName = request.params.categoryName.toUpperCase( );
+server.get( '/:name', ( request, response ) => {
+	const { name } = request.params;
 	
-	Category.findOne( { where: { name: categoryName } } )
+	Category.findOne( {
+			where: {
+				name: { [ Op.iLike ]: name }
+			}
+		} )
 		.then( ( category ) => {
 			if ( !category ) {
 				return response.sendStatus( 404 );
@@ -36,20 +41,27 @@ server.get( '/:categoryName', ( request, response ) => {
 } );
 
 /* =================================================================================
-* 		[ Creación de una ategoría ]
+* 		[ Creación de una categoría ]
 * ================================================================================= */
 
 server.post( '/', ( request, response ) => {
-	let { name, description } = request.body;
+	const { name } = request.body;
 	
-	name = name.toUpperCase( );
-	
-	Category.create( {
-			name: name,
-			description: description 
+	Category.findOne( {
+			where: {
+				name: { [ Op.iLike ]: name }
+			}
 		} )
-		.then( ( ) => response.sendStatus( 200 ) )
-		.catch( ( ) => response.status( 409 ).send( 'La categoría ya existe' ) );
+		.then( category => {
+			if ( category ) {
+				return response.status( 409 ).send( 'Categoría ya existe' );
+			}
+			
+			Category.create( { ...request.body } )
+				.then( ( category ) => {
+					response.status( 200 ).send( category );
+				} );
+		} )
 } );
 
 /* =================================================================================
@@ -57,7 +69,7 @@ server.post( '/', ( request, response ) => {
 * ================================================================================= */
 
 server.put( '/:id', ( request, response ) => {
-	let { id } = request.params;
+	const { id } = request.params;
 	
 	Category.findByPk( id )
 		.then( category => {
@@ -76,7 +88,7 @@ server.put( '/:id', ( request, response ) => {
 * ================================================================================= */
 
 server.delete( '/:id', ( request, response ) => {
-	let { id } = request.params;
+	const { id } = request.params;
 	
 	Category.findByPk( id )
 		.then( category => {

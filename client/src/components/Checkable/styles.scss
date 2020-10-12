@@ -1,0 +1,36 @@
+.checkable
+{
+	display: flex;
+	flex-flow: row no-wrap;
+	align-items: center;
+	justify-content: space-between;
+	user-select: none;
+	cursor: pointer;
+	padding: 10px 20px;
+	font-weight: 700;
+	font-size: 0.85rem;
+	border-radius: 2px;
+	color: #555;
+	background-color: #f8f8f8;
+	
+	@include shadow( $blur: 5px, $spread: -1px, $trans: .35 );
+}
+
+.checkable:hover
+{
+	background-color: #ececec;
+}
+
+.checkable-active
+{
+	color: #fff;
+	
+	border-color: #323232;
+	background-color: #323232;
+}
+
+.checkable-active:hover
+{
+	border-color: #5a5a5a;
+	background-color: #5a5a5a;
+}
