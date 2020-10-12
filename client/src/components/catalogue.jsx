@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import ProductCard from './product_card';
 import { Container, Row, Col } from 'react-bootstrap';
-import sc from '../styles/catalogue.module.css';
 
 function Catalogue( )
 {
