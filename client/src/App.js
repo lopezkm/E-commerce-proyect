@@ -1,22 +1,19 @@
 import React, { useState } from 'react';
-import Product from './components/product.jsx';
-import './App.css';
-import NavBar from './components/nav_bar.jsx';
-import FormAdmin from './components/form_admin.jsx';
-<<<<<<< HEAD
-import { Route } from 'react-router-dom';
-import Catalogue from './components/Catalogue/catalogue.jsx'
-=======
 import { Route, Redirect } from 'react-router-dom';
-import Catalogue from './components/catalogue.jsx'
->>>>>>> 150671304e93c39579dfc1d50173b55fca180d31
-import 'bootstrap/dist/css/bootstrap.min.css'; 
-import FormAdd from './components/form_add_category.jsx'
-import Result from './components/search_results.jsx'
 import axios from 'axios';
 
+import 'bootstrap/dist/css/bootstrap.min.css'; 
+import './App.scss';
 
-function App() {
+import Product from './components/product.jsx';
+import NavBar from './components/nav_bar.jsx';
+import FormAdmin from './components/form_admin.jsx';
+import Catalogue from './components/Catalogue/Catalogue.jsx'
+import FormAdd from './components/form_add_category.jsx'
+import Result from './components/search_results.jsx'
+
+function App( )
+{
 	const [products, setProducts] = useState({});
 	const [redirect, setRedirect] = useState({
 		validate: false
