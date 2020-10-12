@@ -66,7 +66,11 @@ function Catalogue( )
 						{
 							!loading.products ?
 								products.map( ( p, i ) => (
+<<<<<<< HEAD
 									<Col xs={ 10 } md={ 3 } key={ i } className='catalogue__product-col'>
+=======
+									<Col  xs={ 10 } md ={ 3 }  key={ i } className='catalogue__product-col'>
+>>>>>>> 4fff5c3be61ee7dcee431df7eada07a3d0b1428a
 										<Link to={ `/product/${ p.id }` } className='catalogue__product-link'>
 											<ProductCard
 												key={ p.id }

@@ -8,10 +8,11 @@
 	cursor: pointer;
 	padding: 10px 20px;
 	font-weight: 700;
-	font-size: 0.85rem;
+	font-size: 1rem;
 	border-radius: 2px;
 	color: #555;
 	background-color: #f8f8f8;
+	font-family: $barlow;
 	
 	@include shadow( $blur: 5px, $spread: -1px, $trans: .35 );
 }
