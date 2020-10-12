@@ -8,8 +8,7 @@ const NavBar = () => {
       <Navbar.Brand href="/">Toni Games</Navbar.Brand>
       <Nav className="mr-auto">
         <Nav.Link href="/admin/create">Admin</Nav.Link>
-        <Nav.Link href="/Catalogue/catalogue">Catalogo</Nav.Link>
-        <Nav.Link href="#pricing">Pricing</Nav.Link>
+        <Nav.Link href="/products">Catalogo</Nav.Link>
       </Nav>
       <SearchBar/>
     </Navbar>
