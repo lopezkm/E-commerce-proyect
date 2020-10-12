@@ -1,0 +1,58 @@
+.catalogue__container
+{
+	margin-top: 50px;
+}
+
+.catalogue__product-link
+{
+	text-decoration: none !important;
+}
+
+.catalogue__categories-list
+{
+	width: 100%;
+}
+
+.catalogue__product-col
+{
+	padding: 0 0.5rem;
+	padding-bottom: 1rem;
+}
+
+.catalogue__categories-list > div
+{
+	margin-bottom: 10px;
+}
+
+.catalogue__expand-button
+{
+	border: none;
+	width: 100%;
+	border-radius: 5px;
+	padding: 5px;
+	
+	font-weight: 700;
+	color: #fff;
+	background-color: #007dfc;
+}
+
+.catalogue__expand-button:focus
+{
+	outline: none;
+}
+
+.catalogue__loading
+{
+	display: block;
+	
+	margin: 0 auto;
+	margin-top: 25vh;
+	
+	text-align: center;
+	
+	&-products
+	{
+		margin: 0 auto;
+		margin-top: 0;
+	}
+}
