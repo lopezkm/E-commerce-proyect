@@ -1,0 +1,10 @@
+.navBar-container{
+    background-color: $grey !important;
+    min-height: 4rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.navBar-options{
+    color: white;
+}

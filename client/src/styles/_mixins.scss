@@ -1,6 +1,15 @@
-@mixin shadow( $x: 0, $y: 0, $blur: 15px, $spread: -5px, $trans: 0.35 )
+@mixin shadow( $x: 0, $y: 0, $blur: 15px, $spread: -5px, $color: #000, $trans: 0.35, $inset: false )
 {
-	-webkit-box-shadow: $x $y $blur $spread rgba( 0, 0, 0, $trans );
-	-moz-box-shadow: $x $y $blur $spread rgba( 0, 0, 0, $trans );
-	box-shadow: $x $y $blur $spread rgba( 0, 0, 0, $trans );
+	@if ( $inset )
+	{
+		-webkit-box-shadow: inset $x $y $blur $spread rgba( $color, $trans );
+		-moz-box-shadow: inset $x $y $blur $spread rgba( $color, $trans );
+		box-shadow: inset $x $y $blur $spread rgba( $color, $trans );
+	}
+	@else
+	{
+		-webkit-box-shadow: $x $y $blur $spread  rgba( $color, $trans );
+		-moz-box-shadow: $x $y $blur $spread rgba( $color, $trans );
+		box-shadow: $x $y $blur $spread rgba( $color, $trans );
+	}
 }

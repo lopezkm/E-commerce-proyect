@@ -6,31 +6,32 @@
 	justify-content: space-between;
 	user-select: none;
 	cursor: pointer;
-	padding: 10px 20px;
-	font-weight: 700;
-	font-size: 0.85rem;
+	padding: 10px;
+	font-weight: 500;
+	font-size: 0.9rem;
 	border-radius: 2px;
-	color: #555;
-	background-color: #f8f8f8;
+	color: #fff;
+	
+	border-color: #323232;
+	background-color: #323232;
 	
 	@include shadow( $blur: 5px, $spread: -1px, $trans: .35 );
 }
 
 .checkable:hover
 {
-	background-color: #ececec;
+	border-color: #5a5a5a;
+	background-color: #5a5a5a;
 }
 
 .checkable-active
 {
-	color: #fff;
-	
-	border-color: #323232;
-	background-color: #323232;
+	color: #555;
+	background-color: #f8f8f8;
 }
 
 .checkable-active:hover
 {
-	border-color: #5a5a5a;
-	background-color: #5a5a5a;
+	color: #555;
+	background-color: #dbdbdb;
 }
