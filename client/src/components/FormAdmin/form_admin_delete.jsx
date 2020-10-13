@@ -8,7 +8,6 @@ const FormAdminDelete = () => {
     const [loading, setLoading] = useState(true);
     const [input, setInput] = useState({ searchInput: "" })
     const searchInput =useRef(null);
-    const [show, setShow] = useState(true);
     let clickedOption;
 
     const getProducts = () => {
@@ -44,7 +43,8 @@ const FormAdminDelete = () => {
         {
             return alert("Seleccione el juego que quiere eliminar")     
         }
-        axios.delete(`http://localhost:3000/products/${id}`)
+        axios.delete(`http://localhost:3000/products/${id}`) 
+        window.location.reload()
     }
 
     let showProducts = products.filter(product => product.name.toLowerCase().includes(input.searchInput.toLowerCase()))
