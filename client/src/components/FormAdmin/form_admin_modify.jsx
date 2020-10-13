@@ -113,20 +113,15 @@ const FormAdminModify = () => {
         let idP = selector.options[selector.selectedIndex].id;
         e.preventDefault();
         axios.delete(`http://localhost:3000/products/${idP}/category/${idC}`)
-            .then(res => {
-                if (!alert('Categoria eliminada!')) window.location.reload()
-            })
+            .then(() => alert('Categoria eliminada!'))
     }
 
     const addCategoryProduct = (e, idC) => {
         let selector = document.getElementById("productList");
         let idP = selector.options[selector.selectedIndex].id;
-        console.log(idC, 'ura', idP);
         e.preventDefault();
         axios.post(`http://localhost:3000/products/${idP}/category/${idC}`)
-            .then(() => {
-                if (!alert('Categoria agregada!')) window.location.reload()
-            })
+            .then(() => alert('Categoria agregada!'))
     }
 
     let showProducts = products.filter(product => product.name.toLowerCase().includes(inputSearch.searchInput.toLowerCase()))
