@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { Form, Button, FormControl, Container } from 'react-bootstrap';
+import { Form, Button, FormControl, Container, Alert } from 'react-bootstrap';
 import axios from 'axios';
 import NavAdmin from '../NavAdmin/nav_admin.jsx';
 
@@ -8,6 +8,7 @@ const FormAdminDelete = () => {
     const [loading, setLoading] = useState(true);
     const [input, setInput] = useState({ searchInput: "" })
     const searchInput =useRef(null);
+    const [show, setShow] = useState(true);
     let clickedOption;
 
     const getProducts = () => {
@@ -39,6 +40,10 @@ const FormAdminDelete = () => {
     }
 
     const deleteProduct = (id) => {
+        if(!id)
+        {
+            return alert("Seleccione el juego que quiere eliminar")     
+        }
         axios.delete(`http://localhost:3000/products/${id}`)
     }
 
