@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { Nav, Form, Button } from 'react-bootstrap';
+import React, { useEffect, useState, useRef } from 'react';
+import { Form, Button } from 'react-bootstrap';
 import axios from 'axios';
-import NavAdmin from './nav_admin';
+import NavAdmin from '../NavAdmin/nav_admin.jsx'
 
 
 const FormAdminCreate = () => {
 
     const [categories, setCategories] = useState([]);
     const [loading, setLoading] = useState(true);
+    const nameInput =useRef(null);
 
     function getCategories() {
         axios.get(`http://localhost:3000/products/category/`)
@@ -19,6 +20,7 @@ const FormAdminCreate = () => {
     useEffect(() => {
         getCategories();
         setLoading(false);
+        nameInput.current.focus()
 
     }, [loading]);
 
@@ -59,50 +61,44 @@ const FormAdminCreate = () => {
         <div>
             {/* Opciones para CRUD del producto */}
             <NavAdmin />
-            <br />
+
+            <h1 className='formAdmin-title'>Agregue un juego a su catalogo</h1>
 
             {/* Formulario para modificar o crear el producto */}
-            <Form onSubmit={(event) => handleSubmit(event)}>
-                <Form.Group controlId="formBasicEmail">
-                    <Form.Label>Nombre</Form.Label>
+            <Form onSubmit={(event) => handleSubmit(event)} className='formAdmin-create-container'>
+                <Form.Group controlId="formBasicEmail" bsPrefix="formAdmin-create-group">
                     <Form.Control type="text"
-                        placeholder="Ingrese el nombre de su videojuego..."
+                        placeholder="Nombre de su videojuego..."
                         name="name"
+                        ref={nameInput}
                         onChange={(event) => handleInputChange(event)} />
                     <br />
-                    <Form.Label>Descripcion</Form.Label>
                     <Form.Control type="text"
-                        placeholder="Ingrese la descripcion para su videojuego..."
+                        placeholder="Descripcion para su videojuego..."
                         name="description"
                         onChange={(event) => handleInputChange(event)} />
                     <br />
-                    <Form.Label>Precio</Form.Label>
                     <Form.Control type="number"
-                        placeholder="Cuanto queres afanar?..."
+                        placeholder="Costo del videojuego. Ej: 39.99"
                         name="price"
                         onChange={(event) => handleInputChange(event)} />
                     <br />
-                    <Form.Label>Stock disponible</Form.Label>
                     <Form.Control type="number"
                         placeholder="Cantidad disponible..."
                         name="stock"
                         onChange={(event) => handleInputChange(event)} />
                     <br />
-                    <Form.Label>Desarrollado por:</Form.Label>
                     <Form.Control type="text"
                         placeholder="Desarrolladora"
                         name="developer"
                         onChange={(event) => handleInputChange(event)} />
                     <br />
-                    <Form.Label>Publicado por:</Form.Label>
                     <Form.Control type="text"
                         placeholder="Publicadora"
                         name="publisher"
                         onChange={(event) => handleInputChange(event)} />
                     <br />
-                    <Form.Label>Fecha de lanzamiento:</Form.Label>
                     <Form.Control type="date"
-                        placeholder="Fecha de lanzamiento"
                         name="publishDate"
                         onChange={(event) => handleInputChange(event)} />
                     <br />

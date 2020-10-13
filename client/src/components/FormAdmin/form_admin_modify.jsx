@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Nav, Form, Button, FormControl } from 'react-bootstrap';
+import { Form, Button, FormControl } from 'react-bootstrap';
 import axios from 'axios';
-import NavAdmin from './nav_admin';
+import NavAdmin from '../NavAdmin/nav_admin.jsx';
 
 const FormAdminModify = () => {
 
@@ -133,7 +133,7 @@ const FormAdminModify = () => {
     <div>
             {/* Opciones para CRUD del producto */}
             <NavAdmin/>
-            <br />
+            <h1 className='formAdmin-title'>Modificar datos del producto</h1>
 
             <Form >
                 <FormControl
