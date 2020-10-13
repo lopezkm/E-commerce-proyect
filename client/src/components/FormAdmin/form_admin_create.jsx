@@ -153,19 +153,20 @@ const FormAdminCreate = () => {
                     </Form.Group>
                     
                     <Form.Group>
-                    <Form.Control as="select" multiple>
+                    
+                    <Form.Control required="true" as="select" multiple  bsPrefix="custom-select"  >
                         {
                             categories.map(cat => (
                                 <option>{cat.name}</option>
                             ))
                         }
-
                     </Form.Control>
+                    
                     </Form.Group>
                 </Form.Group>
 
                 <Button variant="primary" type="submit">
-                    Submit
+                    Crear
                 </Button>
             </Form>
         </div>
