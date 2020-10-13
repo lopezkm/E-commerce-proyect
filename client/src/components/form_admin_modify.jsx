@@ -3,7 +3,6 @@ import { Nav, Form, Button, FormControl } from 'react-bootstrap';
 import axios from 'axios';
 import NavAdmin from './nav_admin';
 
-
 const FormAdminModify = () => {
 
     const [categories, setCategories] = useState([]);
