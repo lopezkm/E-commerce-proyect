@@ -8,7 +8,8 @@ const FormAdminCreate = () => {
 
     const [categories, setCategories] = useState([]);
     const [loading, setLoading] = useState(true);
-    const nameInput =useRef(null);
+    const [validated, setValidated] = useState(false);
+    const nameInput = useRef(null);
 
     function getCategories() {
         axios.get(`http://localhost:3000/products/category/`)
@@ -43,6 +44,14 @@ const FormAdminCreate = () => {
     };
 
     const handleSubmit = (event) => {
+        const form = event.currentTarget;
+        if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+
+        setValidated(true);
+
         event.preventDefault();
         axios.post('http://localhost:3000/products', {
             name: inputAdminForm.name,
@@ -65,43 +74,85 @@ const FormAdminCreate = () => {
             <h1 className='formAdmin-title'>Agregue un juego a su catalogo</h1>
 
             {/* Formulario para modificar o crear el producto */}
-            <Form onSubmit={(event) => handleSubmit(event)} className='formAdmin-create-container'>
+            <Form noValidate validated={validated} onSubmit={(event) => handleSubmit(event)} className='formAdmin-create-container'>
                 <Form.Group controlId="formBasicEmail" bsPrefix="formAdmin-create-group">
+
+                    <Form.Group>
+                        <Form.Control type="text"
+                            required="true"
+                            placeholder="Nombre de su videojuego..."
+                            name="name"
+                            ref={nameInput}
+                            onChange={(event) => handleInputChange(event)} />
+                        <Form.Control.Feedback type="invalid">
+                            Agregue el nombre del producto
+                        </Form.Control.Feedback>
+                    </Form.Group>
+                    
+                    <Form.Group>
                     <Form.Control type="text"
-                        placeholder="Nombre de su videojuego..."
-                        name="name"
-                        ref={nameInput}
-                        onChange={(event) => handleInputChange(event)} />
-                    <br />
-                    <Form.Control type="text"
+                        required="true"
+                        minLength="15"
                         placeholder="Descripcion para su videojuego..."
                         name="description"
                         onChange={(event) => handleInputChange(event)} />
-                    <br />
+                    <Form.Control.Feedback type="invalid">
+                        La descripción debe tener más de 15 caracteres
+                    </Form.Control.Feedback>
+                    </Form.Group>
+                    
+                    <Form.Group>
                     <Form.Control type="number"
+                        required="true"
                         placeholder="Costo del videojuego. Ej: 39.99"
                         name="price"
                         onChange={(event) => handleInputChange(event)} />
-                    <br />
+                    <Form.Control.Feedback type="invalid">
+                        Debe indicar el precio
+                    </Form.Control.Feedback>
+                    </Form.Group>
+                    
+                    <Form.Group>
                     <Form.Control type="number"
+                        required="true"
                         placeholder="Cantidad disponible..."
                         name="stock"
                         onChange={(event) => handleInputChange(event)} />
-                    <br />
+                    <Form.Control.Feedback type="invalid">
+                        Debe indicar stock
+                    </Form.Control.Feedback>
+                    </Form.Group>
+                    
+                    <Form.Group>
                     <Form.Control type="text"
+                        required="true"
                         placeholder="Desarrolladora"
                         name="developer"
                         onChange={(event) => handleInputChange(event)} />
-                    <br />
+                    <Form.Control.Feedback type="invalid">
+                        Debe agregar desarrolladora
+                    </Form.Control.Feedback>
+                    </Form.Group>
+                    
+                    <Form.Group>
                     <Form.Control type="text"
+                        required="true"
                         placeholder="Publicadora"
                         name="publisher"
                         onChange={(event) => handleInputChange(event)} />
-                    <br />
+                    <Form.Control.Feedback type="invalid">
+                        Debe agregar publisher
+                    </Form.Control.Feedback>
+                    </Form.Group>
+                    
+                    <Form.Group>
                     <Form.Control type="date"
+                        required="true"
                         name="publishDate"
                         onChange={(event) => handleInputChange(event)} />
-                    <br />
+                    </Form.Group>
+                    
+                    <Form.Group>
                     <Form.Control as="select" multiple>
                         {
                             categories.map(cat => (
@@ -110,6 +161,7 @@ const FormAdminCreate = () => {
                         }
 
                     </Form.Control>
+                    </Form.Group>
                 </Form.Group>
 
                 <Button variant="primary" type="submit">
