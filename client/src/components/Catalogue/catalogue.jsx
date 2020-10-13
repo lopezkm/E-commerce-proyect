@@ -73,7 +73,7 @@ function Catalogue( )
 												name={ p.name }
 												price={ p.price }
 												developer={ p.developer }
-												media={ p.media[ 0 ].path }
+												media={ p.media[ 0 ] && p.media[ 0 ].path }
 											/>
 										</Link>
 									</Col>

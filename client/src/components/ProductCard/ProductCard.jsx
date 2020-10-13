@@ -10,7 +10,7 @@ function ProductCard( { name, price, media, developer } )
 	return (
 		<Card bsPrefix='productCard-card'>
 			<Card.Header bsPrefix='productCard-card-header'>
-				<Card.Img bsPrefix='productCard-card-img' src={media} alt={`img Game ${name}`}/>
+				<Card.Img bsPrefix='productCard-card-img' src={ media || 'https://i.imgur.com/X7HDtwN.jpg' } alt={`img Game ${name}`}/>
 			</Card.Header>
 			<Card.Body bsPrefix='productCard-card-body'>
 				<div>
