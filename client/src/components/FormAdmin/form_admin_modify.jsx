@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Form, Button, FormControl } from 'react-bootstrap';
 import axios from 'axios';
 import NavAdmin from '../NavAdmin/nav_admin.jsx';
@@ -11,6 +11,7 @@ const FormAdminModify = () => {
     const [loading, setLoading] = useState(true);
     const [productSelected, setProductSelected] = useState(false);
     const [inputSearch, setInputSearch] = useState({ searchInput: "" });
+    const searchInput =useRef(null);
     const [inputAdminForm, setInputAdminForm] = useState({
         name: "",
         description: "",
@@ -43,6 +44,7 @@ const FormAdminModify = () => {
         getCategories();
         getProducts();
         setLoading(false);
+        searchInput.current.focus()
     }, [loading]);
 
     const handleInputChangeForm = (event) => {
@@ -141,6 +143,7 @@ const FormAdminModify = () => {
                     placeholder="Search your game"
                     className="mr-sm-2"
                     name="searchInput"
+                    ref={searchInput}
                     onChange={(event) => handleInputChangeSearch(event)} />
             </Form>
             <Form.Group>
