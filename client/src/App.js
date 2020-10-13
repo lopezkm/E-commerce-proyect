@@ -4,7 +4,7 @@ import { Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 import './App.scss';
 
-import Product from './components/product.jsx';
+import Product from './components/Product/product.jsx';
 import NavBar from './components/NavBar/NavBar.jsx';
 import FormAdminCreate from './components/FormAdmin/form_admin_create.jsx';
 import FormAdminDelete from './components/FormAdmin/form_admin_delete.jsx';

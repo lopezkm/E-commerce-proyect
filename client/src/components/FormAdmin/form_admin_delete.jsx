@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Form, Button, FormControl, Container } from 'react-bootstrap';
+import React, { useEffect, useState, useRef } from 'react';
+import { Form, Button, FormControl, Container, Alert } from 'react-bootstrap';
 import axios from 'axios';
 import NavAdmin from '../NavAdmin/nav_admin.jsx';
 
@@ -7,6 +7,7 @@ const FormAdminDelete = () => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [input, setInput] = useState({ searchInput: "" })
+    const searchInput =useRef(null);
     let clickedOption;
 
     const getProducts = () => {
@@ -19,6 +20,7 @@ const FormAdminDelete = () => {
     useEffect(() => {
         getProducts();
         setLoading(false);
+        searchInput.current.focus()
     }, [loading]);
 
     const handleInputChange = (event) => {
@@ -37,7 +39,12 @@ const FormAdminDelete = () => {
     }
 
     const deleteProduct = (id) => {
-        axios.delete(`http://localhost:3000/products/${id}`)
+        if(!id)
+        {
+            return alert("Seleccione el juego que quiere eliminar")     
+        }
+        axios.delete(`http://localhost:3000/products/${id}`) 
+        window.location.reload()
     }
 
     let showProducts = products.filter(product => product.name.toLowerCase().includes(input.searchInput.toLowerCase()))
@@ -56,6 +63,7 @@ const FormAdminDelete = () => {
                             placeholder="Search your game"
                             className="mr-sm-2"
                             name="searchInput"
+                            ref={searchInput}
                             onChange={(event) => handleInputChange(event)} />
 
 

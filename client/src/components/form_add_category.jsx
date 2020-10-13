@@ -24,9 +24,13 @@ const FormAddCategory = () => {
             name: formInput.categoryName,
             description: formInput.categoryDescription
         })
-        .then(response => console.log(response))// Respuesta del servidor
-        .catch(e => console.log(e))
+        .then(response => {
+            if(!alert(`La categoria ${response.data.name} ha sido creada exitosamente`)) window.location.reload()})// Respuesta del servidor
+        .catch(e => {
+            if(!alert(`Ya existe una categoria con el nombre ingresado`)) window.location.reload()})
+        
     } 
+
 
     return (
         <div>
