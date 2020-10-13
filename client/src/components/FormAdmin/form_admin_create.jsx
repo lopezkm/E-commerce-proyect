@@ -65,43 +65,45 @@ const FormAdminCreate = () => {
             <h1 className='formAdmin-title'>Agregue un juego a su catalogo</h1>
 
             {/* Formulario para modificar o crear el producto */}
-            <Form onSubmit={(event) => handleSubmit(event)} className='formAdmin-create-container'>
-                <Form.Group controlId="formBasicEmail" bsPrefix="formAdmin-create-group">
+            <Form onSubmit={(event) => handleSubmit(event)} className='formAdmin-container'>
+                <Form.Group controlId="formBasicEmail" bsPrefix="formAdmin-group">
                     <Form.Control type="text"
                         placeholder="Nombre de su videojuego..."
                         name="name"
                         ref={nameInput}
                         onChange={(event) => handleInputChange(event)} />
-                    <br />
-                    <Form.Control type="text"
+                 
+                    <Form.Control 
+                        as = "textarea"
+                        rows={ 4 }
                         placeholder="Descripcion para su videojuego..."
                         name="description"
                         onChange={(event) => handleInputChange(event)} />
-                    <br />
+                
                     <Form.Control type="number"
                         placeholder="Costo del videojuego. Ej: 39.99"
                         name="price"
                         onChange={(event) => handleInputChange(event)} />
-                    <br />
+                
                     <Form.Control type="number"
                         placeholder="Cantidad disponible..."
                         name="stock"
                         onChange={(event) => handleInputChange(event)} />
-                    <br />
+                 
                     <Form.Control type="text"
                         placeholder="Desarrolladora"
                         name="developer"
                         onChange={(event) => handleInputChange(event)} />
-                    <br />
+                
                     <Form.Control type="text"
                         placeholder="Publicadora"
                         name="publisher"
                         onChange={(event) => handleInputChange(event)} />
-                    <br />
+              
                     <Form.Control type="date"
                         name="publishDate"
                         onChange={(event) => handleInputChange(event)} />
-                    <br />
+               
                     <Form.Control as="select" multiple>
                         {
                             categories.map(cat => (
@@ -112,8 +114,8 @@ const FormAdminCreate = () => {
                     </Form.Control>
                 </Form.Group>
 
-                <Button variant="primary" type="submit">
-                    Submit
+                <Button className="mb-2" variant="primary" type="submit">
+                    Subir
                 </Button>
             </Form>
         </div>

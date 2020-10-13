@@ -1,18 +1,31 @@
-.formAdmin-create-container{
+.formAdmin-container{
     background-color: $grey;
     padding: 2rem 10% 0rem 10%;
 }
 
-.formAdmin-create-group{
+.formAdmin-group{
     color: white;
     font-family: $barlow;
     font-style: normal;
     font-size: 1.8rem;
         .form-control{
-            height: 3.6rem;;
+            min-height: 3.6rem;
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1.5rem;
         }
-
+        .form-check-input{
+            min-width: 1.5rem;
+            min-height: 1.5rem;
+        }
+        label{
+            display: block;
+        }
+        button{
+            margin-bottom: 2rem;
+        }
 }
+
 
 .formAdmin-title{
     color: white;
@@ -23,7 +36,6 @@
     margin: 2rem 0rem;
 }
 
-/////////////Formulario para borrar///////////////
 
 .formAdmin-delete-container{
     background-color: $grey;
@@ -36,3 +48,17 @@
             min-height: 40vh;
         }
 }
+
+.formAdmin-submit-button{
+    float: right;
+    display: block;
+    padding: 0.5rem 1.5rem;
+    font-size: 1.5rem;
+    margin: 1rem 0;
+}
+
+.formAdmin-updateButton{
+    overflow: auto;
+}
+
+
