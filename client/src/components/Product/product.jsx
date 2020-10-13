@@ -11,9 +11,30 @@ function Product({productId})
     const getProduct = () => {
         axios.get(`http://localhost:3000/products/${productId}`)
             .then( response => {
-                setProduct(response.data);
-                setLoading(false);
-                console.log(response.data);
+                const productData = response.data;
+                
+                if ( !Array.isArray( productData.media ) || ( productData.media.length === 0 ) )
+                {
+                    productData.media = [
+                        {
+                            type: 'image-big',
+                            path: 'http://i.imgur.com/ltcQkzI.jpg',
+                            width: 1920,
+                            height: 1080
+                        }
+                    ];
+                    
+                    console.log( 'Si esta bien' );
+                    console.log( productData );
+                }
+                else
+                {
+                    console.log( 'No esta bien' );
+                    console.log( productData );
+                }
+                
+                setProduct( productData );
+                setLoading( false );
             });
     }
 
@@ -29,10 +50,11 @@ function Product({productId})
         <Container>
             <Carousel interval={5000} className="product-carousel-main">
             {
-                product.media.map( (media) => media.type.includes("image-big") && 
-                <Carousel.Item>
-                    <img src={`../${media.path}`} className="d-block w-100"/>
-                </Carousel.Item>)
+                product.media.map( ( media ) => media.type.includes("image-big") && 
+                    <Carousel.Item>
+                        <img src={ media.path.includes( 'http' ) ? media.path : `../${media.path}` } className="d-block w-100"/>
+                    </Carousel.Item>
+                )
             }
             </Carousel>
             <Card bsPrefix="product-card">
