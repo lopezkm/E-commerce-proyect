@@ -103,7 +103,9 @@ const FormAdminCreate = () => {
                     </Form.Group>
 
                     <Form.Group>
-                        <Form.Control type="number"
+                        <Form.Control
+                            type="number"
+                            step="0.01"
                             required="true"
                             placeholder="Costo del videojuego. Ej: 39.99"
                             name="price"
