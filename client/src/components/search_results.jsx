@@ -46,7 +46,7 @@ const Result = ({ products }) => {
 												name={ x.name }
 												price={ x.price }
 												developer={ x.developer }
-												media={ `../${x.media[ 0 ].path}` }
+												media={ `../${x.media[ 0 ].path}` } 
 											/>
 										</Link>
 									</Col>
@@ -62,7 +62,7 @@ const Result = ({ products }) => {
             <Alert variant="danger">
                 <Alert.Heading>Ups ha habido un error!</Alert.Heading>
                 <p>
-                  No se encontro ningun producto o descripción que contengan tu busqueda :(
+                  No se encontro ningun producto o descripción que contengan {products} :(
                 </p>
             </Alert>
             )
