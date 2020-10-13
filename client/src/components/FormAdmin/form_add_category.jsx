@@ -31,9 +31,9 @@ const FormAddCategory = () => {
     return (
         <div>
             {/* Formulario para agregar categorías */}
-            <h1>Agregar nueva categoría</h1>
-            <Form onSubmit= {(e) => handleSubmit(e)}>
-                <Form.Group >
+            <h1 className='formAdmin-title'>Nueva categoría</h1>
+            <Form className='formAdmin-container' onSubmit= {(e) => handleSubmit(e)}>
+                <Form.Group bsPrefix='formAdmin-group'>
                     <Form.Label>Nombre de la categoria</Form.Label>
                     <Form.Control type="text"
                         name= "categoryName" 
@@ -46,7 +46,7 @@ const FormAddCategory = () => {
                         onChange= {(event) => handleformInputChange(event)} />
                 </Form.Group>
 
-                <Button variant="primary" type="submit"> Agregar </Button>
+                <Button className="mb-3" variant="primary" type="submit"> Agregar </Button>
             </Form>
         </div>
     );
