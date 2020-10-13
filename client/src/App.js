@@ -5,14 +5,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.scss';
 
 import Product from './components/Product/product.jsx';
-import NavBar from './components/NavBar/nav_bar.jsx';
+import Catalogue from './components/Catalogue/Catalogue.jsx'
+import NavBar from './components/NavBar/NavBar.jsx';
+import Result from './components/search_results.jsx'
+import FormAdd from './components/FormAdmin/form_add_category.jsx'
 import FormAdminCreate from './components/FormAdmin/form_admin_create.jsx';
 import FormAdminDelete from './components/FormAdmin/form_admin_delete.jsx';
 import FormAdminModify from './components/FormAdmin/form_admin_modify.jsx';
-import Catalogue from './components/Catalogue/catalogue.jsx'
-import FormAdd from './components/FormAdmin/form_add_category.jsx'
-import Result from './components/search_results.jsx'
-
 
 function App( )
 {
