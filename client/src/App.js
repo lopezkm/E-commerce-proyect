@@ -10,8 +10,7 @@ import FormAdminCreate from './components/FormAdmin/form_admin_create.jsx';
 import FormAdminDelete from './components/FormAdmin/form_admin_delete.jsx';
 import FormAdminModify from './components/FormAdmin/form_admin_modify.jsx';
 import Catalogue from './components/Catalogue/catalogue.jsx'
-import 'bootstrap/dist/css/bootstrap.min.css'; 
-import FormAdd from './components/form_add_category.jsx'
+import FormAdd from './components/FormAdmin/form_add_category.jsx'
 import Result from './components/search_results.jsx'
 
 
