@@ -34,4 +34,5 @@ server.get( '/', ( request, response, next ) => {
 		.then( ( products ) => {
 			response.status( 200 ).send( products );
 		} )
-		.catch( next );
+        .catch( next );
+    });
