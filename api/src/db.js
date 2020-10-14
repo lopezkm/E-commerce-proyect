@@ -1,6 +1,7 @@
 require( 'dotenv' ).config( );
 
 const { Sequelize } = require( 'sequelize' );
+const Promise = require( 'bluebird' );
 
 const fs = require( 'fs' );
 const path = require( 'path' );
@@ -50,8 +51,8 @@ Category.belongsToMany( Product, { through: ProductCategory } );
 Product.belongsToMany( Media, { through: ProductMedia } );
 Media.belongsToMany( Product, { through: ProductMedia, foreignKey: 'mediaId' } );
 
-/* Product.hasMany(Media);
-Media.belongsTo(Product); */
+/*Product.hasMany( Media );
+Media.belongsTo( Product ); TODO! */
 
 /* =================================================================================
 * 		[ Creamos un callback para la inserción de datos de prueba luego 
@@ -63,13 +64,12 @@ Media.belongsTo(Product); */
 		return;
 	}
 	
-	sequelize.afterBulkSync( async ( ) => {
+	sequelize.afterBulkSync( ( ) => {
 		const mockData = require( '../.mockdata' );
+		const models = Object.keys( sequelize.models );
 		
-		Object.keys( sequelize.models ).forEach( model => {
-			if ( mockData.hasOwnProperty( model ) ) {
-				sequelize.models[ model ].bulkCreate( mockData[ model ] );
-			}
+		Promise.each( models, ( model ) => {
+			return sequelize.models[ model ].bulkCreate( mockData[ model ] );
 		} );
 	} );
 } )( );
