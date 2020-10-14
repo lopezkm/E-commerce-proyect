@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { Form, Button, FormControl, Container, Col } from 'react-bootstrap';
+import { Form, Button, FormControl, Container, Col, Row } from 'react-bootstrap';
 import axios from 'axios';
 import NavAdmin from '../NavAdmin/nav_admin.jsx';
 
@@ -163,24 +163,68 @@ const FormAdminModify = () => {
                     /* Formulario para modificar o crear el producto */
                     <Form onSubmit={() => handleSubmit(inputAdminForm.id)} className='formAdmin-container'>
                         <Form.Group className='formAdmin-group'>
-                            <Form.Row>
-                                <Col xs={0.5}>
-                                    <Form.Check
-                                        type="checkbox"
-                                        name="formName"
-                                        onChange={(event) => handleCheckChange(event)}
-                                    />
-                                </Col>
+                            <Row>
                                 <Col>
-                                    <Form.Label>Nombre:</Form.Label>
-                                </Col>
-                            </Form.Row>
-                            <Form.Control type="text"
-                                placeholder="Nombre del juego"
-                                value={inputAdminForm.name}
-                                name="name"
-                                id="formName"
-                                onChange={(event) => handleInputChangeForm(event)} disabled />
+                                    <Form.Row>
+                                        <Col xs={0.5}>
+                                            <Form.Check
+                                                type="checkbox"
+                                                name="formName"
+                                                onChange={(event) => handleCheckChange(event)}
+                                            />
+                                        </Col>
+                                        <Col>
+                                            <Form.Label>Nombre:</Form.Label>
+                                        </Col>
+                                    </Form.Row>
+                                    <Form.Control type="text"
+                                        placeholder="Nombre del juego"
+                                        value={inputAdminForm.name}
+                                        name="name"
+                                        id="formName"
+                                        onChange={(event) => handleInputChangeForm(event)} disabled />
+                                </Col> 
+                                <Col> 
+                                    <Form.Row>
+                                        <Col xs={0.5}>
+                                            <Form.Check
+                                                type="checkbox"
+                                                name="formPrice"
+                                                onChange={(event) => handleCheckChange(event)}
+                                            />
+                                        </Col>
+                                        <Col>
+                                            <Form.Label>Precio:</Form.Label>
+                                        </Col>
+                                    </Form.Row>
+                                    <Form.Control type="number"
+                                        placeholder="Precio del juego"
+                                        value={inputAdminForm.price}
+                                        name="price"
+                                        id="formPrice"
+                                        onChange={(event) => handleInputChangeForm(event)} disabled />
+                                </Col> 
+                                <Col>
+                                    <Form.Row>
+                                        <Col xs={0.5}>
+                                            <Form.Check
+                                                type="checkbox"
+                                                name="formStock"
+                                                onChange={(event) => handleCheckChange(event)}
+                                            />
+                                        </Col>
+                                        <Col>
+                                            <Form.Label>Stock disponible:</Form.Label>
+                                        </Col>
+                                    </Form.Row>
+                                    <Form.Control type="number"
+                                        placeholder="Stock disponible del juego"
+                                        value={inputAdminForm.stock}
+                                        name="stock"
+                                        id="formStock"
+                                        onChange={(event) => handleInputChangeForm(event)} disabled />
+                                </Col> 
+                            </Row>
 
                             <Form.Row>
                                 <Col xs={0.5}>
@@ -203,100 +247,68 @@ const FormAdminModify = () => {
                                 id="formDescription"
                                 onChange={(event) => handleInputChangeForm(event)} disabled />
 
-                            <Form.Row>
-                                <Col xs={0.5}>
-                                    <Form.Check
-                                        type="checkbox"
-                                        name="formPrice"
-                                        onChange={(event) => handleCheckChange(event)}
-                                    />
+                            <Row>
+                                <Col>
+                                    <Form.Row>
+                                        <Col xs={0.5}>
+                                            <Form.Check
+                                                type="checkbox"
+                                                name="formDeveloper"
+                                                onChange={(event) => handleCheckChange(event)}
+                                            />
+                                        </Col>
+                                        <Col>
+                                            <Form.Label>Desarrollado por:</Form.Label>
+                                        </Col>
+                                    </Form.Row>
+                                    <Form.Control type="text"
+                                        placeholder="Desarrolladora del juego"
+                                        value={inputAdminForm.developer}
+                                        name="developer"
+                                        id="formDeveloper"
+                                        onChange={(event) => handleInputChangeForm(event)} disabled />
                                 </Col>
                                 <Col>
-                                    <Form.Label>Precio:</Form.Label>
-                                </Col>
-                            </Form.Row>
-                            <Form.Control type="number"
-                                placeholder="Precio del juego"
-                                value={inputAdminForm.price}
-                                name="price"
-                                id="formPrice"
-                                onChange={(event) => handleInputChangeForm(event)} disabled />
-
-                            <Form.Row>
-                                <Col xs={0.5}>
-                                    <Form.Check
-                                        type="checkbox"
-                                        name="formStock"
-                                        onChange={(event) => handleCheckChange(event)}
-                                    />
-                                </Col>
-                                <Col>
-                                    <Form.Label>Stock disponible:</Form.Label>
-                                </Col>
-                            </Form.Row>
-                            <Form.Control type="number"
-                                placeholder="Stock disponible del juego"
-                                value={inputAdminForm.stock}
-                                name="stock"
-                                id="formStock"
-                                onChange={(event) => handleInputChangeForm(event)} disabled />
-
-                            <Form.Row>
-                                <Col xs={0.5}>
-                                    <Form.Check
-                                        type="checkbox"
-                                        name="formDeveloper"
-                                        onChange={(event) => handleCheckChange(event)}
-                                    />
+                                    <Form.Row>
+                                        <Col xs={0.5}>
+                                            <Form.Check
+                                                type="checkbox"
+                                                name="formPublisher"
+                                                onChange={(event) => handleCheckChange(event)}
+                                            />
+                                        </Col>
+                                        <Col>
+                                            <Form.Label>Publicado por:</Form.Label>
+                                        </Col>
+                                    </Form.Row>
+                                    <Form.Control type="text"
+                                        placeholder="Publicadora del juego"
+                                        value={inputAdminForm.publisher}
+                                        name="publisher"
+                                        id="formPublisher"
+                                        onChange={(event) => handleInputChangeForm(event)} disabled />
                                 </Col>
                                 <Col>
-                                    <Form.Label>Desarrollado por:</Form.Label>
+                                    <Form.Row>
+                                        <Col xs={0.5}>
+                                            <Form.Check
+                                                type="checkbox"
+                                                name="formPublishDate"
+                                                onChange={(event) => handleCheckChange(event)}
+                                            />
+                                        </Col>
+                                        <Col>
+                                            <Form.Label>Fecha de lanzamiento:</Form.Label>
+                                        </Col>
+                                    </Form.Row>
+                                    <Form.Control type="date"
+                                        placeholder="Fecha de lanzamiento del juego"
+                                        value={inputAdminForm.publishDate}
+                                        name="publishDate"
+                                        id="formPublishDate"
+                                        onChange={(event) => handleInputChangeForm(event)} disabled />
                                 </Col>
-                            </Form.Row>
-                            <Form.Control type="text"
-                                placeholder="Desarrolladora del juego"
-                                value={inputAdminForm.developer}
-                                name="developer"
-                                id="formDeveloper"
-                                onChange={(event) => handleInputChangeForm(event)} disabled />
-
-                            <Form.Row>
-                                <Col xs={0.5}>
-                                    <Form.Check
-                                        type="checkbox"
-                                        name="formPublisher"
-                                        onChange={(event) => handleCheckChange(event)}
-                                    />
-                                </Col>
-                                <Col>
-                                    <Form.Label>Publicado por:</Form.Label>
-                                </Col>
-                            </Form.Row>
-                            <Form.Control type="text"
-                                placeholder="Publicadora del juego"
-                                value={inputAdminForm.publisher}
-                                name="publisher"
-                                id="formPublisher"
-                                onChange={(event) => handleInputChangeForm(event)} disabled />
-
-                            <Form.Row>
-                                <Col xs={0.5}>
-                                    <Form.Check
-                                        type="checkbox"
-                                        name="formPublishDate"
-                                        onChange={(event) => handleCheckChange(event)}
-                                    />
-                                </Col>
-                                <Col>
-                                    <Form.Label>Fecha de lanzamiento:</Form.Label>
-                                </Col>
-                            </Form.Row>
-                            <Form.Control type="date"
-                                placeholder="Fecha de lanzamiento del juego"
-                                value={inputAdminForm.publishDate}
-                                name="publishDate"
-                                id="formPublishDate"
-                                onChange={(event) => handleInputChangeForm(event)} disabled />
+                            </Row>
 
                             <Form.Label>Categorias del producto:</Form.Label>
                             <Form.Control as="select" multiple id="formProductCategories"
