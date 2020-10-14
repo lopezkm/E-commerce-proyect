@@ -11,8 +11,12 @@ function SearchBar( )
 	const handleSubmit = ( e ) => {
 		e.preventDefault( );
 		
-		history.push( `/search/${ input }` );
-		setInput( '' );
+		if(input !== '') {
+
+			history.push( `/search/${ input }` );
+			setInput( '' );
+
+		}
 	};
 
 	const handleInputChange = ( e ) => {
