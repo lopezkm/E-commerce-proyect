@@ -8,8 +8,32 @@
 	}
 	@else
 	{
-		-webkit-box-shadow: $x $y $blur $spread  rgba( $color, $trans );
+		-webkit-box-shadow: $x $y $blur $spread rgba( $color, $trans );
 		-moz-box-shadow: $x $y $blur $spread rgba( $color, $trans );
 		box-shadow: $x $y $blur $spread rgba( $color, $trans );
 	}
+}
+
+@mixin margin-x( $l: auto, $r: auto )
+{
+	margin-left: $l;
+	margin-right: $r;
+}
+
+@mixin mq( $bp )
+{
+	@if map_has_key( $breakpoints, $bp )
+	{
+		$width: map_get( $breakpoints, $bp );
+		
+		@media only screen and ( min-width: $width )
+		{
+			@content;
+		}
+	}
+}
+
+@mixin padding( $t: 0, $r: 0, $b: 0, $l: 0 )
+{
+	padding: $t $r $b $l;
 }
