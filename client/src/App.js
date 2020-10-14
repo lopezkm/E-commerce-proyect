@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.scss';
 
 import Product from './components/Product/product.jsx';
-import Catalogue from './components/Catalogue/Catalogue.jsx'
+import Catalogue from './components/Catalogue/catalogue.jsx'
 import NavBar from './components/NavBar/NavBar.jsx';
 import Result from './components/search_results.jsx'
 import FormAdd from './components/FormAdmin/form_add_category.jsx'
