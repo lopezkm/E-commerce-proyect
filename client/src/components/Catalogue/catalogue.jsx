@@ -46,6 +46,10 @@ function Catalogue( )
 					} );
 				}
 				
+				products.forEach( p => {
+					p.portrait = p.media.find( m => m.type === 'portrait' ).path;
+				} );
+				
 				setProducts( products );
 				setLoading( state => ( { ...state, products: false } ) );
 			} );
@@ -61,19 +65,19 @@ function Catalogue( )
 	return (
 		<Container className='catalogue__container'>
 			<Row>
-				<Col xs={ 10 }>
+				<Col xs={ 7 } sm={ 8 } md={ 9 } lg={ 10 }>
 					<Row>
 						{
 							!loading.products ?
 								products.map( ( p, i ) => (
-									<Col xs={ 10 } md={ 3 } key={ i } className='catalogue__product-col'>
+									<Col xs={ 12 } sm={ 6 } md={ 4 } lg={ 3 } key={ i } className='catalogue__product-col'>
 										<Link to={ `/product/${ p.id }` } className='catalogue__product-link'>
 											<ProductCard
 												key={ p.id }
 												name={ p.name }
 												price={ p.price }
 												developer={ p.developer }
-												media={ p.media[ 0 ] && p.media[ 0 ].path }
+												media={ p.portrait }
 											/>
 										</Link>
 									</Col>
@@ -83,7 +87,7 @@ function Catalogue( )
 						}
 					</Row>
 				</Col>
-				<Col xs={ 2 }>
+				<Col xs={ 5 } sm={ 4 } md={ 3 } lg={ 2 }>
 					<div className='catalogue__categories-list'>
 						<div className='catalogue__categories-section-title'>
 							Categorías
