@@ -1,7 +1,10 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Form, Button, FormControl, Container, Col, Row } from 'react-bootstrap';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 import NavAdmin from '../NavAdmin/nav_admin.jsx';
+toast.configure();
 
 const FormAdminModify = () => {
 
@@ -21,23 +24,21 @@ const FormAdminModify = () => {
         publisher: "",
         publishDate: ""
     });
+    const [allCategories, setAllCategories] = useState([]);
 
-    let clickedOption;
-    let categorySelectedToDelete;
-    let categorySelectedToAdd;
-
-    function getCategories() {
+    const getCategories = () => {
         axios.get(`http://localhost:3000/products/category/`)
-            .then(response => {
-                setCategories(response.data);
-            });
+        .then(response => {
+            setAllCategories(response.data);
+            setCategories(response.data);
+        });
     }
 
     const getProducts = () => {
         axios.get(`http://localhost:3000/products/`)
-            .then(response => {
-                setProducts(response.data);
-            });
+        .then(response => {
+            setProducts(response.data);
+        });
     }
 
     useEffect(() => {
@@ -63,7 +64,7 @@ const FormAdminModify = () => {
 
     const handleSelectChange = (event) => {
         let selector = document.getElementById("productList");
-        clickedOption = selector.options[selector.selectedIndex].id;
+        let clickedOption = selector.options[selector.selectedIndex].id;
         refreshData(clickedOption);
     }
 
@@ -100,45 +101,77 @@ const FormAdminModify = () => {
 
     const handleCategoryDelete = () => {
         let selector = document.getElementById("formProductCategories");
-        categorySelectedToDelete = selector.options[selector.selectedIndex].id;
+        
+        if (selector.options.length > 0) {
+            let categorySelectedToDelete = selector.options[selector.selectedIndex].id;
+            setProductCategories(productCategories.filter(cat => cat.id !== parseInt(categorySelectedToDelete)));
+            deleteCategoryProduct(categorySelectedToDelete);
+        }
     }
 
+    const deleteCategoryProduct = (idC) => {
+        let selector = document.getElementById("productList");
+        let idP = selector.options[selector.selectedIndex].id;
+        axios.delete(`http://localhost:3000/products/${idP}/category/${idC}`)
+        .then(()=>{
+            axios.get(`http://localhost:3000/products/${idP}`)
+            .then(response => {
+
+                let prodCat = response.data.categories;
+                let filteredCat = allCategories.filter((item) => {
+                    return !prodCat.find(el => el.name === item.name);
+                })
+                setCategories(filteredCat);
+                notifyDeleted();
+            })
+        })
+    }
+    
     const handleCategoryAdd = () => {
         let selector = document.getElementById("formCategories");
-        categorySelectedToAdd = selector.options[selector.selectedIndex].id;
+
+        if (selector.options.length > 0) {
+            let categorySelectedToAdd = selector.options[selector.selectedIndex].id;
+            setCategories(categories.filter(cat => cat.id !== parseInt(categorySelectedToAdd)));
+            addCategoryProduct(categorySelectedToAdd);
+        }
     }
 
-    const deleteCategoryProduct = (e, idC) => {
+    const addCategoryProduct = (idC) => {
         let selector = document.getElementById("productList");
         let idP = selector.options[selector.selectedIndex].id;
-        e.preventDefault();
-        axios.delete(`http://localhost:3000/products/${idP}/category/${idC}`)
-            .then(() => alert('Categoria eliminada!'))
-    }
-
-    const addCategoryProduct = (e, idC) => {
-        let selector = document.getElementById("productList");
-        let idP = selector.options[selector.selectedIndex].id;
-        e.preventDefault();
         axios.post(`http://localhost:3000/products/${idP}/category/${idC}`)
-            .then(() => alert('Categoria agregada!'))
+        .then(() => {
+            axios.get(`http://localhost:3000/products/${idP}`)
+            .then((response) => { 
+                setProductCategories(response.data.categories);
+                notifyAdded();
+            })
+        })
     }
 
-    let showProducts = products.filter(product => product.name.toLowerCase().includes(inputSearch.searchInput.toLowerCase()))
+    const notifyAdded = () =>{
+        toast.info('Categoría agregada');
+    }
+
+    const notifyDeleted = () =>{
+        toast.error('Categoría eliminada');
+    }
+
+    let searchedProduct = products.filter(product => product.name.toLowerCase().includes(inputSearch.searchInput.toLowerCase()))
 
     return (
         <div>
-            {/* Opciones para CRUD del producto */}
             <NavAdmin />
+
             <h1 className='formAdmin-title'>Modificar datos del producto</h1>
 
             <Container>
-
                 <Form className='formAdmin-delete-container'>
                     <Form.Group>
                         <FormControl
                             type="text"
-                            placeholder="Search your game"
+                            placeholder="Buscar el juego a modificar"
                             className="mr-sm-2"
                             name="searchInput"
                             ref={searchInput}
@@ -146,8 +179,8 @@ const FormAdminModify = () => {
 
                         <Form.Control as="select" multiple id="productList" onChange={(e) => handleSelectChange(e)}>
                             {
-                                showProducts.map(product => (
-                                    <option id={product.id} >
+                                searchedProduct.map((product, i) => (
+                                    <option key={i} id={product.id} >
                                         {product.name}
                                     </option>
                                 ))
@@ -155,12 +188,10 @@ const FormAdminModify = () => {
                         </Form.Control>
                     </Form.Group>
                 </Form>
-
             </Container>
 
             { productSelected &&
                 (
-                    /* Formulario para modificar o crear el producto */
                     <Form onSubmit={() => handleSubmit(inputAdminForm.id)} className='formAdmin-container'>
                         <Form.Group className='formAdmin-group'>
                             <Row>
@@ -314,33 +345,30 @@ const FormAdminModify = () => {
                             <Form.Control as="select" multiple id="formProductCategories"
                                 onClick={(e) => handleCategoryDelete(e)}>
                                 {
-                                    productCategories.map(cat => (
-                                        <option id={cat.id}>{cat.name}</option>
+                                    productCategories.map((cat, i) => (
+                                        <option key={i} id={cat.id}> × {cat.name}</option>
                                     ))
                                 }
                             </Form.Control>
-                            <Button variant="danger" type="submit"
-                                onClick={(e) => deleteCategoryProduct(e, categorySelectedToDelete)}> Eliminar </Button>
-
 
                             <Form.Label>Categorias disponibles:</Form.Label>
                             <Form.Control as="select" multiple id="formCategories"
                                 onClick={(e) => handleCategoryAdd(e)}>
                                 {
-                                    categories.map(cat => (
-                                        <option id={cat.id}> {cat.name} </option>
+                                    categories.map((cat, i) => (
+                                        <option key={i} id={cat.id}> + {cat.name} </option>
                                     ))
                                 }
                             </Form.Control>
-                            <Button className="formAdmin-modify-actionButton" variant="success" type="submit"
-                                onClick={(e) => addCategoryProduct(e, categorySelectedToAdd)}> Agregar </Button>
+
                         </Form.Group>
                         <div className="formAdmin-updateButton">
                             <Button variant="primary" type="submit" className='formAdmin-submit-button'>
                                 Actualizar
                         </Button>
                         </div>
-                    </Form>)
+                    </Form>
+                )
             }
         </div>
     )
