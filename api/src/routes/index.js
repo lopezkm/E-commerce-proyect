@@ -4,7 +4,7 @@ const productRouter     = require( './product.js' );
 const categoryRouter    = require( './category.js' );
 const mediaRouter       = require( './media.js' );
 const searchRouter      = require( './search.js' );
-const userRouter        = require( '/user.js');
+const userRouter        = require( './user.js' );
 
 const router = Router( );
 

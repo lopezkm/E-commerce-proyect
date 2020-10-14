@@ -1,5 +1,5 @@
 const server = require( 'express' ).Router( );
-//const Promise = require( 'bluebird' );
+const Promise = require( 'bluebird' );
 const { User, Product, Order } = require( '../db.js' );
 
 /* =================================================================================
@@ -15,7 +15,7 @@ server.post( '/', ( request, response ) => {
 				return response.sendStatus( 400 );
 			}
 			
-			return user
+			response.send(user);
 		} )
 		.catch( error => response.status( 400 ).send( error ) );
 } );
@@ -24,18 +24,35 @@ server.post( '/', ( request, response ) => {
 * 		[ Obtención de todos los usuarios ]
 * ================================================================================= */
 
-server.get( '/', ( request, response, next ) => {
-	User.findAll( {
+server.get( '/', ( request, response ) => {
+	User.findAll( /* {
 			include: [
 				{ model: Order },
 				{ model: Product }
 			]
-		} )
+		}  */)
 		.then( ( users ) => {
 			response.status( 200 ).send( users );
 		} )
-        .catch( next );
+        .catch( error => response.status( 400 ).send( error ) );
 });
+
+/* =================================================================================
+* 		[ Obtención de un usuario particular ]
+* ================================================================================= */
+server.get( '/:id', ( request, response ) => {
+	let { id } = request.params;
+	
+	User.findByPk( id )
+		.then( user => {
+			if ( !user ) {
+				return response.sendStatus( 404 );
+			}
+			
+			response.status( 200 ).send( user );
+		} )
+		.catch( error => response.status( 400 ).send( error ) );
+} );
 
 /* =================================================================================
 * 		[ Eliminación de un usuario ]
@@ -51,7 +68,7 @@ server.delete( '/:id', ( request, response ) => {
 			}
 			
 			user.destroy( )
-				.then( ( ) => res.sendStatus( 200 ) );
+				.then( () => response.status( 200 ).send("Eliminado") );
 		} );
 } );
 
@@ -68,7 +85,14 @@ server.put( '/:id', ( request, response ) => {
 				return response.sendStatus( 404 );
 			}
 			
-			return user.update( { ...request.body } );
+			return user.update( { ...request.body } )
+			.then(user => response.status(200).send(user))
 		} )
 		.catch( error => response.status( 400 ).send( error ) );
 } );
+
+/* =================================================================================
+* 		[ Exportamos nuestras rutas ]
+* ================================================================================= */
+
+module.exports = server;
