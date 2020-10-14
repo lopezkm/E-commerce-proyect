@@ -284,55 +284,64 @@ const Media = [
 		type: 'portrait',
 		path: 'uploads/f832b2d6bfd7354555b62010e4b0787b.jpg',
 		width: 640,
-		height: 854
+		height: 854,
+		productId: 1
 	},
 	{
 		type: 'video-small',
 		path: 'uploads/d1cfd667d87bf42fee7b4730d89f6d98.webm',
 		width: 854,
-		height: 480
+		height: 480,
+		productId: 1
 	},
 	{
 		type: 'video-big',
 		path: 'uploads/639c2caa8bbe737878bfc9db070da818.webm',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 1
 	},
 	{
 		type: 'image-small',
 		path: 'uploads/c5440ed31702154a7581fb17b7b34da0.jpg',
 		width: 600,
-		height: 337
+		height: 337,
+		productId: 1
 	},
 	{
 		type: 'image-big',
 		path: 'uploads/d1f35615d213806cc79d52379f8a7fbc.jpg',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 1
 	},
 	{
 		type: 'image-small',
 		path: 'uploads/15b82a76c3726338a835ae4bc4188fd1.jpg',
 		width: 600,
-		height: 337
+		height: 337,
+		productId: 1
 	},
 	{
 		type: 'image-big',
 		path: 'uploads/1e22e5af17b0c476152b280b44065a8c.jpg',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 1
 	},
 	{
 		type: 'image-small',
 		path: 'uploads/6bcdc44c8d6099bd583cc077255f17a7.jpg',
 		width: 600,
-		height: 337
+		height: 337,
+		productId: 1
 	},
 	{
 		type: 'image-big',
 		path: 'uploads/a9984673292011dc3450053978e95962.jpg',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 1
 	},
 	
 	/*
@@ -342,55 +351,64 @@ const Media = [
 		type: 'portrait',
 		path: 'uploads/ffbe1264e47c9394329351da2e231b8e.jpg',
 		width: 640,
-		height: 854
+		height: 854,
+		productId: 2
 	},
 	{
 		type: 'video-small',
 		path: 'uploads/0cb83aec3fb2b6a9396b536c49706112.webm',
 		width: 854,
-		height: 480
+		height: 480,
+		productId: 2
 	},
 	{
 		type: 'video-big',
 		path: 'uploads/70dc3412744db60ea3a2b0e8bfe6707f.webm',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 2
 	},
 	{
 		type: 'image-small',
 		path: 'uploads/e6607a77bb69b924a09042cdd732b232.jpg',
 		width: 600,
-		height: 337
+		height: 337,
+		productId: 2
 	},
 	{
 		type: 'image-big',
 		path: 'uploads/58ad1b7789a2f8fab0084ad6cef6b2f7.jpg',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 2
 	},
 	{
 		type: 'image-small',
 		path: 'uploads/9f08eb141d0bd3fbc95335cb096263ec.jpg',
 		width: 600,
-		height: 337
+		height: 337,
+		productId: 2
 	},
 	{
 		type: 'image-big',
 		path: 'uploads/5aed1da19d25b757411a1958c7843d81.jpg',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 2
 	},
 	{
 		type: 'image-small',
 		path: 'uploads/f73d8372d6dd3bf710b3d0a97f5860fe.jpg',
 		width: 600,
-		height: 337
+		height: 337,
+		productId: 2
 	},
 	{
 		type: 'image-big',
 		path: 'uploads/30f0e8ae45453591b5382e63fb981b83.jpg',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 2
 	},
 	
 	/*
@@ -400,55 +418,64 @@ const Media = [
 		type: 'portrait',
 		path: 'uploads/ab9db99a6fd0856e014085625390fdcc.jpg',
 		width: 640,
-		height: 854
+		height: 854,
+		productId: 3
 	},
 	{
 		type: 'video-small',
 		path: 'uploads/1095e6749093597871d5ae11998cf3d8.webm',
 		width: 854,
-		height: 480
+		height: 480,
+		productId: 3
 	},
 	{
 		type: 'video-big',
 		path: 'uploads/e08cbd0f8a5f4ac3c54a506c7e519d63.webm',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 3
 	},
 	{
 		type: 'image-small',
 		path: 'uploads/814f6d07be2e356b069f28fc8680b423.jpg',
 		width: 600,
-		height: 337
+		height: 337,
+		productId: 3
 	},
 	{
 		type: 'image-big',
 		path: 'uploads/2d92c6a0949c901e49e625f8365ecda5.jpg',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 3
 	},
 	{
 		type: 'image-small',
 		path: 'uploads/dda8cec12f49b21e8373ade0b8f57172.jpg',
 		width: 600,
-		height: 337
+		height: 337,
+		productId: 3
 	},
 	{
 		type: 'image-big',
 		path: 'uploads/029dc3fa0b98cad55ab2a9bc36be5c0a.jpg',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 3
 	},
 	{
 		type: 'image-small',
 		path: 'uploads/9a901226cd38853227d5a3fae4cadfd7.jpg',
 		width: 600,
-		height: 337
+		height: 337,
+		productId: 3
 	},
 	{
 		type: 'image-big',
 		path: 'uploads/904ff520dfdf821ba0d03687f136538f.jpg',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 3
 	},
 	
 	/*
@@ -458,55 +485,64 @@ const Media = [
 		type: 'portrait',
 		path: 'uploads/e5c1f922c2d178d5944b565b5eface8c.jpg',
 		width: 640,
-		height: 854
+		height: 854,
+		productId: 4
 	},
 	{
 		type: 'video-small',
 		path: 'uploads/6d9d402e29a2f5bc005df7ee41ecdb05.webm',
 		width: 854,
-		height: 480
+		height: 480,
+		productId: 4
 	},
 	{
 		type: 'video-big',
 		path: 'uploads/6ca38ddf8de0ad86c6354b728ed9a4c7.webm',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 4
 	},
 	{
 		type: 'image-small',
 		path: 'uploads/4c0cda85f977a57631c40b39f85bcfe4.jpg',
 		width: 600,
-		height: 337
+		height: 337,
+		productId: 4
 	},
 	{
 		type: 'image-big',
 		path: 'uploads/238af00d1c6e5e16dd6245ab32a32f8d.jpg',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 4
 	},
 	{
 		type: 'image-small',
 		path: 'uploads/820c7724a3065b8bf8ba3d271bfe4fd0.jpg',
 		width: 600,
-		height: 337
+		height: 337,
+		productId: 4
 	},
 	{
 		type: 'image-big',
 		path: 'uploads/396c8d817fabf639bb460b2eec4dfc4c.jpg',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 4
 	},
 	{
 		type: 'image-small',
 		path: 'uploads/bbd376bce98ed8a869a36644cf32ffd3.jpg',
 		width: 600,
-		height: 337
+		height: 337,
+		productId: 4
 	},
 	{
 		type: 'image-big',
 		path: 'uploads/04d180c08830ff5bd8caf96628504509.jpg',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 4
 	},
 	
 	/*
@@ -516,55 +552,64 @@ const Media = [
 		type: 'portrait',
 		path: 'uploads/9923b4996ba244750ca9f59c55636b96.jpg',
 		width: 640,
-		height: 854
+		height: 854,
+		productId: 5
 	},
 	{
 		type: 'video-small',
 		path: 'uploads/7626f0aa452ccd50da1a1f06c9f8aac9.webm',
 		width: 854,
-		height: 480
+		height: 480,
+		productId: 5
 	},
 	{
 		type: 'video-big',
 		path: 'uploads/7ff1273b600f86ead1da51d04960147f.webm',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 5
 	},
 	{
 		type: 'image-small',
 		path: 'uploads/37175cca0e3ae1ec809351e151ab7f39.jpg',
 		width: 600,
-		height: 337
+		height: 337,
+		productId: 5
 	},
 	{
 		type: 'image-big',
 		path: 'uploads/b6a10c6fdfc9fac7d4ee6b9b3bfa2f51.jpg',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 5
 	},
 	{
 		type: 'image-small',
 		path: 'uploads/f3ca5f8c236366a6d4f9551ffcc3cba2.jpg',
 		width: 600,
-		height: 337
+		height: 337,
+		productId: 5
 	},
 	{
 		type: 'image-big',
 		path: 'uploads/8e2500672051821c1ba019f77ef223ab.jpg',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 5
 	},
 	{
 		type: 'image-small',
 		path: 'uploads/35364f2f971dc81cc8df72c7ec0393fd.jpg',
 		width: 600,
-		height: 337
+		height: 337,
+		productId: 5
 	},
 	{
 		type: 'image-big',
 		path: 'uploads/0e8c1bd759f21b0ece10fa2dda985e5f.jpg',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 5
 	},
 	
 	/*
@@ -574,55 +619,64 @@ const Media = [
 		type: 'portrait',
 		path: 'uploads/ce374fa7e4a70ffefa319b5191061c4d.jpg',
 		width: 640,
-		height: 854
+		height: 854,
+		productId: 6
 	},
 	{
 		type: 'video-small',
 		path: 'uploads/8d0db2590cf849f7c68ec997d0ad815a.webm',
 		width: 854,
-		height: 480
+		height: 480,
+		productId: 6
 	},
 	{
 		type: 'video-big',
 		path: 'uploads/424937271770bc4e3702e41667307052.webm',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 6
 	},
 	{
 		type: 'image-small',
 		path: 'uploads/431047b1de56abafce7cb29e4fd6a53a.jpg',
 		width: 600,
-		height: 337
+		height: 337,
+		productId: 6
 	},
 	{
 		type: 'image-big',
 		path: 'uploads/68dce62c9d653294d32a383ba90a6ce7.jpg',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 6
 	},
 	{
 		type: 'image-small',
 		path: 'uploads/bebac5de245f7711f6d7b5331930fadf.jpg',
 		width: 600,
-		height: 337
+		height: 337,
+		productId: 6
 	},
 	{
 		type: 'image-big',
 		path: 'uploads/7018e94be5affd6cb7a04fcba23f06d6.jpg',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 6
 	},
 	{
 		type: 'image-small',
 		path: 'uploads/c030b99c6b819a2eb8263ef4cd0df9e7.jpg',
 		width: 600,
-		height: 337
+		height: 337,
+		productId: 6
 	},
 	{
 		type: 'image-big',
 		path: 'uploads/6ba9036a9463927903d12c4732ee4dd4.jpg',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 6
 	},
 	
 	/*
@@ -632,55 +686,64 @@ const Media = [
 		type: 'portrait',
 		path: 'uploads/7256ce583f288a1f6c93243f335e0a41.jpg',
 		width: 640,
-		height: 854
+		height: 854,
+		productId: 7
 	},
 	{
 		type: 'video-small',
 		path: 'uploads/effd0b7f4f2f58556353a218a4c4c359.webm',
 		width: 854,
-		height: 480
+		height: 480,
+		productId: 7
 	},
 	{
 		type: 'video-big',
 		path: 'uploads/f52f3d49f85243b87c369cc281997bf4.webm',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 7
 	},
 	{
 		type: 'image-small',
 		path: 'uploads/885b1ce7af3a03865d4dc2e2e149db32.jpg',
 		width: 600,
-		height: 337
+		height: 337,
+		productId: 7
 	},
 	{
 		type: 'image-big',
 		path: 'uploads/6288d52c21248bbae150075f07e76b10.jpg',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 7
 	},
 	{
 		type: 'image-small',
 		path: 'uploads/4ab4bd388deff744b48ae0e99dbf4404.jpg',
 		width: 600,
-		height: 337
+		height: 337,
+		productId: 7
 	},
 	{
 		type: 'image-big',
 		path: 'uploads/558b01ab255eef3d600faafb4c74a9ce.jpg',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 7
 	},
 	{
 		type: 'image-small',
 		path: 'uploads/a9e6f7081e103a22a3a5e5e062a9f225.jpg',
 		width: 600,
-		height: 337
+		height: 337,
+		productId: 7
 	},
 	{
 		type: 'image-big',
 		path: 'uploads/63214b2b114edadc128dfd3ff0344ce8.jpg',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 7
 	},
 	
 	/*
@@ -690,55 +753,64 @@ const Media = [
 		type: 'portrait',
 		path: 'uploads/3ddadeafa9c1039258d433e6a002da5b.jpg',
 		width: 640,
-		height: 854
+		height: 854,
+		productId: 8
 	},
 	{
 		type: 'video-small',
 		path: 'uploads/dfb5607e17272e43718dc2958bfe52b0.webm',
 		width: 854,
-		height: 480
+		height: 480,
+		productId: 8
 	},
 	{
 		type: 'video-big',
 		path: 'uploads/4f0f6fa23e50342fbd1c234063020dc4.webm',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 8
 	},
 	{
 		type: 'image-small',
 		path: 'uploads/c616cb657f386dc9c32f6790b43e809c.jpg',
 		width: 600,
-		height: 337
+		height: 337,
+		productId: 8
 	},
 	{
 		type: 'image-big',
 		path: 'uploads/40c7f1c1972eaaee521f034207821acb.jpg',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 8
 	},
 	{
 		type: 'image-small',
 		path: 'uploads/57baee5110b93622a79461c436f180f3.jpg',
 		width: 600,
-		height: 337
+		height: 337,
+		productId: 8
 	},
 	{
 		type: 'image-big',
 		path: 'uploads/1290aa3001822f4d5eec43c6174ff8d9.jpg',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 8
 	},
 	{
 		type: 'image-small',
 		path: 'uploads/21dfd3b3861b8191e520d200f5062749.jpg',
 		width: 600,
-		height: 337
+		height: 337,
+		productId: 8
 	},
 	{
 		type: 'image-big',
 		path: 'uploads/60ba3a7b364399caf1869ff3b2e1c480.jpg',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 8
 	},
 	
 	/*
@@ -748,55 +820,64 @@ const Media = [
 		type: 'portrait',
 		path: 'uploads/7880768f979175387a112033a823390c.jpg',
 		width: 640,
-		height: 854
+		height: 854,
+		productId: 9
 	},
 	{
 		type: 'video-small',
 		path: 'uploads/21a6716a8ad70db714ddcc0128e8edad.webm',
 		width: 854,
-		height: 480
+		height: 480,
+		productId: 9
 	},
 	{
 		type: 'video-big',
 		path: 'uploads/e7fbdddce76909cc757e57310043d60c.webm',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 9
 	},
 	{
 		type: 'image-small',
 		path: 'uploads/87fa46a1e6f96171f1509df65745997d.jpg',
 		width: 600,
-		height: 337
+		height: 337,
+		productId: 9
 	},
 	{
 		type: 'image-big',
 		path: 'uploads/abbdadfd8dd3df63bdf6451eb0db129a.jpg',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 9
 	},
 	{
 		type: 'image-small',
 		path: 'uploads/c5cbaa8914ae248a93a4f965de9795ee.jpg',
 		width: 600,
-		height: 337
+		height: 337,
+		productId: 9
 	},
 	{
 		type: 'image-big',
 		path: 'uploads/cb3b6ba704dbc498dbbc6090992b2e67.jpg',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 9
 	},
 	{
 		type: 'image-small',
 		path: 'uploads/cee21e66555595213f7816ef8b161882.jpg',
 		width: 600,
-		height: 337
+		height: 337,
+		productId: 9
 	},
 	{
 		type: 'image-big',
 		path: 'uploads/228362402849bc383cb38e59b8c037e1.jpg',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 9
 	},
 	
 	/*
@@ -806,55 +887,64 @@ const Media = [
 		type: 'portrait',
 		path: 'uploads/7b164533304af1adc854dd16a45a9fd7.jpg',
 		width: 640,
-		height: 854
+		height: 854,
+		productId: 10
 	},
 	{
 		type: 'video-small',
 		path: 'uploads/1199d289827b6ad236162f4e94127600.webm',
 		width: 854,
-		height: 480
+		height: 480,
+		productId: 10
 	},
 	{
 		type: 'video-big',
 		path: 'uploads/b81d01ba47b9896e2a871726af83a5e6.webm',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 10
 	},
 	{
 		type: 'image-small',
 		path: 'uploads/7dcb40c2415c428c94ccb56b754d0fbf.jpg',
 		width: 600,
-		height: 337
+		height: 337,
+		productId: 10
 	},
 	{
 		type: 'image-big',
 		path: 'uploads/0ad3136d8385151fbf2b104d0391dfea.jpg',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 10
 	},
 	{
 		type: 'image-small',
 		path: 'uploads/afe36dc1fb22c2043f98894d98d9c4e7.jpg',
 		width: 600,
-		height: 337
+		height: 337,
+		productId: 10
 	},
 	{
 		type: 'image-big',
 		path: 'uploads/efdb2e7753e53bde9a64b1af32b1fef4.jpg',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 10
 	},
 	{
 		type: 'image-small',
 		path: 'uploads/cc17b679a8dcdbf96004e04cfada1b0b.jpg',
 		width: 600,
-		height: 337
+		height: 337,
+		productId: 10
 	},
 	{
 		type: 'image-big',
 		path: 'uploads/3c1bfb3fe3f402753e4defe8dd916df5.jpg',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 10
 	},
 	
 	/*
@@ -864,55 +954,64 @@ const Media = [
 		type: 'portrait',
 		path: 'uploads/5c52644cb29cbdb0eddd859813d7c201.jpg',
 		width: 640,
-		height: 854
+		height: 854,
+		productId: 11
 	},
 	{
 		type: 'video-small',
 		path: 'uploads/2f1847e2004d202b6638bee865caa8a6.webm',
 		width: 854,
-		height: 480
+		height: 480,
+		productId: 11
 	},
 	{
 		type: 'video-big',
 		path: 'uploads/cccd5c0ddc6fc8518341f65f31139a09.webm',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 11
 	},
 	{
 		type: 'image-small',
 		path: 'uploads/5528d11b5ea819579fc1acaef47f037e.jpg',
 		width: 600,
-		height: 337
+		height: 337,
+		productId: 11
 	},
 	{
 		type: 'image-big',
 		path: 'uploads/698eb95f085e94bf55299cfe6005e788.jpg',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 11
 	},
 	{
 		type: 'image-small',
 		path: 'uploads/9a9b7bfb824559412bd3c25f012bc9bb.jpg',
 		width: 600,
-		height: 337
+		height: 337,
+		productId: 11
 	},
 	{
 		type: 'image-big',
 		path: 'uploads/b4f0901059186c736b6bdc0657f312cc.jpg',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 11
 	},
 	{
 		type: 'image-small',
 		path: 'uploads/ff349653d06e8fb0207613a25da9d0b8.jpg',
 		width: 600,
-		height: 337
+		height: 337,
+		productId: 11
 	},
 	{
 		type: 'image-big',
 		path: 'uploads/6f8e355eca4d00697a233d182d49fd1e.jpg',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 11
 	},
 	
 	/*
@@ -922,55 +1021,64 @@ const Media = [
 		type: 'portrait',
 		path: 'uploads/b4fb3cbf73cfca3a112c80f6ca688fe1.jpg',
 		width: 640,
-		height: 854
+		height: 854,
+		productId: 12
 	},
 	{
 		type: 'video-small',
 		path: 'uploads/38563a68caffd93e1c7bf238733b7885.webm',
 		width: 854,
-		height: 480
+		height: 480,
+		productId: 12
 	},
 	{
 		type: 'video-big',
 		path: 'uploads/42b6ff46a509ac8148985871da9f720d.webm',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 12
 	},
 	{
 		type: 'image-small',
 		path: 'uploads/f459884a74d9bc58a7131c1ec12d702c.jpg',
 		width: 600,
-		height: 337
+		height: 337,
+		productId: 12
 	},
 	{
 		type: 'image-big',
 		path: 'uploads/5521490b40e99b23d94affbe35a2d75c.jpg',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 12
 	},
 	{
 		type: 'image-small',
 		path: 'uploads/94461a85b3d6402e556f3a12461eee0d.jpg',
 		width: 600,
-		height: 337
+		height: 337,
+		productId: 12
 	},
 	{
 		type: 'image-big',
 		path: 'uploads/0b25864597229e4a452e07cd3f6f4712.jpg',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 12
 	},
 	{
 		type: 'image-small',
 		path: 'uploads/be56538c77b5ae952eb92868a5710d33.jpg',
 		width: 600,
-		height: 337
+		height: 337,
+		productId: 12
 	},
 	{
 		type: 'image-big',
 		path: 'uploads/76c534da821d09d7452a1c922b93e3e0.jpg',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 12
 	},
 	
 	/*
@@ -980,55 +1088,64 @@ const Media = [
 		type: 'portrait',
 		path: 'uploads/2b0d72d57a1953c969d805a0428f8f7d.jpg',
 		width: 640,
-		height: 854
+		height: 854,
+		productId: 13
 	},
 	{
 		type: 'video-small',
 		path: 'uploads/ee86f154f4864e2545db61b233e070c7.webm',
 		width: 854,
-		height: 480
+		height: 480,
+		productId: 13
 	},
 	{
 		type: 'video-big',
 		path: 'uploads/08f0fcd2eeb74a7cbba26db7171308e9.webm',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 13
 	},
 	{
 		type: 'image-small',
 		path: 'uploads/3388d7c3de75c773c5db00f71f755755.jpg',
 		width: 600,
-		height: 337
+		height: 337,
+		productId: 13
 	},
 	{
 		type: 'image-big',
 		path: 'uploads/f6bad21ec941beffe34f64afd775c4fb.jpg',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 13
 	},
 	{
 		type: 'image-small',
 		path: 'uploads/8c8093c8c7609b9cd594f661b360b4ff.jpg',
 		width: 600,
-		height: 337
+		height: 337,
+		productId: 13
 	},
 	{
 		type: 'image-big',
 		path: 'uploads/f00362e59cd4b45a58fb35661f79dd15.jpg',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 13
 	},
 	{
 		type: 'image-small',
 		path: 'uploads/5344ed77966070aecee489f9d00f9cee.jpg',
 		width: 600,
-		height: 337
+		height: 337,
+		productId: 13
 	},
 	{
 		type: 'image-big',
 		path: 'uploads/b0ec745753213d41ff145eb7d8cda5ca.jpg',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 13
 	},
 	
 	/*
@@ -1038,55 +1155,64 @@ const Media = [
 		type: 'portrait',
 		path: 'uploads/e33f1e6c7b7c490515d00b806485096c.jpg',
 		width: 640,
-		height: 854
+		height: 854,
+		productId: 14
 	},
 	{
 		type: 'video-small',
 		path: 'uploads/787f5e11d469706592786c372fec71e5.webm',
 		width: 854,
-		height: 480
+		height: 480,
+		productId: 14
 	},
 	{
 		type: 'video-big',
 		path: 'uploads/7e8af0d5d9e4ef022962141ae3105752.webm',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 14
 	},
 	{
 		type: 'image-small',
 		path: 'uploads/621f50971fd089f21e3e0321da97653c.jpg',
 		width: 600,
-		height: 337
+		height: 337,
+		productId: 14
 	},
 	{
 		type: 'image-big',
 		path: 'uploads/388cf828538a647847c563a8bcc988f9.jpg',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 14
 	},
 	{
 		type: 'image-small',
 		path: 'uploads/2173551f9b0f308ba3e5a9e83a5f2898.jpg',
 		width: 600,
-		height: 337
+		height: 337,
+		productId: 14
 	},
 	{
 		type: 'image-big',
 		path: 'uploads/b9dbbce7bce1b50f081f0dad9477ee64.jpg',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 14
 	},
 	{
 		type: 'image-small',
 		path: 'uploads/c4b5542594d20f2e1596317fbae7d7d9.jpg',
 		width: 600,
-		height: 337
+		height: 337,
+		productId: 14
 	},
 	{
 		type: 'image-big',
 		path: 'uploads/49fb5559879f22c707a7c490f8930f0a.jpg',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 14
 	},
 	
 	/*
@@ -1096,55 +1222,64 @@ const Media = [
 		type: 'portrait',
 		path: 'uploads/4cd37878ad29391b9bb8282685813841.jpg',
 		width: 640,
-		height: 854
+		height: 854,
+		productId: 15
 	},
 	{
 		type: 'video-small',
 		path: 'uploads/50064dedb531ad5541ae34d56a211b11.webm',
 		width: 854,
-		height: 480
+		height: 480,
+		productId: 15
 	},
 	{
 		type: 'video-big',
 		path: 'uploads/309b36ff538ce8faee863985ff349597.webm',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 15
 	},
 	{
 		type: 'image-small',
 		path: 'uploads/fda04155c109dd145440f72e998ce1a4.jpg',
 		width: 600,
-		height: 337
+		height: 337,
+		productId: 15
 	},
 	{
 		type: 'image-big',
 		path: 'uploads/4e30eb6644554b8b56e36ae9037c9262.jpg',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 15
 	},
 	{
 		type: 'image-small',
 		path: 'uploads/0645bffa52272ca8fe70c4cc36f214d7.jpg',
 		width: 600,
-		height: 337
+		height: 337,
+		productId: 15
 	},
 	{
 		type: 'image-big',
 		path: 'uploads/5d4493f382ce111504f80842497da31e.jpg',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 15
 	},
 	{
 		type: 'image-small',
 		path: 'uploads/7fd61ebd4dfc5cd1f2feaddfaea2d33c.jpg',
 		width: 600,
-		height: 337
+		height: 337,
+		productId: 15
 	},
 	{
 		type: 'image-big',
 		path: 'uploads/70328664021056555dca804aca73d1fa.jpg',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 15
 	},
 	
 	/*
@@ -1154,55 +1289,64 @@ const Media = [
 		type: 'portrait',
 		path: 'uploads/87ea08689e145db9bdd3a8137bb244d1.jpg',
 		width: 640,
-		height: 854
+		height: 854,
+		productId: 16
 	},
 	{
 		type: 'video-small',
 		path: 'uploads/e7af0b6a5e98d6a10bd25cf3c2e9a22a.webm',
 		width: 854,
-		height: 480
+		height: 480,
+		productId: 16
 	},
 	{
 		type: 'video-big',
 		path: 'uploads/685fb0186acde387be7769afde8195dc.webm',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 16
 	},
 	{
 		type: 'image-small',
 		path: 'uploads/95fd588af3f9fb40e93cdee1f2b46d95.jpg',
 		width: 600,
-		height: 337
+		height: 337,
+		productId: 16
 	},
 	{
 		type: 'image-big',
 		path: 'uploads/6fd1e6cf7588166357b50cb97fc7ca3d.jpg',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 16
 	},
 	{
 		type: 'image-small',
 		path: 'uploads/9700387e61280b1e261aa41758771b9f.jpg',
 		width: 600,
-		height: 337
+		height: 337,
+		productId: 16
 	},
 	{
 		type: 'image-big',
 		path: 'uploads/2ecb82c2741b5482131c5ecc6ee2fb2e.jpg',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 16
 	},
 	{
 		type: 'image-small',
 		path: 'uploads/aacd635d07cde5185ac84eec8cea3ee9.jpg',
 		width: 600,
-		height: 337
+		height: 337,
+		productId: 16
 	},
 	{
 		type: 'image-big',
 		path: 'uploads/d06273f6afab732acf8d6c87c5695336.jpg',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 16
 	},
 	
 	/*
@@ -1212,55 +1356,64 @@ const Media = [
 		type: 'portrait',
 		path: 'uploads/61f408acd05de5de8d96742d85a913b0.jpg',
 		width: 640,
-		height: 854
+		height: 854,
+		productId: 17
 	},
 	{
 		type: 'video-small',
 		path: 'uploads/e6e6541e7a57284af79faf07ca78b292.webm',
 		width: 854,
-		height: 480
+		height: 480,
+		productId: 17
 	},
 	{
 		type: 'video-big',
 		path: 'uploads/53e048c1f6ca1046715047f342c19de4.webm',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 17
 	},
 	{
 		type: 'image-small',
 		path: 'uploads/32e3332aa82a5be0561339be6db3e563.jpg',
 		width: 600,
-		height: 337
+		height: 337,
+		productId: 17
 	},
 	{
 		type: 'image-big',
 		path: 'uploads/d8e5a560359545d73c36842997a5156a.jpg',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 17
 	},
 	{
 		type: 'image-small',
 		path: 'uploads/23611a6468af4707488532edb8a0e48f.jpg',
 		width: 600,
-		height: 337
+		height: 337,
+		productId: 17
 	},
 	{
 		type: 'image-big',
 		path: 'uploads/81265c8e90a82d40da8e660c8ee21d3c.jpg',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 17
 	},
 	{
 		type: 'image-small',
 		path: 'uploads/88bffee1b42f1f9ae9c4d6829adeb029.jpg',
 		width: 600,
-		height: 337
+		height: 337,
+		productId: 17
 	},
 	{
 		type: 'image-big',
 		path: 'uploads/7d825cbc0c223c35568f1484c7692533.jpg',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 17
 	},
 	
 	/*
@@ -1270,55 +1423,64 @@ const Media = [
 		type: 'portrait',
 		path: 'uploads/0fbe417ccd16f432197742af8520fa63.jpg',
 		width: 640,
-		height: 854
+		height: 854,
+		productId: 18
 	},
 	{
 		type: 'video-small',
 		path: 'uploads/7ab58fd373348e6cc4b5944b69247d68.webm',
 		width: 854,
-		height: 480
+		height: 480,
+		productId: 18
 	},
 	{
 		type: 'video-big',
 		path: 'uploads/0d78c30c13307775df6b722c906e89f2.webm',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 18
 	},
 	{
 		type: 'image-small',
 		path: 'uploads/37a83cf80cb5b1006eab5be5766b7ee5.jpg',
 		width: 600,
-		height: 337
+		height: 337,
+		productId: 18
 	},
 	{
 		type: 'image-big',
 		path: 'uploads/124eee0fc5e00ee30341f48c5bb04412.jpg',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 18
 	},
 	{
 		type: 'image-small',
 		path: 'uploads/f4bfb591236c77d33dc075796df72b32.jpg',
 		width: 600,
-		height: 337
+		height: 337,
+		productId: 18
 	},
 	{
 		type: 'image-big',
 		path: 'uploads/7202bc0cb7066323f7e613e10e399ba9.jpg',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 18
 	},
 	{
 		type: 'image-small',
 		path: 'uploads/9f766fbe8b0706669edb2fb37e8d51cf.jpg',
 		width: 600,
-		height: 337
+		height: 337,
+		productId: 18
 	},
 	{
 		type: 'image-big',
 		path: 'uploads/e2c1d5a49a7e555df2394680421237c3.jpg',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 18
 	},
 	
 	/*
@@ -1328,55 +1490,64 @@ const Media = [
 		type: 'portrait',
 		path: 'uploads/759c03c3d347b31c273cbed4e5d62016.jpg',
 		width: 640,
-		height: 854
+		height: 854,
+		productId: 19
 	},
 	{
 		type: 'video-small',
 		path: 'uploads/f107f6fd33a2b15129f127e8d7af4801.webm',
 		width: 854,
-		height: 480
+		height: 480,
+		productId: 19
 	},
 	{
 		type: 'video-big',
 		path: 'uploads/7b8a3b7c9c544ebb43c4779ffe6f0231.webm',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 19
 	},
 	{
 		type: 'image-small',
 		path: 'uploads/b1cac7cd33d0f2d89f0cdd9ec93f5a9f.jpg',
 		width: 600,
-		height: 337
+		height: 337,
+		productId: 19
 	},
 	{
 		type: 'image-big',
 		path: 'uploads/e3b375b90f051518510b25b159ebbe28.jpg',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 19
 	},
 	{
 		type: 'image-small',
 		path: 'uploads/9ca8b9736893eaa6ee7329c3931d5dd3.jpg',
 		width: 600,
-		height: 337
+		height: 337,
+		productId: 19
 	},
 	{
 		type: 'image-big',
 		path: 'uploads/29664349afd7450640c4b0735282b7e5.jpg',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 19
 	},
 	{
 		type: 'image-small',
 		path: 'uploads/f15ae68baf6e17f24399bdc17557b961.jpg',
 		width: 600,
-		height: 337
+		height: 337,
+		productId: 19
 	},
 	{
 		type: 'image-big',
 		path: 'uploads/8500ee33a84041d52ad1f19b4dd2d5cd.jpg',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 19
 	},
 	
 	/*
@@ -1386,56 +1557,65 @@ const Media = [
 		type: 'portrait',
 		path: 'uploads/a67b235fb86d870b5062f655b5b6f343.jpg',
 		width: 640,
-		height: 854
+		height: 854,
+		productId: 20
 	},
 	{
 		type: 'video-small',
 		path: 'uploads/592b30a2cfbc451f601242f4eb1aa777.webm',
 		width: 854,
-		height: 480
+		height: 480,
+		productId: 20
 	},
 	{
 		type: 'video-big',
 		path: 'uploads/54740822e824a52d7544c7818b959705.webm',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 20
 	},
 	{
 		type: 'image-small',
 		path: 'uploads/a7156947618bff10bd68d72680013394.jpg',
 		width: 600,
-		height: 337
+		height: 337,
+		productId: 20
 	},
 	{
 		type: 'image-big',
 		path: 'uploads/e2c599047a18ccc11db370c6ad0615db.jpg',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 20
 	},
 	{
 		type: 'image-small',
 		path: 'uploads/71755b0b1adfc01f718e89df0f9eff66.jpg',
 		width: 600,
-		height: 337
+		height: 337,
+		productId: 20
 	},
 	{
 		type: 'image-big',
 		path: 'uploads/ab689e6039d0213f4ab45e15c14764c0.jpg',
 		width: 1920,
-		height: 1080
+		height: 1080,
+		productId: 20
 	},
 	{
 		type: 'image-small',
 		path: 'uploads/a058c1d43e86929a6e2a732b0ce67531.jpg',
 		width: 600,
-		height: 337
+		height: 337,
+		productId: 20
 	},
 	{
 		type: 'image-big',
 		path: 'uploads/5484a53f800d383decc36e8318b5843b.jpg',
 		width: 1920,
-		height: 1080
-	},
+		height: 1080,
+		productId: 20
+	}
 ];
 
 /* =================================================================================
@@ -2017,812 +2197,6 @@ const ProductCategory = [
 ];
 
 /* =================================================================================
-* 		[ Creación de relaciones entre Productos y Media ]
-* ================================================================================= */
-
-const ProductMedia = [
-	/*
-		I Am Dead
-	*/
-	{
-		productId: 1,
-		mediaId: 1
-	},
-	{
-		productId: 1,
-		mediaId: 2
-	},
-	{
-		productId: 1,
-		mediaId: 3
-	},
-	{
-		productId: 1,
-		mediaId: 4
-	},
-	{
-		productId: 1,
-		mediaId: 5
-	},
-	{
-		productId: 1,
-		mediaId: 6
-	},
-	{
-		productId: 1,
-		mediaId: 7
-	},
-	{
-		productId: 1,
-		mediaId: 8
-	},
-	{
-		productId: 1,
-		mediaId: 9
-	},
-
-	/*
-		MAFIA
-	*/
-	{
-		productId: 2,
-		mediaId: 10
-	},
-	{
-		productId: 2,
-		mediaId: 11
-	},
-	{
-		productId: 2,
-		mediaId: 12
-	},
-	{
-		productId: 2,
-		mediaId: 13
-	},
-	{
-		productId: 2,
-		mediaId: 14
-	},
-	{
-		productId: 2,
-		mediaId: 15
-	},
-	{
-		productId: 2,
-		mediaId: 16
-	},
-	{
-		productId: 2,
-		mediaId: 17
-	},
-	{
-		productId: 2,
-		mediaId: 18
-	},
-
-	/*
-		Rocket League
-	*/
-	{
-		productId: 3,
-		mediaId: 19
-	},
-	{
-		productId: 3,
-		mediaId: 20
-	},
-	{
-		productId: 3,
-		mediaId: 21
-	},
-	{
-		productId: 3,
-		mediaId: 22
-	},
-	{
-		productId: 3,
-		mediaId: 23
-	},
-	{
-		productId: 3,
-		mediaId: 24
-	},
-	{
-		productId: 3,
-		mediaId: 25
-	},
-	{
-		productId: 3,
-		mediaId: 26
-	},
-	{
-		productId: 3,
-		mediaId: 27
-	},
-
-	/*
-		PUBG
-	*/
-	{
-		productId: 4,
-		mediaId: 28
-	},
-	{
-		productId: 4,
-		mediaId: 29
-	},
-	{
-		productId: 4,
-		mediaId: 30
-	},
-	{
-		productId: 4,
-		mediaId: 31
-	},
-	{
-		productId: 4,
-		mediaId: 32
-	},
-	{
-		productId: 4,
-		mediaId: 33
-	},
-	{
-		productId: 4,
-		mediaId: 34
-	},
-	{
-		productId: 4,
-		mediaId: 35
-	},
-	{
-		productId: 4,
-		mediaId: 36
-	},
-
-	/*
-		Sea of Thieves
-	*/
-	{
-		productId: 5,
-		mediaId: 37
-	},
-	{
-		productId: 5,
-		mediaId: 38
-	},
-	{
-		productId: 5,
-		mediaId: 39
-	},
-	{
-		productId: 5,
-		mediaId: 40
-	},
-	{
-		productId: 5,
-		mediaId: 41
-	},
-	{
-		productId: 5,
-		mediaId: 42
-	},
-	{
-		productId: 5,
-		mediaId: 43
-	},
-	{
-		productId: 5,
-		mediaId: 44
-	},
-	{
-		productId: 5,
-		mediaId: 45
-	},
-
-	/*
-		Star Wars
-	*/
-	{
-		productId: 6,
-		mediaId: 46
-	},
-	{
-		productId: 6,
-		mediaId: 47
-	},
-	{
-		productId: 6,
-		mediaId: 48
-	},
-	{
-		productId: 6,
-		mediaId: 49
-	},
-	{
-		productId: 6,
-		mediaId: 50
-	},
-	{
-		productId: 6,
-		mediaId: 51
-	},
-	{
-		productId: 6,
-		mediaId: 52
-	},
-	{
-		productId: 6,
-		mediaId: 53
-	},
-	{
-		productId: 6,
-		mediaId: 54
-	},
-
-	/*
-		The Witcher III
-	*/
-	{
-		productId: 7,
-		mediaId: 55
-	},
-	{
-		productId: 7,
-		mediaId: 56
-	},
-	{
-		productId: 7,
-		mediaId: 57
-	},
-	{
-		productId: 7,
-		mediaId: 58
-	},
-	{
-		productId: 7,
-		mediaId: 59
-	},
-	{
-		productId: 7,
-		mediaId: 60
-	},
-	{
-		productId: 7,
-		mediaId: 61
-	},
-	{
-		productId: 7,
-		mediaId: 62
-	},
-	{
-		productId: 7,
-		mediaId: 63
-	},
-
-	/*
-		GTA V
-	*/
-	{
-		productId: 8,
-		mediaId: 64
-	},
-	{
-		productId: 8,
-		mediaId: 65
-	},
-	{
-		productId: 8,
-		mediaId: 66
-	},
-	{
-		productId: 8,
-		mediaId: 67
-	},
-	{
-		productId: 8,
-		mediaId: 68
-	},
-	{
-		productId: 8,
-		mediaId: 69
-	},
-	{
-		productId: 8,
-		mediaId: 70
-	},
-	{
-		productId: 8,
-		mediaId: 71
-	},
-	{
-		productId: 8,
-		mediaId: 72
-	},
-
-	/*
-		Civilization
-	*/
-	{
-		productId: 9,
-		mediaId: 73
-	},
-	{
-		productId: 9,
-		mediaId: 74
-	},
-	{
-		productId: 9,
-		mediaId: 75
-	},
-	{
-		productId: 9,
-		mediaId: 76
-	},
-	{
-		productId: 9,
-		mediaId: 77
-	},
-	{
-		productId: 9,
-		mediaId: 78
-	},
-	{
-		productId: 9,
-		mediaId: 79
-	},
-	{
-		productId: 9,
-		mediaId: 80
-	},
-	{
-		productId: 9,
-		mediaId: 81
-	},
-
-	/*
-		GRIP
-	*/
-	{
-		productId: 10,
-		mediaId: 82
-	},
-	{
-		productId: 10,
-		mediaId: 83
-	},
-	{
-		productId: 10,
-		mediaId: 84
-	},
-	{
-		productId: 10,
-		mediaId: 85
-	},
-	{
-		productId: 10,
-		mediaId: 86
-	},
-	{
-		productId: 10,
-		mediaId: 87
-	},
-	{
-		productId: 10,
-		mediaId: 88
-	},
-	{
-		productId: 10,
-		mediaId: 89
-	},
-	{
-		productId: 10,
-		mediaId: 90
-	},
-
-	/*
-		Assassins Creed
-	*/
-	{
-		productId: 11,
-		mediaId: 91
-	},
-	{
-		productId: 11,
-		mediaId: 92
-	},
-	{
-		productId: 11,
-		mediaId: 93
-	},
-	{
-		productId: 11,
-		mediaId: 94
-	},
-	{
-		productId: 11,
-		mediaId: 95
-	},
-	{
-		productId: 11,
-		mediaId: 96
-	},
-	{
-		productId: 11,
-		mediaId: 97
-	},
-	{
-		productId: 11,
-		mediaId: 98
-	},
-	{
-		productId: 11,
-		mediaId: 99
-	},
-
-	/*
-		Borderlands 2
-	*/
-	{
-		productId: 12,
-		mediaId: 100
-	},
-	{
-		productId: 12,
-		mediaId: 101
-	},
-	{
-		productId: 12,
-		mediaId: 102
-	},
-	{
-		productId: 12,
-		mediaId: 103
-	},
-	{
-		productId: 12,
-		mediaId: 104
-	},
-	{
-		productId: 12,
-		mediaId: 105
-	},
-	{
-		productId: 12,
-		mediaId: 106
-	},
-	{
-		productId: 12,
-		mediaId: 107
-	},
-	{
-		productId: 12,
-		mediaId: 108
-	},
-
-	/*
-		Primordials
-	*/
-	{
-		productId: 13,
-		mediaId: 109
-	},
-	{
-		productId: 13,
-		mediaId: 110
-	},
-	{
-		productId: 13,
-		mediaId: 111
-	},
-	{
-		productId: 13,
-		mediaId: 112
-	},
-	{
-		productId: 13,
-		mediaId: 113
-	},
-	{
-		productId: 13,
-		mediaId: 114
-	},
-	{
-		productId: 13,
-		mediaId: 115
-	},
-	{
-		productId: 13,
-		mediaId: 116
-	},
-	{
-		productId: 13,
-		mediaId: 117
-	},
-
-	/*
-		Raft
-	*/
-	{
-		productId: 14,
-		mediaId: 118
-	},
-	{
-		productId: 14,
-		mediaId: 119
-	},
-	{
-		productId: 14,
-		mediaId: 120
-	},
-	{
-		productId: 14,
-		mediaId: 121
-	},
-	{
-		productId: 14,
-		mediaId: 122
-	},
-	{
-		productId: 14,
-		mediaId: 123
-	},
-	{
-		productId: 14,
-		mediaId: 124
-	},
-	{
-		productId: 14,
-		mediaId: 125
-	},
-	{
-		productId: 14,
-		mediaId: 126
-	},
-
-	/*
-		Titanfall 2
-	*/
-	{
-		productId: 15,
-		mediaId: 127
-	},
-	{
-		productId: 15,
-		mediaId: 128
-	},
-	{
-		productId: 15,
-		mediaId: 129
-	},
-	{
-		productId: 15,
-		mediaId: 130
-	},
-	{
-		productId: 15,
-		mediaId: 131
-	},
-	{
-		productId: 15,
-		mediaId: 132
-	},
-	{
-		productId: 15,
-		mediaId: 133
-	},
-	{
-		productId: 15,
-		mediaId: 134
-	},
-	{
-		productId: 15,
-		mediaId: 135
-	},
-
-	/*
-		Fall Guys
-	*/
-	{
-		productId: 16,
-		mediaId: 136
-	},
-	{
-		productId: 16,
-		mediaId: 137
-	},
-	{
-		productId: 16,
-		mediaId: 138
-	},
-	{
-		productId: 16,
-		mediaId: 139
-	},
-	{
-		productId: 16,
-		mediaId: 140
-	},
-	{
-		productId: 16,
-		mediaId: 141
-	},
-	{
-		productId: 16,
-		mediaId: 142
-	},
-	{
-		productId: 16,
-		mediaId: 143
-	},
-	{
-		productId: 16,
-		mediaId: 144
-	},
-
-	/*
-		Phasmophobia
-	*/
-	{
-		productId: 17,
-		mediaId: 145
-	},
-	{
-		productId: 17,
-		mediaId: 146
-	},
-	{
-		productId: 17,
-		mediaId: 147
-	},
-	{
-		productId: 17,
-		mediaId: 148
-	},
-	{
-		productId: 17,
-		mediaId: 149
-	},
-	{
-		productId: 17,
-		mediaId: 150
-	},
-	{
-		productId: 17,
-		mediaId: 151
-	},
-	{
-		productId: 17,
-		mediaId: 152
-	},
-	{
-		productId: 17,
-		mediaId: 153
-	},
-
-	/*
-		Among Us
-	*/
-	{
-		productId: 18,
-		mediaId: 154
-	},
-	{
-		productId: 18,
-		mediaId: 155
-	},
-	{
-		productId: 18,
-		mediaId: 156
-	},
-	{
-		productId: 18,
-		mediaId: 157
-	},
-	{
-		productId: 18,
-		mediaId: 158
-	},
-	{
-		productId: 18,
-		mediaId: 159
-	},
-	{
-		productId: 18,
-		mediaId: 160
-	},
-	{
-		productId: 18,
-		mediaId: 161
-	},
-	{
-		productId: 18,
-		mediaId: 162
-	},
-
-	/*
-		Worms
-	*/
-	{
-		productId: 19,
-		mediaId: 163
-	},
-	{
-		productId: 19,
-		mediaId: 164
-	},
-	{
-		productId: 19,
-		mediaId: 165
-	},
-	{
-		productId: 19,
-		mediaId: 166
-	},
-	{
-		productId: 19,
-		mediaId: 167
-	},
-	{
-		productId: 19,
-		mediaId: 168
-	},
-	{
-		productId: 19,
-		mediaId: 169
-	},
-	{
-		productId: 19,
-		mediaId: 170
-	},
-	{
-		productId: 19,
-		mediaId: 171
-	},
-
-	/*
-		Rust
-	*/
-	{
-		productId: 20,
-		mediaId: 172
-	},
-	{
-		productId: 20,
-		mediaId: 173
-	},
-	{
-		productId: 20,
-		mediaId: 174
-	},
-	{
-		productId: 20,
-		mediaId: 175
-	},
-	{
-		productId: 20,
-		mediaId: 176
-	},
-	{
-		productId: 20,
-		mediaId: 177
-	},
-	{
-		productId: 20,
-		mediaId: 178
-	},
-	{
-		productId: 20,
-		mediaId: 179
-	},
-	{
-		productId: 20,
-		mediaId: 180
-	}
-];
-
-/* =================================================================================
 * 		[ Exportamos los objetos creados anteriormente ]
 * ================================================================================= */
 
@@ -2830,6 +2204,5 @@ module.exports = {
 	Product,
 	Category,
 	Media,
-	ProductCategory,
-	ProductMedia
+	ProductCategory
 };
