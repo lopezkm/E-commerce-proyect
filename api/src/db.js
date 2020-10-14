@@ -54,7 +54,7 @@ Media.belongsTo( Product );
 User.hasMany( Order );
 Order.belongsTo( User );
 
-Order.belongsToMany ( Product, { through: OrderProducts} );
+Order.hasMany ( Product, { through: OrderProducts} );
 Product.belongsToMany ( Order, { through: OrderProducts} );
 
 /* =================================================================================
