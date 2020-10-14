@@ -5,6 +5,7 @@ function ProductCard({ name, price, media, developer, stock }) {
 	const getProductPrice = () => {
 		return price.toLocaleString('es-ES', { minimumFractionDigits: 2 });
 	}
+
 	if (stock > 0) {
 		return (
 

@@ -78,6 +78,7 @@ function Catalogue( )
 												price={ p.price }
 												developer={ p.developer }
 												media={ p.portrait }
+												stock={p.stock}
 											/>
 										</Link>
 									</Col>
