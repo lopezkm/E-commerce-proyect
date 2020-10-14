@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Row, Col} from 'react-bootstrap';
 import axios from 'axios';
 import NavAdmin from '../NavAdmin/nav_admin.jsx'
 
@@ -76,17 +76,48 @@ const FormAdminCreate = () => {
             {/* Formulario para modificar o crear el producto */}
             <Form noValidate validated={validated} onSubmit={(event) => handleSubmit(event)} className='formAdmin-container'>
                 <Form.Group controlId="formBasicEmail" bsPrefix="formAdmin-group">
-                    <Form.Group>
-                        <Form.Control type="text"
-                            required="true"
-                            placeholder="Nombre de su videojuego..."
-                            name="name"
-                            ref={nameInput}
-                            onChange={(event) => handleInputChange(event)} />
-                        <Form.Control.Feedback type="invalid">
-                            Agregue el nombre del producto
-                        </Form.Control.Feedback>
-                    </Form.Group>
+                    
+                    <Row>
+                        <Col>
+                            <Form.Group>
+                                <Form.Control type="text"
+                                    required="true"
+                                    placeholder="Nombre de su videojuego..."
+                                    name="name"
+                                    ref={nameInput}
+                                    onChange={(event) => handleInputChange(event)} />
+                                <Form.Control.Feedback type="invalid">
+                                    Agregue el nombre del producto
+                                </Form.Control.Feedback>
+                            </Form.Group>
+                        </Col>
+                        <Col>
+                            <Form.Group>
+                                <Form.Control
+                                    type="number"
+                                    step="0.01"
+                                    required="true"
+                                    placeholder="Costo del videojuego. Ej: 39.99"
+                                    name="price"
+                                    onChange={(event) => handleInputChange(event)} />
+                                <Form.Control.Feedback type="invalid">
+                                    Debe indicar el precio
+                            </Form.Control.Feedback>
+                            </Form.Group>
+                        </Col>
+                        <Col>
+                            <Form.Group>
+                                <Form.Control type="number"
+                                    required="true"
+                                    placeholder="Cantidad disponible..."
+                                    name="stock"
+                                    onChange={(event) => handleInputChange(event)} />
+                                <Form.Control.Feedback type="invalid">
+                                    Debe indicar stock
+                            </Form.Control.Feedback>
+                            </Form.Group>
+                        </Col>
+                    </Row>
 
                     <Form.Group>
                         <Form.Control
@@ -101,59 +132,41 @@ const FormAdminCreate = () => {
                             La descripción debe tener más de 15 caracteres
                         </Form.Control.Feedback>
                     </Form.Group>
-
-                    <Form.Group>
-                        <Form.Control
-                            type="number"
-                            step="0.01"
-                            required="true"
-                            placeholder="Costo del videojuego. Ej: 39.99"
-                            name="price"
-                            onChange={(event) => handleInputChange(event)} />
-                        <Form.Control.Feedback type="invalid">
-                            Debe indicar el precio
-                    </Form.Control.Feedback>
-                    </Form.Group>
-
-                    <Form.Group>
-                        <Form.Control type="number"
-                            required="true"
-                            placeholder="Cantidad disponible..."
-                            name="stock"
-                            onChange={(event) => handleInputChange(event)} />
-                        <Form.Control.Feedback type="invalid">
-                            Debe indicar stock
-                    </Form.Control.Feedback>
-                    </Form.Group>
-
-                    <Form.Group>
-                        <Form.Control type="text"
-                            required="true"
-                            placeholder="Desarrolladora"
-                            name="developer"
-                            onChange={(event) => handleInputChange(event)} />
-                        <Form.Control.Feedback type="invalid">
-                            Debe agregar desarrolladora
-                    </Form.Control.Feedback>
-                    </Form.Group>
-
-                    <Form.Group>
-                        <Form.Control type="text"
-                            required="true"
-                            placeholder="Publicadora"
-                            name="publisher"
-                            onChange={(event) => handleInputChange(event)} />
-                        <Form.Control.Feedback type="invalid">
-                            Debe agregar publisher
-                    </Form.Control.Feedback>
-                    </Form.Group>
-
-                    <Form.Group>
-                        <Form.Control type="date"
-                            required="true"
-                            name="publishDate"
-                            onChange={(event) => handleInputChange(event)} />
-                    </Form.Group>
+                    
+                    <Row>
+                        <Col>
+                            <Form.Group>
+                                <Form.Control type="text"
+                                    required="true"
+                                    placeholder="Desarrolladora"
+                                    name="developer"
+                                    onChange={(event) => handleInputChange(event)} />
+                                <Form.Control.Feedback type="invalid">
+                                    Debe agregar desarrolladora
+                            </Form.Control.Feedback>
+                            </Form.Group>
+                        </Col>
+                        <Col>
+                            <Form.Group>
+                                <Form.Control type="text"
+                                    required="true"
+                                    placeholder="Publicadora"
+                                    name="publisher"
+                                    onChange={(event) => handleInputChange(event)} />
+                                <Form.Control.Feedback type="invalid">
+                                    Debe agregar publisher
+                            </Form.Control.Feedback>
+                            </Form.Group>
+                        </Col>
+                        <Col>
+                            <Form.Group>
+                                <Form.Control type="date"
+                                    required="true"
+                                    name="publishDate"
+                                    onChange={(event) => handleInputChange(event)} />
+                            </Form.Group>
+                        </Col>
+                    </Row>
 
                     <Form.Group>
                         <Form.Control required="true" as="select" multiple bsPrefix="custom-select"  >
