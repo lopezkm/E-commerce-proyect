@@ -20,7 +20,7 @@ const sequelize = new Sequelize( `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST
 
 /* =================================================================================
 * 		[ Leemos todos los modelos definidos, capitalizamos sus
-*		   nombres  y los agregamos a los modelos de Sequelize ]    
+*		   nombres y los agregamos a los modelos de Sequelize ]    
 * ================================================================================= */
 
 const modelDefiners = [ ];
@@ -43,16 +43,13 @@ sequelize.models = Object.fromEntries( capsEntries );
 *		      y creamos las relaciones entre estos ]    
 * ================================================================================= */
 
-const { Product, Category, Media, ProductCategory, ProductMedia } = sequelize.models;
+const { Product, Category, Media, ProductCategory } = sequelize.models;
 
 Product.belongsToMany( Category, { through: ProductCategory } );
 Category.belongsToMany( Product, { through: ProductCategory } );
 
-Product.belongsToMany( Media, { through: ProductMedia } );
-Media.belongsToMany( Product, { through: ProductMedia, foreignKey: 'mediaId' } );
-
-/*Product.hasMany( Media );
-Media.belongsTo( Product ); TODO! */
+Product.hasMany( Media );
+Media.belongsTo( Product );
 
 /* =================================================================================
 * 		[ Creamos un callback para la inserción de datos de prueba luego 
@@ -66,7 +63,7 @@ Media.belongsTo( Product ); TODO! */
 	
 	sequelize.afterBulkSync( ( ) => {
 		const mockData = require( '../.mockdata' );
-		const models = Object.keys( sequelize.models );
+		const models = Object.keys( mockData );
 		
 		Promise.each( models, ( model ) => {
 			return sequelize.models[ model ].bulkCreate( mockData[ model ] );
