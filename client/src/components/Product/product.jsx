@@ -7,6 +7,7 @@ function Product({productId})
 {
     const [ product, setProduct ] = useState({});
     const [isLoading, setLoading] = useState(true);
+    
 
     const getProduct = () => {
         axios.get(`http://localhost:3000/products/${productId}`)
@@ -46,6 +47,8 @@ function Product({productId})
         return <div className="App">Loading...</div>;
     }
 
+
+
     return (
         <Container>
             <Carousel interval={5000} className="product-carousel-main">
@@ -74,7 +77,13 @@ function Product({productId})
                                     <p> {product.description} </p>
                                 </Col>
                                 <Col sm={2}>
-                                    <Button className="d-flex ml-auto">Comprar por ${product.price}</Button>
+                                    {product.stock > 0 &&
+                                    <Button className="d-flex ml-auto">Comprar por ${product.price} </Button>
+                                }
+
+                                    {product.stock===0 &&
+                                    <Button className="d-flex ml-auto btn btn-secondary" disabled>Comprar por ${product.price} </Button>
+                                    }
                                 </Col>
                             </Row>
                             <Row className="product-row-border-top">
