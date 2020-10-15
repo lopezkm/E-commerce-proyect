@@ -8,15 +8,6 @@ module.exports = ( sequelize ) => {
 		},
 		path: {
 			type: DataTypes.STRING,
-			allowNull: false,
-			unique: true
-		},
-		width: {
-			type: DataTypes.INTEGER,
-			allowNull: false
-		},
-		height: {
-			type: DataTypes.INTEGER,
 			allowNull: false
 		}
 	}, {
