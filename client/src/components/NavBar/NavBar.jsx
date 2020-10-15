@@ -4,6 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 import SearchBar from '../SearchBar/SearchBar.jsx';
 import logo from '../../assets/logo.png';
+import store from '../../redux/store/store.js';
+console.log('navBar',store.getState());
 
 function NavBar( )
 {

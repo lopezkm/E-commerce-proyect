@@ -1,6 +1,8 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Card, Button, Carousel, Container, Col, Row, Badge } from 'react-bootstrap';
+import store from '../../redux/store/store.js';
+console.log('product',store.getState());
 
 
 function Product({productId})
