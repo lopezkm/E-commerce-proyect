@@ -7,9 +7,11 @@ import ProductCard from '../ProductCard/ProductCard.jsx';
 import Checkable from '../Checkable/Checkable.jsx';
 
 import loadingCircle from '../../assets/loading.svg';
+import store from '../../redux/store/store.js';
+console.log(store.getState());
 
 function Catalogue( )
-{
+{	
 	const [ categories, setCategories ] = useState( [ ] );
 	const [ products, setProducts ] = useState( [ ] );
 	const [ checked, setChecked ] = useState( [ ] );

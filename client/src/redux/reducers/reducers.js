@@ -1,4 +1,6 @@
-const initialState = {};
+const initialState = {
+    init: 'initial state'
+};
 
 
 function rootReducer(state = initialState, action) {
