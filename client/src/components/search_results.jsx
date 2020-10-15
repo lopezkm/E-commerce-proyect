@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import ProductCard from './ProductCard/ProductCard.jsx';
 import { Container, Row, Col, Alert } from 'react-bootstrap';
 import axios from 'axios';
-import store from '../../redux/store/store.js';
-console.log('searchBar',store.getState());
+import store from '.././redux/store/store.js';
+console.log('searchResult',store.getState());
 
 let SaveData;
 
