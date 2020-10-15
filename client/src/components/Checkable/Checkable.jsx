@@ -1,4 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
+import store from '../../redux/store/store.js';
+console.log('checkable',store.getState());
 
 function Checkable( { name, id, onChange, initial } )
 {

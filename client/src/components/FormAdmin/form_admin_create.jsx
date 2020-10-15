@@ -2,6 +2,8 @@ import React, { useEffect, useState, useRef } from 'react';
 import { Form, Button, Row, Col} from 'react-bootstrap';
 import axios from 'axios';
 import NavAdmin from '../NavAdmin/nav_admin.jsx'
+import store from '../../redux/store/store.js';
+console.log('formAdminCreate',store.getState());
 
 
 const FormAdminCreate = () => {

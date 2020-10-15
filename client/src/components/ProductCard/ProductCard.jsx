@@ -1,6 +1,9 @@
 import React from 'react';
 import { Card, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import defaultPortrait from '../../assets/portrait.jpg';
+import store from '../../redux/store/store.js';
+
+console.log('productCard',store.getState());
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -16,8 +19,6 @@ function ProductCard( { name, price, media, developer, stock } )
 		if ( !portrait ) {
 			return defaultPortrait;
 		}
-		
-		console.log( portrait );
 		
 		if ( !portrait.path.includes( '/' ) ) {
 			return `${ API_URL }/${ portrait.path }`;
