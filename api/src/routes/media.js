@@ -1,5 +1,5 @@
 const server = require( 'express' ).Router( );
-const { Media } = require( '../db.js' );
+const { Media, Product } = require( '../db.js' );
 
 /* =================================================================================
 * 		[ Creación de la relación entre un producto y una media ]
@@ -27,40 +27,15 @@ server.post( '/:idMedia/product/:idProduct', ( request, response, next ) => {
 } );
 
 /* =================================================================================
-* 		[ Eliminación de la relación entre un producto y una media ]
-* ================================================================================= */
-
-server.delete( '/:idMedia/product/:idProduct', ( request, response, next ) => {
-	const { idMedia, idProduct } = request.params;
-	const promises = [ ];
-	
-	promises.push( Media.findByPk( idMedia ) );
-	promises.push( Product.findByPk( idProduct ) );
-	
-	Promise.all( promises )
-		.spread( function( media, product ) {
-			if ( !media || !product ) {
-				return response.sendStatus( 404 );
-			}
-			
-			media.removeProduct( product )
-				.then( ( data ) => {
-					( !!data ) ?
-						response.sendStatus( 204 ) : response.sendStatus( 409 );
-				} );
-		} );
-} );
-
-/* =================================================================================
 * 		[ Creación de un modelo Media ]
 * ================================================================================= */
 
 server.post( '/', ( request, response ) => {
-	Media.findOrCreate( {
+	Media.create( {
 			...request.body
 		} )
 		.then( media => response.status( 200 ).send( media ) )
-		.catch( error => response.status( 400 ).send( error ) );
+		.catch( error => { console.log( error ); response.status( 400 ).send( error ); } );
 } );
 
 /* =================================================================================

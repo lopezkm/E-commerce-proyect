@@ -13,11 +13,10 @@ function SearchBar( )
 	const handleSubmit = ( e ) => {
 		e.preventDefault( );
 		
-		if(input !== '') {
-
+		if ( input !== '' )
+		{
 			history.push( `/search/${ input }` );
 			setInput( '' );
-
 		}
 	};
 
