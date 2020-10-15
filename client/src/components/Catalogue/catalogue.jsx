@@ -8,7 +8,7 @@ import Checkable from '../Checkable/Checkable.jsx';
 
 import loadingCircle from '../../assets/loading.svg';
 import store from '../../redux/store/store.js';
-console.log(store.getState());
+console.log('catalogue',store.getState());
 
 function Catalogue( )
 {	
