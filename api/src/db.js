@@ -54,8 +54,8 @@ Media.belongsTo( Product );
 User.hasMany( Order );
 Order.belongsTo( User );
 
-Order.belongsToMany ( Product, { through: OrderProducts} );
-Product.belongsToMany ( Order, { through: OrderProducts} );
+Order.belongsToMany( Product, { through: OrderProducts } );
+Product.belongsToMany( Order, { through: OrderProducts } );
 
 /* =================================================================================
 * 		[ Creamos un callback para la inserción de datos de prueba luego 
