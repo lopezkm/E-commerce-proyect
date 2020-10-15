@@ -1,0 +1,60 @@
+.mediaRow
+{
+	display: flex;
+	flex-flow: row no-wrap;
+	align-items: center;
+	justify-content: space-between;
+	position: relative;
+	height: 50px;
+	padding: 1rem;
+	margin: 10px;
+	margin-top: 0;
+	padding-right: 0;
+	font-weight: 500;
+	font-size: 0.9rem;
+	border-radius: 2px;
+	max-width: 30rem;
+	color: #fff;
+	
+	border-color: #555;
+	background-color: #555;
+	
+	@include margin-x( );
+	@include shadow( $blur: 5px, $spread: -1px, $trans: .35 );
+}
+
+.mediaRow span
+{
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.mediaRow__button
+{
+	display: block;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	height: 50px;
+	width: 50px;
+	background-color: #ca3d3d;
+	color: #ccc;
+	border: none;
+	
+	&:focus
+	{
+		outline: none;
+	}
+	
+	svg
+	{
+		font-size: 2rem;
+		color: #fff;
+	}
+}
+
+.mediaRow__button:hover
+{
+	border-color: #ca3d3d;
+	background-color: #ca3d3d;
+}

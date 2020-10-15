@@ -1,8 +1,6 @@
 import React from 'react';
-import { Form, Button, } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { Form, Button } from 'react-bootstrap';
 import axios from 'axios';
-
 
 const FormAddCategory = () => {
 
@@ -30,7 +28,8 @@ const FormAddCategory = () => {
             if(!alert(`Ya existe una categoria con el nombre ingresado`)) window.location.reload()})
         
     } 
-
+    
+    
 
     return (
         <div>
