@@ -1,5 +1,7 @@
 import React from 'react';
 import { Card, OverlayTrigger, Tooltip } from 'react-bootstrap';
+import store from '../../redux/store/store.js';
+console.log('productCard',store.getState());
 
 function ProductCard({ name, price, media, developer, stock }) {
 	const getProductPrice = () => {
