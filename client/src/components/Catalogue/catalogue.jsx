@@ -46,10 +46,6 @@ function Catalogue( )
 					} );
 				}
 				
-				products.forEach( p => {
-					p.portrait = p.media.find( m => m.type === 'portrait' ).path;
-				} );
-				
 				setProducts( products );
 				setLoading( state => ( { ...state, products: false } ) );
 			} );
@@ -77,8 +73,8 @@ function Catalogue( )
 												name={ p.name }
 												price={ p.price }
 												developer={ p.developer }
-												media={ p.portrait }
-												stock={p.stock}
+												media={ p.media }
+												stock={ p.stock }
 											/>
 										</Link>
 									</Col>
