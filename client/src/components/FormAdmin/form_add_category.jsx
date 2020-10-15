@@ -1,6 +1,8 @@
 import React from 'react';
 import { Form, Button } from 'react-bootstrap';
 import axios from 'axios';
+import store from '../../redux/store/store.js';
+console.log('formAddCategory',store.getState());
 
 const FormAddCategory = () => {
 
