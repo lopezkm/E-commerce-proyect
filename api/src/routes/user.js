@@ -1,6 +1,212 @@
 const server = require( 'express' ).Router( );
-const Promise = require( 'bluebird' );
-const { User, Product, Order } = require( '../db.js' );
+const { Op } = require( 'sequelize' );
+const { User, Order } = require( '../db.js' );
+
+/* =================================================================================
+* 		[ Obtención de todas las órdenes de un usuario ]
+* ================================================================================= */
+
+server.get( '/:id/orders', ( request, response ) => {
+	const { id } = request.params;
+	
+	User.findByPk( id )
+		.then( user => {
+			if ( !user ) {
+				return response.sendStatus( 404 );
+			}
+			
+			user.getOrders( )
+				.then( ( orders ) => { response.status( 200 ).send( orders ); } );
+		} )
+		.catch( error => response.status( 400 ).send( error ) );
+} );
+
+/* =================================================================================
+* 		[ Obtención de los productos del carrito del usuario ]
+* ================================================================================= */
+
+server.get( '/:id/cart', ( request, response ) => {
+	const { id } = request.params;
+	
+	User.findByPk( id )
+		.then( user => {
+			if ( !user ) {
+				return response.sendStatus( 404 );
+			}
+			
+			return user.getOrders( {
+				where: {
+					status: {
+						[ Op.or ]: [ 'cart', 'created', 'processing' ]
+					}
+				}
+			} );
+		} )
+		.then( ( orders ) => {
+			if ( !orders ) {
+				return response.sendStatus( 200 );
+			}
+			
+			orders[ 0 ].getProducts( )
+				.then( ( products ) => {
+					response.send( 200 ).status( products );
+				} );
+		} )
+		.catch( error => response.status( 400 ).send( error ) );
+} );
+
+/* =================================================================================
+* 		[ Vaciamiento del carrito del usuario ]
+* ================================================================================= */
+
+server.delete( '/:id/cart', ( request, response ) => {
+	const { id } = request.params;
+	
+	User.findByPk( id )
+		.then( user => {
+			if ( !user ) {
+				return response.sendStatus( 404 );
+			}
+			
+			return user.getOrders( {
+				where: {
+					status: {
+						[ Op.or ]: [ 'cart', 'created', 'processing' ]
+					}
+				}
+			} );
+		} )
+		.then( ( orders ) => {
+			if ( !orders ) {
+				return response.sendStatus( 404 );
+			}
+			
+			orders[ 0 ].removeProducts( )
+				.then( ( ) => response.sendStatus( 204 ) );
+		} )
+		.catch( error => response.status( 400 ).send( error ) );
+} );
+
+/* =================================================================================
+* 		[ Modificación del carrito del usuario ]
+* ================================================================================= */
+
+server.put( '/:id/cart', ( request, response ) => {
+	const { id } = request.params;
+	const { productId, quantity } = request.body;
+	
+	User.findByPk( id )
+		.then( user => {
+			if ( !user ) {
+				return response.sendStatus( 404 );
+			}
+			
+			return user.getOrders( {
+				where: {
+					status: 'cart'
+				}
+			} );
+		} )
+		.then( ( orders ) => {
+			if ( !orders ) {
+				return response.sendStatus( 404 );
+			}
+			
+			OrderProducts.findOne( { 
+				where: {
+					orderId: orders[ 0 ].id,
+					productId: productId
+				}
+			} )
+			.then( ( orderProduct ) => { 
+				return orderProduct.update( { quantity } );
+			} )
+			.then( ( data ) => {
+				response.send( 200 ).status( data );
+			} );
+		} )
+		.catch( error => response.status( 400 ).send( error ) );
+} );
+
+/* =================================================================================
+* 		[ Obtención de un usuario particular ]
+* ================================================================================= */
+
+server.get( '/:id', ( request, response ) => {
+	let { id } = request.params;
+	
+	User.findByPk( id )
+		.then( user => {
+			if ( !user ) {
+				return response.sendStatus( 404 );
+			}
+			
+			response.status( 200 ).send( user );
+		} )
+		.catch( error => response.status( 400 ).send( error ) );
+} );
+
+/* =================================================================================
+* 		[ Obtención de todos los usuarios ]
+* ================================================================================= */
+
+server.get( '/', ( request, response ) => {
+	User.findAll( ).then( ( users ) => {
+			response.status( 200 ).send( users );
+		} )
+        .catch( error => response.status( 400 ).send( error ) );
+} );
+
+/* =================================================================================
+* 		[ Agregado de un producto al carrito del usuario ]
+* ================================================================================= */
+
+server.post( '/:idUser/cart', ( request, response ) => {
+	const { userId } = request.params;
+	const { productId } = request.body;
+	
+	User.findByPk( userId )
+		.then( ( user ) => {
+			if ( !user ) {
+				throw new Error( 'User not found' );
+			}
+			
+			return Order.getOrders( {
+				where: {
+					status: {
+						[ Op.or ]: [ 'cart', 'created', 'processing' ]
+					}
+				}
+			} );
+		} )
+		.then( ( orders ) => {
+			if ( orders ) {
+				if ( orders[ 0 ].status !== 'cart' ) {
+					throw new Error( 'User has an active order which is not editable' );
+				}
+				
+				return orders[ 0 ];
+			}
+			
+			return Order.create( {
+				status: 'cart',
+				userId: userId
+			} );
+		} )
+		.then( ( order ) => {
+			if ( !order ) {
+				throw new Error( 'Cart could not be created/retrieved' );
+			}
+			
+			Product.findByPk( productId )
+				.then( ( product ) => product.addOrder( order ) )
+				.then( ( data ) => response.status( 200 ).send( data ) )
+		} )
+		.catch( ( error ) => {
+			console.log( error );
+			response.status( 400 ).send( error );
+		} );
+} );
 
 /* =================================================================================
 * 		[ Creación de un usuario ]
@@ -15,41 +221,7 @@ server.post( '/', ( request, response ) => {
 				return response.sendStatus( 400 );
 			}
 			
-			response.send(user);
-		} )
-		.catch( error => response.status( 400 ).send( error ) );
-} );
-
-/* =================================================================================
-* 		[ Obtención de todos los usuarios ]
-* ================================================================================= */
-
-server.get( '/', ( request, response ) => {
-	User.findAll( /* {
-			include: [
-				{ model: Order },
-				{ model: Product }
-			]
-		}  */)
-		.then( ( users ) => {
-			response.status( 200 ).send( users );
-		} )
-        .catch( error => response.status( 400 ).send( error ) );
-});
-
-/* =================================================================================
-* 		[ Obtención de un usuario particular ]
-* ================================================================================= */
-server.get( '/:id', ( request, response ) => {
-	let { id } = request.params;
-	
-	User.findByPk( id )
-		.then( user => {
-			if ( !user ) {
-				return response.sendStatus( 404 );
-			}
-			
-			response.status( 200 ).send( user );
+			response.send( user );
 		} )
 		.catch( error => response.status( 400 ).send( error ) );
 } );
@@ -68,7 +240,7 @@ server.delete( '/:id', ( request, response ) => {
 			}
 			
 			user.destroy( )
-				.then( () => response.status( 200 ).send("Eliminado") );
+				.then( ( ) => response.status( 200 ).send( 'Eliminado' ) );
 		} );
 } );
 
@@ -86,7 +258,7 @@ server.put( '/:id', ( request, response ) => {
 			}
 			
 			return user.update( { ...request.body } )
-			.then(user => response.status(200).send(user))
+				.then( user => response.status( 200 ).send( user ) )
 		} )
 		.catch( error => response.status( 400 ).send( error ) );
 } );
