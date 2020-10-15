@@ -26,12 +26,7 @@ const validExtensions = [
 * ================================================================================= */
 
 server.post( '/', ( request, response ) => {
-	
-	console.log( response );
-	
 	if ( !request.files ) {
-		console.log( request.files );
-		
 		return response.status( 500 ).send( 'File not found' );
 	}
 	
@@ -42,8 +37,6 @@ server.post( '/', ( request, response ) => {
 	
 	if ( ( extPos < 0 ) || !validExtensions.includes( extension ) )
 	{
-		console.log( extension );
-		
 		return response.status( 500 ).send( 'Invalid extension' );
 	}
 	
@@ -52,14 +45,11 @@ server.post( '/', ( request, response ) => {
 	
 	fs.access( filePath, fs.constants.F_OK, ( error ) => {
 		if ( !error ) {
-			console.log( 'wtf' );
-			
 			return response.status( 500 ).send( 'Duplicated hash' );
 		}
 		
 		file.mv( filePath, ( error ) => {
 			if ( error ) {
-				console.log( 'wtf 2' );
 				return response.status( 500 ).send( 'Relocation error' );
 			}
 			
