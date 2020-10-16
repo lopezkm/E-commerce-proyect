@@ -29,6 +29,44 @@ server.get( '/:id/orders', ( request, response ) => {
 } );
 
 /* =================================================================================
+* 		[ Crea el carrito del usuario ]
+* ================================================================================= */
+
+/*
+	- Crea el carrito (una orden en estado carrito) y lo devuelve
+	- No agrega un producto sino que sirve para "inicializar" el carrito
+*/
+
+server.post( '/:idUser/cart', ( request, response ) => {
+	const { id } = request.params;
+	
+	Order.findOne( {
+		where: {
+			userId: id,
+			status: {
+				[ Op.or ]: [ 'cart', 'created', 'processing' ]
+			}
+		}
+	} )
+	.then( ( order ) => {
+		if ( order ) {
+			return response.sendStatus( 409 );
+		}
+		
+		Order.create( {
+			status: 'cart',
+			userId: id
+		} )
+		.then( ( newOrder ) => {
+			response.status( 201 ).send( newOrder );
+		} );
+	} )
+	.catch( ( error ) => {
+		response.status( 500 ).send( error );
+	} );
+} );
+
+/* =================================================================================
 * 		[ Obtención de los productos del carrito del usuario ]
 * ================================================================================= */
 
@@ -203,57 +241,6 @@ server.get( '/', ( request, response ) => {
 			response.status( 200 ).send( users );
 		} )
         .catch( error => response.status( 400 ).send( error ) );
-} );
-
-/* =================================================================================
-* 		[ Agregado de un producto al carrito del usuario ]
-* ================================================================================= */
-
-server.post( '/:idUser/cart', ( request, response ) => {
-	const { userId } = request.params;
-	const { productId } = request.body;
-	
-	User.findByPk( userId )
-		.then( ( user ) => {
-			if ( !user ) {
-				throw new Error( 'User not found' );
-			}
-			
-			return Order.getOrders( {
-				where: {
-					status: {
-						[ Op.or ]: [ 'cart', 'created', 'processing' ]
-					}
-				}
-			} );
-		} )
-		.then( ( orders ) => {
-			if ( orders ) {
-				if ( orders[ 0 ].status !== 'cart' ) {
-					throw new Error( 'User has an active order which is not editable' );
-				}
-				
-				return orders[ 0 ];
-			}
-			
-			return Order.create( {
-				status: 'cart',
-				userId: userId
-			} );
-		} )
-		.then( ( order ) => {
-			if ( !order ) {
-				throw new Error( 'Cart could not be created/retrieved' );
-			}
-			
-			Product.findByPk( productId )
-				.then( ( product ) => product.addOrder( order ) )
-				.then( ( data ) => response.status( 200 ).send( data ) )
-		} )
-		.catch( ( error ) => {
-			console.log( error );
-			response.status( 400 ).send( error );
-		} );
 } );
 
 /* =================================================================================
