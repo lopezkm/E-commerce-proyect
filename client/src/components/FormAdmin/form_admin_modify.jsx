@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Form, Button, FormControl, Container, Col, Row } from 'react-bootstrap';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import MediaForm from './MediaForm/MediaForm.jsx';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
