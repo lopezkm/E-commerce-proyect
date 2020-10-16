@@ -173,8 +173,8 @@ const FormAdminCreate = () => {
                     <Form.Group>
                         <Form.Control required="true" as="select" multiple bsPrefix="custom-select"  >
                             {
-                                categories.map(cat => (
-                                    <option>{cat.name}</option>
+                                categories.map((cat,i) => (
+                                    <option key={i}>{cat.name}</option>
                                 ))
                             }
                         </Form.Control>
