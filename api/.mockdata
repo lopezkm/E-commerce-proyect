@@ -2044,7 +2044,7 @@ const Order = [
 * 		[ Creación de relaciones entre Orden y Producto ]
 * ================================================================================= */
 
-const OrderProducts = [
+const OrderProduct = [
 
 ];
 
@@ -2059,5 +2059,5 @@ module.exports = {
 	ProductCategory,
 	User, 
 	Order,
-	OrderProducts
+	OrderProduct
 };
