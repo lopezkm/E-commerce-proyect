@@ -9,6 +9,7 @@ import Product from './components/Product/Product.jsx';
 import Catalogue from './components/Catalogue/Catalogue.jsx'
 import NavBar from './components/NavBar/NavBar.jsx';
 import Result from './components/search_results.jsx'
+import Order from './components/Order/Order.jsx'
 import FormAdd from './components/FormAdmin/form_add_category.jsx'
 import FormAdminCreate from './components/FormAdmin/form_admin_create.jsx';
 import FormAdminDelete from './components/FormAdmin/form_admin_delete.jsx';
@@ -19,6 +20,7 @@ function App( )
 	return (
 		<Container fluid>
 			<Route path="/" component={ ( ) => <NavBar/> }/>
+			<Route path='/order' component={ Order } />
 			<Route path="/search/:product" render={ ( { match } ) => <Result products={ match.params.product }/> }/>
 			<Route path='/Admin/create' component={ FormAdminCreate } />
 			<Route path='/Admin/delete' component={ FormAdminDelete } />
