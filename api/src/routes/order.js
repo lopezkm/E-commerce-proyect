@@ -34,7 +34,7 @@ server.get( '/:id', ( request, response ) => {
 			
 			response.status( 200 ).send( order );
 		} )
-		.catch( error => response.status( 400 ).send( error ) );
+		.catch( error => response.status( 500 ).send( error ) );
 } );
 
 /* =================================================================================
