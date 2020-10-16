@@ -13,6 +13,8 @@ import FormAdd from './components/FormAdmin/form_add_category.jsx'
 import FormAdminCreate from './components/FormAdmin/form_admin_create.jsx';
 import FormAdminDelete from './components/FormAdmin/form_admin_delete.jsx';
 import FormAdminModify from './components/FormAdmin/form_admin_modify.jsx';
+import Cart from './components/Cart/Cart.jsx';
+import PanelAdmin from './components/PanelAdmin/PanelAdmin.jsx';
 
 function App( )
 {
@@ -20,16 +22,18 @@ function App( )
 		<Container fluid>
 			<Route path="/" component={ ( ) => <NavBar/> }/>
 			<Route path="/search/:product" render={ ( { match } ) => <Result products={ match.params.product }/> }/>
-			<Route path='/Admin/create' component={ FormAdminCreate } />
-			<Route path='/Admin/delete' component={ FormAdminDelete } />
-			<Route path='/Admin/modify' component={ FormAdminModify } />
-			<Route exact path="/categories" component={ FormAdd } />
+			<Route exact path='/Admin' component={ PanelAdmin } />
+			<Route exact path='/Admin/create' component={ FormAdminCreate } />
+			<Route exact path='/Admin/delete' component={ FormAdminDelete } />
+			<Route exact path='/Admin/modify' component={ FormAdminModify } />
+			<Route exact path="/Admin/categories" component={ FormAdd } />
 			<Route exact path="/products" component={ Catalogue } />
 			<Route exact path ='/product/:productId' render={ ( { match } ) =>
 				<Product 
 					productId = { match.params.productId }
 				/>
 			} />
+			<Route exact path='/Cart' component={ Cart } />
 		</Container>
 	);
 }
