@@ -46,7 +46,7 @@ function Product( { productId } )
 
 	useEffect( ( ) => {
 		getProduct( );
-	}, [ ] );    
+	});    
 
 	if ( isLoading ) {
 		return <div className="App">Loading...</div>;
@@ -58,7 +58,7 @@ function Product( { productId } )
 			{
 				product.media.map( ( media,i ) => media.type.includes( "image-big" ) && 
 					<Carousel.Item key={i}>
-						<img src={ media.path } className="d-block w-100"/>
+						<img src={ media.path } className="d-block w-100" alt=""/>
 					</Carousel.Item>
 				)
 			}
