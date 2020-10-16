@@ -95,41 +95,85 @@ server.delete( '/:id/cart', ( request, response ) => {
 * 		[ Modificación del carrito del usuario ]
 * ================================================================================= */
 
+/*
+	- Se pasa el id y cantidad del producto por body (productId y quantity)
+	- Si la operación fue exitosa se devuelve 200, 201 o 204 (modificada/creada/eliminada)
+	- Si la operación falló se devuelve un error 400
+*/
+
 server.put( '/:id/cart', ( request, response ) => {
 	const { id } = request.params;
 	const { productId, quantity } = request.body;
 	
-	User.findByPk( id )
-		.then( user => {
-			if ( !user ) {
-				return response.sendStatus( 404 );
+	Product.findByPk( productId )
+		.then( ( product ) => {
+			if ( !product ) {
+				throw new Error( 'Product not found' );
 			}
 			
-			return user.getOrders( {
+			if ( product.stock < quantity ) {
+				throw new Error( 'Not enough stock' );
+			}
+			
+			return Order.findOne( {
 				where: {
+					userId: id,
 					status: 'cart'
+				},
+				include: {
+					model: Product,
+					required: false,
+					where: {
+						id: productId
+					}
 				}
 			} );
 		} )
-		.then( ( orders ) => {
-			if ( !orders ) {
-				return response.sendStatus( 404 );
+		.then( ( order ) => {
+			if ( !order ) {
+				throw new Error( 'Order not found' );
 			}
 			
-			OrderProducts.findOne( { 
+			if ( quantity <= 0 )
+			{
+				return OrderProduct.destroy( {
+					where: {
+						orderId: order.id,
+						productId
+					}
+				} );
+			}
+			
+			return OrderProduct.findOrCreate( {
 				where: {
-					orderId: orders[ 0 ].id,
-					productId: productId
+					orderId: order.id,
+					productId
+				},
+				defaults: {
+					price: product.price,
+					quantity
 				}
-			} )
-			.then( ( orderProduct ) => { 
-				return orderProduct.update( { quantity } );
-			} )
-			.then( ( data ) => {
-				response.send( 200 ).status( data );
 			} );
 		} )
-		.catch( error => response.status( 400 ).send( error ) );
+		.then( ( data ) => {
+			if ( !Array.isArray( data ) ) {
+				return response.sendStatus( 204 );
+			}
+			
+			const [ orderline, created ] = data;
+			
+			if ( created )
+			{
+				return response.sendStatus( 201 );
+			}
+			
+			orderline.update( { quantity } ).then( ( ) => {
+				response.sendStatus( 200 );
+			} );
+		} )
+		.catch( ( error ) => {
+			response.status( 500 ).send( error );
+		} );
 } );
 
 /* =================================================================================
