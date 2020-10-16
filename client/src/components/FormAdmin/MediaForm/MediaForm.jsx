@@ -147,7 +147,7 @@ function MediaUploader( { productId, productMedias } )
 				<div>
 					{
 						medias.map( ( m, i ) => (
-							<MediaRow name={ m.path } id={ m.id } onDelete={ handleMediaDelete }/>
+							<MediaRow key={i} name={ m.path } id={ m.id } onDelete={ handleMediaDelete }/>
 						) )
 					}
 				</div>
