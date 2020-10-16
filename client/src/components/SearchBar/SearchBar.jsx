@@ -24,10 +24,6 @@ function SearchBar( )
 		setInput( e.target.value );
 	};
 	
-	const handleOnClick = ( e ) => {
-		e.preventDefault( );
-	};
-	
 	return (
 		<form className="searchBar" onSubmit={ handleSubmit }>
 			<button type="submit" className="searchBar__button">
