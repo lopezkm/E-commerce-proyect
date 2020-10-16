@@ -12,15 +12,15 @@ const API_URL = process.env.REACT_APP_API_URL;
 function Product({ productId }) {
 	const [product, setProduct] = useState({});
 	const [isLoading, setLoading] = useState(true);
-	const [productCategories, setProductCategories] = useState([]);
+	const [productCategories, setProductCategories] = useState("");
 	const [recommendProduct, setRecommendProduct] = useState([]);
+	
 
 	const getProduct = () => {
 		axios.get(`${API_URL}/products/${productId}`)
 			.then((response) => {
 				const productData = response.data;
-				const prodCategories = response.data.categories;
-
+				const prodCategories = response.data.categories[0].name;
 				setProductCategories(prodCategories);
 
 				processMedia(productData);
@@ -29,10 +29,17 @@ function Product({ productId }) {
 				setLoading(false);
 			});
 
-/* 		axios.get(`${API_URL}/products/category/${productCategories[0].name}`)
-			.then((response) =>{
-				const recommendProds = response.data;
-			}); */
+	}
+
+	
+
+	const getRecommendProduct = () =>{
+		axios.get(`${API_URL}/products/category/${productCategories}`)
+		.then((response) => {
+			
+			let recommendProds = response.data;
+			setRecommendProduct(recommendProds)
+		});
 	}
 
 	const processMedia = ({ media }) => {
@@ -56,7 +63,14 @@ function Product({ productId }) {
 
 	useEffect(() => {
 		getProduct();
-	}, []);
+		
+		if (productCategories) {
+			setLoading(false)
+		}
+
+		getRecommendProduct();
+		
+	}, [isLoading]);
 
 	if (isLoading) {
 		return <div className="App">Loading...</div>;
@@ -118,11 +132,12 @@ function Product({ productId }) {
 						{product.stock === 0 &&
 							<Row className="product-row-border-top">
 								<h2> Otros juegos que te pueden interesar:</h2>
-								
-								<div>
-									{productCategories[0].name}
-								</div>
+								{
+									//mapear recommendProduct para renderizar las cartas
+									<div>{console.log("recomend: ", recommendProduct)}</div>
+								}
 							</Row>
+
 						}
 					</Card.Text>
 				</Card.Body>
