@@ -6,6 +6,12 @@ const { User, Order } = require( '../db.js' );
 * 		[ Obtención de todas las órdenes de un usuario ]
 * ================================================================================= */
 
+/*
+	- Retorna un arreglo con las órdenes pertenecientes al usuario.
+	- Retorna todas las órdenes, no solo las que estén cerradas o abiertas.
+	- Retorna las órdenes ordenadas por fecha de creación ( nueva > vieja )
+*/
+
 server.get( '/:id/orders', ( request, response ) => {
 	const { id } = request.params;
 	
@@ -15,10 +21,11 @@ server.get( '/:id/orders', ( request, response ) => {
 				return response.sendStatus( 404 );
 			}
 			
-			user.getOrders( )
-				.then( ( orders ) => { response.status( 200 ).send( orders ); } );
+			user.getOrders( ).then( ( orders ) => {
+				response.status( 200 ).send( orders );
+			} );
 		} )
-		.catch( error => response.status( 400 ).send( error ) );
+		.catch( error => response.status( 500 ).send( error ) );
 } );
 
 /* =================================================================================
