@@ -17,18 +17,18 @@ import FormAdminModify from './components/FormAdmin/form_admin_modify.jsx';
 function App( )
 {
 	return (
-		<Container fluid>
+		<Container fluid className="app">
 			<Route path="/" component={ ( ) => <NavBar/> }/>
-			<Route path="/search/:product" render={ ( { match } ) => <Result products={ match.params.product }/> }/>
+			<Route path="/search/:product" render={ ( { match } ) =>
+				<Result products={ match.params.product }/>
+			} />
 			<Route path='/Admin/create' component={ FormAdminCreate } />
 			<Route path='/Admin/delete' component={ FormAdminDelete } />
 			<Route path='/Admin/modify' component={ FormAdminModify } />
 			<Route exact path="/categories" component={ FormAdd } />
 			<Route exact path="/products" component={ Catalogue } />
 			<Route exact path ='/product/:productId' render={ ( { match } ) =>
-				<Product 
-					productId = { match.params.productId }
-				/>
+				<Product productId={ match.params.productId }/>
 			} />
 		</Container>
 	);
