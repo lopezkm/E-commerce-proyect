@@ -2023,21 +2023,236 @@ const User = [
 * ================================================================================= */
 
 const Order = [
+	/*
+		Ordenes del usuario con id 1
+	*/
 	{
-		status: 'cart'
+		status: 'cart',
+		userId: 1
 	},
 	{
-		status: 'created'
+		status: 'created',
+		userId: 1
 	},
 	{
-		status: 'processing'
+		status: 'processing',
+		userId: 1
 	},
 	{
-		status: 'canceled'
+		status: 'canceled',
+		userId: 1
 	},
 	{
-		status: 'completed' 
-	}
+		status: 'completed',
+		userId: 1
+	},
+	/*
+		Ordenes del usuario con id 2
+	*/
+	{
+		status: 'cart',
+		userId: 2
+	},
+	{
+		status: 'created',
+		userId: 2
+	},
+	{
+		status: 'completed',
+		userId: 2
+	},
+	{
+		status: 'completed',
+		userId: 2
+	},
+	{
+		status: 'completed',
+		userId: 2
+	},
+	/*
+		Ordenes del usuario con id 3
+	*/
+	{
+		status: 'cart',
+		userId: 3
+	},
+	{
+		status: 'created',
+		userId: 3
+	},
+	{
+		status: 'canceled',
+		userId: 3
+	},
+	{
+		status: 'canceled',
+		userId: 3
+	},
+	{
+		status: 'completed',
+		userId: 3
+	},
+	/*
+		Ordenes del usuario con id 4
+	*/
+	{
+		status: 'completed',
+		userId: 4
+	},
+	{
+		status: 'cart',
+		userId: 4
+	},
+	{
+		status: 'canceled',
+		userId: 4
+	},
+	{
+		status: 'canceled',
+		userId: 4
+	},
+	{
+		status: 'processing',
+		userId: 4
+	},
+	/*
+		Ordenes del usuario con id 5
+	*/
+	{
+		status: 'cart',
+		userId: 4
+	},
+	{
+		status: 'created',
+		userId: 5
+	},
+	{
+		status: 'completed',
+		userId: 5
+	},
+	{
+		status: 'canceled',
+		userId: 5
+	},
+	{
+		status: 'completed',
+		userId: 5
+	},
+	/*
+		Ordenes del usuario con id 6
+	*/
+	{
+		status: 'cart',
+		userId: 6
+	},
+	{
+		status: 'created',
+		userId: 6
+	},
+	{
+		status: 'completed',
+		userId: 6
+	},
+	{
+		status: 'canceled',
+		userId: 6
+	},
+	{
+		status: 'canceled',
+		userId: 6
+	},
+	/*
+		Ordenes del usuario con id 7
+	*/
+	{
+		status: 'canceled',
+		userId: 7
+	},
+	{
+		status: 'created',
+		userId: 7
+	},
+	{
+		status: 'completed',
+		userId: 7
+	},
+	{
+		status: 'processing',
+		userId: 7
+	},
+	{
+		status: 'completed',
+		userId: 7
+	},
+	/*
+		Ordenes del usuario con id 8
+	*/
+	{
+		status: 'canceled',
+		userId: 8
+	},
+	{
+		status: 'created',
+		userId: 8
+	},
+	{
+		status: 'completed',
+		userId: 8
+	},
+	{
+		status: 'completed',
+		userId: 8
+	},
+	{
+		status: 'completed',
+		userId: 8
+	},
+	/*
+		Ordenes del usuario con id 9
+	*/
+	{
+		status: 'canceled',
+		userId: 9
+	},
+	{
+		status: 'canceled',
+		userId: 9
+	},
+	{
+		status: 'processing',
+		userId: 9
+	},
+	{
+		status: 'canceled',
+		userId: 9
+	},
+	{
+		status: 'completed',
+		userId: 9
+	},
+	/*
+		Ordenes del usuario con id 10
+	*/
+	{
+		status: 'cart',
+		userId: 10
+	},
+	{
+		status: 'canceled',
+		userId: 10
+	},
+	{
+		status: 'canceled',
+		userId: 10
+	},
+	{
+		status: 'processing',
+		userId: 10
+	},
+	{
+		status: 'processing',
+		userId: 10
+	},
 ];
 
 /* =================================================================================
@@ -2045,7 +2260,114 @@ const Order = [
 * ================================================================================= */
 
 const OrderProducts = [
-
+	/*
+		Orden id 1
+	*/
+	{
+		orderId: 1,
+		productId: 1,
+		quantity: 1,
+		price: 3.99
+	},
+	{
+		orderId: 1,
+		productId: 2,
+		quantity: 1,
+		price: 38.99
+	},
+	{
+		orderId: 1,
+		productId: 3,
+		quantity: 1,
+		price: 4.99
+	},
+		{
+		orderId: 1,
+		productId: 4,
+		quantity: 1,
+		price: 29.99
+	},
+	/*
+		Orden id 2
+	*/
+	{
+		orderId: 2,
+		productId: 5,
+		quantity: 1,
+		price: 39.99
+	},
+	{
+		orderId: 2,
+		productId: 6,
+		quantity: 1,
+		price: 39.99
+	},
+		{
+		orderId: 2,
+		productId: 7,
+		quantity: 1,
+		price: 19.96
+	},
+	{
+		orderId: 2,
+		productId: 8,
+		quantity: 1,
+		price: 10.99
+	},
+	/*
+		Orden id 3
+	*/	
+	{
+		orderId: 3,
+		productId: 9,
+		quantity: 1,
+		price: 7.99
+	},
+	{
+		orderId: 3,
+		productId: 10,
+		quantity: 1,
+		price: 6
+	},
+		{
+		orderId: 3,
+		productId: 8,
+		quantity: 1,
+		price: 10.99
+	},
+	{
+		orderId: 3,
+		productId: 2,
+		quantity: 1,
+		price: 38.99
+	},
+	/*
+		Orden id 4
+	*/	
+	{
+		orderId: 4,
+		productId: 1,
+		quantity: 1,
+		price: 3.99
+	},
+	{
+		orderId: 4,
+		productId: 2,
+		quantity: 1,
+		price: 38.99
+	},
+		{
+		orderId: 4,
+		productId: 3,
+		quantity: 1,
+		price: 4.99
+	},
+	{
+		orderId: 4,
+		productId: 4,
+		quantity: 1,
+		price: 29.99
+	},
 ];
 
 /* =================================================================================
