@@ -71,8 +71,8 @@ const FormAdminDelete = () => {
 
                         <Form.Control as="select" multiple id="productList" onClick={(e) => handleSelectChange(e)}>
                             {
-                                showProducts.map(product => (
-                                    <option id={product.id} >
+                                showProducts.map((product,i) => (
+                                    <option key={i} id={product.id} >
                                         {product.name}
                                     </option>
                                 ))
