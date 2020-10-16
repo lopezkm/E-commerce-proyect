@@ -4,13 +4,13 @@ import axios from 'axios';
 
 const Order = ({ orderId }) => {
 
-    const [order, setOrder] = useState([]);
+    const [order, setOrder] = useState({});
     const [loading, setLoading] = useState(true);
 
     const getOrder = ( orderId ) => {
         axios.get(`http://localhost:3000/orders/${orderId}`)
             .then(response => {
-                setOrder(response);
+                setOrder(response.data);
             })
     };
 
