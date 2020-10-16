@@ -64,32 +64,31 @@ server.get( '/:id/cart', ( request, response ) => {
 * 		[ Vaciamiento del carrito del usuario ]
 * ================================================================================= */
 
+/*
+	- Remueve los productos del carrito sin borrar el carrito
+*/
+
 server.delete( '/:id/cart', ( request, response ) => {
 	const { id } = request.params;
 	
-	User.findByPk( id )
-		.then( user => {
-			if ( !user ) {
-				return response.sendStatus( 404 );
+	Order.findOne( {
+		where: {
+			userId: id,
+			status: {
+				[ Op.or ]: [ 'cart', 'created', 'processing' ]
 			}
-			
-			return user.getOrders( {
-				where: {
-					status: {
-						[ Op.or ]: [ 'cart', 'created', 'processing' ]
-					}
-				}
-			} );
-		} )
-		.then( ( orders ) => {
-			if ( !orders ) {
-				return response.sendStatus( 404 );
-			}
-			
-			orders[ 0 ].removeProducts( )
-				.then( ( ) => response.sendStatus( 204 ) );
-		} )
-		.catch( error => response.status( 400 ).send( error ) );
+		}
+	} )
+	.then( ( order ) => {
+		if ( !order ) {
+			return response.sendStatus( 404 );
+		}
+		
+		order.removeProducts( ).then( ( ) => {
+			response.sendStatus( 204 );
+		} );
+	} )
+	.catch( error => response.status( 500 ).send( error ) );
 } );
 
 /* =================================================================================
