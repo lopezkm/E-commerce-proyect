@@ -1,6 +1,6 @@
 const server = require( 'express' ).Router( );
 const { Op } = require( 'sequelize' );
-const { User, Order } = require( '../db.js' );
+const { User, Order, Product } = require( '../db.js' );
 
 /* =================================================================================
 * 		[ Obtención de todas las órdenes de un usuario ]
