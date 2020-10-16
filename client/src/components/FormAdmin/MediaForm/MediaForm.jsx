@@ -76,7 +76,7 @@ function MediaUploader( { productId, productMedias } )
 	return (
 		<Row className="mediaContainer">
 			<Col xs={ 12 } lg={ 6 }>
-				{ !medias.length || <div class="mediaForm__separator"></div> }
+				{ !medias.length || <div className="mediaForm__separator"></div> }
 				<Form className="mediaForm" onSubmit={ handleFormSubmit }>
 					<Form.Row style={ { alignItems: 'center' } }>
 						<Col xs={ 12 }>
