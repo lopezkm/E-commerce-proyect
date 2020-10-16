@@ -56,8 +56,8 @@ function Product( { productId } )
 		<Container>
 			<Carousel interval={ 5000 } className="product-carousel-main">
 			{
-				product.media.map( ( media ) => media.type.includes( "image-big" ) && 
-					<Carousel.Item>
+				product.media.map( ( media,i ) => media.type.includes( "image-big" ) && 
+					<Carousel.Item key={i}>
 						<img src={ media.path } className="d-block w-100"/>
 					</Carousel.Item>
 				)
@@ -70,8 +70,8 @@ function Product( { productId } )
 							<Row>
 								<Col sm={ 10 }>
 									{
-										product.categories.map( c => (
-											<Badge pill variant="secondary">{c.name}</Badge>
+										product.categories.map( (c,i) => (
+											<Badge pill variant="secondary" key={i}>{c.name}</Badge>
 										) )
 									}
 								</Col>
