@@ -5,17 +5,18 @@ const { Order } = require( '../db.js' );
 * 		[ Búsqueda y/o obtención de todas las órdenes ]
 * ================================================================================= */
 
+/*
+	- Puede recibir un "status" en query para devolver solo las órdenes que pertenezcan a un estado en particular
+	- Puede recibir mas de un status separado por coma para buscar por mas de un status a la vez
+*/
+
 server.get( '/', ( request, response ) => {
 	const { status } = request.query;
-	const options = !status ? { } : { where: { status: { [ Op.iLike ]: status } } };
+	const options = !status ? { } : { where: { status: { [ Op.or ]: status.split( ',' ) } } };
 	
-	Order.findAll( options ).then( ( orders ) => {
-		if ( !orders ) {
-			return response.sendStatus( 404 );
-		}
-		
-		response.status( 200 ).send( orders );
-	} );
+	Order.findAll( options )
+		.then( ( orders ) => response.status( 200 ).send( orders ) )
+		.catch( ( error ) => response.status( 500 ).send( error ) );
 } );
 
 /* =================================================================================
