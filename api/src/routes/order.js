@@ -41,6 +41,10 @@ server.get( '/:id', ( request, response ) => {
 * 		[ Modificación de una orden ]
 * ================================================================================= */
 
+/*
+	- Se pasan por body las propiedades a cambiar con sus respectivos valores
+*/
+
 server.put( '/:id', ( request, response ) => {
 	const { id } = request.params;
 	
@@ -51,10 +55,11 @@ server.put( '/:id', ( request, response ) => {
 			}
 			
 			return order.update( { ...request.body } )
-				.then( order => response.status( 200 ).send( order ) );
+				.then( ( order ) => response.status( 200 ).send( order ) );
 		} )
-		.catch( error => response.status( 400 ).send( error ) );
+		.catch( error => response.status( 500 ).send( error ) );
 } );
+
 
 /* =================================================================================
 * 		[ Exportamos nuestras rutas ]
