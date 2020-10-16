@@ -325,7 +325,7 @@ const Media = [
 		path: 'a9984673292011dc3450053978e95962.jpg',
 		productId: 1
 	},
-	
+
 	/*
 		MAFIA
 	*/
@@ -374,7 +374,7 @@ const Media = [
 		path: '30f0e8ae45453591b5382e63fb981b83.jpg',
 		productId: 2
 	},
-	
+
 	/*
 		Rocket League
 	*/
@@ -423,7 +423,7 @@ const Media = [
 		path: '904ff520dfdf821ba0d03687f136538f.jpg',
 		productId: 3
 	},
-	
+
 	/*
 		PUBG
 	*/
@@ -472,7 +472,7 @@ const Media = [
 		path: '04d180c08830ff5bd8caf96628504509.jpg',
 		productId: 4
 	},
-	
+
 	/*
 		Sea of Thieves
 	*/
@@ -521,7 +521,7 @@ const Media = [
 		path: '0e8c1bd759f21b0ece10fa2dda985e5f.jpg',
 		productId: 5
 	},
-	
+
 	/*
 		Star Wars
 	*/
@@ -570,7 +570,7 @@ const Media = [
 		path: '6ba9036a9463927903d12c4732ee4dd4.jpg',
 		productId: 6
 	},
-	
+
 	/*
 		The Witcher III
 	*/
@@ -619,7 +619,7 @@ const Media = [
 		path: '63214b2b114edadc128dfd3ff0344ce8.jpg',
 		productId: 7
 	},
-	
+
 	/*
 		GTA V
 	*/
@@ -668,7 +668,7 @@ const Media = [
 		path: '60ba3a7b364399caf1869ff3b2e1c480.jpg',
 		productId: 8
 	},
-	
+
 	/*
 		Civilization VI
 	*/
@@ -717,7 +717,7 @@ const Media = [
 		path: '228362402849bc383cb38e59b8c037e1.jpg',
 		productId: 9
 	},
-	
+
 	/*
 		GRIP
 	*/
@@ -766,7 +766,7 @@ const Media = [
 		path: '3c1bfb3fe3f402753e4defe8dd916df5.jpg',
 		productId: 10
 	},
-	
+
 	/*
 		Assassins Creed
 	*/
@@ -815,7 +815,7 @@ const Media = [
 		path: '6f8e355eca4d00697a233d182d49fd1e.jpg',
 		productId: 11
 	},
-	
+
 	/*
 		Borderlands 2
 	*/
@@ -864,7 +864,7 @@ const Media = [
 		path: '76c534da821d09d7452a1c922b93e3e0.jpg',
 		productId: 12
 	},
-	
+
 	/*
 		Primordials
 	*/
@@ -913,7 +913,7 @@ const Media = [
 		path: 'b0ec745753213d41ff145eb7d8cda5ca.jpg',
 		productId: 13
 	},
-	
+
 	/*
 		Raft
 	*/
@@ -962,7 +962,7 @@ const Media = [
 		path: '49fb5559879f22c707a7c490f8930f0a.jpg',
 		productId: 14
 	},
-	
+
 	/*
 		Titanfall 2
 	*/
@@ -1011,7 +1011,7 @@ const Media = [
 		path: '70328664021056555dca804aca73d1fa.jpg',
 		productId: 15
 	},
-	
+
 	/*
 		Fall Guys
 	*/
@@ -1060,7 +1060,7 @@ const Media = [
 		path: 'd06273f6afab732acf8d6c87c5695336.jpg',
 		productId: 16
 	},
-	
+
 	/*
 		Phasmophobia
 	*/
@@ -1109,7 +1109,7 @@ const Media = [
 		path: '7d825cbc0c223c35568f1484c7692533.jpg',
 		productId: 17
 	},
-	
+
 	/*
 		Among Us
 	*/
@@ -1158,7 +1158,7 @@ const Media = [
 		path: 'e2c1d5a49a7e555df2394680421237c3.jpg',
 		productId: 18
 	},
-	
+
 	/*
 		Worms
 	*/
@@ -1207,7 +1207,7 @@ const Media = [
 		path: '8500ee33a84041d52ad1f19b4dd2d5cd.jpg',
 		productId: 19
 	},
-	
+
 	/*
 		Rust
 	*/
@@ -1263,11 +1263,11 @@ const Media = [
 * ================================================================================= */
 
 const ProductCategory = [
- 	/*
- 		Accion
- 	*/
- 	{
- 		categoryId: 1,
+	/*
+		  Accion
+	*/
+	{
+		categoryId: 1,
 		productId: 2
 	},
 	{
@@ -1318,7 +1318,7 @@ const ProductCategory = [
 		categoryId: 1,
 		productId: 19
 	},
-	
+
 	/*
 		Aventura
 	*/
@@ -1358,7 +1358,7 @@ const ProductCategory = [
 		categoryId: 2,
 		productId: 20
 	},
-	
+
 	/*
 		Carreras
 	*/
@@ -1374,7 +1374,7 @@ const ProductCategory = [
 		categoryId: 3,
 		productId: 10
 	},
-	
+
 	/*
 		Colorido
 	*/
@@ -1386,7 +1386,7 @@ const ProductCategory = [
 		categoryId: 4,
 		productId: 18
 	},
-	
+
 	/*
 		Competitivo
 	*/
@@ -1422,7 +1422,7 @@ const ProductCategory = [
 		categoryId: 5,
 		productId: 19
 	},
-	
+
 	/*
 		Cooperativo
 	*/
@@ -1474,7 +1474,7 @@ const ProductCategory = [
 		categoryId: 6,
 		productId: 20
 	},
-	
+
 	/*
 		Disparos
 	*/
@@ -1510,7 +1510,7 @@ const ProductCategory = [
 		categoryId: 7,
 		productId: 20
 	},
-	
+
 	/*
 		Divertido
 	*/
@@ -1534,7 +1534,7 @@ const ProductCategory = [
 		categoryId: 8,
 		productId: 19
 	},
-	
+
 	/*
 		Estrategia
 	*/
@@ -1554,7 +1554,7 @@ const ProductCategory = [
 		categoryId: 9,
 		productId: 19
 	},
-	
+
 	/*
 		Indie
 	*/
@@ -1574,7 +1574,7 @@ const ProductCategory = [
 		categoryId: 10,
 		productId: 16
 	},
-	
+
 	/*
 		Multijugador
 	*/
@@ -1638,7 +1638,7 @@ const ProductCategory = [
 		categoryId: 11,
 		productId: 20
 	},
-	
+
 	/*
 		Mundo abierto
 	*/
@@ -1678,7 +1678,7 @@ const ProductCategory = [
 		categoryId: 12,
 		productId: 20
 	},
-	
+
 	/*
 		Parkour
 	*/
@@ -1690,7 +1690,7 @@ const ProductCategory = [
 		categoryId: 13,
 		productId: 15
 	},
-	
+
 	/*
 		Por turnos
 	*/
@@ -1702,7 +1702,7 @@ const ProductCategory = [
 		categoryId: 14,
 		productId: 19
 	},
-	
+
 	/*
 		Primera Persona
 	*/
@@ -1734,7 +1734,7 @@ const ProductCategory = [
 		categoryId: 15,
 		productId: 20
 	},
-	
+
 	/*
 		Rol
 	*/
@@ -1746,7 +1746,7 @@ const ProductCategory = [
 		categoryId: 16,
 		productId: 12
 	},
-	
+
 	/*
 		Supervivencia
 	*/
@@ -1766,7 +1766,7 @@ const ProductCategory = [
 		categoryId: 17,
 		productId: 20
 	},
-	
+
 	/*
 		Tercera persona
 	*/
@@ -1790,7 +1790,7 @@ const ProductCategory = [
 		categoryId: 18,
 		productId: 16
 	},
-	
+
 	/*
 		Terror
 	*/
@@ -1798,7 +1798,7 @@ const ProductCategory = [
 		categoryId: 19,
 		productId: 17
 	},
-	
+
 	/*
 		Un jugador
 	*/
@@ -1837,6 +1837,218 @@ const ProductCategory = [
 ];
 
 /* =================================================================================
+* 		[ Creación de usuarios ]
+* ================================================================================= */
+
+const User = [
+	{
+		firstName: 'Kevin',
+		lastName: 'Vega',
+		email: 'huguito@masgrande.com',
+		password: '111111111',
+		isAdmin: true
+	},
+	{
+		firstName: 'Mati',
+		lastName: 'Lopez',
+		email: 'ura@calva.com',
+		password: '222222222',
+		isAdmin: true
+	},
+	{
+		firstName: 'Fake',
+		lastName: 'Lie',
+		email: 'noemail@fake.com',
+		password: '333333333',
+		isAdmin: true
+	},
+	{
+		firstName: 'Manu',
+		lastName: 'Lozano',
+		email: 'crack@solo.com',
+		password: '444444444',
+		isAdmin: true
+	},
+	{
+		firstName: 'Santi',
+		lastName: 'Martinez',
+		email: 'asado@ux.com',
+		password: '555555555',
+		isAdmin: true
+	},
+	{
+		firstName: 'Franco',
+		lastName: 'Bonomo',
+		email: 'streamer@tetris.com',
+		password: '666666666',
+		isAdmin: true
+	},
+	{
+		firstName: 'Carlos',
+		lastName: 'Saballe',
+		email: 'me@againme.com',
+		password: '777777777',
+		isAdmin: true
+	},
+	{
+		firstName: "Keen",
+		lastName: "Pohl",
+		email: "kpohl0@shop-pro.jp",
+		password: "Kannada",
+		isAdmin: false
+	},
+	{
+		firstName: 'Niel',
+		lastName: 'Hartnup',
+		email: 'nhartnup0@issuu.com',
+		password: 'Portuguese',
+		isAdmin: false
+	},
+	{
+		firstName: 'Vale',
+		lastName: 'Schlagh',
+		email: 'vschlagh1@github.io',
+		password: 'Kyrgyz',
+		isAdmin: false
+	},
+	{
+		firstName: 'Cynthie',
+		lastName: 'Grindall',
+		email: 'cgrindall2@lulu.com',
+		password: 'Swedish',
+		isAdmin: false
+	},
+	{
+		firstName: 'Pammi',
+		lastName: 'Aldis',
+		email: 'paldis3@mozilla.com',
+		password: 'Ndebele',
+		isAdmin: false
+	},
+	{
+		firstName: 'Pascale',
+		lastName: 'Shrubsall',
+		email: 'pshrubsall4@npr.org',
+		password: 'Haitian Creole',
+		isAdmin: false
+	},
+	{
+		firstName: 'Raquela',
+		lastName: 'Rozec',
+		email: 'rrozec5@barnesandnoble.com',
+		password: 'Punjabi',
+		isAdmin: false
+	},
+	{
+		firstName: 'Ilse',
+		lastName: 'McAllister',
+		email: 'imcallister6@apple.com',
+		password: 'Korean',
+		isAdmin: false
+	},
+	{
+		firstName: 'Shawn',
+		lastName: 'Greveson',
+		email: 'sgreveson7@howstuffworks.com',
+		password: 'Filipino',
+		isAdmin: false
+	},
+	{
+		firstName: 'Bernita',
+		lastName: 'Piscot',
+		email: 'bpiscot8@baidu.com',
+		password: 'Tok Pisin',
+		isAdmin: false
+	},
+	{
+		firstName: 'Meriel',
+		lastName: 'Gurrado',
+		email: 'mgurrado9@de.vu',
+		password: 'Kyrgyz',
+		isAdmin: false
+	},
+	{
+		firstName: 'Bastien',
+		lastName: 'Snowball',
+		email: 'bsnowballa@friendfeed.com',
+		password: 'Norwegian',
+		isAdmin: false
+	},
+	{
+		firstName: 'Grissel',
+		lastName: 'Balaam',
+		email: 'gbalaamb@creativecommons.org',
+		password: 'Kyrgyz',
+		isAdmin: false
+	},
+	{
+		firstName: 'Mathilde',
+		lastName: 'Giraudy',
+		email: 'mgiraudyd@uol.com.br',
+		password: 'Tetum',
+		isAdmin: false
+	},
+	{
+		firstName: 'Salmon',
+		lastName: 'Gouthier',
+		email: 'sgouthiere@nyu.edu',
+		password: 'Oriya',
+		isAdmin: false
+	},
+	{
+		firstName: 'Sheree',
+		lastName: 'Mayston',
+		email: 'smaystonf@msu.edu',
+		password: 'Nepali',
+		isAdmin: false
+	},
+	{
+		firstName: 'Talya',
+		lastName: 'Medlen',
+		email: 'tmedleng@mysql.com',
+		password: 'English',
+		isAdmin: false
+	},
+	{
+		firstName: 'Kahaleel',
+		lastName: 'Eilert',
+		email: 'keilerth@icq.com',
+		password: 'Malagasy',
+		isAdmin: false
+	}
+];
+
+/* =================================================================================
+* 		[ Carga de ordenes ]
+* ================================================================================= */
+
+const Order = [
+	{
+		status: 'cart'
+	},
+	{
+		status: 'created'
+	},
+	{
+		status: 'processing'
+	},
+	{
+		status: 'canceled'
+	},
+	{
+		status: 'completed' 
+	}
+];
+
+/* =================================================================================
+* 		[ Creación de relaciones entre Orden y Producto ]
+* ================================================================================= */
+
+const OrderProducts = [
+
+];
+
+/* =================================================================================
 * 		[ Exportamos los objetos creados anteriormente ]
 * ================================================================================= */
 
@@ -1844,5 +2056,8 @@ module.exports = {
 	Product,
 	Category,
 	Media,
-	ProductCategory
+	ProductCategory,
+	User, 
+	Order,
+	OrderProducts
 };
