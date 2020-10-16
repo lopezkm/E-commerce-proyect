@@ -1836,55 +1836,59 @@ const ProductCategory = [
 	}
 ];
 
+/* =================================================================================
+* 		[ Creación de usuarios ]
+* ================================================================================= */
+
 const User = [
 	{
 		firstName: 'Kevin',
 		lastName: 'Vega',
 		email: 'huguito@masgrande.com',
-		password: '123456789',
+		password: '111111111',
 		isAdmin: true
 	},
 	{
 		firstName: 'Mati',
 		lastName: 'Lopez',
 		email: 'ura@calva.com',
-		password: 'abcdefghi',
+		password: '222222222',
 		isAdmin: true
 	},
 	{
 		firstName: 'Fake',
 		lastName: 'Lie',
 		email: 'noemail@fake.com',
-		password: 'qqqqqqqqq',
-		isAdmin: false
+		password: '333333333',
+		isAdmin: true
 	},
 	{
 		firstName: 'Manu',
 		lastName: 'Lozano',
 		email: 'crack@solo.com',
-		password: 'wwwwwwwww',
+		password: '444444444',
 		isAdmin: true
 	},
 	{
 		firstName: 'Santi',
 		lastName: 'Martinez',
 		email: 'asado@ux.com',
-		password: 'eeeeeeeee',
+		password: '555555555',
 		isAdmin: true
 	},
 	{
 		firstName: 'Franco',
 		lastName: 'Bonomo',
 		email: 'streamer@tetris.com',
-		password: 'rrrrrrrrr',
+		password: '666666666',
 		isAdmin: true
 	},
 	{
 		firstName: 'Carlos',
 		lastName: 'Saballe',
 		email: 'me@againme.com',
-		password: 'ttttttttt',
-		isAdmin: false
+		password: '777777777',
+		isAdmin: true
 	},
 	{
 		firstName: "Keen",
@@ -1898,14 +1902,14 @@ const User = [
 		lastName: 'Hartnup',
 		email: 'nhartnup0@issuu.com',
 		password: 'Portuguese',
-		isAdmin: true
+		isAdmin: false
 	},
 	{
 		firstName: 'Vale',
 		lastName: 'Schlagh',
 		email: 'vschlagh1@github.io',
 		password: 'Kyrgyz',
-		isAdmin: true
+		isAdmin: false
 	},
 	{
 		firstName: 'Cynthie',
@@ -1919,21 +1923,21 @@ const User = [
 		lastName: 'Aldis',
 		email: 'paldis3@mozilla.com',
 		password: 'Ndebele',
-		isAdmin: true
+		isAdmin: false
 	},
 	{
 		firstName: 'Pascale',
 		lastName: 'Shrubsall',
 		email: 'pshrubsall4@npr.org',
 		password: 'Haitian Creole',
-		isAdmin: true
+		isAdmin: false
 	},
 	{
 		firstName: 'Raquela',
 		lastName: 'Rozec',
 		email: 'rrozec5@barnesandnoble.com',
 		password: 'Punjabi',
-		isAdmin: true
+		isAdmin: false
 	},
 	{
 		firstName: 'Ilse',
@@ -1954,7 +1958,7 @@ const User = [
 		lastName: 'Piscot',
 		email: 'bpiscot8@baidu.com',
 		password: 'Tok Pisin',
-		isAdmin: true
+		isAdmin: false
 	},
 	{
 		firstName: 'Meriel',
@@ -1975,14 +1979,14 @@ const User = [
 		lastName: 'Balaam',
 		email: 'gbalaamb@creativecommons.org',
 		password: 'Kyrgyz',
-		isAdmin: true
+		isAdmin: false
 	},
 	{
 		firstName: 'Mathilde',
 		lastName: 'Giraudy',
 		email: 'mgiraudyd@uol.com.br',
 		password: 'Tetum',
-		isAdmin: true
+		isAdmin: false
 	},
 	{
 		firstName: 'Salmon',
@@ -1996,14 +2000,14 @@ const User = [
 		lastName: 'Mayston',
 		email: 'smaystonf@msu.edu',
 		password: 'Nepali',
-		isAdmin: true
+		isAdmin: false
 	},
 	{
 		firstName: 'Talya',
 		lastName: 'Medlen',
 		email: 'tmedleng@mysql.com',
 		password: 'English',
-		isAdmin: true
+		isAdmin: false
 	},
 	{
 		firstName: 'Kahaleel',
@@ -2014,6 +2018,35 @@ const User = [
 	}
 ];
 
+/* =================================================================================
+* 		[ Carga de ordenes ]
+* ================================================================================= */
+
+const Order = [
+	{
+		status: 'cart'
+	},
+	{
+		status: 'created'
+	},
+	{
+		status: 'processing'
+	},
+	{
+		status: 'canceled'
+	},
+	{
+		status: 'completed' 
+	}
+];
+
+/* =================================================================================
+* 		[ Creación de relaciones entre Orden y Producto ]
+* ================================================================================= */
+
+const OrderProducts = [
+
+];
 
 /* =================================================================================
 * 		[ Exportamos los objetos creados anteriormente ]
@@ -2024,5 +2057,7 @@ module.exports = {
 	Category,
 	Media,
 	ProductCategory,
-	User
+	User, 
+	Order,
+	OrderProducts
 };

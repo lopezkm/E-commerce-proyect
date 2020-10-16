@@ -66,11 +66,6 @@ Product.belongsToMany( Order, { through: OrderProducts } );
 	if ( process.env.NODE_ENV && ( process.env.NODE_ENV !== 'development' ) ) {
 		return;
 	}
-	const mock = require( '../.mockdata' );
-	const mod = Object.keys( mock );
-
-	console.log('MODDDDD',mod);
-
 	
 	sequelize.afterBulkSync( ( ) => {
 		const mockData = require( '../.mockdata' );
