@@ -32,34 +32,32 @@ server.get( '/:id/orders', ( request, response ) => {
 * 		[ Obtención de los productos del carrito del usuario ]
 * ================================================================================= */
 
+/*
+	- El carrito es la última orden abierta que tenga el usuario
+	- Si no tiene orden abierta retorna un estado 404
+*/
+
 server.get( '/:id/cart', ( request, response ) => {
 	const { id } = request.params;
 	
-	User.findByPk( id )
-		.then( user => {
-			if ( !user ) {
-				return response.sendStatus( 404 );
+	Order.findOne( {
+		where: {
+			userId: id,
+			status: {
+				[ Op.or ]: [ 'cart', 'created', 'processing' ]
 			}
-			
-			return user.getOrders( {
-				where: {
-					status: {
-						[ Op.or ]: [ 'cart', 'created', 'processing' ]
-					}
-				}
-			} );
-		} )
-		.then( ( orders ) => {
-			if ( !orders ) {
-				return response.sendStatus( 200 );
-			}
-			
-			orders[ 0 ].getProducts( )
-				.then( ( products ) => {
-					response.send( 200 ).status( products );
-				} );
-		} )
-		.catch( error => response.status( 400 ).send( error ) );
+		}
+	} )
+	.then( ( order ) => {
+		if ( !order ) {
+			return response.sendStatus( 404 );
+		}
+		
+		order.getProducts( ).then( ( products ) => {
+			response.send( 200 ).status( products );
+		} );
+	} )
+	.catch( error => response.status( 500 ).send( error ) );
 } );
 
 /* =================================================================================
