@@ -2,6 +2,8 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Card, Button, Carousel, Container, Col, Row, Badge } from 'react-bootstrap';
 import defaultBanner from '../../assets/banner.jpg';
+import ProductCard from '../ProductCard/ProductCard.jsx';
+import { Link } from 'react-router-dom';
 /* import store from '../../redux/store/store.js'; */
 /* console.log('product', store.getState()); */
 
@@ -14,7 +16,7 @@ function Product({ productId }) {
 	const [isLoading, setLoading] = useState(true);
 	const [productCategories, setProductCategories] = useState("");
 	const [recommendProduct, setRecommendProduct] = useState([]);
-	
+
 
 	const getProduct = () => {
 		axios.get(`${API_URL}/products/${productId}`)
@@ -31,15 +33,15 @@ function Product({ productId }) {
 
 	}
 
-	
 
-	const getRecommendProduct = () =>{
+
+	const getRecommendProduct = () => {
 		axios.get(`${API_URL}/products/category/${productCategories}`)
-		.then((response) => {
-			
-			let recommendProds = response.data;
-			setRecommendProduct(recommendProds)
-		});
+			.then((response) => {
+
+				let recommendProds = response.data;
+				setRecommendProduct(recommendProds)
+			});
 	}
 
 	const processMedia = ({ media }) => {
@@ -63,13 +65,13 @@ function Product({ productId }) {
 
 	useEffect(() => {
 		getProduct();
-		
+
 		if (productCategories) {
 			setLoading(false)
 		}
 
 		getRecommendProduct();
-		
+
 	}, [isLoading]);
 
 	if (isLoading) {
@@ -130,13 +132,31 @@ function Product({ productId }) {
 						</Row>
 
 						{product.stock === 0 &&
-							<Row className="product-row-border-top">
+							(<Row className="product-row-border-top">
 								<h2> Otros juegos que te pueden interesar:</h2>
 								{
+									
 									//mapear recommendProduct para renderizar las cartas
-									<div>{console.log("recomend: ", recommendProduct)}</div>
+									recommendProduct.map((p, i) => (
+										<Col xs={12} sm={6} md={4} lg={3} key={i} className='catalogue__product-col'>
+											<Link to={`/product/${p.id}`} className='catalogue__product-link'>
+
+												<ProductCard
+													key={p.id}
+													name={p.name}
+													price={p.price}
+													developer={p.developer}
+													media={p.media}
+													stock={p.stock}
+												/>
+
+											</Link>
+										</Col>
+									))
+
 								}
 							</Row>
+							)
 
 						}
 					</Card.Text>
