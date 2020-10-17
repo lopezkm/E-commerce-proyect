@@ -45,7 +45,7 @@ function Catalogue( props )
 		if ( !firstRender.current )
 		{
 			query.categories = [ ...checked ];
-			query = qs.stringify( query, { arrayFormat: 'comma' } );
+			query = '?' + qs.stringify( query, { arrayFormat: 'comma' } );
 			
 			props.history.push( `/products${ query }` );
 		}
