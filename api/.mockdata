@@ -2259,11 +2259,7 @@ const Order = [
 * 		[ Creación de relaciones entre Orden y Producto ]
 * ================================================================================= */
 
-<<<<<<< HEAD
 const OrderProduct = [
-
-=======
-const OrderProducts = [
 	/*
 		Orden id 1
 	*/
@@ -3614,7 +3610,6 @@ const OrderProducts = [
 		quantity: 2,
 		price: 24.74
 	}
->>>>>>> master
 ];
 
 /* =================================================================================
