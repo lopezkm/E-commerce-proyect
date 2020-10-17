@@ -99,6 +99,7 @@ const FormAdminModify = () => {
     }
 
     const handleCheckChange = (event) => {
+        console.log('EVENT',event.target.name);
         let formCheck = document.getElementById(event.target.name);
         formCheck.disabled = !formCheck.disabled
     }
@@ -202,14 +203,13 @@ const FormAdminModify = () => {
                                 <Col>
                                     <Form.Row>
                                         <Col xs={0.5}>
-                                            <Form.Check
-                                                type="checkbox"
+                                            <Form.Switch 
+                                                type="switch"
+                                                id="switch-name"
                                                 name="formName"
+                                                label="Nombre"
                                                 onChange={(event) => handleCheckChange(event)}
                                             />
-                                        </Col>
-                                        <Col>
-                                            <Form.Label>Nombre:</Form.Label>
                                         </Col>
                                     </Form.Row>
                                     <Form.Control type="text"
@@ -222,14 +222,13 @@ const FormAdminModify = () => {
                                 <Col> 
                                     <Form.Row>
                                         <Col xs={0.5}>
-                                            <Form.Check
-                                                type="checkbox"
+                                        <Form.Switch 
+                                                type="switch"
+                                                id="switch-price"
                                                 name="formPrice"
+                                                label="Precio"
                                                 onChange={(event) => handleCheckChange(event)}
                                             />
-                                        </Col>
-                                        <Col>
-                                            <Form.Label>Precio:</Form.Label>
                                         </Col>
                                     </Form.Row>
                                     <Form.Control type="number"
@@ -242,14 +241,13 @@ const FormAdminModify = () => {
                                 <Col>
                                     <Form.Row>
                                         <Col xs={0.5}>
-                                            <Form.Check
-                                                type="checkbox"
+                                        <Form.Switch 
+                                                type="switch"
+                                                id="switch-stock"
                                                 name="formStock"
+                                                label="Stock disponible"
                                                 onChange={(event) => handleCheckChange(event)}
                                             />
-                                        </Col>
-                                        <Col>
-                                            <Form.Label>Stock disponible:</Form.Label>
                                         </Col>
                                     </Form.Row>
                                     <Form.Control type="number"
@@ -263,14 +261,13 @@ const FormAdminModify = () => {
 
                             <Form.Row>
                                 <Col xs={0.5}>
-                                    <Form.Check
-                                        type="checkbox"
+                                    <Form.Switch 
+                                        type="switch"
+                                        id="switch-description"
                                         name="formDescription"
+                                        label="Descripcion"
                                         onChange={(event) => handleCheckChange(event)}
                                     />
-                                </Col>
-                                <Col>
-                                    <Form.Label>Descripcion:</Form.Label>
                                 </Col>
                             </Form.Row>
                             <Form.Control
@@ -286,14 +283,13 @@ const FormAdminModify = () => {
                                 <Col>
                                     <Form.Row>
                                         <Col xs={0.5}>
-                                            <Form.Check
-                                                type="checkbox"
+                                            <Form.Switch 
+                                                type="switch"
+                                                id="switch-developer"
                                                 name="formDeveloper"
+                                                label="Desarrollado por"
                                                 onChange={(event) => handleCheckChange(event)}
                                             />
-                                        </Col>
-                                        <Col>
-                                            <Form.Label>Desarrollado por:</Form.Label>
                                         </Col>
                                     </Form.Row>
                                     <Form.Control type="text"
@@ -306,14 +302,13 @@ const FormAdminModify = () => {
                                 <Col>
                                     <Form.Row>
                                         <Col xs={0.5}>
-                                            <Form.Check
-                                                type="checkbox"
+                                            <Form.Switch 
+                                                type="switch"
+                                                id="switch-publisher"
                                                 name="formPublisher"
+                                                label="Publicado por"
                                                 onChange={(event) => handleCheckChange(event)}
                                             />
-                                        </Col>
-                                        <Col>
-                                            <Form.Label>Publicado por:</Form.Label>
                                         </Col>
                                     </Form.Row>
                                     <Form.Control type="text"
@@ -326,14 +321,13 @@ const FormAdminModify = () => {
                                 <Col>
                                     <Form.Row>
                                         <Col xs={0.5}>
-                                            <Form.Check
-                                                type="checkbox"
+                                        <Form.Switch 
+                                                type="switch"
+                                                id="switch-publish-date"
                                                 name="formPublishDate"
+                                                label="Fecha de lanzamiento"
                                                 onChange={(event) => handleCheckChange(event)}
                                             />
-                                        </Col>
-                                        <Col>
-                                            <Form.Label>Fecha de lanzamiento:</Form.Label>
                                         </Col>
                                     </Form.Row>
                                     <Form.Control type="date"
