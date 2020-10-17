@@ -10,6 +10,7 @@ import Catalogue from './components/Catalogue/Catalogue.jsx'
 import NavBar from './components/NavBar/NavBar.jsx';
 import Result from './components/search_results.jsx'
 import Order from './components/Order/Order.jsx'
+import CreateUser from './components/FormCreateUser/FormCreateUser.jsx'
 import FormAdd from './components/FormAdmin/form_add_category.jsx'
 import FormAdminCreate from './components/FormAdmin/form_admin_create.jsx';
 import FormAdminDelete from './components/FormAdmin/form_admin_delete.jsx';
@@ -30,6 +31,8 @@ function App( )
 			<Route exact path='/Admin/delete' component={ FormAdminDelete } />
 			<Route exact path='/Admin/modify' component={ FormAdminModify } />
 			<Route exact path="/Admin/categories" component={ FormAdd } />
+			<Route exact path='/order' component={ Order } />
+			<Route exact path='/createUser' component={ CreateUser } />
 			<Route exact path="/Admin/orders" component={ OrderTable } />
 			<Route exact path="/products" component={ Catalogue } />
 			<Route exact path ='/product/:productId' render={ ( { match } ) =>
