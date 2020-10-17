@@ -27,10 +27,6 @@ function NavBar( )
 					<Nav.Link href="/admin">
 						<p className="navbar-option-text">Panel Admin</p>
 					</Nav.Link>
-					<div className="navbar-separator"></div>
-					<Nav.Link href="/orders">
-						<p className="navbar-option-text">Panel Ordenes</p>
-					</Nav.Link>
 				</Nav>
 				<SearchBar/>
 			</Navbar.Collapse>
