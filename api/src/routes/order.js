@@ -1,3 +1,4 @@
+const { Op } = require('sequelize');
 const server = require( 'express' ).Router( );
 const { Order } = require( '../db.js' );
 
@@ -7,8 +8,8 @@ const { Order } = require( '../db.js' );
 
 server.get( '/', ( request, response ) => {
 	const { status } = request.query;
-	const options = !status ? { } : { where: { status: { [ Op.iLike ]: status } } };
-	
+	const options = !status ? { } : { where: { status: status } };
+	console.log(status);
 	Order.findAll( options ).then( ( orders ) => {
 		if ( !orders ) {
 			return response.sendStatus( 404 );

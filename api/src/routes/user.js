@@ -44,7 +44,7 @@ server.get( '/:id/cart', ( request, response ) => {
 		} )
 		.then( ( orders ) => {
 			if ( !orders ) {
-				return response.sendStatus( 200 );
+				return response.sendStatus( 200 ); 
 			}
 			
 			orders[ 0 ].getProducts( )

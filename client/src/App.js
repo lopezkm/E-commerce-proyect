@@ -13,6 +13,7 @@ import FormAdd from './components/FormAdmin/form_add_category.jsx'
 import FormAdminCreate from './components/FormAdmin/form_admin_create.jsx';
 import FormAdminDelete from './components/FormAdmin/form_admin_delete.jsx';
 import FormAdminModify from './components/FormAdmin/form_admin_modify.jsx';
+import OrderTable from './components/OrderTable/orderTable.jsx'
 
 function App( )
 {
@@ -30,6 +31,7 @@ function App( )
 					productId = { match.params.productId }
 				/>
 			} />
+			<Route exact path="/orders" component={ OrderTable } />
 		</Container>
 	);
 }
