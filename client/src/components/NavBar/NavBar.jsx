@@ -3,7 +3,7 @@ import { Nav, Navbar } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 import SearchBar from '../SearchBar/SearchBar.jsx';
-import logo from '../../assets/logo.png';
+import { ReactComponent as Logo } from '../../assets/logofull.svg';
 import store from '../../redux/store/store.js';
 console.log('navBar',store.getState());
 
@@ -12,7 +12,7 @@ function NavBar( )
 	return (
 		<Navbar collapseOnSelect expand="md" fixed="top" variant="dark" className="navbar-main">
 			<Navbar.Brand href="#home">
-				<img src={ logo } className="navbar-logo" alt="Logo"/>
+				<Logo className="navbar-logo"/>
 			</Navbar.Brand>
 			<Navbar.Toggle aria-controls="navbarCollapse">
 				<FontAwesomeIcon icon={ faBars } className="navbar-open-menu"/>
@@ -24,12 +24,8 @@ function NavBar( )
 						<p className="navbar-option-text">Catálogo</p>
 					</Nav.Link>
 					<div class="navbar-separator"></div>
-					<Nav.Link href="/categories">
-						<p className="navbar-option-text">Panel Categorías</p>
-					</Nav.Link>
-					<div class="navbar-separator"></div>
-					<Nav.Link href="/admin/create">
-						<p className="navbar-option-text">Panel Productos</p>
+					<Nav.Link href="/admin">
+						<p className="navbar-option-text">Panel Admin</p>
 					</Nav.Link>
 				</Nav>
 				<SearchBar/>
