@@ -10,12 +10,11 @@ import Catalogue from './components/Catalogue/Catalogue.jsx'
 import NavBar from './components/NavBar/NavBar.jsx';
 import Result from './components/search_results.jsx'
 import Order from './components/Order/Order.jsx'
-import CreateUser from './components/FormCreateUser/FormCreateUser.jsx'
 import FormAdd from './components/FormAdmin/form_add_category.jsx'
 import FormAdminCreate from './components/FormAdmin/form_admin_create.jsx';
 import FormAdminDelete from './components/FormAdmin/form_admin_delete.jsx';
 import FormAdminModify from './components/FormAdmin/form_admin_modify.jsx';
-import OrderTable from './components/OrderTable/orderTable.jsx'
+import OrderTable from './components/FormAdmin/OrderTable/orderTable.jsx'
 import Cart from './components/Cart/Cart.jsx';
 import PanelAdmin from './components/PanelAdmin/PanelAdmin.jsx';
 
@@ -24,18 +23,14 @@ function App( )
 	return (
 		<Container fluid>
 			<Route path="/" component={ ( ) => <NavBar/> }/>
+			<Route path='/order' component={ Order } />
 			<Route path="/search/:product" render={ ( { match } ) => <Result products={ match.params.product }/> }/>
 			<Route exact path='/Admin' component={ PanelAdmin } />
 			<Route exact path='/Admin/create' component={ FormAdminCreate } />
 			<Route exact path='/Admin/delete' component={ FormAdminDelete } />
 			<Route exact path='/Admin/modify' component={ FormAdminModify } />
 			<Route exact path="/Admin/categories" component={ FormAdd } />
-<<<<<<< HEAD
 			<Route exact path="/Admin/orders" component={ OrderTable } />
-=======
-			<Route exact path='/order' component={ Order } />
-			<Route exact path='/createUser' component={ CreateUser } />
->>>>>>> master
 			<Route exact path="/products" component={ Catalogue } />
 			<Route exact path ='/product/:productId' render={ ( { match } ) =>
 				<Product 
