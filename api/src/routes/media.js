@@ -1,30 +1,5 @@
 const server = require( 'express' ).Router( );
-const { Media, Product } = require( '../db.js' );
-
-/* =================================================================================
-* 		[ Creación de la relación entre un producto y una media ]
-* ================================================================================= */
-
-server.post( '/:idMedia/product/:idProduct', ( request, response, next ) => {
-	const { idMedia, idProduct } = request.params;
-	const promises = [ ];
-	
-	promises.push( Media.findByPk( idMedia ) );
-	promises.push( Product.findByPk( idProduct ) );
-	
-	Promise.all( promises )
-		.spread( function( media, product ) {
-			if ( !media || !product ) {
-				return response.sendStatus( 404 );
-			}
-			
-			media.addProduct( product )
-				.then( ( data ) => {
-					( !!data ) ?
-						response.sendStatus( 201 ) : response.sendStatus( 409 );
-				} );
-		} );
-} );
+const { Media } = require( '../db.js' );
 
 /* =================================================================================
 * 		[ Creación de un modelo Media ]
@@ -32,29 +7,13 @@ server.post( '/:idMedia/product/:idProduct', ( request, response, next ) => {
 
 server.post( '/', ( request, response ) => {
 	Media.create( {
-			...request.body
-		} )
-		.then( media => response.status( 200 ).send( media ) )
-		.catch( error => { console.log( error ); response.status( 400 ).send( error ); } );
-} );
-
-/* =================================================================================
-* 		[ Modificación de un modelo Media ]
-* ================================================================================= */
-
-server.put( '/:id', ( request, response ) => {
-	let { id } = request.params;
-	
-	Media.findByPk( id )
-		.then( media => {
-			if ( !media ) {
-				return response.status( 404 ).send( 'Media inexistente' );
-			}
-			
-			media.update( { ...request.body } )
-                .then( media => response.status( 200 ).send( media ) )
-                .catch( error => response.status( 400 ).send( error ) );
-		} );
+		...request.body
+	}, {
+		fields: [ 'path', 'type', 'productId' ]
+	} )
+	.then( ( media ) => {
+		response.status( 200 ).send( media );
+	} );
 } );
 
 /* =================================================================================
@@ -64,15 +23,15 @@ server.put( '/:id', ( request, response ) => {
 server.delete( '/:id', ( request, response ) => {
 	let { id } = request.params;
 	
-	Media.findByPk( id )
-		.then( media => {
-			if ( !media ) {
-				return response.status( 404 ).send( 'Media inexistente' );
-			}
+	Media.findByPk( id ).then( media => {
+		if ( !media ) {
+			return response.sendStatus( 404 );
+		}
 
-			media.destroy( )
-				.then( ( ) => response.sendStatus( 204 ) );
+		media.destroy( ).then( ( ) => {
+			response.sendStatus( 204 );
 		} );
+	} );
 } );
 
 /* =================================================================================
