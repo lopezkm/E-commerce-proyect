@@ -1,0 +1,34 @@
+
+ .orderTable-selector-button {
+    font-family: $barlow;
+    font-size: 1rem;
+    color:white;
+    background-color: $blue;
+    margin-bottom: 2rem;
+    height: 3rem;
+    border-radius: 5px;
+    border-color: $blue;
+    margin-top: 2rem;
+} 
+.orderTable-table {
+    font-family: $barlow;
+    font-size: 0.9rem;
+}  
+th, td {
+    text-align: center;
+}
+h1 {
+    font-size: 1rem;
+    color: white;
+    display: inline-block;
+    margin-top: 4rem;
+}
+.dropdown {
+    max-width: min-content;
+    display: inline-block;
+    margin-left: 1rem;
+}
+
+div {
+    text-align: center;
+}

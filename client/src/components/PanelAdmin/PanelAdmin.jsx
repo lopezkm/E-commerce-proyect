@@ -8,7 +8,7 @@ function PanelAdmin(){
     return (
         <Container>
             <Row>
-                <Col xs={3}>
+                <Col xs={2}>
                     <Link to="/admin/categories">
                         <Card bg="primary" text="white">
                             <Card.Body>
@@ -17,7 +17,7 @@ function PanelAdmin(){
                         </Card>
                     </Link>
                 </Col>
-                <Col xs={3}>
+                <Col xs={2}>
                     <Link to="/admin/create">
                         <Card bg="primary" text="white">
                             <Card.Body>
@@ -26,7 +26,7 @@ function PanelAdmin(){
                         </Card>
                     </Link>
                 </Col>
-                <Col xs={3}>
+                <Col xs={2}>
                     <Link to="/admin/modify">
                         <Card bg="primary" text="white">
                             <Card.Body>
@@ -35,11 +35,20 @@ function PanelAdmin(){
                         </Card>
                     </Link>
                 </Col>
-                <Col xs={3}>
+                <Col xs={2}>
                     <Link to="/admin/delete">
                         <Card bg="primary" text="white">
                             <Card.Body>
                                 <Card.Title> Eliminar producto <FontAwesomeIcon icon={ faChevronCircleRight } /> </Card.Title>
+                            </Card.Body>
+                        </Card>
+                    </Link>
+                </Col>
+                <Col xs={2}>
+                    <Link to="/admin/orders">
+                        <Card bg="primary" text="white">
+                            <Card.Body>
+                                <Card.Title> Filtrar ordenes <FontAwesomeIcon icon={ faChevronCircleRight } /> </Card.Title>
                             </Card.Body>
                         </Card>
                     </Link>
