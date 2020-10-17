@@ -93,9 +93,8 @@ function Catalogue( )
 						</div>
 						{
 							categories.map( ( c, i ) => (
-								<div className='catalogue__categories-list-item' style={ { display: ( i < 7 || expanded ) ? 'block' : 'none' } }>
+								<div key = { i } className='catalogue__categories-list-item' style={ { display: ( i < 7 || expanded ) ? 'block' : 'none' } }>
 									<Checkable
-										key = { i }
 										name = { c.name }
 										id = { c.id }
 										onChange = { onChangeHandler }

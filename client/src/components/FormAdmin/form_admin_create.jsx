@@ -83,7 +83,7 @@ const FormAdminCreate = () => {
                         <Col>
                             <Form.Group>
                                 <Form.Control type="text"
-                                    required="true"
+                                    required={true}
                                     placeholder="Nombre de su videojuego..."
                                     name="name"
                                     ref={nameInput}
@@ -98,7 +98,7 @@ const FormAdminCreate = () => {
                                 <Form.Control
                                     type="number"
                                     step="0.01"
-                                    required="true"
+                                    required={true}
                                     placeholder="Costo del videojuego. Ej: 39.99"
                                     name="price"
                                     onChange={(event) => handleInputChange(event)} />
@@ -110,7 +110,7 @@ const FormAdminCreate = () => {
                         <Col>
                             <Form.Group>
                                 <Form.Control type="number"
-                                    required="true"
+                                    required={true}
                                     placeholder="Cantidad disponible..."
                                     name="stock"
                                     onChange={(event) => handleInputChange(event)} />
@@ -126,7 +126,7 @@ const FormAdminCreate = () => {
                             as="textarea"
                             rows={4}
                             placeholder="Descripcion para su videojuego..."
-                            required="true"
+                            required={true}
                             minLength="15"
                             name="description"
                             onChange={(event) => handleInputChange(event)} />
@@ -139,7 +139,7 @@ const FormAdminCreate = () => {
                         <Col>
                             <Form.Group>
                                 <Form.Control type="text"
-                                    required="true"
+                                    required={true}
                                     placeholder="Desarrolladora"
                                     name="developer"
                                     onChange={(event) => handleInputChange(event)} />
@@ -151,7 +151,7 @@ const FormAdminCreate = () => {
                         <Col>
                             <Form.Group>
                                 <Form.Control type="text"
-                                    required="true"
+                                    required={true}
                                     placeholder="Publicadora"
                                     name="publisher"
                                     onChange={(event) => handleInputChange(event)} />
@@ -163,7 +163,7 @@ const FormAdminCreate = () => {
                         <Col>
                             <Form.Group>
                                 <Form.Control type="date"
-                                    required="true"
+                                    required={true}
                                     name="publishDate"
                                     onChange={(event) => handleInputChange(event)} />
                             </Form.Group>
@@ -171,10 +171,10 @@ const FormAdminCreate = () => {
                     </Row>
 
                     <Form.Group>
-                        <Form.Control required="true" as="select" multiple bsPrefix="custom-select"  >
+                        <Form.Control required={true} as="select" multiple bsPrefix="custom-select"  >
                             {
-                                categories.map(cat => (
-                                    <option>{cat.name}</option>
+                                categories.map((cat,i) => (
+                                    <option key={i}>{cat.name}</option>
                                 ))
                             }
                         </Form.Control>

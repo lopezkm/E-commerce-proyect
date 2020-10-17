@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Nav, Navbar } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
@@ -23,7 +23,7 @@ function NavBar( )
 					<Nav.Link href="/products">
 						<p className="navbar-option-text">Catálogo</p>
 					</Nav.Link>
-					<div class="navbar-separator"></div>
+					<div className="navbar-separator"></div>
 					<Nav.Link href="/admin">
 						<p className="navbar-option-text">Panel Admin</p>
 					</Nav.Link>
