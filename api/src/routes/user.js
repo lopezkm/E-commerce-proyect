@@ -9,23 +9,25 @@ const { User, Order, Product } = require( '../db.js' );
 /*
 	- Retorna un arreglo con las órdenes pertenecientes al usuario.
 	- Retorna todas las órdenes, no solo las que estén cerradas o abiertas.
-	- Retorna las órdenes ordenadas por fecha de creación ( nueva > vieja )
+	- Devuelve las órdenes ordenadas por fecha de creación (de más nueva a mas vieja)
 */
 
 server.get( '/:id/orders', ( request, response ) => {
 	const { id } = request.params;
 	
-	User.findByPk( id )
-		.then( user => {
-			if ( !user ) {
-				return response.sendStatus( 404 );
-			}
-			
-			user.getOrders( ).then( ( orders ) => {
-				response.status( 200 ).send( orders );
-			} );
-		} )
-		.catch( error => response.status( 500 ).send( error ) );
+	User.findByPk( id ).then( ( user ) => {
+		if ( !user ) {
+			return response.sendStatus( 404 );
+		}
+		
+		user.getOrders( {
+			order: [
+				[ 'createdAt', 'DESC' ]
+			]
+		} ).then( ( orders ) => {
+			response.status( 200 ).send( orders );
+		} );
+	} );
 } );
 
 /* =================================================================================
@@ -37,7 +39,7 @@ server.get( '/:id/orders', ( request, response ) => {
 	- No agrega un producto sino que sirve para "inicializar" el carrito
 */
 
-server.post( '/:idUser/cart', ( request, response ) => {
+server.post( '/:id/cart', ( request, response ) => {
 	const { id } = request.params;
 	
 	Order.findOne( {
@@ -60,9 +62,6 @@ server.post( '/:idUser/cart', ( request, response ) => {
 		.then( ( newOrder ) => {
 			response.status( 201 ).send( newOrder );
 		} );
-	} )
-	.catch( ( error ) => {
-		response.status( 500 ).send( error );
 	} );
 } );
 
@@ -94,8 +93,7 @@ server.get( '/:id/cart', ( request, response ) => {
 		order.getProducts( ).then( ( products ) => {
 			response.send( 200 ).status( products );
 		} );
-	} )
-	.catch( error => response.status( 500 ).send( error ) );
+	} );
 } );
 
 /* =================================================================================
@@ -125,8 +123,7 @@ server.delete( '/:id/cart', ( request, response ) => {
 		order.removeProducts( ).then( ( ) => {
 			response.sendStatus( 204 );
 		} );
-	} )
-	.catch( error => response.status( 500 ).send( error ) );
+	} );
 } );
 
 /* =================================================================================
@@ -143,75 +140,71 @@ server.put( '/:id/cart', ( request, response ) => {
 	const { id } = request.params;
 	const { productId, quantity } = request.body;
 	
-	Product.findByPk( productId )
-		.then( ( product ) => {
-			if ( !product ) {
-				throw new Error( 'Product not found' );
-			}
-			
-			if ( product.stock < quantity ) {
-				throw new Error( 'Not enough stock' );
-			}
-			
-			return Order.findOne( {
+	Product.findByPk( productId ).then( ( product ) => {
+		if ( !product ) {
+			throw new Error( 'Product not found' );
+		}
+		
+		if ( product.stock < quantity ) {
+			throw new Error( 'Not enough stock' );
+		}
+		
+		return Order.findOne( {
+			where: {
+				userId: id,
+				status: 'cart'
+			},
+			include: {
+				model: Product,
+				required: false,
 				where: {
-					userId: id,
-					status: 'cart'
-				},
-				include: {
-					model: Product,
-					required: false,
-					where: {
-						id: productId
-					}
+					id: productId
 				}
-			} );
-		} )
-		.then( ( order ) => {
-			if ( !order ) {
-				throw new Error( 'Order not found' );
 			}
-			
-			if ( quantity <= 0 )
-			{
-				return OrderProduct.destroy( {
-					where: {
-						orderId: order.id,
-						productId
-					}
-				} );
-			}
-			
-			return OrderProduct.findOrCreate( {
+		} );
+	} )
+	.then( ( order ) => {
+		if ( !order ) {
+			throw new Error( 'Order not found' );
+		}
+		
+		if ( quantity <= 0 )
+		{
+			return OrderProduct.destroy( {
 				where: {
 					orderId: order.id,
 					productId
-				},
-				defaults: {
-					price: product.price,
-					quantity
 				}
 			} );
-		} )
-		.then( ( data ) => {
-			if ( !Array.isArray( data ) ) {
-				return response.sendStatus( 204 );
+		}
+		
+		return OrderProduct.findOrCreate( {
+			where: {
+				orderId: order.id,
+				productId
+			},
+			defaults: {
+				price: product.price,
+				quantity
 			}
-			
-			const [ orderline, created ] = data;
-			
-			if ( created )
-			{
-				return response.sendStatus( 201 );
-			}
-			
-			orderline.update( { quantity } ).then( ( ) => {
-				response.sendStatus( 200 );
-			} );
-		} )
-		.catch( ( error ) => {
-			response.status( 500 ).send( error );
 		} );
+	} )
+	.then( ( data ) => {
+		if ( !Array.isArray( data ) ) {
+			return response.sendStatus( 204 );
+		}
+		
+		const [ orderline, created ] = data;
+		
+		if ( created )
+		{
+			return response.sendStatus( 201 );
+		}
+		
+		orderline.update( { quantity } ).then( ( ) => {
+			response.sendStatus( 200 );
+		} );
+	} );
 } );
 
 /* =================================================================================
@@ -221,15 +214,13 @@ server.put( '/:id/cart', ( request, response ) => {
 server.get( '/:id', ( request, response ) => {
 	let { id } = request.params;
 	
-	User.findByPk( id )
-		.then( user => {
-			if ( !user ) {
-				return response.sendStatus( 404 );
-			}
-			
-			response.status( 200 ).send( user );
-		} )
-		.catch( error => response.status( 400 ).send( error ) );
+	User.findByPk( id ).then( user => {
+		if ( !user ) {
+			return response.sendStatus( 404 );
+		}
+		
+		response.status( 200 ).send( user );
+	} );
 } );
 
 /* =================================================================================
@@ -238,9 +229,8 @@ server.get( '/:id', ( request, response ) => {
 
 server.get( '/', ( request, response ) => {
 	User.findAll( ).then( ( users ) => {
-			response.status( 200 ).send( users );
-		} )
-        .catch( error => response.status( 400 ).send( error ) );
+		response.status( 200 ).send( users );
+	} );
 } );
 
 /* =================================================================================
@@ -249,16 +239,13 @@ server.get( '/', ( request, response ) => {
 
 server.post( '/', ( request, response ) => {
 	User.create( {
-			...request.body
-		} )
-		.then( user => {
-			if ( !user ) {
-				return response.sendStatus( 400 );
-			}
-			
-			response.send( user );
-		} )
-		.catch( error => response.status( 400 ).send( error ) );
+		...request.body
+	}, {
+		fields: [ 'firstName', 'lastName', 'email', 'password' ]
+	} )
+	.then( ( user ) => {
+		response.status( 200 ).send( user );
+	} );
 } );
 
 /* =================================================================================
@@ -268,15 +255,15 @@ server.post( '/', ( request, response ) => {
 server.delete( '/:id', ( request, response ) => {
 	let { id } = request.params;
 	
-	User.findByPk( id )
-		.then( user => {
-			if ( !user ) {
-				return response.sendStatus( 404 );
-			}
-			
-			user.destroy( )
-				.then( ( ) => response.status( 200 ).send( 'Eliminado' ) );
+	User.findByPk( id ).then( ( user ) => {
+		if ( !user ) {
+			return response.sendStatus( 404 );
+		}
+		
+		user.destroy( ).then( ( ) => {
+			response.sendStatus( 204 );
 		} );
+	} );
 } );
 
 /* =================================================================================
@@ -286,16 +273,20 @@ server.delete( '/:id', ( request, response ) => {
 server.put( '/:id', ( request, response ) => {
 	const { id } = request.params;
 	
-	User.findByPk( id )
-		.then( user => {
-			if ( !user ) {
-				return response.sendStatus( 404 );
-			}
-			
-			return user.update( { ...request.body } )
-				.then( user => response.status( 200 ).send( user ) )
+	User.findByPk( id ).then( ( user ) => {
+		if ( !user ) {
+			return response.sendStatus( 404 );
+		}
+		
+		return user.update( {
+			...request.body
+		}, {
+			fields: [ 'firstName', 'lastName', 'email', 'password' ]
 		} )
-		.catch( error => response.status( 400 ).send( error ) );
+		.then( ( user ) => {
+			response.status( 200 ).send( user );
+		} );
+	} );
 } );
 
 /* =================================================================================
