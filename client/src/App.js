@@ -30,13 +30,13 @@ function App( )
 			<Route exact path='/Admin/delete' component={ FormAdminDelete } />
 			<Route exact path='/Admin/modify' component={ FormAdminModify } />
 			<Route exact path="/Admin/categories" component={ FormAdd } />
+			<Route exact path="/Admin/orders" component={ OrderTable } />
 			<Route exact path="/products" component={ Catalogue } />
 			<Route exact path ='/product/:productId' render={ ( { match } ) =>
 				<Product 
 					productId = { match.params.productId }
 				/>
 			} />
-			<Route exact path="/orders" component={ OrderTable } />
 			<Route exact path='/Cart' component={ Cart } />
 		</Container>
 	);
