@@ -1,4 +1,5 @@
 const server = require( 'express' ).Router( );
+const { Op } = require( 'sequelize' );
 const { Order } = require( '../db.js' );
 
 /* =================================================================================
@@ -7,16 +8,26 @@ const { Order } = require( '../db.js' );
 
 /*
 	- Puede recibir un "status" en query para devolver solo las órdenes que pertenezcan a un estado en particular
-	- Puede recibir mas de un status separado por coma para buscar por mas de un status a la vez
+	- Puede recibir mas de un status separados por comas para buscar por varios status a la vez (OR)
+	- Devuelve las órdenes ordenadas por fecha de creación (de más nueva a mas vieja)
 */
 
 server.get( '/', ( request, response ) => {
 	const { status } = request.query;
-	const options = !status ? { } : { where: { status: { [ Op.or ]: status.split( ',' ) } } };
+	const options = {
+		where: status && {
+			status: {
+				[ Op.or ]: status.split( ',' )
+			}
+		},
+		order: [
+			[ 'createdAt', 'DESC' ]
+		]
+	};
 	
-	Order.findAll( options )
-		.then( ( orders ) => response.status( 200 ).send( orders ) )
-		.catch( ( error ) => response.status( 500 ).send( error ) );
+	Order.findAll( options ).then( ( orders ) => {
+		response.status( 200 ).send( orders );
+	} );
 } );
 
 /* =================================================================================
@@ -26,15 +37,13 @@ server.get( '/', ( request, response ) => {
 server.get( '/:id', ( request, response ) => {
 	let { id } = request.params;
 	
-	Order.findByPk( id )
-		.then( order => {
-			if ( !order ) {
-				return response.sendStatus( 404 );
-			}
-			
-			response.status( 200 ).send( order );
-		} )
-		.catch( error => response.status( 500 ).send( error ) );
+	Order.findByPk( id ).then( ( order ) => {
+		if ( !order ) {
+			return response.sendStatus( 404 );
+		}
+		
+		response.status( 200 ).send( order );
+	} );
 } );
 
 /* =================================================================================
@@ -48,18 +57,24 @@ server.get( '/:id', ( request, response ) => {
 server.put( '/:id', ( request, response ) => {
 	const { id } = request.params;
 	
-	Order.findByPk( id )
-		.then( order => {
-			if ( !order ) {
-				return response.sendStatus( 404 );
-			}
-			
-			return order.update( { ...request.body } )
-				.then( ( order ) => response.status( 200 ).send( order ) );
+	Order.findByPk( id ).then( ( order ) => {
+		if ( !order ) {
+			return response.sendStatus( 404 );
+		}
+		
+		return order.update( {
+			...request.body
+		}, {
+			fields: [ 'status' ]
 		} )
-		.catch( error => response.status( 500 ).send( error ) );
+		.then( ( order ) => {
+			response.status( 200 ).send( order );
+		} )
+		.catch( ( error ) => {
+			response.status( 500 ).send( error.message );
+		} );
+	} );
 } );
-
 
 /* =================================================================================
 * 		[ Exportamos nuestras rutas ]
