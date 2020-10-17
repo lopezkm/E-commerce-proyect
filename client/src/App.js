@@ -36,11 +36,8 @@ function App( )
 					productId = { match.params.productId }
 				/>
 			} />
-<<<<<<< HEAD
 			<Route exact path="/orders" component={ OrderTable } />
-=======
 			<Route exact path='/Cart' component={ Cart } />
->>>>>>> master
 		</Container>
 	);
 }
