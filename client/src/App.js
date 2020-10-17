@@ -21,15 +21,15 @@ function App( )
 			<Route path="/" component={ ( ) => <NavBar/> }/>
 			<Route path="/search/:product" render={ ( { match } ) =>
 				<Result products={ match.params.product }/>
-			} />
-			<Route path='/Admin/create' component={ FormAdminCreate } />
-			<Route path='/Admin/delete' component={ FormAdminDelete } />
-			<Route path='/Admin/modify' component={ FormAdminModify } />
-			<Route exact path="/categories" component={ FormAdd } />
-			<Route exact path="/products" component={ Catalogue } />
+			}/>
+			<Route path='/Admin/create' component={ FormAdminCreate }/>
+			<Route path='/Admin/delete' component={ FormAdminDelete }/>
+			<Route path='/Admin/modify' component={ FormAdminModify }/>
+			<Route exact path="/categories" component={ FormAdd }/>
+			<Route exact path="/products" component={ Catalogue }/>
 			<Route exact path ='/product/:productId' render={ ( { match } ) =>
 				<Product productId={ match.params.productId }/>
-			} />
+			}/>
 		</Container>
 	);
 }

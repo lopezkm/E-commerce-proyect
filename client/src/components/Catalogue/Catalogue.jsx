@@ -1,16 +1,15 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
+import qs from 'query-string';
 import axios from 'axios';
 
 import ProductCard from '../ProductCard/ProductCard.jsx';
 import Checkable from '../Checkable/Checkable.jsx';
 
 import loadingCircle from '../../assets/loading.svg';
-import store from '../../redux/store/store.js';
-console.log('catalogue',store.getState());
 
-function Catalogue( )
+function Catalogue( props )
 {	
 	const [ categories, setCategories ] = useState( [ ] );
 	const [ products, setProducts ] = useState( [ ] );
@@ -27,28 +26,27 @@ function Catalogue( )
 	}, [ ] );
 	
 	useEffect( ( ) => {
-		axios.get( `http://localhost:3000/products/category/` )
+		axios.get( `http://localhost:3000/products/category` )
 			.then( response => {
 				setCategories( response.data );
 				setLoading( state => ( { ...state, categories: false } ) );
 			} );
+		
+		qs.parse( props.location.search );
 	}, [ ] );
 	
 	useEffect( ( ) => {
-		axios.get( `http://localhost:3000/products/` )
+		let params;
+		
+		params = qs.parse( props.location.search, { arrayFormat: 'comma' } );
+		params.categories = [ ...checked ];
+		params = qs.stringify( params, { arrayFormat: 'comma' } );
+		
+		props.history.push( `/products?${ params }` );
+		
+		axios.get( `http://localhost:3000/products?${ params }` )
 			.then( response => {
-				let products = response.data;
-				
-				if ( checked.length > 0 )
-				{
-					products = products.filter( p => {
-						return checked.every( ck => {
-							return ( p.categories.findIndex( c => c.id === ck ) > -1 );
-						} );
-					} );
-				}
-				
-				setProducts( products );
+				setProducts( response.data );
 				setLoading( state => ( { ...state, products: false } ) );
 			} );
 		
@@ -98,6 +96,7 @@ function Catalogue( )
 										key = { i }
 										name = { c.name }
 										id = { c.id }
+										initial = { !!checked.find( ck => ck === c.id ) }
 										onChange = { onChangeHandler }
 									/>
 								</div>
