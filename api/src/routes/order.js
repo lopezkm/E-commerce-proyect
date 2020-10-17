@@ -1,19 +1,31 @@
 const server = require( 'express' ).Router( );
+const { Op } = require( 'sequelize' );
 const { Order } = require( '../db.js' );
 
 /* =================================================================================
 * 		[ Búsqueda y/o obtención de todas las órdenes ]
 * ================================================================================= */
 
+/*
+	- Puede recibir un "status" en query para devolver solo las órdenes que pertenezcan a un estado en particular
+	- Puede recibir mas de un status separados por comas para buscar por varios status a la vez (OR)
+	- Devuelve las órdenes ordenadas por fecha de creación (de más nueva a mas vieja)
+*/
+
 server.get( '/', ( request, response ) => {
 	const { status } = request.query;
-	const options = !status ? { } : { where: { status: { [ Op.iLike ]: status } } };
+	const options = {
+		where: status && {
+			status: {
+				[ Op.or ]: status.split( ',' )
+			}
+		},
+		order: [
+			[ 'createdAt', 'DESC' ]
+		]
+	};
 	
 	Order.findAll( options ).then( ( orders ) => {
-		if ( !orders ) {
-			return response.sendStatus( 404 );
-		}
-		
 		response.status( 200 ).send( orders );
 	} );
 } );
@@ -25,34 +37,43 @@ server.get( '/', ( request, response ) => {
 server.get( '/:id', ( request, response ) => {
 	let { id } = request.params;
 	
-	Order.findByPk( id )
-		.then( order => {
-			if ( !order ) {
-				return response.sendStatus( 404 );
-			}
-			
-			response.status( 200 ).send( order );
-		} )
-		.catch( error => response.status( 400 ).send( error ) );
+	Order.findByPk( id ).then( ( order ) => {
+		if ( !order ) {
+			return response.sendStatus( 404 );
+		}
+		
+		response.status( 200 ).send( order );
+	} );
 } );
 
 /* =================================================================================
 * 		[ Modificación de una orden ]
 * ================================================================================= */
 
+/*
+	- Se pasan por body las propiedades a cambiar con sus respectivos valores
+*/
+
 server.put( '/:id', ( request, response ) => {
 	const { id } = request.params;
 	
-	Order.findByPk( id )
-		.then( order => {
-			if ( !order ) {
-				return response.sendStatus( 404 );
-			}
-			
-			return order.update( { ...request.body } )
-				.then( order => response.status( 200 ).send( order ) );
+	Order.findByPk( id ).then( ( order ) => {
+		if ( !order ) {
+			return response.sendStatus( 404 );
+		}
+		
+		return order.update( {
+			...request.body
+		}, {
+			fields: [ 'status' ]
 		} )
-		.catch( error => response.status( 400 ).send( error ) );
+		.then( ( order ) => {
+			response.status( 200 ).send( order );
+		} )
+		.catch( ( error ) => {
+			response.status( 500 ).send( error.message );
+		} );
+	} );
 } );
 
 /* =================================================================================
