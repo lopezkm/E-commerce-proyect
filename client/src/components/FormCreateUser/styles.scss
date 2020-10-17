@@ -1,0 +1,73 @@
+
+.containerUserCreate {
+    background-color: $grey;
+    margin-top: 4rem;
+    padding-bottom: 3rem;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    padding-left: 3rem;
+}
+
+
+.formUserCreate {
+    padding-top: 1.7rem;
+    font-family: $barlow !important;
+    background-color: transparent;
+        label {
+            color: rgba(202, 199, 199, 0.904); 
+            width: min-content;
+            position: absolute;
+            top: -3px;
+            left: 7px;
+        }
+        h1 {
+            color: white;
+            padding: 1rem 0 1.5rem 0;
+        }
+        button {
+            margin-top: 1.5rem;
+            background-color: $blue;
+        }
+
+        .form-group {
+            padding-top: 2rem;
+            width: 30rem;
+            .bZuaGP {
+                .cCYNlE {
+                    border-bottom: transparent;
+                    .cQfKIB {
+                        border: 0.2rem solid $grey;
+                        background-color: $grey;
+                        position: absolute;
+                        top: -2px;
+                    }
+                    .kCarGG{
+                        background-color: transparent;
+                        border: 2px $light-grey solid;
+                        border-radius: 5px;
+                        padding-top: 1.55rem;
+                    }
+
+                    .fzlnyb{
+                        background-color: transparent;
+                        border: 2px $blue solid;
+                        border-radius: 5px;
+                        padding-top: 1.55rem;
+                        box-shadow: 0 0 3px $blue;
+                    }
+                }
+            }
+        }
+}
+
+.linkUserLogin {
+    position: absolute;
+    bottom: 5px;
+    right: 3.5rem;
+    color: $blue;
+    text-decoration: none !important;
+    &:hover{
+        color: #30a5ec !important;
+    }
+}
+
