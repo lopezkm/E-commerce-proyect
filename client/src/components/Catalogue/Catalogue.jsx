@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState,useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
 import qs from 'query-string';
@@ -17,6 +17,8 @@ function Catalogue( props )
 	const [ expanded, setExpanded ] = useState( false );
 	const [ loading, setLoading ] = useState( { products: true, categories: true } );
 	
+	const firstRender = useRef( true );
+	
 	const onChangeHandler = useCallback( ( status, id ) => {
 		setChecked( prevState => {
 			const pos = prevState.findIndex( c => c === id );
@@ -32,19 +34,35 @@ function Catalogue( props )
 				setLoading( state => ( { ...state, categories: false } ) );
 			} );
 		
-		qs.parse( props.location.search );
+		/*const checkedCategories = qs.parse( props.location.search, { arrayFormat: 'comma' } ).categories.map( c => c.id );
+		
+		setChecked( checkedCategories );*/
 	}, [ ] );
 	
 	useEffect( ( ) => {
-		let params;
+		let query = qs.parse( props.location.search, { arrayFormat: 'comma' } );
 		
-		params = qs.parse( props.location.search, { arrayFormat: 'comma' } );
-		params.categories = [ ...checked ];
-		params = qs.stringify( params, { arrayFormat: 'comma' } );
+		if ( !firstRender.current )
+		{
+			query.categories = [ ...checked ];
+			query = qs.stringify( query, { arrayFormat: 'comma' } );
+			
+			props.history.push( `/products${ query }` );
+		}
+		else
+		{
+			console.log( query.categories );
+			
+			if ( Array.isArray( query.categories ) )
+			{
+				setChecked( query.categories.map( c => parseInt( c ) ) );
+			}
+			
+			query = props.location.search;
+			firstRender.current = false;
+		}
 		
-		props.history.push( `/products?${ params }` );
-		
-		axios.get( `http://localhost:3000/products?${ params }` )
+		axios.get( `http://localhost:3000/products${ query }` )
 			.then( response => {
 				setProducts( response.data );
 				setLoading( state => ( { ...state, products: false } ) );
