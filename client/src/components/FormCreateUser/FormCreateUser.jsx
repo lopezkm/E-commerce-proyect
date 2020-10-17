@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Container, Form, Button, Col, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import FloatingLabelInput from 'react-floating-label-input';
+import { ReactComponent as Logo } from '../../assets/logofull.svg';
 
 
 
@@ -59,11 +60,14 @@ const CreateUser = () => {
                                 onChange={(event) => handleInputChange(event)}
                             />
                         </Form.Group>
-                            <Button variant="primary" type="submit">
-                                Registrarse
+                        <Button variant="primary" type="submit">
+                            Registrarse
                             </Button>
-                            <Link className='linkUserLogin'>Prefiero iniciar sesión</Link>
+                        <Link className='linkUserLogin'>Prefiero iniciar sesión</Link>
                     </Form>
+                </Col>
+                <Col>
+                    <Logo className='formCreateUser-logo'/>
                 </Col>
             </Row>
         </Container>
