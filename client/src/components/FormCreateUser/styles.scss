@@ -2,15 +2,16 @@
 .containerUserCreate {
     background-color: $grey;
     margin: 0.5rem auto 2rem auto;
-    padding: 0 0 3rem 3rem;
+    padding: 0 0 3rem 0;
     font-size: 1.2rem;
     border-radius: 5px;
+    display: flex;
+    justify-content: center;
   
 }
 
 
 .formUserCreate {
-    padding-top: 1.7rem;
     font-family: $barlow !important;
     background-color: transparent;
         label {
@@ -22,7 +23,11 @@
         }
         h1 {
             color: $white;
-            padding: 1rem 0 1.5rem 0;
+            padding-right: 0.6rem;
+            margin: 0;
+            font-size: 2rem;
+            padding-top: 1.7rem;
+        
         }
         button {
             margin-top: 1.5rem;
@@ -64,8 +69,8 @@
 
 .linkUserLogin {
     position: absolute;
-    bottom: 1rem;
-    right: 4.2rem;
+    bottom: 0.4rem;
+    right: 1rem;
     color: $blue;
     text-decoration: none !important;
     &:hover{
@@ -74,7 +79,13 @@
 }
 
 .formCreateUser-logo {
-    width: 25rem;
-    height: 30rem;
+    width: 10rem;
+    height: 6rem;
+}
+
+.formCreateUser-title {
+    display: flex;
+    justify-content: start;
+    padding-left: 1.8rem;
 }
 

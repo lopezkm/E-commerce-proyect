@@ -26,9 +26,12 @@ const CreateUser = () => {
     return (
         <Container className='containerUserCreate'>
             <Row>
-                <Col lg={6}>
+                <Col>
                     <Form className='formUserCreate'>
-                        <h1>Crea tu cuenta de Six Games</h1>
+                        <div className='formCreateUser-title'>
+                        <h1>Crea tu cuenta de</h1>
+                        <Logo className='formCreateUser-logo'/>
+                        </div>
                         <Form.Group controlId="formBasicEmail">
                             <FloatingLabelInput
                                 name='firstName'
@@ -65,9 +68,6 @@ const CreateUser = () => {
                             </Button>
                         <Link className='linkUserLogin'>Prefiero iniciar sesión</Link>
                     </Form>
-                </Col>
-                <Col>
-                    <Logo className='formCreateUser-logo'/>
                 </Col>
             </Row>
         </Container>
