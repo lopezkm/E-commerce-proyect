@@ -2259,7 +2259,7 @@ const Order = [
 * 		[ Creación de relaciones entre Orden y Producto ]
 * ================================================================================= */
 
-const OrderProducts = [
+const OrderProduct = [
 	/*
 		Orden id 1
 	*/
@@ -3623,5 +3623,5 @@ module.exports = {
 	ProductCategory,
 	User,
 	Order,
-	OrderProducts
+	OrderProduct
 };

@@ -7,14 +7,9 @@ const { Op } = require( 'sequelize' );
 * ================================================================================= */
 
 server.get( '/', ( request, response ) => {
-	Category.findAll( )
-		.then( categories => {
-			if ( !categories ) {
-				return response.sendStatus( 404 );
-			}
-			
-			response.status( 200 ).send( categories );
-		} );
+	Category.findAll( ).then( ( categories ) => {
+		response.status( 200 ).send( categories );
+	} );
 } );
 
 /* =================================================================================
@@ -25,19 +20,19 @@ server.get( '/:name', ( request, response ) => {
 	const { name } = request.params;
 	
 	Category.findOne( {
-			where: {
-				name: { [ Op.iLike ]: name }
-			}
-		} )
-		.then( ( category ) => {
-			if ( !category ) {
-				return response.sendStatus( 404 );
-			}
-			
-			category.getProducts( ).then( ( products ) => {
-				response.status( 200 ).send( products );
-			} );
+		where: {
+			name: { [ Op.iLike ]: name }
+		}
+	} )
+	.then( ( category ) => {
+		if ( !category ) {
+			return response.sendStatus( 404 );
+		}
+		
+		category.getProducts( ).then( ( products ) => {
+			response.status( 200 ).send( products );
 		} );
+	} );
 } );
 
 /* =================================================================================
@@ -48,20 +43,23 @@ server.post( '/', ( request, response ) => {
 	const { name } = request.body;
 	
 	Category.findOne( {
-			where: {
-				name: { [ Op.iLike ]: name }
-			}
-		} )
-		.then( category => {
-			if ( category ) {
-				return response.status( 409 ).send( 'Categoría ya existe' );
-			}
-			
-			Category.create( { ...request.body } )
-				.then( ( category ) => {
-					response.status( 200 ).send( category );
-				} );
-		} )
+		where: {
+			name: { [ Op.iLike ]: name }
+		}
+	} )
+	.then( category => {
+		if ( category ) {
+			return response.status( 409 ).send( 'Categoría ya existe' );
+		}
+		
+		Category.create( {
+			...request.body
+		}, {
+			fields: [ 'name', 'description' ]
+		} ).then( ( category ) => {
+			response.status( 200 ).send( category );
+		} );
+	} );
 } );
 
 /* =================================================================================
@@ -71,16 +69,20 @@ server.post( '/', ( request, response ) => {
 server.put( '/:id', ( request, response ) => {
 	const { id } = request.params;
 	
-	Category.findByPk( id )
-		.then( category => {
-			if ( !category ) {
-				return response.status( 404 ).send( 'Categoría inexistente' );
-			}
-			
-			category.update( { ...request.body } )
-				.then( category => response.status( 200 ).send( category ) )
-				.catch( error => response.status( 400 ).send( error ) );
+	Category.findByPk( id ).then( ( category ) => {
+		if ( !category ) {
+			return response.status( 404 ).send( 'Categoría inexistente' );
+		}
+		
+		category.update( {
+			...request.body
+		}, {
+			fields: [ 'name', 'description' ]
+		} )
+		.then( ( category ) => {
+			response.status( 200 ).send( category );
 		} );
+	} );
 } );
 
 /* =================================================================================
@@ -90,15 +92,15 @@ server.put( '/:id', ( request, response ) => {
 server.delete( '/:id', ( request, response ) => {
 	const { id } = request.params;
 	
-	Category.findByPk( id )
-		.then( category => {
-			if ( !category ) {
-				return response.status( 404 ).send( 'Categoría inexistente' );
-			}
+	Category.findByPk( id ).then( category => {
+		if ( !category ) {
+			return response.status( 404 ).send( 'Categoría inexistente' );
+		}
 
-			category.destroy( )
-				.then( ( ) => response.sendStatus( 200 ) );
+		category.destroy( ).then( ( ) => {
+			response.sendStatus( 204 );
 		} );
+	} );
 } );
 
 /* =================================================================================

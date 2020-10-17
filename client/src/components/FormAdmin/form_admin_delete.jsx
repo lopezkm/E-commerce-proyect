@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { Form, Button, FormControl, Container, Alert } from 'react-bootstrap';
+import { Form, Button, FormControl, Container } from 'react-bootstrap';
 import axios from 'axios';
 import NavAdmin from '../NavAdmin/nav_admin.jsx';
 import store from '../../redux/store/store.js';
@@ -71,8 +71,8 @@ const FormAdminDelete = () => {
 
                         <Form.Control as="select" multiple id="productList" onClick={(e) => handleSelectChange(e)}>
                             {
-                                showProducts.map(product => (
-                                    <option id={product.id} >
+                                showProducts.map((product,i) => (
+                                    <option key={i} id={product.id} >
                                         {product.name}
                                     </option>
                                 ))
