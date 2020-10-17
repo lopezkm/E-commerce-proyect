@@ -1,4 +1,3 @@
-const { Op } = require('sequelize');
 const server = require( 'express' ).Router( );
 const { Op } = require( 'sequelize' );
 const { Order } = require( '../db.js' );
