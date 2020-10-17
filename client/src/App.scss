@@ -13,10 +13,16 @@
 @import './components/FormAdmin/MediaRow/styles.scss';
 @import './components/Order/styles.scss';
 @import './components/OrderTable/styles.scss';
-
+@import './components/FormCreateUser/styles.scss';
 
 body
 {
     background-color: $black;
     padding-top: 3.25rem;
+}
+
+.app
+{
+    padding-left: 0;
+    padding-right: 0;
 }

@@ -1,22 +1,23 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState,useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
+import qs from 'query-string';
 import axios from 'axios';
 
 import ProductCard from '../ProductCard/ProductCard.jsx';
 import Checkable from '../Checkable/Checkable.jsx';
 
 import loadingCircle from '../../assets/loading.svg';
-import store from '../../redux/store/store.js';
-console.log('catalogue',store.getState());
 
-function Catalogue( )
+function Catalogue( props )
 {	
 	const [ categories, setCategories ] = useState( [ ] );
 	const [ products, setProducts ] = useState( [ ] );
 	const [ checked, setChecked ] = useState( [ ] );
 	const [ expanded, setExpanded ] = useState( false );
 	const [ loading, setLoading ] = useState( { products: true, categories: true } );
+	
+	const firstRender = useRef( true );
 	
 	const onChangeHandler = useCallback( ( status, id ) => {
 		setChecked( prevState => {
@@ -27,28 +28,43 @@ function Catalogue( )
 	}, [ ] );
 	
 	useEffect( ( ) => {
-		axios.get( `http://localhost:3000/products/category/` )
+		axios.get( `http://localhost:3000/products/category` )
 			.then( response => {
 				setCategories( response.data );
 				setLoading( state => ( { ...state, categories: false } ) );
 			} );
+		
+		/*const checkedCategories = qs.parse( props.location.search, { arrayFormat: 'comma' } ).categories.map( c => c.id );
+		
+		setChecked( checkedCategories );*/
 	}, [ ] );
 	
 	useEffect( ( ) => {
-		axios.get( `http://localhost:3000/products/` )
+		let query = qs.parse( props.location.search, { arrayFormat: 'comma' } );
+		
+		if ( !firstRender.current )
+		{
+			query.categories = [ ...checked ];
+			query = '?' + qs.stringify( query, { arrayFormat: 'comma' } );
+			
+			props.history.push( `/products${ query }` );
+		}
+		else
+		{
+			console.log( query.categories );
+			
+			if ( Array.isArray( query.categories ) )
+			{
+				setChecked( query.categories.map( c => parseInt( c ) ) );
+			}
+			
+			query = props.location.search;
+			firstRender.current = false;
+		}
+		
+		axios.get( `http://localhost:3000/products${ query }` )
 			.then( response => {
-				let products = response.data;
-				
-				if ( checked.length > 0 )
-				{
-					products = products.filter( p => {
-						return checked.every( ck => {
-							return ( p.categories.findIndex( c => c.id === ck ) > -1 );
-						} );
-					} );
-				}
-				
-				setProducts( products );
+				setProducts( response.data );
 				setLoading( state => ( { ...state, products: false } ) );
 			} );
 		
@@ -93,11 +109,11 @@ function Catalogue( )
 						</div>
 						{
 							categories.map( ( c, i ) => (
-								<div className='catalogue__categories-list-item' style={ { display: ( i < 7 || expanded ) ? 'block' : 'none' } }>
+								<div key = { i } className='catalogue__categories-list-item' style={ { display: ( i < 7 || expanded ) ? 'block' : 'none' } }>
 									<Checkable
-										key = { i }
 										name = { c.name }
 										id = { c.id }
+										initial = { !!checked.find( ck => ck === c.id ) }
 										onChange = { onChangeHandler }
 									/>
 								</div>
