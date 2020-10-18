@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { useLocation, useHistory } from 'react-router-dom';
 import qs from 'query-string';
+import { useEffect } from 'react';
 
 function SearchBar( )
 {
@@ -14,10 +15,12 @@ function SearchBar( )
 	const location = useLocation( );
 	const history = useHistory( );
 	
-	const updateHistory = ( ) => {
+	const updateHistory = ( empty ) => {
 		let query = qs.parse( location.search, { arrayFormat: 'comma' } );
 		
-		query.query = input || null;
+		( empty || !input ) ?
+			delete query.query : query.query = input;
+		
 		query = qs.stringify( query, { arrayFormat: 'comma' } );
 		
 		history.push( `/products?${ query }` );
@@ -33,17 +36,21 @@ function SearchBar( )
 		if ( !input ) {
 			inputWrapper.current.style.display = null;
 		}
+		
+		updateHistory( );
 	}
 	
 	const handleCloseClick = ( e ) => {
+		e.preventDefault( );
+		
 		setInput( '' );
-		updateHistory( '' );
+		updateHistory( true );
 		
 		inputWrapper.current.style.display = null;
 	};
 	
 	const handleSearchClick = ( e ) => {
-		if ( input || ( window.innerWidth < 768 ) ) {
+		if ( input || ( window.innerWidth < 992 ) ) {
 			return;
 		}
 		
@@ -62,16 +69,18 @@ function SearchBar( )
 		setInput( e.target.value );
 	};
 	
-	useLayoutEffect( ( ) => {
+	useEffect( ( ) => {
 		const { query } = qs.parse( location.search, { arrayFormat: 'comma' } );
 		
-		if ( !query ) {
-			return;
+		if ( query ) {
+			setInput( query );
 		}
-		
-		setInput( query );
-		
-		inputWrapper.current.style.display = 'block';
+	}, [ ] );
+	
+	useLayoutEffect( ( ) => {
+		if ( input ) {
+			inputWrapper.current.style.display = 'block';
+		}
 	}, [ ] );
 	
 	return (
