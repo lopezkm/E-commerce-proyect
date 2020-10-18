@@ -4,10 +4,9 @@ import { Card, Button, Carousel, Container, Col, Row, Badge } from 'react-bootst
 import defaultBanner from '../../assets/banner.jpg';
 import ProductCard from '../ProductCard/ProductCard.jsx';
 import { Link } from 'react-router-dom';
-/* import store from '../../redux/store/store.js'; */
-/* console.log('product', store.getState()); */
-
-
+import store from '../../redux/store/store.js';
+import CartButton from '../CartButton.jsx';
+console.log('product', store.getState());
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -25,6 +24,7 @@ function Product({ productId }) {
 				const prodCategories = response.data.categories[0].name;
 				setProductCategories(prodCategories);
 
+				console.log(response.data);
 				processMedia(productData);
 
 				setProduct(productData);
@@ -32,7 +32,6 @@ function Product({ productId }) {
 			});
 
 	}
-
 
 
 	const getRecommendProduct = () => {
@@ -43,6 +42,8 @@ function Product({ productId }) {
 				setRecommendProduct(recommendProds)
 			});
 	}
+
+
 
 	const processMedia = ({ media }) => {
 		if (!media || (media.length === 0)) {
@@ -80,15 +81,14 @@ function Product({ productId }) {
 
 	let recoProdFilter = recommendProduct.filter(prod => prod.id !== product.id)
 
-	console.log(recoProdFilter)
 
 	return (
 		<Container>
 			<Carousel interval={5000} className="product-carousel-main">
 				{
-					product.media.map((media) => media.type.includes("image-big") &&
-						<Carousel.Item>
-							<img src={media.path} className="d-block w-100" />
+					product.media.map((media, i) => media.type.includes("image-big") &&
+						<Carousel.Item key={i}>
+							<img src={media.path} className="d-block w-100" alt="" />
 						</Carousel.Item>
 					)
 				}
@@ -100,8 +100,8 @@ function Product({ productId }) {
 						<Row>
 							<Col sm={10}>
 								{
-									product.categories.map(c => (
-										<Badge pill variant="secondary">{c.name}</Badge>
+									product.categories.map((c, i) => (
+										<Badge pill variant="secondary" key={i}>{c.name}</Badge>
 									))
 								}
 							</Col>
@@ -110,10 +110,15 @@ function Product({ productId }) {
 							<Col sm={8}>
 								<p>{product.description}</p>
 							</Col>
-							<Col sm={2}>
+							<Col sm={4}>
 								{product.stock > 0 ?
-									<Button className="d-flex ml-auto">Comprar por ${product.price}</Button> :
-									<Button className="d-flex ml-auto btn btn-secondary" disabled>Comprar por ${product.price}</Button>}
+									<div className="action-buttons">
+										<Button className="d-flex ml-auto mr-3">Comprar por ${product.price}</Button>
+										<CartButton />
+									</div>
+									:
+									<Button className="d-flex ml-auto btn btn-secondary" disabled>Comprar por ${product.price}</Button>
+								}
 							</Col>
 						</Row>
 						<Row className="product-row-border-top">

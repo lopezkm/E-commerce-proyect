@@ -56,6 +56,9 @@
         color: $light-grey;
     }
 
-    
+}
 
+.action-buttons{
+    display: flex;
+    justify-content: start;
 }
