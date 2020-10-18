@@ -6,49 +6,49 @@ import { faChevronCircleRight } from '@fortawesome/free-solid-svg-icons';
 
 function PanelAdmin(){
     return (
-        <Container>
-            <Row>
-                <Col xs={2}>
+        <Container className='panelAdmin-container'>
+            <Row className='panelAdmin-row '>
+                <Col xs={4}>
                     <Link to="/admin/categories">
                         <Card bg="primary" text="white">
                             <Card.Body>
-                                <Card.Title> Agregar categorias <FontAwesomeIcon icon={ faChevronCircleRight } /> </Card.Title>
+                                <Card.Title bsPrefix='panelAdmin-cardTitle'> Agregar categorias <FontAwesomeIcon icon={ faChevronCircleRight } /> </Card.Title>
                             </Card.Body>
                         </Card>
                     </Link>
                 </Col>
-                <Col xs={2}>
+                <Col xs={4}>
                     <Link to="/admin/create">
                         <Card bg="primary" text="white">
                             <Card.Body>
-                                <Card.Title> Agregar producto <FontAwesomeIcon icon={ faChevronCircleRight } /> </Card.Title>
+                                <Card.Title bsPrefix='panelAdmin-cardTitle'> Agregar producto <FontAwesomeIcon icon={ faChevronCircleRight } /> </Card.Title>
                             </Card.Body>
                         </Card>
                     </Link>
                 </Col>
-                <Col xs={2}>
+                <Col xs={4}>
                     <Link to="/admin/modify">
                         <Card bg="primary" text="white">
                             <Card.Body>
-                                <Card.Title> Modificar producto <FontAwesomeIcon icon={ faChevronCircleRight } /> </Card.Title>
+                                <Card.Title bsPrefix='panelAdmin-cardTitle'> Modificar producto <FontAwesomeIcon icon={ faChevronCircleRight } /> </Card.Title>
                             </Card.Body>
                         </Card>
                     </Link>
                 </Col>
-                <Col xs={2}>
+                <Col xs={4}>
                     <Link to="/admin/delete">
                         <Card bg="primary" text="white">
                             <Card.Body>
-                                <Card.Title> Eliminar producto <FontAwesomeIcon icon={ faChevronCircleRight } /> </Card.Title>
+                                <Card.Title bsPrefix='panelAdmin-cardTitle'> Eliminar producto <FontAwesomeIcon icon={ faChevronCircleRight } /> </Card.Title>
                             </Card.Body>
                         </Card>
                     </Link>
                 </Col>
-                <Col xs={2}>
+                <Col xs={4}>
                     <Link to="/admin/orders">
                         <Card bg="primary" text="white">
                             <Card.Body>
-                                <Card.Title> Filtrar ordenes <FontAwesomeIcon icon={ faChevronCircleRight } /> </Card.Title>
+                                <Card.Title bsPrefix='panelAdmin-cardTitle'> Filtrar ordenes <FontAwesomeIcon icon={ faChevronCircleRight } /> </Card.Title>
                             </Card.Body>
                         </Card>
                     </Link>
