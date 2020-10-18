@@ -1,6 +1,6 @@
 const server = require( 'express' ).Router( );
 const { Op } = require( 'sequelize' );
-const { Order } = require( '../db.js' );
+const { Order, Product } = require( '../db.js' );
 
 /* =================================================================================
 * 		[ Búsqueda y/o obtención de todas las órdenes ]
@@ -22,6 +22,9 @@ server.get( '/', ( request, response ) => {
 		},
 		order: [
 			[ 'createdAt', 'DESC' ]
+		],
+		include: [
+			{ model: Product }
 		]
 	};
 	
@@ -37,7 +40,12 @@ server.get( '/', ( request, response ) => {
 server.get( '/:id', ( request, response ) => {
 	let { id } = request.params;
 	
-	Order.findByPk( id ).then( ( order ) => {
+	Order.findByPk( id, {
+		include: [
+			{ model: Product }
+		]
+	} )
+	.then( ( order ) => {
 		if ( !order ) {
 			return response.sendStatus( 404 );
 		}
@@ -57,7 +65,12 @@ server.get( '/:id', ( request, response ) => {
 server.put( '/:id', ( request, response ) => {
 	const { id } = request.params;
 	
-	Order.findByPk( id ).then( ( order ) => {
+	Order.findByPk( id, {
+		include: [
+			{ model: Product }
+		]
+	} )
+	.then( ( order ) => {
 		if ( !order ) {
 			return response.sendStatus( 404 );
 		}
