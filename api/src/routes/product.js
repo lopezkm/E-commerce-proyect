@@ -252,10 +252,25 @@ server.post( '/', ( request, response ) => {
 		if ( !product ) {
 			return response.sendStatus( 409 );
 		}
-
-		return response.status( 200 ).send( product );
+		
+		const promises = [ ];
+		const { categories, medias } = request.body;
+		
+		categories && ( categories.length > 0 ) && promises.push( product.addCategories( categories ) );
+		medias && ( medias.length > 0 ) && promises.push( product.addMedium( medias ) );
+		
+		if ( promises.length > 0 ) {
+			Promise.all( promises ).then( ( ) => {
+				response.status( 200 ).send( product );
+			} );
+		}
+		else {
+			response.status( 200 ).send( product );
+		}
 	} )
-	.catch(e => response.status( 400 ).send( e ));
+	.catch( ( error ) => {
+		response.status( 500 ).send( error );
+	} );
 } );
 
 /* =================================================================================
@@ -270,10 +285,13 @@ server.put( '/:id', ( request, response ) => {
 			return response.sendStatus( 404 );
 		}
 		
-		return product.update( {
+		product.update( {
 			...request.body
 		}, {
 			fields: [ 'name', 'description', 'price', 'stock', 'developer', 'publisher', 'publishDate' ]
+		} )
+		.then( ( product ) => {
+			response.status( 200 ).send( product );
 		} );
 	} );
 } );
