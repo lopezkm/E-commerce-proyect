@@ -8,7 +8,6 @@ import './App.scss';
 import Product from './components/Product/Product.jsx';
 import Catalogue from './components/Catalogue/Catalogue.jsx'
 import NavBar from './components/NavBar/NavBar.jsx';
-import Result from './components/search_results.jsx'
 import Order from './components/Order/Order.jsx'
 import CreateUser from './components/FormCreateUser/FormCreateUser.jsx'
 import FormAdd from './components/FormAdmin/form_add_category.jsx'
@@ -25,7 +24,6 @@ function App( )
 		<Container fluid className="app">
 			<Route path="/" component={ ( ) => <NavBar/> }/>
 			<Route path='/order' component={ Order } />
-			<Route path="/search/:product" render={ ( { match } ) => <Result products={ match.params.product }/> }/>
 			<Route exact path='/Admin' component={ PanelAdmin } />
 			<Route exact path='/Admin/create' component={ FormAdminCreate } />
 			<Route exact path='/Admin/delete' component={ FormAdminDelete } />

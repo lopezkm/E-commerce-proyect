@@ -6,8 +6,11 @@ import axios from 'axios';
 
 import ProductCard from '../ProductCard/ProductCard.jsx';
 import Checkable from '../Checkable/Checkable.jsx';
+import SearchBar from '../SearchBar/SearchBar.jsx';
 
 import loadingCircle from '../../assets/loading.svg';
+
+const API_URL = process.env.REACT_APP_API_URL;
 
 function Catalogue( props )
 {	
@@ -20,56 +23,44 @@ function Catalogue( props )
 	const firstRender = useRef( true );
 	
 	const onChangeHandler = useCallback( ( status, id ) => {
-		setChecked( prevState => {
-			const pos = prevState.findIndex( c => c === id );
-			
-			return ( pos > -1 ) ? prevState.filter( c => c !== id ) : [ ...prevState, id ];
+		setChecked( ( state ) => {
+			return status ? [ ...state, id ] : state.filter( c => c !== id );
 		} );
 	}, [ ] );
 	
 	useEffect( ( ) => {
-		axios.get( `http://localhost:3000/products/category` )
-			.then( response => {
-				setCategories( response.data );
-				setLoading( state => ( { ...state, categories: false } ) );
-			} );
-		
-		/*const checkedCategories = qs.parse( props.location.search, { arrayFormat: 'comma' } ).categories.map( c => c.id );
-		
-		setChecked( checkedCategories );*/
+		axios.get( `${ API_URL }/products/category` ).then( ( response ) => {
+			setCategories( response.data );
+			setLoading( ( state ) => ( { ...state, categories: false } ) );
+		} );
 	}, [ ] );
 	
 	useEffect( ( ) => {
+		if ( firstRender.current )
+		{
+			firstRender.current = false;
+			
+			return;
+		}
+		
 		let query = qs.parse( props.location.search, { arrayFormat: 'comma' } );
 		
-		if ( !firstRender.current )
-		{
-			query.categories = [ ...checked ];
-			query = '?' + qs.stringify( query, { arrayFormat: 'comma' } );
-			
-			props.history.push( `/products${ query }` );
-		}
-		else
-		{
-			console.log( query.categories );
-			
-			if ( Array.isArray( query.categories ) )
-			{
-				setChecked( query.categories.map( c => parseInt( c ) ) );
-			}
-			
-			query = props.location.search;
-			firstRender.current = false;
-		}
+		query.categories = [ ...checked ];
+		query = qs.stringify( query, { arrayFormat: 'comma' } );
 		
-		axios.get( `http://localhost:3000/products${ query }` )
-			.then( response => {
-				setProducts( response.data );
-				setLoading( state => ( { ...state, products: false } ) );
-			} );
+		props.history.push( `/products?${ query }` );
+	}, [ checked ] ); // eslint-disable-line
+	
+	useEffect( ( ) => {
+		const { search } = props.location;
+		
+		axios.get( `${ API_URL }/products${ search }` ).then( ( response ) => {
+			setProducts( response.data );
+			setLoading( state => ( { ...state, products: false } ) );
+		} );
 		
 		setLoading( state => ( { ...state, products: true } ) );
-	}, [ checked ] );
+	}, [ props.location.search ] );  // eslint-disable-line
 	
 	if ( loading.categories )
 	{
@@ -79,7 +70,7 @@ function Catalogue( props )
 	return (
 		<Container className='catalogue__container'>
 			<Row>
-				<Col xs={ 7 } sm={ 8 } md={ 9 } lg={ 10 }>
+				<Col xs={ 7 } sm={ 8 } md={ 9 } xl={ 10 }>
 					<Row>
 						{
 							!loading.products ?
@@ -90,9 +81,9 @@ function Catalogue( props )
 												key={ p.id }
 												name={ p.name }
 												price={ p.price }
-												developer={ p.developer }
-												media={ p.media }
 												stock={ p.stock }
+												media={ p.media }
+												developer={ p.developer }
 											/>
 										</Link>
 									</Col>
@@ -102,27 +93,29 @@ function Catalogue( props )
 						}
 					</Row>
 				</Col>
-				<Col xs={ 5 } sm={ 4 } md={ 3 } lg={ 2 }>
-					<div className='catalogue__categories-list'>
-						<div className='catalogue__categories-section-title'>
-							Categorías
+				<Col xs={ 5 } sm={ 4 } md={ 3 } xl={ 2 }>
+					<div className='catalogue__filters'>
+						<div className='catalogue__categories-list'>
+							<div className='catalogue__categories-section-title'>
+								Categorías
+							</div>
+							{
+								categories.map( ( c, i ) => (
+									<div key = { i } className='catalogue__categories-list-item' style={ { display: ( i < 7 || expanded ) ? 'block' : 'none' } }>
+										<Checkable
+											name={ c.name }
+											id={ c.id }
+											initial={ !!checked.find( ck => ck === c.id ) }
+											onChange={ onChangeHandler }
+										/>
+									</div>
+								) )
+							}
+							
+							<button className='catalogue__expand-button' onClick={ ( ) => setExpanded( !expanded ) }>
+								{ expanded ? 'Contraer' : 'Expandir' }
+							</button>
 						</div>
-						{
-							categories.map( ( c, i ) => (
-								<div key = { i } className='catalogue__categories-list-item' style={ { display: ( i < 7 || expanded ) ? 'block' : 'none' } }>
-									<Checkable
-										name = { c.name }
-										id = { c.id }
-										initial = { !!checked.find( ck => ck === c.id ) }
-										onChange = { onChangeHandler }
-									/>
-								</div>
-							) )
-						}
-						
-						<button className='catalogue__expand-button' onClick={ ( ) => setExpanded( !expanded ) }>
-							{ expanded ? 'Contraer' : 'Expandir' }
-						</button>
 					</div>
 				</Col>
 			</Row>
