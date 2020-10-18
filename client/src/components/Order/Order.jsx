@@ -2,29 +2,29 @@ import React, { useState, useEffect } from 'react';
 import { Container, Table, Card } from 'react-bootstrap';
 import axios from 'axios';
 
-const Order = ({ orderId }) => {
+const Order = ({orderId}) => {
 
     const [order, setOrder] = useState({});
     const [loading, setLoading] = useState(true);
 
-    const getOrder = ( orderId ) => {
+    const getOrder = () => {
         axios.get(`http://localhost:3000/orders/${orderId}`)
             .then(response => {
                 setOrder(response.data);
+                setLoading(false);
+                console.log(response.data);
             })
     };
 
     useEffect(() => {
         getOrder();
-        setLoading(false);
-
-    }, [loading]);
+    }, []);
 
     return (
         <Container className='mt-3'>
             <Card bg='dark'>
                 <Card.Body>
-                    <Card.Title style={{ color: 'white'}}>Pepito Landa</Card.Title>
+                    <Card.Title style={{ color: 'white'}}>{user.firstName, user.lastName}</Card.Title>
                     <Card.Subtitle className="mb-2 text-muted">Fecha de emision: 16/10/2020</Card.Subtitle>
                     <Table striped bordered hover variant="dark">
                         <thead>
