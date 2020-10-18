@@ -68,13 +68,18 @@
 		}
 	}
 	
-	.navbar-nav .nav-link:hover
+	.navbar-nav
 	{
-		color: #ccc;
+		padding: 0;
 		
-		.navbar-text
+		.nav-link:hover
 		{
 			color: #ccc;
+			
+			.navbar-text
+			{
+				color: #ccc;
+			}
 		}
 	}
 	
@@ -118,6 +123,9 @@
 	.navbar-nav-right
 	{
 		align-items: center;
+		flex-flow: row wrap;
+		justify-content: space-around;
+		margin-top: 1rem;
 		
 		& .nav-link
 		{
@@ -126,6 +134,47 @@
 			padding-left: 1rem;
 			padding-right: 1rem;
 			font-size: 1.25rem;
+		}
+		
+		.navbar-nav-cart, .navbar-nav-user
+		{
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			width: 50%;
+			padding: .5rem 0;
+			
+			color: #ccc;
+			
+			.navbar-text
+			{
+				color: #ccc;
+			}
+		}
+		
+		.navbar-nav-user { background-color: $blue; }
+		.navbar-nav-cart { background-color: $green; }
+		
+		@include mq( 'lg' )
+		{
+			.navbar-nav-cart, .navbar-nav-user
+			{
+				
+				width: auto;
+				
+				color: rgba( 255, 255, 255, 0.5 );
+				background-color: transparent;
+				
+				.navbar-text
+				{
+					color: rgba( 255, 255, 255, 0.5 );
+				}
+				
+				padding: 0 1rem;
+			}
+			
+			flex-flow: row nowrap;
+			margin-top: 0;
 		}
 	}
 	
