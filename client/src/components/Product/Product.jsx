@@ -46,7 +46,7 @@ function Product( { productId } )
 
 	useEffect( ( ) => {
 		getProduct( );
-	});    
+	}, []);    
 
 	if ( isLoading ) {
 		return <div className="App">Loading...</div>;
