@@ -4,12 +4,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import defaultPortrait from '../../assets/portrait.jpg';
-<<<<<<< HEAD
-=======
-import store from '../../redux/store/store.js';
-import CartButton from '../CartButton.jsx';
-console.log('productCard',store.getState());
->>>>>>> master
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -72,7 +66,6 @@ function ProductCard( { id, name, price, media, developer, stock } )
 						
 						<p className='productCard__card-noStock'>SIN STOCK</p> }
 				</div>
-			<CartButton/>
 			</Card.Body>
 		</Card>
 	);

@@ -252,7 +252,6 @@ server.post( '/', ( request, response ) => {
 		if ( !product ) {
 			return response.sendStatus( 409 );
 		}
-<<<<<<< HEAD
 		
 		const promises = [ ];
 		const { categories, medias } = request.body;
@@ -272,12 +271,6 @@ server.post( '/', ( request, response ) => {
 	.catch( ( error ) => {
 		response.status( 500 ).send( error );
 	} );
-=======
-
-		return response.status( 200 ).send( product );
-	} )
-	.catch(e => response.status( 400 ).send( e ));
->>>>>>> master
 } );
 
 /* =================================================================================
