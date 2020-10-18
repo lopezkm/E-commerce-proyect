@@ -3,6 +3,7 @@ import { Form, Button, Row, Col} from 'react-bootstrap';
 import axios from 'axios';
 import NavAdmin from '../NavAdmin/nav_admin.jsx'
 //import store from '../../redux/store/store.js';
+import { toast } from 'react-toastify';
 
 const FormAdminCreate = () => {
 
@@ -50,11 +51,9 @@ const FormAdminCreate = () => {
 
         if (statusCheck && !selectedCategories.includes(selectedId)) {
             selectedCategories.push(selectedId);
-            console.log(selectedCategories);
         }
         else{
             selectedCategories = selectedCategories.filter(id => id !== selectedId);
-            console.log(selectedCategories);
         }
     }
 
@@ -79,8 +78,35 @@ const FormAdminCreate = () => {
         })
         .then(response => response.data.id)// Respuesta del servidor con producto creado
         .then(idP => axios.post(`http://localhost:3000/products/${idP}/category/`,{ categories: selectedCategories}) )
-        .then(success => console.log(success))
-        .catch(e => console.log(e))
+        .then(success => {
+            console.log(success);
+
+            toast.info('Categoría agregada con exito', {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+
+            setTimeout(function(){ window.location.reload(); }, 3100);
+            
+        })
+        .catch(e => {
+            console.log(e);
+            toast.error('ERROR: Producto ya existe', {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+        })
+        
     }
 
     return (
