@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Row, Col } from 'react-bootstrap';
+import { Form, Row, Col, Container } from 'react-bootstrap';
 import axios from 'axios';
 import bsCustomFileInput from 'bs-custom-file-input';
 import MediaRow from '../MediaRow/MediaRow.jsx';
@@ -26,7 +26,9 @@ function MediaUploader( { productId, productMedias } )
 		} ) );
 	}
 	
-	const handleMediaDelete = ( id ) => {
+	const handleMediaDelete = ( e, id ) => {
+		e.preventDefault( );
+		
 		axios.delete( `${ API_URL }/medias/${ id }` )
 			.then( ( response ) => setMedias( medias.filter( m => m.id !== id ) ) )
 			.catch( ( error ) => console.log( error ) );
@@ -74,85 +76,79 @@ function MediaUploader( { productId, productMedias } )
 	}, [ ] );
 	
 	return (
-		<Row className="mediaContainer">
-			<Col xs={ 12 } lg={ 6 }>
-				{ !medias.length || <div class="mediaForm__separator"></div> }
-				<Form className="mediaForm" onSubmit={ handleFormSubmit }>
-					<Form.Row style={ { alignItems: 'center' } }>
-						<Col xs={ 12 }>
-							{ error && <span className="mediaForm__error">{ error }</span> }
-						</Col>
-						
-						<Col xs={ 12 }>
-							<Form.Group>
-								<Form.Control
-									name="alias"
-									type="text"
-									placeholder="Ingresar un alias"
-									value={ input.alias }
-									onChange={ handleInputChange }
-								/>
-							</Form.Group>
-						</Col>
-						<Col xs={ 12 }>
-							<Form.Group>
-								<Form.Control
-									as="select"
-									name="type"
-									value={ input.type }
-									onChange={ handleInputChange }
-									custom
-								>
-									<option value="none">Seleccionar un tipo</option>
-									<option value="portrait">Portada</option>
-									<option value="image-small">Imagen chica</option>
-									<option value="video-small">Video chico</option>
-									<option value="image-big">Imagen grande</option>
-									<option value="video-big">Video grande</option>
-								</Form.Control>
-							</Form.Group>
-						</Col>
-						<Col xs={ 12 }>
-							<Form.Group>
-								<Form.Control 
-									name="path"
-									type="text"
-									value={ input.path }
-									placeholder="Ingresar una ruta de archivo"
-									disabled={ input.file ? true : null }
-									onChange={ handleInputChange }
-								/>
-							</Form.Group>
-						</Col>
-						<Col xs={ 12 }>
-							<Form.Group>
-								<Form.File 
-									custom
-									id="custom-file"
-									name="file"
-									label="Seleccionar un archivo"
-									disabled={ input.path ? true : null }
-									data-browse="Buscar media"
-									onChange={ handleInputChange }
-								/>
-							</Form.Group>
-						</Col>
-					</Form.Row>
-					<button type="submit" className="mediaForm__button-submit">
-						Agregar
-					</button>
-				</Form>
-			</Col>
-			<Col xs={ { span: 12, order: 'first' } } lg={ { span: 6, order: 'last' } }>
-				<div>
-					{
-						medias.map( ( m, i ) => (
-							<MediaRow name={ m.path } id={ m.id } onDelete={ handleMediaDelete }/>
-						) )
-					}
-				</div>
-			</Col>
-		</Row>
+		<Container>
+			{ !medias.length || <div className="mediaForm__separator"></div> }
+			<Row className="mediaContainer">
+				<Col xs={ 12 } lg={ 5 }>
+					{ !medias.length || <div className="mediaForm__separator mediaForm__form-separator"></div> }
+					<Form className="mediaForm" onSubmit={ handleFormSubmit }>
+						<Form.Row style={ { alignItems: 'center' } }>
+							<Col xs={ 12 }>
+								{ error && <span className="mediaForm__error">{ error }</span> }
+							</Col>
+							
+							<Col xs={ 12 }>
+								<Form.Group>
+									<Form.Control
+										as="select"
+										name="type"
+										value={ input.type }
+										onChange={ handleInputChange }
+										custom
+									>
+										<option value="none">Seleccionar un tipo</option>
+										<option value="portrait">Portada</option>
+										<option value="image-small">Imagen chica</option>
+										<option value="video-small">Video chico</option>
+										<option value="image-big">Imagen grande</option>
+										<option value="video-big">Video grande</option>
+									</Form.Control>
+								</Form.Group>
+							</Col>
+							<Col xs={ 12 }>
+								<Form.Group>
+									<Form.Control 
+										name="path"
+										type="text"
+										value={ input.path }
+										placeholder="Ingresar una ruta de archivo"
+										disabled={ input.file ? true : null }
+										onChange={ handleInputChange }
+									/>
+								</Form.Group>
+							</Col>
+							<Col xs={ 12 }>
+								<Form.Group>
+									<Form.File 
+										custom
+										id="custom-file"
+										name="file"
+										label="Seleccionar un archivo"
+										disabled={ input.path ? true : null }
+										data-browse="Buscar media"
+										onChange={ handleInputChange }
+									/>
+								</Form.Group>
+							</Col>
+						</Form.Row>
+						<button type="submit" className="mediaForm__button-submit">
+							Agregar
+						</button>
+					</Form>
+				</Col>
+				<Col xs={ { span: 12, order: 'first' } } lg={ { span: 7, order: 'last' } }>
+					<Row>
+						{
+							medias.map( ( m, i ) => (
+								<Col xs={ 12 } sm={ 6 }>
+									<MediaRow key={ i } media={ m } onDelete={ handleMediaDelete }/>
+								</Col>
+							) )
+						}
+					</Row>
+				</Col>
+			</Row>
+		</Container>
 	);
 }
 

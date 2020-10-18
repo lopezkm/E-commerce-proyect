@@ -1,22 +1,127 @@
 const server = require( 'express' ).Router( );
 const Promise = require( 'bluebird' );
-const { Product, Category, Media } = require( '../db.js' );
+const sequelize = require( 'sequelize' );
+const { Op, QueryTypes } = sequelize;
+const { Product, Category, Media, conn } = require( '../db.js' );
+
+/* =================================================================================
+* 		[ Métodos y constantes de ayuda para las rutas ]
+* ================================================================================= */
+
+const _SORT_FIELDS = [
+	'name',
+	'price',
+	'publishDate'
+];
+
+const _SORT_DIRECTIONS = [
+	'ASC',
+	'DESC'
+];
+
+const _MAX_PRICE = 200.0;
+const _MAX_PAGE = 1000;
+
+const _MIN_PER_PAGE = 5;
+const _MAX_PER_PAGE = 20;
+const _DEF_PER_PAGE = 20;
+
+const _clamp = ( value, min, max ) => {
+	return Math.max( min, Math.min( max, value ) );
+};
+
+const _buildProductsQuery = ( categories, limit, page ) => {
+	let query = `SELECT "products".id FROM "products" $r LIMIT :maxRows OFFSET :offset`;
+	
+	if ( categories && ( categories.length > 0 ) )
+	{
+		query = query.replace( '$r', `
+			INNER JOIN "product_category" ON "product_category"."productId" = "products"."id"
+			INNER JOIN "categories" ON "product_category"."categoryId" = "categories"."id"
+			WHERE "categories"."id" IN( :list )
+			GROUP BY "products"."id" HAVING COUNT( "products"."id" ) = :length
+		` );
+	}
+	else
+	{
+		query = query.replace( '$r', '' );
+	}
+	
+	return conn.query( query, {
+		replacements: {
+			list: categories && categories,
+			length: categories && categories.length,
+			maxRows: limit,
+			offset: ( page * limit )
+		},
+		type: QueryTypes.SELECT
+	} );
+}
 
 /* =================================================================================
 * 		[ Obtención de todos los productos ]
 * ================================================================================= */
 
 server.get( '/', ( request, response, next ) => {
-	Product.findAll( {
+	let { query, categories, sortBy, sortDir, minPrice, maxPrice, page, limit } = request.query;
+	
+	sortBy = _SORT_FIELDS.find( v => sortBy === v ) || _SORT_FIELDS[ 0 ];
+	sortDir = _SORT_DIRECTIONS.find( v => sortDir === v ) || _SORT_DIRECTIONS[ 0 ];
+	
+	minPrice = _clamp( ( minPrice || 0.0 ), 0.0, _MAX_PRICE );
+	maxPrice = _clamp( ( maxPrice || _MAX_PRICE ), 0.0, _MAX_PRICE );
+	
+	page = _clamp( ( page || 0 ), 0, _MAX_PAGE );
+	limit = _clamp( ( limit || _DEF_PER_PAGE ), _MIN_PER_PAGE, _MAX_PER_PAGE );
+	
+	query = query && `%${query}%`;
+	categories = categories && categories.split && categories.split( ',' ).map( c => parseInt( c ) || undefined );
+	
+	_buildProductsQuery( categories, limit, page ).then( ( data ) => {
+		if ( !data || ( data.length === 0 ) ) {
+			response.status( 200 ).send( [ ] );
+			
+			return null;
+		}
+		
+		const productIds = data.map( v => v.id );
+		
+		return Product.findAll( {
+			where: {
+				[ Op.and ]: [
+					{
+						id: productIds
+					},
+					{
+						[ Op.and ]: [
+							{ price: { [ Op.gte ]: minPrice } },
+							{ price: { [ Op.lte ]: maxPrice } }
+						]
+					},
+					query && {
+						[ Op.or ]: [
+							{ name: { [ Op.iLike ]: query } },
+							{ description: { [ Op.iLike ]: query } }
+						]
+					}
+				]
+			},
+			order: [
+				[ sortBy, sortDir ]
+			],
 			include: [
-				{ model: Media },
-				{ model: Category }
+				{ model: Category },
+				{ model: Media }
 			]
-		} )
-		.then( ( products ) => {
-			response.status( 200 ).send( products );
-		} )
-		.catch( next );
+		} );
+	} )
+	.then( ( products ) => {
+		if ( products === null ) {
+			return null;
+		}
+		
+		response.status( 200 ).send( products );
+	} );
 } );
 
 /* =================================================================================
@@ -27,18 +132,18 @@ server.get( '/:id', ( request, response, next ) => {
 	const { id } = request.params;
 	
 	Product.findByPk( id, {
-			include: [
-				{ model: Media },
-				{ model: Category }
-			]
-		} )
-		.then( ( product ) => {
-			if ( !product ) {
-				return response.sendStatus( 404 );
-			}
-			
-			response.send( product );
-		} );
+		include: [
+			{ model: Media },
+			{ model: Category }
+		]
+	} )
+	.then( ( product ) => {
+		if ( !product ) {
+			return response.sendStatus( 404 );
+		}
+		
+		response.status( 200 ).send( product );
+	} );
 } );
 
 /* =================================================================================
@@ -52,18 +157,39 @@ server.post( '/:idProduct/category/:idCategory', ( request, response, next ) => 
 	promises.push( Product.findByPk( idProduct ) );
 	promises.push( Category.findByPk( idCategory ) );
 	
-	Promise.all( promises )
-		.spread( function( product, category ) {
-			if ( !product || !category ) {
-				return response.sendStatus( 404 );
-			}
-			
-			product.addCategory( category )
-				.then( ( data ) => {
-					( !!data ) ?
-						response.sendStatus( 201 ) : response.sendStatus( 409 );
-				} );
-		} );
+	Promise.all( promises ).spread( function( product, category ) {
+		if ( !product || !category ) {
+			return response.sendStatus( 404 );
+		}
+		
+		product.addCategory( category )
+			.then( ( data ) => {
+				( !!data ) ?
+					response.sendStatus( 201 ) : response.sendStatus( 409 );
+			} );
+	} );
+} );
+
+/* =================================================================================
+* 		[ Creación de la relación entre un producto y varias categoría ]
+* ================================================================================= */
+
+server.post( '/:idProduct/category/', ( request, response, next ) => {
+	const { idProduct } = request.params;
+	const { categories } = request.body;
+	let promises=[];
+	
+	Product.findByPk( idProduct )
+	.then(product => product)
+	.then(prod => categories.map(cat => promises.push(prod.addCategory(cat))) )
+	.then(x => {
+
+		Promise.all( promises )
+		.then(data => {
+			response.send(data)
+		})
+		.catch(e => response.send (e))
+	})
 } );
 
 /* =================================================================================
@@ -77,18 +203,39 @@ server.delete( '/:idProduct/category/:idCategory', ( request, response, next ) =
 	promises.push( Product.findByPk( idProduct ) );
 	promises.push( Category.findByPk( idCategory ) );
 	
-	Promise.all( promises )
-		.spread( function( product, category ) {
-			if ( !product || !category ) {
-				return response.sendStatus( 404 );
-			}
-			
-			product.removeCategory( category )
-				.then( ( data ) => {
-					( !!data ) ?
-						response.sendStatus( 204 ) : response.sendStatus( 409 );
-				} );
-		} );
+	Promise.all( promises ).spread( function( product, category ) {
+		if ( !product || !category ) {
+			return response.sendStatus( 404 );
+		}
+		
+		product.removeCategory( category )
+			.then( ( data ) => {
+				( !!data ) ?
+					response.sendStatus( 204 ) : response.sendStatus( 409 );
+			} );
+	} );
+} );
+
+/* =================================================================================
+* 		[ Creación de la relación entre un producto y varias categoría ]
+* ================================================================================= */
+
+server.post( '/:idProduct/category/', ( request, response, next ) => {
+	const { idProduct } = request.params;
+	const { categories } = request.body;
+	let promises=[];
+	
+	Product.findByPk( idProduct )
+	.then(product => product)
+	.then(prod => categories.map(cat => promises.push(prod.addCategory(cat))) )
+	.then(x => {
+
+		Promise.all( promises )
+		.then(data => {
+			response.send(data)
+		})
+		.catch(e => response.send (e))
+	})
 } );
 
 /* =================================================================================
@@ -97,16 +244,18 @@ server.delete( '/:idProduct/category/:idCategory', ( request, response, next ) =
 
 server.post( '/', ( request, response ) => {
 	Product.create( {
-			...request.body
-		} )
-		.then( product => {
-			if ( !product ) {
-				return response.sendStatus( 400 );
-			}
-			
-			return product
-		} )
-		.catch( error => response.status( 400 ).send( error ) );
+		...request.body
+	}, {
+		fields: [ 'name', 'description', 'price', 'stock', 'developer', 'publisher', 'publishDate' ]
+	} )
+	.then( ( product ) => {
+		if ( !product ) {
+			return response.sendStatus( 409 );
+		}
+
+		return response.status( 200 ).send( product );
+	} )
+	.catch(e => response.status( 400 ).send( e ));
 } );
 
 /* =================================================================================
@@ -116,15 +265,17 @@ server.post( '/', ( request, response ) => {
 server.put( '/:id', ( request, response ) => {
 	const { id } = request.params;
 	
-	Product.findByPk( id )
-		.then( product => {
-			if ( !product ) {
-				return response.sendStatus( 404 );
-			}
-			
-			return product.update( { ...request.body } );
-		} )
-		.catch( error => response.status( 400 ).send( error ) );
+	Product.findByPk( id ).then( ( product ) => {
+		if ( !product ) {
+			return response.sendStatus( 404 );
+		}
+		
+		return product.update( {
+			...request.body
+		}, {
+			fields: [ 'name', 'description', 'price', 'stock', 'developer', 'publisher', 'publishDate' ]
+		} );
+	} );
 } );
 
 /* =================================================================================
@@ -134,15 +285,15 @@ server.put( '/:id', ( request, response ) => {
 server.delete( '/:id', ( request, response ) => {
 	let { id } = request.params;
 	
-	Product.findByPk( id )
-		.then( product => {
-			if ( !product ) {
-				return response.sendStatus( 404 );
-			}
-			
-			product.destroy( )
-				.then( ( ) => res.sendStatus( 200 ) );
+	Product.findByPk( id ).then( ( product ) => {
+		if ( !product ) {
+			return response.sendStatus( 404 );
+		}
+		
+		product.destroy( ).then( ( ) => {
+			res.sendStatus( 204 );
 		} );
+	} );
 } );
 
 /* =================================================================================

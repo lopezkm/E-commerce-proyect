@@ -1,45 +1,54 @@
 .mediaRow
 {
-	display: flex;
-	flex-flow: row no-wrap;
-	align-items: center;
-	justify-content: space-between;
 	position: relative;
-	height: 50px;
-	padding: 1rem;
-	margin: 10px;
-	margin-top: 0;
-	padding-right: 0;
-	font-weight: 500;
-	font-size: 0.9rem;
-	border-radius: 2px;
-	max-width: 30rem;
-	color: #fff;
+	width: 100%;
+	height: 20rem;
+	margin-bottom: 10px;
+	max-height: 200px;
+	border-radius: 15px;
+	overflow: hidden;
 	
-	border-color: #555;
-	background-color: #555;
+	img, video
+	{
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		outline: none;
+	}
 	
 	@include margin-x( );
-	@include shadow( $blur: 5px, $spread: -1px, $trans: .35 );
 }
 
-.mediaRow span
+.mediaRow:hover
 {
-	overflow: hidden;
-	text-overflow: ellipsis;
+	.mediaRow__tile-overlay
+	{
+		display: flex;
+	}
 }
 
-.mediaRow__button
+.mediaRow__tile-overlay
 {
-	display: block;
+	display: none;
+	align-items: center;
+	justify-content: space-between;
 	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	padding: 0.35rem 0.35rem;
+}
+
+.mediaRow__tile-button
+{
 	bottom: 0;
 	right: 0;
 	height: 50px;
 	width: 50px;
+	border: none;
+	border-radius: 10px;
 	background-color: #ca3d3d;
 	color: #ccc;
-	border: none;
 	
 	&:focus
 	{
@@ -53,8 +62,22 @@
 	}
 }
 
-.mediaRow__button:hover
+.mediaRow__tile-button:hover
 {
-	border-color: #ca3d3d;
-	background-color: #ca3d3d;
+	background-color: #d36464;
+}
+
+.mediaRow__tile-text
+{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 125px;
+	height: 50px;
+	font-weight: 700;
+	font-size: 0.75rem;
+	text-transform: uppercase;
+	color: $white;
+	background-color: $black;
+	border-radius: 10px;
 }
