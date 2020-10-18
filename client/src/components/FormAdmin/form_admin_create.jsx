@@ -2,9 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { Form, Button, Row, Col} from 'react-bootstrap';
 import axios from 'axios';
 import NavAdmin from '../NavAdmin/nav_admin.jsx'
-import store from '../../redux/store/store.js';
-console.log('formAdminCreate',store.getState());
-
+//import store from '../../redux/store/store.js';
 
 const FormAdminCreate = () => {
 
@@ -12,12 +10,13 @@ const FormAdminCreate = () => {
     const [loading, setLoading] = useState(true);
     const [validated, setValidated] = useState(false);
     const nameInput = useRef(null);
+    let selectedCategories = [];
 
     function getCategories() {
         axios.get(`http://localhost:3000/products/category/`)
-            .then(response => {
-                setCategories(response.data);
-            });
+        .then(response => {
+            setCategories(response.data);
+        });
     }
 
     useEffect(() => {
@@ -26,7 +25,6 @@ const FormAdminCreate = () => {
         nameInput.current.focus()
 
     }, [loading]);
-
 
     const [inputAdminForm, setInputAdminForm] = React.useState({
         name: "",
@@ -44,6 +42,21 @@ const FormAdminCreate = () => {
             [event.target.name]: event.target.value
         });
     };
+
+    const handleCategoryChange = (event) => {
+        let selected = document.getElementById(event.target.id)
+        let selectedId = selected.id
+        let statusCheck = selected.checked;
+
+        if (statusCheck && !selectedCategories.includes(selectedId)) {
+            selectedCategories.push(selectedId);
+            console.log(selectedCategories);
+        }
+        else{
+            selectedCategories = selectedCategories.filter(id => id !== selectedId);
+            console.log(selectedCategories);
+        }
+    }
 
     const handleSubmit = (event) => {
         const form = event.currentTarget;
@@ -64,18 +77,18 @@ const FormAdminCreate = () => {
             publisher: inputAdminForm.publisher,
             publishDate: inputAdminForm.publishDate
         })
-            .then(response => console.log(response))// Respuesta del servidor
-            .catch(e => console.log(e))
+        .then(response => response.data.id)// Respuesta del servidor con producto creado
+        .then(idP => axios.post(`http://localhost:3000/products/${idP}/category/`,{ categories: selectedCategories}) )
+        .then(success => console.log(success))
+        .catch(e => console.log(e))
     }
 
     return (
         <div>
-            {/* Opciones para CRUD del producto */}
             <NavAdmin />
 
             <h1 className='formAdmin-title'>Agregue un juego a su catalogo</h1>
 
-            {/* Formulario para modificar o crear el producto */}
             <Form noValidate validated={validated} onSubmit={(event) => handleSubmit(event)} className='formAdmin-container'>
                 <Form.Group controlId="formBasicEmail" bsPrefix="formAdmin-group">
                     
@@ -170,19 +183,24 @@ const FormAdminCreate = () => {
                         </Col>
                     </Row>
 
-                    <Form.Group>
-                        <Form.Control required={true} as="select" multiple bsPrefix="custom-select"  >
-                            {
-                                categories.map((cat,i) => (
-                                    <option key={i}>{cat.name}</option>
-                                ))
-                            }
-                        </Form.Control>
-                    </Form.Group>
+                        { 
+                            categories.map((cat,i) => ( 
+                                <Form.Switch 
+                                    key={i}
+                                    type="switch"
+                                    id={i+1}
+                                    label={cat.name}
+                                    onChange = {(e)=>handleCategoryChange(e)}
+                                />
+                            ))
+                        }     
 
-                    <Button className="mb-2" variant="primary" type="submit">
-                        Subir
-                </Button>
+                        <Button className="mb-2" variant="secondary" type="submit">
+                            Cancelar
+                        </Button>
+                        <Button className="mb-2" variant="primary" type="submit">
+                            Subir
+                        </Button>
                 </Form.Group>
             </Form>
         </div>
