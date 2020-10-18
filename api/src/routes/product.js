@@ -241,10 +241,13 @@ server.put( '/:id', ( request, response ) => {
 			return response.sendStatus( 404 );
 		}
 		
-		return product.update( {
+		product.update( {
 			...request.body
 		}, {
 			fields: [ 'name', 'description', 'price', 'stock', 'developer', 'publisher', 'publishDate' ]
+		} )
+		.then( ( product ) => {
+			response.status( 200 ).send( product );
 		} );
 	} );
 } );
