@@ -54,9 +54,9 @@ function OrderTable( ) {
                     </tr>
                 </thead>
                 <tbody>
-                    {orderSelector && orderSelector.map(order => { 
+                    {orderSelector && orderSelector.map((order,i) => { 
                         return( 
-                            <tr> 
+                            <tr key={i}> 
                                 <td>{order.id}</td>
                                 <td>{order.status}</td>
                                 <td>{order.userId}</td>
