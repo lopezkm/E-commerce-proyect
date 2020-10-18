@@ -61,4 +61,25 @@
     overflow: auto;
 }
 
+.label-switch {
+    display: flex;
+    justify-content: space-between;
 
+    .custom-control-label { 
+        display: inline;
+        width: min-content;
+        &:before {
+            padding-top: 1.15rem;
+            padding-right: 1.85rem;
+            margin-top: 0.5rem;
+            border-radius: 15px;
+            margin-left: 0.13rem;
+            border: none !important;
+        }
+        &:after {
+            margin-top: 0.37rem;
+            border-radius: 100%;
+            padding: 0.57rem;
+        }
+    }
+}

@@ -6,7 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 import NavAdmin from '../NavAdmin/nav_admin.jsx';
 import store from '../../redux/store/store.js';
-console.log('formAdminModify',store.getState());
+console.log('formAdminModify', store.getState());
 
 toast.configure();
 
@@ -32,17 +32,17 @@ const FormAdminModify = () => {
 
     const getCategories = () => {
         axios.get(`http://localhost:3000/products/category/`)
-        .then(response => {
-            setAllCategories(response.data);
-            setCategories(response.data);
-        });
+            .then(response => {
+                setAllCategories(response.data);
+                setCategories(response.data);
+            });
     }
 
     const getProducts = () => {
         axios.get(`http://localhost:3000/products/`)
-        .then(response => {
-            setProducts(response.data);
-        });
+            .then(response => {
+                setProducts(response.data);
+            });
     }
 
     useEffect(() => {
@@ -99,14 +99,14 @@ const FormAdminModify = () => {
     }
 
     const handleCheckChange = (event) => {
-        console.log('EVENT',event.target.name);
+        console.log('EVENT', event.target.name);
         let formCheck = document.getElementById(event.target.name);
         formCheck.disabled = !formCheck.disabled
     }
 
     const handleCategoryDelete = () => {
         let selector = document.getElementById("formProductCategories");
-        
+
         if (selector.options.length > 0) {
             let categorySelectedToDelete = selector.options[selector.selectedIndex].id;
             setProductCategories(productCategories.filter(cat => cat.id !== parseInt(categorySelectedToDelete)));
@@ -118,20 +118,20 @@ const FormAdminModify = () => {
         let selector = document.getElementById("productList");
         let idP = selector.options[selector.selectedIndex].id;
         axios.delete(`http://localhost:3000/products/${idP}/category/${idC}`)
-        .then(()=>{
-            axios.get(`http://localhost:3000/products/${idP}`)
-            .then(response => {
+            .then(() => {
+                axios.get(`http://localhost:3000/products/${idP}`)
+                    .then(response => {
 
-                let prodCat = response.data.categories;
-                let filteredCat = allCategories.filter((item) => {
-                    return !prodCat.find(el => el.name === item.name);
-                })
-                setCategories(filteredCat);
-                notifyDeleted();
+                        let prodCat = response.data.categories;
+                        let filteredCat = allCategories.filter((item) => {
+                            return !prodCat.find(el => el.name === item.name);
+                        })
+                        setCategories(filteredCat);
+                        notifyDeleted();
+                    })
             })
-        })
     }
-    
+
     const handleCategoryAdd = () => {
         let selector = document.getElementById("formCategories");
 
@@ -146,20 +146,20 @@ const FormAdminModify = () => {
         let selector = document.getElementById("productList");
         let idP = selector.options[selector.selectedIndex].id;
         axios.post(`http://localhost:3000/products/${idP}/category/${idC}`)
-        .then(() => {
-            axios.get(`http://localhost:3000/products/${idP}`)
-            .then((response) => { 
-                setProductCategories(response.data.categories);
-                notifyAdded();
+            .then(() => {
+                axios.get(`http://localhost:3000/products/${idP}`)
+                    .then((response) => {
+                        setProductCategories(response.data.categories);
+                        notifyAdded();
+                    })
             })
-        })
     }
 
-    const notifyAdded = () =>{
+    const notifyAdded = () => {
         toast.info('Categoría agregada');
     }
 
-    const notifyDeleted = () =>{
+    const notifyDeleted = () => {
         toast.error('Categoría eliminada');
     }
 
@@ -184,11 +184,12 @@ const FormAdminModify = () => {
 
                         <Form.Control as="select" multiple id="productList" onChange={(e) => handleSelectChange(e)}>
                             {
-                                searchedProduct.map((product, i) => (
+                                searchedProduct.map((product, i) => {
+                                    return (
                                     <option key={i} id={product.id} >
                                         {product.name}
-                                    </option>
-                                ))
+                                    </option>)
+                                })
                             }
                         </Form.Control>
                     </Form.Group>
@@ -201,75 +202,70 @@ const FormAdminModify = () => {
                         <Form.Group className='formAdmin-group'>
                             <Row>
                                 <Col>
-                                    <Form.Row>
-                                        <Col xs={0.5}>
-                                            <Form.Switch 
-                                                type="switch"
-                                                id="switch-name"
-                                                name="formName"
-                                                label="Nombre"
-                                                onChange={(event) => handleCheckChange(event)}
-                                            />
-                                        </Col>
-                                    </Form.Row>
+                                    <div className='label-switch'>
+                                        <label>Nombre</label>
+                                        <Form.Switch
+                                            type="switch"
+                                            id="switch-name"
+                                            name="formName"
+                                            label=""
+                                            onChange={(event) => handleCheckChange(event)}
+                                        />
+                                    </div>
                                     <Form.Control type="text"
                                         placeholder="Nombre del juego"
                                         value={inputAdminForm.name}
                                         name="name"
                                         id="formName"
                                         onChange={(event) => handleInputChangeForm(event)} disabled />
-                                </Col> 
-                                <Col> 
-                                    <Form.Row>
-                                        <Col xs={0.5}>
-                                        <Form.Switch 
-                                                type="switch"
-                                                id="switch-price"
-                                                name="formPrice"
-                                                label="Precio"
-                                                onChange={(event) => handleCheckChange(event)}
-                                            />
-                                        </Col>
-                                    </Form.Row>
+                                </Col>
+                                <Col>
+                                    <div className='label-switch'>
+                                        <label>Precio</label>
+                                        <Form.Switch
+                                            type="switch"
+                                            id="switch-price"
+                                            name="formPrice"
+                                            label=""
+                                            onChange={(event) => handleCheckChange(event)}
+                                        />
+                                    </div>
                                     <Form.Control type="number"
                                         placeholder="Precio del juego"
                                         value={inputAdminForm.price}
                                         name="price"
                                         id="formPrice"
                                         onChange={(event) => handleInputChangeForm(event)} disabled />
-                                </Col> 
+                                </Col>
                                 <Col>
-                                    <Form.Row>
-                                        <Col xs={0.5}>
-                                        <Form.Switch 
-                                                type="switch"
-                                                id="switch-stock"
-                                                name="formStock"
-                                                label="Stock disponible"
-                                                onChange={(event) => handleCheckChange(event)}
-                                            />
-                                        </Col>
-                                    </Form.Row>
+                                    <div className='label-switch'>
+                                        <label>Stock</label>
+                                        <Form.Switch
+                                            type="switch"
+                                            id="switch-stock"
+                                            name="formStock"
+                                            label=""
+                                            onChange={(event) => handleCheckChange(event)}
+                                        />
+                                    </div>
                                     <Form.Control type="number"
                                         placeholder="Stock disponible del juego"
                                         value={inputAdminForm.stock}
                                         name="stock"
                                         id="formStock"
                                         onChange={(event) => handleInputChangeForm(event)} disabled />
-                                </Col> 
-                            </Row>
-
-                            <Form.Row>
-                                <Col xs={0.5}>
-                                    <Form.Switch 
-                                        type="switch"
-                                        id="switch-description"
-                                        name="formDescription"
-                                        label="Descripcion"
-                                        onChange={(event) => handleCheckChange(event)}
-                                    />
                                 </Col>
-                            </Form.Row>
+                            </Row>
+                            <div className='label-switch'>
+                                <label>Descripcion</label>
+                                <Form.Switch
+                                    type="switch"
+                                    id="switch-description"
+                                    name="formDescription"
+                                    label=""
+                                    onChange={(event) => handleCheckChange(event)}
+                                />
+                            </div>
                             <Form.Control
                                 as="textarea"
                                 rows={4}
@@ -281,17 +277,16 @@ const FormAdminModify = () => {
 
                             <Row>
                                 <Col>
-                                    <Form.Row>
-                                        <Col xs={0.5}>
-                                            <Form.Switch 
-                                                type="switch"
-                                                id="switch-developer"
-                                                name="formDeveloper"
-                                                label="Desarrollado por"
-                                                onChange={(event) => handleCheckChange(event)}
-                                            />
-                                        </Col>
-                                    </Form.Row>
+                                    <div className='label-switch'>
+                                        <label>Desarrollador</label>
+                                        <Form.Switch
+                                            type="switch"
+                                            id="switch-developer"
+                                            name="formDeveloper"
+                                            label=""
+                                            onChange={(event) => handleCheckChange(event)}
+                                        />
+                                    </div>
                                     <Form.Control type="text"
                                         placeholder="Desarrolladora del juego"
                                         value={inputAdminForm.developer}
@@ -300,17 +295,16 @@ const FormAdminModify = () => {
                                         onChange={(event) => handleInputChangeForm(event)} disabled />
                                 </Col>
                                 <Col>
-                                    <Form.Row>
-                                        <Col xs={0.5}>
-                                            <Form.Switch 
-                                                type="switch"
-                                                id="switch-publisher"
-                                                name="formPublisher"
-                                                label="Publicado por"
-                                                onChange={(event) => handleCheckChange(event)}
-                                            />
-                                        </Col>
-                                    </Form.Row>
+                                    <div className='label-switch'>
+                                        <label>Publicado por</label>
+                                        <Form.Switch
+                                            type="switch"
+                                            id="switch-publisher"
+                                            name="formPublisher"
+                                            label=""
+                                            onChange={(event) => handleCheckChange(event)}
+                                        />
+                                    </div>
                                     <Form.Control type="text"
                                         placeholder="Publicadora del juego"
                                         value={inputAdminForm.publisher}
@@ -319,20 +313,19 @@ const FormAdminModify = () => {
                                         onChange={(event) => handleInputChangeForm(event)} disabled />
                                 </Col>
                                 <Col>
-                                    <Form.Row>
-                                        <Col xs={0.5}>
-                                        <Form.Switch 
-                                                type="switch"
-                                                id="switch-publish-date"
-                                                name="formPublishDate"
-                                                label="Fecha de lanzamiento"
-                                                onChange={(event) => handleCheckChange(event)}
-                                            />
-                                        </Col>
-                                    </Form.Row>
+                                    <div className='label-switch'>
+                                        <label>Lanzamiento</label>
+                                        <Form.Switch
+                                            type="switch"
+                                            id="switch-publish-date"
+                                            name="formPublishDate"
+                                            label=""
+                                            onChange={(event) => handleCheckChange(event)}
+                                        />
+                                    </div>
                                     <Form.Control type="date"
                                         placeholder="Fecha de lanzamiento del juego"
-                                        value={inputAdminForm.publishDate}
+                                        value={inputAdminForm.publishDate.substring(0,10)}
                                         name="publishDate"
                                         id="formPublishDate"
                                         onChange={(event) => handleInputChangeForm(event)} disabled />
@@ -365,7 +358,7 @@ const FormAdminModify = () => {
                                 Actualizar
                         </Button>
                         </div>
-                    <MediaForm productId={ inputAdminForm.id } productMedias={ inputAdminForm.media }/>
+                        <MediaForm productId={inputAdminForm.id} productMedias={inputAdminForm.media} />
                     </Form>
                 )
             }

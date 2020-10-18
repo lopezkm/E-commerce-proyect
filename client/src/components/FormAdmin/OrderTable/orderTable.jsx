@@ -31,7 +31,7 @@ function OrderTable( ) {
     }
     
 	return (
-        <Container>
+        <Container className="orderTable">
             <div className='orderTable-divConatiner'>
                 <h1>Seleccione el estado de las ordenes que desea filtrar :</h1>
                 <div className= 'dropdown'>

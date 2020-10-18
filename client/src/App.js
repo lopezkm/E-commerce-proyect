@@ -22,7 +22,7 @@ import PanelAdmin from './components/PanelAdmin/PanelAdmin.jsx';
 function App( )
 {
 	return (
-		<Container fluid>
+		<Container fluid className="app">
 			<Route path="/" component={ ( ) => <NavBar/> }/>
 			<Route path='/order' component={ Order } />
 			<Route path="/search/:product" render={ ( { match } ) => <Result products={ match.params.product }/> }/>

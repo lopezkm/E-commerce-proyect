@@ -16,7 +16,7 @@ function Product( { productId } )
 		axios.get( `${ API_URL }/products/${productId}` )
 			.then( ( response ) => {
 				const productData = response.data;
-				
+				console.log(response.data);
 				processMedia( productData );
 				
 				setProduct( productData );
@@ -46,7 +46,7 @@ function Product( { productId } )
 
 	useEffect( ( ) => {
 		getProduct( );
-	});    
+	}, []);    
 
 	if ( isLoading ) {
 		return <div className="App">Loading...</div>;
