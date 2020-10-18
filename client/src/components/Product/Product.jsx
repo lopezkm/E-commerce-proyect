@@ -78,6 +78,10 @@ function Product({ productId }) {
 		return <div className="App">Loading...</div>;
 	}
 
+	let recoProdFilter = recommendProduct.filter(prod=>prod.id!==product.id)
+
+	console.log(recoProdFilter)
+
 	return (
 		<Container>
 			<Carousel interval={5000} className="product-carousel-main">
@@ -132,12 +136,11 @@ function Product({ productId }) {
 						</Row>
 
 						{product.stock === 0 &&
-							(<Row className="product-row-border-top">
-								<h2> Otros juegos que te pueden interesar:</h2>
+							(<Row><h2> Otros juegos que te pueden interesar:</h2>
+							
+								<Row className="product-row-border-top">
 								{
-									
-									//mapear recommendProduct para renderizar las cartas
-									recommendProduct.map((p, i) => (
+									recoProdFilter.map((p, i) => (
 										<Col xs={12} sm={6} md={4} lg={3} key={i} className='catalogue__product-col'>
 											<Link to={`/product/${p.id}`} className='catalogue__product-link'>
 
@@ -155,6 +158,7 @@ function Product({ productId }) {
 									))
 
 								}
+							</Row>
 							</Row>
 							)
 
