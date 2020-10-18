@@ -1,6 +1,5 @@
 .navbar-main
 {
-	
 	padding: 0;
 	color: #fff;
 	min-height: 3.25rem;
@@ -106,7 +105,7 @@
 		}
 	}
 	
-	.navbar-option-text
+	.navbar-text
 	{
 		padding: 0.5rem;
 		margin: 0;
@@ -114,15 +113,6 @@
 		font-weight: 800;
 		font-family: 'Open Sans', sans-serif, arial;
 		text-transform: uppercase;
-		
-		@include mq( 'md' )
-		{
-			position: relative;
-			top: 50%;
-			transform: translateY( -50% );
-			font-size: 0.7rem;
-			font-weight: 600;
-		}
 	}
 	
 	.navbar-separator
@@ -132,6 +122,32 @@
 		@include mq( 'md' )
 		{
 			display: none;
+		}
+	}
+	
+	.navbar-cart
+	{
+		color: #ccc;
+	}
+	
+	.navbar-user
+	{
+		color: #ccc;
+	}
+	
+	@include mq( 'md' )
+	{
+		.navbar-text
+		{
+			font-size: 0.7rem;
+			font-weight: 600;
+		}
+		
+		.navbar-text-outline
+		{
+			position: relative;
+			top: 50%;
+			transform: translateY( -50% );
 		}
 	}
 }

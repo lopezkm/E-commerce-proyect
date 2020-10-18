@@ -1,13 +1,13 @@
 import React from 'react';
 import { Card, OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
+import axios from 'axios';
 import defaultPortrait from '../../assets/portrait.jpg';
-import store from '../../redux/store/store.js';
-import CartButton from '../CartButton.jsx';
-console.log('productCard',store.getState());
 
 const API_URL = process.env.REACT_APP_API_URL;
 
-function ProductCard( { name, price, media, developer, stock } )
+function ProductCard( { id, name, price, media, developer, stock } )
 {
 	const getProductPortrait = ( ) => {
 		if ( !media || ( media.length === 0 ) ) {
@@ -25,32 +25,47 @@ function ProductCard( { name, price, media, developer, stock } )
 		}
 		
 		return portrait.path;
-	}
+	};
 	
 	const getProductPrice = ( ) => {
 		return price.toLocaleString( 'es-ES', { minimumFractionDigits: 2 } );
-	}
+	};
+	
+	const handleCartButtonClick = ( e ) => {
+		e.preventDefault( );
+		
+		axios.post( `${ API_URL }/users/1/cart`, {
+			productId: id,
+			quantity: 1
+		} );
+	};
 
 	return (
-		<Card bsPrefix='productCard-card'>
-			<Card.Header bsPrefix='productCard-card-header'>
-				<Card.Img bsPrefix='productCard-card-img' src={ getProductPortrait( ) } alt={`Portrait of ${name}`} />
+		<Card bsPrefix='productCard__card'>
+			<Card.Header bsPrefix='productCard__card-header'>
+				<Card.Img bsPrefix='productCard__card-img' src={ getProductPortrait( ) } alt={ `Portrait of ${ name }` } />
 			</Card.Header>
-			<Card.Body bsPrefix='productCard-card-body'>
+			<Card.Body bsPrefix='productCard__card-body'>
 				<div>
-					<OverlayTrigger overlay={<Tooltip id="tooltip-disabled">{name}</Tooltip>}>
-						<p className='productCard-card-name'>{name}</p>
+					<OverlayTrigger overlay={ <Tooltip id="tooltip-disabled">{ name }</Tooltip> }>
+						<p className='productCard__card-name'>{ name }</p>
 					</OverlayTrigger>
 
-					<p className='productCard-card-developer'>{developer}</p>
+					<p className='productCard__card-developer'>{ developer }</p>
 				</div>
 				
 				<div>
 					{ ( stock > 0 ) ?
-						<p className='productCard-card-price'>{getProductPrice( )} US$</p> :
-						<p className='productCard-card-noStock'>SIN STOCK</p> }
+						<div className='productCard__card-price'>
+							<p>{ getProductPrice( ) } US$</p>
+							
+							<button className="productCard__cart-button" onClick={ handleCartButtonClick }>
+								<FontAwesomeIcon icon={ faCartPlus }/>
+							</button>
+						</div> :
+						
+						<p className='productCard__card-noStock'>SIN STOCK</p> }
 				</div>
-			<CartButton/>
 			</Card.Body>
 		</Card>
 	);
