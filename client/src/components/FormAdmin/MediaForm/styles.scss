@@ -41,12 +41,17 @@
 
 .mediaForm__separator
 {
-	margin: 1rem 0;
-	border-bottom: 1px solid #3f3f3f;
+	margin: 2rem 0;
+	border-bottom: 1px solid $light-grey;
 	
-	@include mq( 'lg' )
+	&.mediaForm__form-separator
 	{
-		display: none;
+		margin: 1rem 0;
+		
+		@include mq( 'lg' )
+		{
+			display: none;
+		}
 	}
 }
 
