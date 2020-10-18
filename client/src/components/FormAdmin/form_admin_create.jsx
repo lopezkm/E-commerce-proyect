@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { Form, Button, Row, Col} from 'react-bootstrap';
+import { Form, Button, Row, Col } from 'react-bootstrap';
 import axios from 'axios';
 import NavAdmin from '../NavAdmin/nav_admin.jsx'
 //import store from '../../redux/store/store.js';
@@ -15,9 +15,9 @@ const FormAdminCreate = () => {
 
     function getCategories() {
         axios.get(`http://localhost:3000/products/category/`)
-        .then(response => {
-            setCategories(response.data);
-        });
+            .then(response => {
+                setCategories(response.data);
+            });
     }
 
     useEffect(() => {
@@ -52,7 +52,7 @@ const FormAdminCreate = () => {
         if (statusCheck && !selectedCategories.includes(selectedId)) {
             selectedCategories.push(selectedId);
         }
-        else{
+        else {
             selectedCategories = selectedCategories.filter(id => id !== selectedId);
         }
     }
@@ -76,37 +76,37 @@ const FormAdminCreate = () => {
             publisher: inputAdminForm.publisher,
             publishDate: inputAdminForm.publishDate
         })
-        .then(response => response.data.id)// Respuesta del servidor con producto creado
-        .then(idP => axios.post(`http://localhost:3000/products/${idP}/category/`,{ categories: selectedCategories}) )
-        .then(success => {
-            console.log(success);
+            .then(response => response.data.id)// Respuesta del servidor con producto creado
+            .then(idP => axios.post(`http://localhost:3000/products/${idP}/category/`, { categories: selectedCategories }))
+            .then(success => {
+                console.log(success);
 
-            toast.info('Categoría agregada con exito', {
-                position: "top-right",
-                autoClose: 3000,
-                hideProgressBar: true,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-            });
+                toast.info('Categoría agregada con exito', {
+                    position: "top-right",
+                    autoClose: 3000,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
 
-            setTimeout(function(){ window.location.reload(); }, 3100);
-            
-        })
-        .catch(e => {
-            console.log(e);
-            toast.error('ERROR: Producto ya existe', {
-                position: "top-right",
-                autoClose: 3000,
-                hideProgressBar: true,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-            });
-        })
-        
+                setTimeout(function () { window.location.reload(); }, 3100);
+
+            })
+            .catch(e => {
+                console.log(e);
+                toast.error('ERROR: Producto ya existe', {
+                    position: "top-right",
+                    autoClose: 3000,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
+            })
+
     }
 
     return (
@@ -117,9 +117,9 @@ const FormAdminCreate = () => {
 
             <Form noValidate validated={validated} onSubmit={(event) => handleSubmit(event)} className='formAdmin-container'>
                 <Form.Group controlId="formBasicEmail" bsPrefix="formAdmin-group">
-                    
+
                     <Row>
-                        <Col>
+                        <Col xs={12} md={4}>
                             <Form.Group>
                                 <Form.Control type="text"
                                     required={true}
@@ -132,7 +132,7 @@ const FormAdminCreate = () => {
                                 </Form.Control.Feedback>
                             </Form.Group>
                         </Col>
-                        <Col>
+                        <Col xs={12} md={4}>
                             <Form.Group>
                                 <Form.Control
                                     type="number"
@@ -146,7 +146,7 @@ const FormAdminCreate = () => {
                             </Form.Control.Feedback>
                             </Form.Group>
                         </Col>
-                        <Col>
+                        <Col xs={12} md={4}>
                             <Form.Group>
                                 <Form.Control type="number"
                                     required={true}
@@ -173,9 +173,9 @@ const FormAdminCreate = () => {
                             La descripción debe tener más de 15 caracteres
                         </Form.Control.Feedback>
                     </Form.Group>
-                    
+
                     <Row>
-                        <Col>
+                        <Col xs={12} md={4}>
                             <Form.Group>
                                 <Form.Control type="text"
                                     required={true}
@@ -187,7 +187,7 @@ const FormAdminCreate = () => {
                             </Form.Control.Feedback>
                             </Form.Group>
                         </Col>
-                        <Col>
+                        <Col xs={12} md={4}>
                             <Form.Group>
                                 <Form.Control type="text"
                                     required={true}
@@ -199,7 +199,7 @@ const FormAdminCreate = () => {
                             </Form.Control.Feedback>
                             </Form.Group>
                         </Col>
-                        <Col>
+                        <Col xs={12} md={4}>
                             <Form.Group>
                                 <Form.Control type="date"
                                     required={true}
@@ -208,24 +208,31 @@ const FormAdminCreate = () => {
                             </Form.Group>
                         </Col>
                     </Row>
+                    <div className='categories-container'>
+                        <Form.Row inline>
+                            {
+                                categories.map((cat, i) => (
 
-                        { 
-                            categories.map((cat,i) => ( 
-                                <Form.Switch 
-                                    key={i}
-                                    type="switch"
-                                    id={i+1}
-                                    label={cat.name}
-                                    onChange = {(e)=>handleCategoryChange(e)}
-                                />
-                            ))
-                        }     
+                                    <Col lg={3}  >
+                                        <Form.Switch bsPrefix='custom-control-label'
+                                            key={i}
+                                            type="switch"
+                                            id={i + 1}
+                                            label={cat.name}
+                                            onChange={(e) => handleCategoryChange(e)}
+                                        />
+                                    </Col>
 
-                        <Button className="mb-2" variant="secondary" type="submit">
-                            Cancelar
+                                ))
+                            }
+                        </Form.Row>
+                    </div>
+
+                    <Button className="mb-2" variant="secondary" type="submit">
+                        Cancelar
                         </Button>
-                        <Button className="mb-2" variant="primary" type="submit">
-                            Subir
+                    <Button className="mb-2 create-product-button-submit" variant="primary" type="submit">
+                        Crear producto
                         </Button>
                 </Form.Group>
             </Form>
