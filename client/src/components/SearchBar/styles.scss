@@ -2,8 +2,8 @@
 {
 	display: flex;
 	align-items: center;
-	height: 100%;
-	width: 100%;
+	justify-content: flex-end;
+	height: 2.5rem;
 	padding: 0.5rem 1rem;
 	background-color: $black;
 	
@@ -16,15 +16,16 @@
 	
 	@include mq( 'md' )
 	{
-		width: 15rem;
+		max-width: 15rem;
 		padding: 0;
+		margin-bottom: 0.25rem;
 		margin-right: 1rem;
 		background-color: transparent;
 		box-shadow: none;
 	}
 }
 
-.searchBar__button
+.searchBar__submit-button
 {
 	background-color: transparent;
 	color: #ccc;
@@ -37,9 +38,23 @@
 	}
 }
 
+.searchBar__input-wrapper
+{
+	display: block;
+	position: relative;
+	width: 100%;
+	
+	@include mq( 'md' )
+	{
+		display: none;
+		width: auto;
+	}
+}
+
 .searchBar__input
 {
-	color: #fff;
+	display: block;
+	color: $light-grey;
 	background-color: transparent;
 	border: none;
 	border-bottom: 1px solid #555;
@@ -47,17 +62,36 @@
 	margin-left: 0.25rem;
 	padding: 0.25rem;
 	padding-left: 0.1rem;
-	width: 100%;
 	height: 2.5rem;
+	width: 100%;
+	line-height: 0.5;
 	
 	&:focus
 	{
+		color: #fff;
 		border-bottom: 1px solid $blue;
 		box-shadow: 0 1px 0 0 $blue;
+	}
+}
+
+.searchBar__close-button
+{
+	position: absolute;
+	bottom: 5px;
+	right: 0;
+	background-color: transparent;
+	color: #ccc;
+	border: none;
+	font-size: 1.25rem;
+	
+	&:focus
+	{
+		outline: none;
 	}
 	
 	@include mq( 'md' )
 	{
-		height: 2rem;
+		bottom: 0;
+		height: 2.5rem;
 	}
 }
