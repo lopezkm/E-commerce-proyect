@@ -26,13 +26,13 @@ function NavBar( )
 						<p className="navbar-text navbar-text-outline">Administración</p>
 					</Nav.Link>
 				</Nav>
-				<SearchBar/>
 				<Nav.Link className="navbar-cart" href="/cart">
 					<FontAwesomeIcon icon={ faShoppingCart }/> <p className="navbar-text">Carrito</p>
 				</Nav.Link>
 				<Nav.Link className="navbar-user" href="/user">
 					<FontAwesomeIcon icon={ faUser }/> <p className="navbar-text">Mi cuenta</p>
 				</Nav.Link>
+				<SearchBar/>
 			</Navbar.Collapse>
 		</Navbar>
 	);
