@@ -185,7 +185,6 @@ const FormAdminModify = () => {
                         <Form.Control as="select" multiple id="productList" onChange={(e) => handleSelectChange(e)}>
                             {
                                 searchedProduct.map((product, i) => {
-                                    console.log(searchedProduct)
                                     return (
                                     <option key={i} id={product.id} >
                                         {product.name}

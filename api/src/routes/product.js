@@ -252,9 +252,10 @@ server.post( '/', ( request, response ) => {
 		if ( !product ) {
 			return response.sendStatus( 409 );
 		}
-		
+
 		return response.status( 200 ).send( product );
-	} );
+	} )
+	.catch(e => response.status( 400 ).send( e ));
 } );
 
 /* =================================================================================
