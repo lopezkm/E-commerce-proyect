@@ -35,7 +35,7 @@ function App( )
 			<Route exact path="/products" component={ Catalogue } />
 			<Route exact path ='/orders/:orderId' render={ ( { match } ) =>
 				<Order 
-					orderId = { match.params.ordertId }
+					orderId = { match.params.orderId }
 				/>
 			} />
 			<Route exact path ='/product/:productId' render={ ( { match } ) =>
