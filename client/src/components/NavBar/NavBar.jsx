@@ -8,7 +8,7 @@ import SearchBar from '../SearchBar/SearchBar.jsx';
 function NavBar( )
 {
 	return (
-		<Navbar collapseOnSelect expand="md" fixed="top" variant="dark" className="navbar-main">
+		<Navbar collapseOnSelect expand="lg" fixed="top" variant="dark" className="navbar-main">
 			<Navbar.Brand href="#home">
 				<Logo className="navbar-logo"/>
 			</Navbar.Brand>
