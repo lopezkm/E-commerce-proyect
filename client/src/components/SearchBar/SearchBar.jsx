@@ -46,7 +46,9 @@ function SearchBar( )
 		setInput( '' );
 		updateHistory( true );
 		
-		hideInputElement( inputWrapper.current );
+		if ( window.innerWidth >= 992 ) {
+			hideInputElement( inputWrapper.current );
+		}
 	};
 	
 	const handleSearchClick = ( e ) => {
