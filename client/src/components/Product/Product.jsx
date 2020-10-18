@@ -78,7 +78,7 @@ function Product({ productId }) {
 		return <div className="App">Loading...</div>;
 	}
 
-	let recoProdFilter = recommendProduct.filter(prod=>prod.id!==product.id)
+	let recoProdFilter = recommendProduct.filter(prod => prod.id !== product.id)
 
 	console.log(recoProdFilter)
 
@@ -136,29 +136,29 @@ function Product({ productId }) {
 						</Row>
 
 						{product.stock === 0 &&
-							(<Row><h2> Otros juegos que te pueden interesar:</h2>
-							
-								<Row className="product-row-border-top">
-								{
-									recoProdFilter.map((p, i) => (
-										<Col xs={12} sm={6} md={4} lg={3} key={i} className='catalogue__product-col'>
-											<Link to={`/product/${p.id}`} className='catalogue__product-link'>
+							(<Row ><h2> Otros juegos que te pueden interesar:</h2>
 
-												<ProductCard
-													key={p.id}
-													name={p.name}
-													price={p.price}
-													developer={p.developer}
-													media={p.media}
-													stock={p.stock}
-												/>
+								<Row >
+									{
+										recoProdFilter.map((p, i) => (
+											<Col xs={12} sm={6} md={4} lg={3} key={i} className='catalogue__product-col'>
+												<Link to={`/product/${p.id}`} className='catalogue__product-link'>
 
-											</Link>
-										</Col>
-									))
+													<ProductCard
+														key={p.id}
+														name={p.name}
+														price={p.price}
+														developer={p.developer}
+														media={p.media}
+														stock={p.stock}
+													/>
 
-								}
-							</Row>
+												</Link>
+											</Col>
+										))
+
+									}
+								</Row>
 							</Row>
 							)
 
