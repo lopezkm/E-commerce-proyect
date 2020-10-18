@@ -79,10 +79,10 @@ const FormAdminCreate = () => {
         .then(idP => axios.post(`http://localhost:3000/products/${idP}/category/`,{ categories: selectedCategories}) )
         .then(success => {
             console.log(success);
+            window.location.reload();
         })
         .catch(e => console.log(e))
         
-        window.location.reload();
     }
 
     return (
