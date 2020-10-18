@@ -86,17 +86,6 @@ function MediaUploader( { productId, productMedias } )
 						<Col xs={ 12 }>
 							<Form.Group>
 								<Form.Control
-									name="alias"
-									type="text"
-									placeholder="Ingresar un alias"
-									value={ input.alias }
-									onChange={ handleInputChange }
-								/>
-							</Form.Group>
-						</Col>
-						<Col xs={ 12 }>
-							<Form.Group>
-								<Form.Control
 									as="select"
 									name="type"
 									value={ input.type }
