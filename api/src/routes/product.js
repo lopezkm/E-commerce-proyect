@@ -209,7 +209,23 @@ server.post( '/', ( request, response ) => {
 			return response.sendStatus( 409 );
 		}
 		
-		return response.status( 200 ).send( product );
+		const promises = [ ];
+		const { categories, medias } = request.body;
+		
+		categories && ( categories.length > 0 ) && promises.push( product.addCategories( categories ) );
+		medias && ( medias.length > 0 ) && promises.push( product.addMedium( medias ) );
+		
+		if ( promises.length > 0 ) {
+			Promise.all( promises ).then( ( ) => {
+				response.status( 200 ).send( product );
+			} );
+		}
+		else {
+			response.status( 200 ).send( product );
+		}
+	} )
+	.catch( ( error ) => {
+		response.status( 500 ).send( error );
 	} );
 } );
 
