@@ -26,7 +26,9 @@ function MediaUploader( { productId, productMedias } )
 		} ) );
 	}
 	
-	const handleMediaDelete = ( id ) => {
+	const handleMediaDelete = ( e, id ) => {
+		e.preventDefault( );
+		
 		axios.delete( `${ API_URL }/medias/${ id }` )
 			.then( ( response ) => setMedias( medias.filter( m => m.id !== id ) ) )
 			.catch( ( error ) => console.log( error ) );
@@ -75,9 +77,10 @@ function MediaUploader( { productId, productMedias } )
 	
 	return (
 		<Container>
+			{ !medias.length || <div className="mediaForm__separator"></div> }
 			<Row className="mediaContainer">
 				<Col xs={ 12 } lg={ 5 }>
-					{ !medias.length || <div className="mediaForm__separator"></div> }
+					{ !medias.length || <div className="mediaForm__separator mediaForm__form-separator"></div> }
 					<Form className="mediaForm" onSubmit={ handleFormSubmit }>
 						<Form.Row style={ { alignItems: 'center' } }>
 							<Col xs={ 12 }>
@@ -137,7 +140,7 @@ function MediaUploader( { productId, productMedias } )
 					<Row>
 						{
 							medias.map( ( m, i ) => (
-								<Col xs={ 12 } md={ 6 }>
+								<Col xs={ 12 } sm={ 6 }>
 									<MediaRow key={ i } media={ m } onDelete={ handleMediaDelete }/>
 								</Col>
 							) )

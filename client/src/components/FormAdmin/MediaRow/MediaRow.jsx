@@ -32,8 +32,8 @@ function MediaRow( { media, onDelete } )
 			}
 			<div className="mediaRow__tile-overlay">
 				<span className="mediaRow__tile-text">{ type }</span>
-				<button className="mediaRow__tile-button">
-					<FontAwesomeIcon icon={ faTimes } onClick={ ( ) => onDelete( id ) }/>
+				<button className="mediaRow__tile-button" onClick={ ( e ) => onDelete( e, id ) }>
+					<FontAwesomeIcon icon={ faTimes }/>
 				</button>
 			</div>
 		</div>
