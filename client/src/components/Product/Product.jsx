@@ -2,13 +2,13 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Card, Button, Carousel, Container, Col, Row, Badge } from 'react-bootstrap';
 import defaultBanner from '../../assets/banner.jpg';
-import store from '../../redux/store/store.js';
-import CartButton from '../CartButton.jsx';
-console.log('product', store.getState());
+import { connect } from 'react-redux';
+import { AddToCart } from '../../redux/actions/actions';
 
 const API_URL = process.env.REACT_APP_API_URL;
 
-function Product({ productId }) {
+function Product({ productId, AddToCart }) {
+
 	const [product, setProduct] = useState({});
 	const [isLoading, setLoading] = useState(true);
 
@@ -16,7 +16,6 @@ function Product({ productId }) {
 		axios.get(`${API_URL}/products/${productId}`)
 			.then((response) => {
 				const productData = response.data;
-				console.log(response.data);
 				processMedia(productData);
 
 				setProduct(productData);
@@ -83,7 +82,7 @@ function Product({ productId }) {
 								{product.stock > 0 ?
 									<div className="action-buttons">
 										<Button className="d-flex ml-auto mr-3">Comprar por ${product.price}</Button>
-										<CartButton />
+										<Button variant="success" onClick={AddToCart}>Agregar al carrito</Button>
 									</div>
 									:
 									<Button className="d-flex ml-auto btn btn-secondary" disabled>Comprar por ${product.price}</Button>
@@ -115,4 +114,4 @@ function Product({ productId }) {
 	);
 }
 
-export default Product;
+export default connect(null, { AddToCart } )(Product);
