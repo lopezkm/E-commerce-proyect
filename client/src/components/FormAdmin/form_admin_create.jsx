@@ -50,11 +50,9 @@ const FormAdminCreate = () => {
 
         if (statusCheck && !selectedCategories.includes(selectedId)) {
             selectedCategories.push(selectedId);
-            console.log(selectedCategories);
         }
         else{
             selectedCategories = selectedCategories.filter(id => id !== selectedId);
-            console.log(selectedCategories);
         }
     }
 
@@ -79,8 +77,12 @@ const FormAdminCreate = () => {
         })
         .then(response => response.data.id)// Respuesta del servidor con producto creado
         .then(idP => axios.post(`http://localhost:3000/products/${idP}/category/`,{ categories: selectedCategories}) )
-        .then(success => console.log(success))
+        .then(success => {
+            console.log(success);
+        })
         .catch(e => console.log(e))
+        
+        window.location.reload();
     }
 
     return (
