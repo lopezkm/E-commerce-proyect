@@ -12,7 +12,7 @@ const API_URL = process.env.REACT_APP_API_URL;
 	Si un producto existe, se edita ese producto incrementando su cantidad en 1.
 */
 
-export function addProductToCart( userId, productId )
+export function AddProductToCart( userId, productId )
 {
 	if ( userId <= 0 )
 	{
@@ -62,7 +62,7 @@ export function addProductToCart( userId, productId )
 	Si la cantidad es nula, el producto se elimina del carrito.
 */
 
-export function editProductInCart( userId, productId, quantity )
+export function EditProductInCart( userId, productId, quantity )
 {
 	if ( userId <= 0 )
 	{
@@ -98,7 +98,7 @@ export function editProductInCart( userId, productId, quantity )
 * 		[ Remover productos del carrito ]
 * ================================================================================= */
 
-export function removeProductsFromCart( userId )
+export function RemoveProductsFromCart( userId )
 {
 	if ( userId <= 0 )
 	{

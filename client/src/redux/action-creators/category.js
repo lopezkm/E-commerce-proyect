@@ -3,7 +3,11 @@ import axios from 'axios';
 
 const API_URL = process.env.REACT_APP_API_URL;
 
-export function addCategory( name )
+/* =================================================================================
+* 		[ Agregar una categoría ]
+* ================================================================================= */
+
+export function AddCategory( name )
 {
 	return function( dispatch ) {
 		axios.post( `${ API_URL }/products/category`, {
@@ -26,7 +30,11 @@ export function addCategory( name )
 	};
 }
 
-export function modifyCategory( id, name )
+/* =================================================================================
+* 		[ Modificar el nombre de una categoría ]
+* ================================================================================= */
+
+export function ModifyCategory( id, name )
 {
 	return function( dispatch ) {
 		axios.put( `${ API_URL }/products/category/${ id }`, {
@@ -49,7 +57,11 @@ export function modifyCategory( id, name )
 	};
 }
 
-export function deleteCategory( id )
+/* =================================================================================
+* 		[ Remover una categoría ]
+* ================================================================================= */
+
+export function DeleteCategory( id )
 {
 	return function( dispatch ) {
 		axios.delete( `${ API_URL }/products/category/${ id }` ).then( ( response ) => {
@@ -69,7 +81,11 @@ export function deleteCategory( id )
 	};
 }
 
-export function getCategories( )
+/* =================================================================================
+* 		[ Obtener todas las categorías ]
+* ================================================================================= */
+
+export function GetCategories( )
 {
 	return function( dispatch ) {
 		axios.get( `${ API_URL }/products/category` ).then( ( response ) => {

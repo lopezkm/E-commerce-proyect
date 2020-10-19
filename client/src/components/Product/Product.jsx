@@ -1,21 +1,23 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Card, Button, Carousel, Container, Col, Row, Badge } from 'react-bootstrap';
-import defaultBanner from '../../assets/banner.jpg';
-import { connect } from 'react-redux';
-import { AddToCart } from '../../redux/actions/actions';
-import ProductCard from '../ProductCard/ProductCard.jsx';
 import { Link } from 'react-router-dom';
+import { Card, Button, Carousel, Container, Col, Row, Badge } from 'react-bootstrap';
+import { useSelector, useDispatch } from 'react-redux';
+import axios from 'axios';
+import { AddProductToCart } from '../../redux/action-creators/cart';
+import ProductCard from '../ProductCard/ProductCard.jsx';
+import defaultBanner from '../../assets/banner.jpg';
 
 const API_URL = process.env.REACT_APP_API_URL;
 
-function Product({ productId, AddToCart }) {
-
-	const [product, setProduct] = useState({});
-	const [isLoading, setLoading] = useState(true);
-	const [productCategories, setProductCategories] = useState("");
-	const [recommendProduct, setRecommendProduct] = useState([]);
-
+function Product( { productId } )
+{
+	const [ product, setProduct ] = useState( { } );
+	const [ isLoading, setLoading ] = useState( true );
+	const [ productCategories, setProductCategories ] = useState( '' );
+	const [ recommendProduct, setRecommendProduct ] = useState( [ ] );
+	
+	const userId = useSelector( ( state ) => state.userRedicer.id );
+	const dispatch = useDispatch( );
 
 	const getProduct = () => {
 		axios.get(`${API_URL}/products/${productId}`)
@@ -62,6 +64,12 @@ function Product({ productId, AddToCart }) {
 				m.path = `${API_URL}/${m.path}`;
 			}
 		})
+	}
+	
+	const handleAddToCartClick = ( e ) => {
+		e.preventDefault( );
+		
+		AddProductToCart( userId, productId );
 	}
 
 	useEffect(() => {
@@ -114,7 +122,7 @@ function Product({ productId, AddToCart }) {
 								{product.stock > 0 ?
 									<div className="action-buttons">
 										<Button className="d-flex ml-auto mr-3">Comprar por ${product.price}</Button>
-										<Button variant="success" onClick={AddToCart}>Agregar al carrito</Button>
+										<Button variant="success" onClick={ handleAddToCartClick }>Agregar al carrito</Button>
 									</div>
 									:
 									<Button className="d-flex ml-auto btn btn-secondary" disabled>Comprar por ${product.price}</Button>
@@ -175,4 +183,4 @@ function Product({ productId, AddToCart }) {
 	);
 }
 
-export default connect(null, { AddToCart } )(Product);
+export default Product;

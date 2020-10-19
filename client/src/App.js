@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Route } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
-import { getCategories } from './redux/action-creators/category';
+import { GetCategories } from './redux/action-creators/category';
 
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 import './App.scss';
@@ -26,7 +26,7 @@ function App( )
 	const dispatch = useDispatch( );
 	
 	useEffect( ( ) => {
-		dispatch( getCategories( ) );
+		dispatch( GetCategories( ) );
 	}, [ ] );
 	
 	return (
