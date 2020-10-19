@@ -1,5 +1,8 @@
 .orderTable
+
 {
+
+	padding-bottom: 2rem;
 	.orderTable-selector-button
 	{
 		font-family: $barlow;
@@ -11,25 +14,72 @@
 		border-radius: 5px;
 		border-color: $blue;
 		margin-top: 2rem;
-	} 
+		outline: none;
+		&:hover 
+		{
+			box-shadow: 0 0 8px $blue;
+		}
+	}
+	
+	.dropdown-item 
+	{
+		font-family: $barlow;
+		color: $white;
+		&:hover
+		{
+			background-color: $blue;
+		}
+	}
+
+	.dropdown-menu 
+	{
+		background-color: $grey;
+		border-radius: 10px;
+		transition: 500ms;
+	}
 	
 	.orderTable-table
 	{
 		font-family: $barlow;
 		font-size: 0.9rem;
+		border-radius: 15px 15px 0 0;
+		background-color: $grey;
+		margin-bottom: 2rem;
 	}
 	
-	th, td
+
+	th
 	{
 		text-align: center;
+		border: none;
+		background-color: $grey;
+		border-radius: 15px;
+		font-size: 1rem;
+		font-family: $barlow;
+		font-weight: 500;
+	}
+
+	td
+	{
+		border: none;
+	}
+
+	tr
+	{
+		&:hover 
+		{
+			border: 2px $light-grey solid;
+
+		}
 	}
 	
 	h1
 	{
-		font-size: 1rem;
+		font-size: 1.7rem;
 		color: white;
 		display: inline-block;
 		margin-top: 4rem;
+		font-family: $kanit;
 	}
 	
 	.dropdown
@@ -44,3 +94,22 @@
 		text-align: center;
 	}
 }
+
+.orderTable-orderLink
+	{
+		text-decoration: none !important;
+		text-align: center !important;
+		display: table-cell;
+		color: white;
+		&:hover {
+			color: $blue;
+		}
+		
+		td 
+		{
+			display: inline-block;
+			width: 100%;
+		}		
+	}
+
+	

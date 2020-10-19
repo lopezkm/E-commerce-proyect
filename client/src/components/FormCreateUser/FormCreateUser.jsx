@@ -3,7 +3,8 @@ import { Container, Form, Button, Col, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import FloatingLabelInput from 'react-floating-label-input';
 import { ReactComponent as Logo } from '../../assets/logofull.svg';
-
+import axios from 'axios';
+import { toast } from 'react-toastify';
 
 
 
@@ -23,11 +24,40 @@ const CreateUser = () => {
         });
     };
 
+    const handleSumbit = (event) => {
+        event.preventDefault();
+        axios.post(`http://localhost:3000/users`, input)
+        .then(response => {
+            console.log(response);
+            toast.info('Usuario creado con exito :)', {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+        })
+        .catch(err => {
+            console.log(err)
+            toast.error('ERROR: Email ya existente :(', {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+        })
+    };
+
     return (
         <Container className='containerUserCreate'>
             <Row>
                 <Col>
-                    <Form className='formUserCreate'>
+                    <Form className='formUserCreate' onSubmit={(event) => handleSumbit (event)}>
                         <div className='formCreateUser-title'>
                         <h1>Crea tu cuenta de</h1>
                         <Logo className='formCreateUser-logo'/>
@@ -59,6 +89,7 @@ const CreateUser = () => {
                         <Form.Group controlId="formBasicPassword">
                             <FloatingLabelInput
                                 name='password'
+                                type='password'
                                 label='Contraseña'
                                 onChange={(event) => handleInputChange(event)}
                             />

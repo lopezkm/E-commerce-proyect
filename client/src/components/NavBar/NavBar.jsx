@@ -1,12 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Nav, Navbar } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faTimes, faShoppingCart, faUser } from '@fortawesome/free-solid-svg-icons';
 import { ReactComponent as Logo } from '../../assets/logofull.svg';
 import SearchBar from '../SearchBar/SearchBar.jsx';
+import store from '../../redux/store/store.js'
+import { useState } from 'react';
+console.log(store.getState());
 
-function NavBar( )
-{
+function NavBar( props ){
+
+	const [cartCounter, setCartCounter] = useState(store.getState().cartCounter);
+	
+	useEffect(() => {
+		
+		store.subscribe(() => { 
+			setCartCounter(store.getState().cartCounter) 
+		});
+		
+    }, []);
+
 	return (
 		<Navbar collapseOnSelect expand="lg" fixed="top" variant="dark" className="navbar-main">
 			<Navbar.Brand>
@@ -28,10 +41,10 @@ function NavBar( )
 				</Nav>
 				<Nav className="navbar-nav-right">
 					<Nav.Link className="navbar-nav-cart" href="/cart">
-						<FontAwesomeIcon icon={ faShoppingCart }/> <p className="navbar-text">Carrito</p>
+					<FontAwesomeIcon icon={ faShoppingCart }/> <p className="navbar-text">Carrito {cartCounter}</p>
 					</Nav.Link>
-					<Nav.Link className="navbar-nav-user" href="/user">
-						<FontAwesomeIcon icon={ faUser }/> <p className="navbar-text">Mi cuenta</p>
+					<Nav.Link className="navbar-nav-user" href="/userCreate">
+						<FontAwesomeIcon icon={ faUser }/> <p className="navbar-text">Creá tu cuenta</p>
 					</Nav.Link>
 					<SearchBar/>
 				</Nav>
