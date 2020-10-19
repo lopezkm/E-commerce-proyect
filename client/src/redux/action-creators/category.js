@@ -26,6 +26,29 @@ export function addCategory( name, description )
 	};
 }
 
+export function modifyCategory( id, props )
+{
+	return function( dispatch ) {
+		axios.put( `${ API_URL }/products/category/${ id }`, {
+			...props
+		} )
+		.then( ( response ) => {
+			dispatch( {
+				type: actionTypes.MODIFY_CATEGORY,
+				payload: response.data,
+				error: null
+			} );
+		} )
+		.catch( ( error ) => {
+			dispatch( {
+				type: actionTypes.MODIFY_CATEGORY,
+				payload: null,
+				error: error
+			} );
+		} );
+	};
+}
+
 export function getCategories( )
 {
 	return function( dispatch ) {

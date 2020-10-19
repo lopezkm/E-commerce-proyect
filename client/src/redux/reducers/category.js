@@ -1,8 +1,7 @@
 import * as actionTypes from '../action-types';
 
 const initialState = {
-	categories: [ ],
-	error: ''
+	categories: [ ]
 };
 
 function reducer( state = initialState, action )
@@ -13,16 +12,21 @@ function reducer( state = initialState, action )
 		
 			return {
 				...state,
-				categories: [ ...state.categories, action.payload ],
-				error: action.error
+				categories: [ ...state.categories, action.payload ]
 			};
+		
+		case actionTypes.MODIFY_CATEGORY:
+			
+			return {
+				...state,
+				categories: [ ...state.categories.filter( c => c.id !== action.payload.id ), action.payload ]
+			}
 		
 		case actionTypes.GET_CATEGORIES:
 			
 			return {
 				...state,
-				categories: action.payload,
-				error: action.error
+				categories: action.payload
 			}
 		
 		default:
