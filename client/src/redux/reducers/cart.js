@@ -1,7 +1,7 @@
 import * as actionTypes from '../action-types';
 
 const initialState = {
-	cart: [ ],
+	products: [ ],
 	count: 0
 };
 
@@ -11,7 +11,7 @@ function reducer( state = initialState, action )
 	{
 		case actionTypes.EDIT_PRODUCT_IN_CART:
 		{
-			const list = [ ...state.cart.filter( ( value ) => value.productId !== action.payload.productId ) ];
+			const list = [ ...state.products.filter( ( value ) => value.productId !== action.payload.productId ) ];
 			
 			if ( action.payload.quantity > 0 )
 			{
@@ -19,14 +19,14 @@ function reducer( state = initialState, action )
 			}
 			
 			return {
-				cart: list,
+				products: list,
 				count: ( list.length )
 			};
 		}
 		case actionTypes.REMOVE_PRODUCTS_FROM_CART:
 		{
 			return {
-				cart: [ ],
+				products: [ ],
 				count: 0
 			};
 		}

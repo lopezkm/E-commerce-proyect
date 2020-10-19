@@ -17,8 +17,8 @@ export function AddProductToCart( userId, productId )
 	if ( userId <= 0 )
 	{
 		return function( dispatch, getState ) {
-			const cartProduct = getState( ).cartReducer.cart.find( ( value ) => value.productId === productId );
-			const quantity = cartProduct ? 1 : ( cartProduct.quantity + 1 );
+			const cartProduct = getState( ).cart.products.find( ( value ) => value.productId === productId );
+			const quantity = !cartProduct ? 1 : ( cartProduct.quantity + 1 );
 			
 			dispatch( {
 				type: actionTypes.EDIT_PRODUCT_IN_CART,
@@ -29,7 +29,7 @@ export function AddProductToCart( userId, productId )
 	}
 	
 	return function( dispatch, getState ) {
-		const cartProduct = getState( ).cartReducer.cart.find( ( value ) => value.productId === productId );
+		const cartProduct = getState( ).cart.products.find( ( value ) => value.productId === productId );
 		const quantity = cartProduct ? 1 : ( cartProduct.quantity + 1 );
 		
 		axios.put( `${ API_URL }/users/${ userId }/cart`, {
