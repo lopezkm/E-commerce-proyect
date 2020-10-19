@@ -33,9 +33,10 @@ function App( )
 			<Route exact path='/createUser' component={ CreateUser } />
 			<Route exact path="/Admin/orders" component={ OrderTable } />
 			<Route exact path="/products" component={ Catalogue } />
-			<Route exact path ='/product/:productId' render={ ( { match } ) =>
+			<Route exact path ='/product/:productId'  render={ ( { match } )  =>
 				<Product 
 					productId = { match.params.productId }
+					key={window.location.pathname}
 				/>
 			} />
 			<Route exact path='/Cart' component={ Cart } />

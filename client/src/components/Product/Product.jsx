@@ -34,6 +34,12 @@ function Product({ productId }) {
 
 	}
 
+/* 	const handleReload = (event) =>{
+		event.preventDefault()
+		window.location.reload()
+
+	} */
+
 
 	const getRecommendProduct = () => {
 		axios.get(`${API_URL}/products/category/${productCategories}`)
@@ -148,7 +154,7 @@ function Product({ productId }) {
 									{
 										recoProdFilter.map((p, i) => (
 											<Col xs={12} sm={6} md={4} lg={3} key={i} className='catalogue__product-col'>
-												<Link to={`/product/${p.id}`} className='catalogue__product-link'>
+												<Link to={`/product/${p.id}`} /* onClick={(e)=> handleReload(e)} */ className='catalogue__product-link'>
 
 													<ProductCard
 														key={p.id}
