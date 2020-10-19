@@ -1,0 +1,45 @@
+.panelAdmin-container {
+
+    h1 {
+        font-family: $kanit;
+        background-color: $black;
+        text-align: center;
+        color: $white;
+    }
+
+    .panelAdmin-internal-container {
+        border-radius: 10px;
+        font-family: $barlow;
+        background-color: $grey;
+        padding: 1rem 0 1rem 0;
+        margin: 0 4rem 0 4rem;
+        .row {
+            display: flex;
+            justify-content: center;
+        }
+        .card {
+            background-color: $blue;
+            color: $white;
+            min-height: 13rem;
+
+            &:hover {
+                transform: scale( 1.07 );
+                transition: 350ms;
+            }
+            .card-title {
+                text-align: center;
+            }
+            .card-text {
+                margin-bottom: 1.2rem;
+                text-align: center;
+                vertical-align: middle;
+                font-size: 3rem;
+            }
+            .card-body {
+                display: flex;
+                flex-direction: column-reverse;
+                margin-bottom: 0.5rem;
+            }
+        }
+    }
+}
