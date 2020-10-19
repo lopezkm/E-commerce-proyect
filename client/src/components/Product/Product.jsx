@@ -13,82 +13,71 @@ function Product( { productId } )
 {
 	const [ product, setProduct ] = useState( { } );
 	const [ isLoading, setLoading ] = useState( true );
-	const [ productCategories, setProductCategories ] = useState( '' );
-	const [ recommendProduct, setRecommendProduct ] = useState( [ ] );
+	const [ recommendedProducts, setRecommendedProducts ] = useState( [ ] );
 	
-	const userId = useSelector( ( state ) => state.userRedicer.id );
+	const userId = useSelector( ( state ) => state.user.id );
 	const dispatch = useDispatch( );
 
-	const getProduct = () => {
-		axios.get(`${API_URL}/products/${productId}`)
-			.then((response) => {
-				const productData = response.data;
-				const prodCategories = response.data.categories[0].name;
-				setProductCategories(prodCategories);
-
-				console.log(response.data);
-				processMedia(productData);
-
-				setProduct(productData);
-				setLoading(false);
-			});
-
+	const getProduct = ( ) => {
+		axios.get( `${API_URL}/products/${productId}` ).then( ( response ) => {
+			const productData = response.data;
+			
+			processMedia( productData );
+			setProduct( productData );
+			
+			getRecommendedProducts( );
+			
+			setLoading( false );
+		} );
 	}
-
-
-	const getRecommendProduct = () => {
-		axios.get(`${API_URL}/products/category/${productCategories}`)
-			.then((response) => {
-
-				let recommendProds = response.data;
-				setRecommendProduct(recommendProds)
-			});
-	}
-
-
-
-	const processMedia = ({ media }) => {
-		if (!media || (media.length === 0)) {
-			media = [
-				{
-					type: 'image-big',
-					path: defaultBanner
-				}
-			];
-
+	
+	const getRecommendedProducts = ( ) => {
+		if ( !product.categories || ( product.categories.length === 0 ) )
+		{
 			return;
 		}
-
-		media.forEach(m => {
-			if (!m.path.includes('/')) {
-				m.path = `${API_URL}/${m.path}`;
+		
+		axios.get( `${ API_URL }/products/category/${ product.categories[ 0 ] }` ).then( ( response ) => {
+			const products = response.data.filter( p => p.id !== productId );
+			
+			setRecommendedProducts( products );
+		} );
+	}
+	
+	const processMedia = ( { media } ) => {
+		if ( !media || ( media.length === 0 ) ) {
+			media = [ {
+				type: 'image-big',
+				path: defaultBanner
+			} ];
+			
+			return;
+		}
+		
+		media.forEach( ( m ) => {
+			if ( !m.path.includes( '/' ) ) {
+				m.path = `${ API_URL }/${ m.path }`;
 			}
-		})
+		} );
 	}
 	
 	const handleAddToCartClick = ( e ) => {
 		e.preventDefault( );
 		
-		AddProductToCart( userId, productId );
+		dispatch( AddProductToCart( userId, productId ) );
 	}
 
-	useEffect(() => {
-		getProduct();
+	useEffect( ( ) => {
+		getProduct( );
+	}, [ ] );
 
-		if (productCategories) {
-			setLoading(false)
-		}
-
-		getRecommendProduct();
-
-	}, [isLoading]);
-
-	if (isLoading) {
-		return <div className="App">Loading...</div>;
+	if ( isLoading ) {
+		return (
+			<div className="App">
+				Loading...
+			</div>
+		);
 	}
-
-	let recoProdFilter = recommendProduct.filter(prod => prod.id !== product.id)
-
 
 	return (
 		<Container>
@@ -153,7 +142,7 @@ function Product( { productId } )
 
 								<Row >
 									{
-										recoProdFilter.map((p, i) => (
+										recommendedProducts.map( ( p, i ) => (
 											<Col xs={12} sm={6} md={4} lg={3} key={i} className='catalogue__product-col'>
 												<Link to={`/product/${p.id}`}  className='catalogue__product-link'>
 
