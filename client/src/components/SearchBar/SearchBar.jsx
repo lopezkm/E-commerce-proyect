@@ -17,8 +17,16 @@ function SearchBar( )
 	const updateHistory = ( empty ) => {
 		let query = qs.parse( location.search, { arrayFormat: 'comma' } );
 		
-		( empty || !input ) ?
-			delete query.query : query.query = input;
+		if ( empty || !input ) {
+			if ( location.pathname !== '/products' ) {
+				return;
+			}
+			
+			delete query.query
+		}
+		else {
+			query.query = input;
+		}
 		
 		query = qs.stringify( query, { arrayFormat: 'comma' } );
 		
@@ -35,8 +43,6 @@ function SearchBar( )
 		if ( !input ) {
 			hideInputElement( inputWrapper.current );
 		}
-		
-		updateHistory( );
 	}
 	
 	const handleCloseClick = ( e ) => {
@@ -74,15 +80,12 @@ function SearchBar( )
 	useEffect( ( ) => {
 		const { query } = qs.parse( location.search, { arrayFormat: 'comma' } );
 		
-		if ( query ) {
-			setInput( query );
+		if ( !query ) {
+			return;
 		}
-	}, [ ] );
-	
-	useLayoutEffect( ( ) => {
-		if ( input ) {
-			showInputElement( inputWrapper.current );
-		}
+		
+		setInput( query );
+		showInputElement( inputWrapper.current );
 	}, [ ] );
 	
 	return (
