@@ -1,7 +1,7 @@
 import { ADD_TO_CART } from '../actions/action-types.js'
 
 const initialState = {
-    cartCounter: 3
+    cartCounter: 2
 };
 
 

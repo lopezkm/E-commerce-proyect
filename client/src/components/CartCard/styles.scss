@@ -1,17 +1,36 @@
 .card-cart-container {
-    background-color: $grey;
-
 
     .card {
         margin: 0.5rem 0 0.5rem 0;
-        background-color: $grey;
+        border-top: 1px solid $light-grey;
+        .card-body{
+            padding-bottom: 0rem;
+        }
+    }
+
+    h1 {
+        font-family: $kanit;
+        color: $white;
+        font-size: 2.5rem;
+        margin-bottom: 0;
+        font-style: italic;
     }
 
     input {
-        border-radius: 3px;
-        border: none;
         margin-top: 0.8rem;
-        font-family: $barlow;
-        width: 3rem;
+        font-family: $kanit;
+        background-color: transparent;
+        border: 0px solid transparent;
+        color: $white;
+        width: 2.25rem;
+    }
+
+    input:focus{
+        outline: none;
+    }
+
+    input[type=number]::-webkit-inner-spin-button, 
+    input[type=number]::-webkit-outer-spin-button {  
+        opacity: 1;
     }
 }

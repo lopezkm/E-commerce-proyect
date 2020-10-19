@@ -1,52 +1,81 @@
 .cart-container {
-    background-color: $grey;
     margin: 1rem auto 1rem auto;
     padding: 1rem;
-    border-radius: 10px;
     color: $white;
+    font-family: $barlow;
 
-
-    .card {
-        border: 4px $light-grey solid;
-        border-radius: 10px;
-        background-color: $grey;
+    .card, .card-body, .card-header, .card-footer {
+        border: 0px;
     }
 
-    .card-header {
+    .cart-list {
         background-color: $black;
-        color: $white;
-        font-family: $barlow;
-        border-radius: 6px 6px 0 0;
-        border-bottom: 4px solid $light-grey;
-    }
-
-    .card-footer {
-        border-top: 4px solid $light-grey;
-    }
-
-    h2, p {
-        font-family: $barlow;
-    }
-
-    .cart-button-buy {
-        font-size: 1.5rem;
-        background-color: $blue;
-        font-family: $barlow;
-        margin-top: 1rem;
-        &:hover {
-			box-shadow: 0 0 8px $blue;
-		}
-    }
-
-    .cart-button-cancel {
-        font-size: 1.5rem;
-        font-family: $barlow;
-        margin-top: 1rem;
-        &:hover {
-			box-shadow: 0 0 8px red;
+        .card-body, .card-header, .card-footer {
+            background-color: $black;
         }
-        float: right
+        h1 {
+            font-family: $kanit;
+            color: $white;
+            font-size: 2.5rem;
+            margin-bottom: 0;
+        }
+        .card-header{
+            padding-bottom: 0;
+        }
+    }
+}
+
+.cart-summary {
+    background-color: $grey;
+    
+    .card-header {
+        padding-bottom: 0rem;
+        span {
+            font-family: $kanit;
+            color: $white;
+            font-size: 1.75rem;
+        }
     }
 
+    .card-body {
+        padding-bottom: 0rem;
+        padding-top: 0.5rem;
+        span {
+            font-family: $barlow;
+            color: $white;
+            font-size: 1.15rem;
+            font-style: italic
+        }
+    }
 
+    .card-footer{
+        span, p {
+            font-family: $barlow;
+            color: $white;
+            font-size: 1.50rem;
+            font-weight: 600;
+            font-style: italic;
+            margin: 0 -0.1rem;
+        }
+
+        .cart-total{
+            border-top: 1px solid $light-grey;
+            border-bottom: 1px solid $light-grey;
+            padding: 0.5rem 0;
+        }
+
+        .cart-button {
+            display: flex;
+            justify-content: center;
+            .cart-button-buy {
+                font-size: 1.5rem;
+                background-color: $blue;
+                font-family: $barlow;
+                margin-top: 1rem;
+                &:hover {
+                    box-shadow: 0 0 8px $blue;
+                }
+            }
+        }
+    }
 }

@@ -2,14 +2,14 @@ import React, { } from 'react';
 import { Container, Col, Row, Card, Button } from 'react-bootstrap';
 import CartCard from '../CartCard/CartCard.jsx';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBackspace, faCashRegister } from '@fortawesome/free-solid-svg-icons';
+import { faBacksspanace, faCashRegister } from '@fortawesome/free-solid-svg-icons';
 
 function Cart() {
     return (
         <Container className='cart-container'>
             <Row>
                 <Col xs={8}>
-                    <Card>
+                    <Card className="cart-list">
                         <Card.Header><h1>Carrito de compra</h1></Card.Header>
                         <Card.Body>
                             <Row>
@@ -24,37 +24,40 @@ function Cart() {
                     </Card>
                 </Col>
                 <Col xs={4}>
-                    <Card>
+                    <Card className="cart-summary">
                         <Card.Header>
-                            <h1>Resumen</h1>
+                            <span>Resumen del pedido</span>
                         </Card.Header>
                         <Card.Body>
                             <Row>
-                                <Col><h2>SubTotal</h2></Col>
-                                <Col><p>$100</p></Col>
+                                <Col><span>Articulos (2):</span></Col>
+                                <Col><span>$100</span></Col>
                             </Row>
                             <Row>
-                                <Col><h2>Envios</h2></Col>
-                                <Col><p>$50</p></Col>
+                                <Col><span>Envio:</span></Col>
+                                <Col><span>$50</span></Col>
                             </Row>
                             <Row>
-                                <Col><h2>Impuestos</h2></Col>
-                                <Col><p>$50</p></Col>
+                                <Col><span>Impuestos:</span></Col>
+                                <Col><span>$50</span></Col>
                             </Row>
                         </Card.Body>
                         <Card.Footer>
-                            <Row>
+                            <Row className="cart-total">
                                 <Col>
-                                    <h1>Total:</h1>
+                                    <span>Total:</span>
                                 </Col>
                                 <Col>
-                                    <h1>$200</h1>
+                                    <span>$200</span>
                                 </Col>
                             </Row>
+                            <Row className="cart-button">
+                                <Col xs={12}>
+                                    <Button className='cart-button-buy w-100'>{/* <FontAwesomeIcon icon={ faCashRegister }/> */}Proceder a pagar</Button>
+                                </Col>
+                            </Row>    
                         </Card.Footer>
                     </Card>
-                    <Button className='cart-button-buy'>{/* <FontAwesomeIcon icon={ faCashRegister }/> */}Comprar</Button>
-                    <Button variant="danger" className="cart-button-cancel">{/* <FontAwesomeIcon icon={ faBackspace }/> */}Cancelar</Button>
                 </Col>
             </Row>
         </Container>
