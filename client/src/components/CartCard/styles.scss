@@ -1,0 +1,17 @@
+.card-cart-container {
+    background-color: $grey;
+
+
+    .card {
+        margin: 0.5rem 0 0.5rem 0;
+        background-color: $grey;
+    }
+
+    input {
+        border-radius: 3px;
+        border: none;
+        margin-top: 0.8rem;
+        font-family: $barlow;
+        width: 3rem;
+    }
+}

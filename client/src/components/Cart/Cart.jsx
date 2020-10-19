@@ -1,21 +1,23 @@
 import React, { } from 'react';
 import { Container, Col, Row, Card, Button } from 'react-bootstrap';
 import CartCard from '../CartCard/CartCard.jsx';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBackspace, faCashRegister } from '@fortawesome/free-solid-svg-icons';
 
-function Cart () {
+function Cart() {
     return (
-        <Container>
+        <Container className='cart-container'>
             <Row>
                 <Col xs={8}>
                     <Card>
-                        <Card.Header><h1>Shopping Cart</h1></Card.Header>
+                        <Card.Header><h1>Carrito de compra</h1></Card.Header>
                         <Card.Body>
                             <Row>
-                                <CartCard>                          
+                                <CartCard>
                                 </CartCard>
                             </Row>
                             <Row>
-                                <CartCard>                          
+                                <CartCard>
                                 </CartCard>
                             </Row>
                         </Card.Body>
@@ -24,7 +26,7 @@ function Cart () {
                 <Col xs={4}>
                     <Card>
                         <Card.Header>
-                            <h1>Summary</h1>
+                            <h1>Resumen</h1>
                         </Card.Header>
                         <Card.Body>
                             <Row>
@@ -51,9 +53,10 @@ function Cart () {
                             </Row>
                         </Card.Footer>
                     </Card>
+                    <Button className='cart-button-buy'>{/* <FontAwesomeIcon icon={ faCashRegister }/> */}Comprar</Button>
+                    <Button variant="danger" className="cart-button-cancel">{/* <FontAwesomeIcon icon={ faBackspace }/> */}Cancelar</Button>
                 </Col>
             </Row>
-            <Button variant="primary">Comprar</Button><Button variant="danger">Cancelar</Button>
         </Container>
     );
 }
