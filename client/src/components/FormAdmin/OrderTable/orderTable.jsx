@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 function OrderTable( ) {
     const [orderTable, setOrderTable]       = useState();
-    const [user, setUser]                   = useState();
+    const [users, setUsers]                 = useState();
     const [loading, setLoading]             = useState();
     const [orderSelector, setOrderSelector] = useState();
 
@@ -18,21 +18,14 @@ function OrderTable( ) {
     const getUsers = ( ) => {
 		axios.get( `http://localhost:3000/users`)
         .then( response => {
-            setUser(response.data);
+            setUsers(response.data);
     })}; 
 
     useEffect(() => {
         getOrders();
         getUsers();
         setLoading(false);
-    }, [loading]);
-
-    let users;
-    let firstName;
-    let lastName;
-
-  
-    
+    }, [loading]);  
     
 
     const handleStatusChange = (e) =>  {
@@ -47,13 +40,18 @@ function OrderTable( ) {
        }
     }
 
-       if(orderSelector && user){
-       /*  users = user.filter((users) => { 
-            return !orderSelector.find( id => id === userId); */
-            console.log(orderSelector);
-            console.log(user);
-        } 
-       
+    let selectedUsers;
+    let firstName;
+    let lastName;
+
+    if(orderSelector && users){
+        console.log('ordenes', orderSelector);
+        console.log('todos', users);
+        selectedUsers = users.filter((user) => { 
+        return !orderSelector.find( order => order.userId === user.id);
+    } )}
+        
+        console.log('seleccionados', selectedUsers);
 
     
 	return (
