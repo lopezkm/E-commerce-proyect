@@ -51,8 +51,8 @@ const Order = ({orderId}) => {
     
     if(userData) {
         return (
-            <Container className='mt-3'>
-                <Card bg='dark'>
+            <Container className='order-container'>
+                <Card>
                     <Card.Body>
                         <Card.Title style={{ color: 'white'}}>Usuario: {userData.firstName +' '+ userData.lastName}</Card.Title>
                         <Card.Subtitle className="mb-2 text-muted">Fecha de cración: {dateFormat}</Card.Subtitle>
