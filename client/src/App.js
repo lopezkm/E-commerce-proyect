@@ -42,9 +42,7 @@ function App( )
 			<Route exact path="/Admin/orders" component={ OrderTable } />
 			<Route exact path="/products" component={ Catalogue } />
 			<Route exact path ='/product/:productId' render={ ( { match } ) =>
-				<Product 
-					productId = { match.params.productId }
-				/>
+				<Product productId={ match.params.productId }/>
 			} />
 			<Route exact path='/Cart' component={ Cart } />
 		</Container>
