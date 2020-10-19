@@ -3,11 +3,11 @@ import axios from 'axios';
 
 const API_URL = process.env.REACT_APP_API_URL;
 
-export function addCategory( name, description )
+export function addCategory( name )
 {
 	return function( dispatch ) {
 		axios.post( `${ API_URL }/products/category`, {
-			name, description
+			name
 		} )
 		.then( ( response ) => {
 			dispatch( {
@@ -26,11 +26,11 @@ export function addCategory( name, description )
 	};
 }
 
-export function modifyCategory( id, props )
+export function modifyCategory( id, name )
 {
 	return function( dispatch ) {
 		axios.put( `${ API_URL }/products/category/${ id }`, {
-			...props
+			name
 		} )
 		.then( ( response ) => {
 			dispatch( {
@@ -42,6 +42,26 @@ export function modifyCategory( id, props )
 		.catch( ( error ) => {
 			dispatch( {
 				type: actionTypes.MODIFY_CATEGORY,
+				payload: null,
+				error: error
+			} );
+		} );
+	};
+}
+
+export function deleteCategory( id )
+{
+	return function( dispatch ) {
+		axios.delete( `${ API_URL }/products/category/${ id }` ).then( ( response ) => {
+			dispatch( {
+				type: actionTypes.DELETE_CATEGORY,
+				payload: { id },
+				error: null
+			} );
+		} )
+		.catch( ( error ) => {
+			dispatch( {
+				type: actionTypes.DELETE_CATEGORY,
 				payload: null,
 				error: error
 			} );
@@ -68,11 +88,3 @@ export function getCategories( )
 		} );
 	};
 }
-
-/*export function removeMovieFavorite( payload )
-{
-	return {
-		type: REMOVE_MOVIE_FAVORITE,
-		payload
-	};
-}*/

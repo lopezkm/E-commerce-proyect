@@ -22,6 +22,13 @@ function reducer( state = initialState, action )
 				categories: [ ...state.categories.filter( c => c.id !== action.payload.id ), action.payload ]
 			}
 		
+		case actionTypes.DELETE_CATEGORY:
+			
+			return {
+				...state,
+				categories: state.categories.filter( c => c.id !== action.payload.id )
+			}
+		
 		case actionTypes.GET_CATEGORIES:
 			
 			return {
