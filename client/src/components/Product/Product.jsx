@@ -2,9 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Card, Button, Carousel, Container, Col, Row, Badge } from 'react-bootstrap';
 import defaultBanner from '../../assets/banner.jpg';
-import store from '../../redux/store/store.js';
 import CartButton from '../CartButton.jsx';
-console.log('product', store.getState());
 
 const API_URL = process.env.REACT_APP_API_URL;
 

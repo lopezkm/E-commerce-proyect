@@ -1,7 +1,5 @@
 import React from 'react';
 import { Nav } from 'react-bootstrap';
-import store from '../../redux/store/store.js';
-console.log('navAdmin',store.getState());
 
 const NavAdmin = () => {
 
