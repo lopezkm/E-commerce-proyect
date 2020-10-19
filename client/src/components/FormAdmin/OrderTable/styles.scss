@@ -19,7 +19,9 @@
 		font-size: 0.9rem;
 	}
 	
-	th, td
+	
+
+	th
 	{
 		text-align: center;
 	}
@@ -44,3 +46,20 @@
 		text-align: center;
 	}
 }
+
+.orderTable-orderLink
+	{
+		text-decoration: none !important;
+		text-align: center !important;
+		display: table-cell;
+		color: white;
+		&:hover {
+			color: $blue;
+		}
+		
+		td 
+		{
+			display: inline-block;
+			width: 100%;
+		}		
+	}

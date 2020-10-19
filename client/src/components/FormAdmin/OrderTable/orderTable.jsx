@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Table, DropdownButton, Dropdown, Container } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 function OrderTable( ) {
     const [orderTable, setOrderTable] = useState();
@@ -11,6 +12,7 @@ function OrderTable( ) {
 		axios.get( `http://localhost:3000/orders`)
         .then( response => {
             setOrderTable(response.data);
+            console.log('ordenes', response.data)
     })}; 
 
     useEffect(() => {
@@ -54,13 +56,19 @@ function OrderTable( ) {
                     </tr>
                 </thead>
                 <tbody>
-                    {orderSelector && orderSelector.map(order => { 
+                    {orderSelector && orderSelector.map((order,i) => { 
                         return( 
-                            <tr> 
-                                <td>{order.id}</td>
-                                <td>{order.status}</td>
-                                <td>{order.userId}</td>
-                            </tr>
+                                <tr key={i}> 
+                                    <Link to={ `/orders/${ order.id }` } className="orderTable-orderLink"> 
+                                        <td>{order.id}</td> 
+                                    </Link>
+                                    <Link to={ `/orders/${ order.id }` } className="orderTable-orderLink"> 
+                                        <td>{order.status}</td>
+                                    </Link>    
+                                    <Link to={ `/orders/${ order.id }` } className="orderTable-orderLink">     
+                                        <td>{order.userId}</td>
+                                    </Link>
+                                </tr>  
                         )
                     })}
                 </tbody>
