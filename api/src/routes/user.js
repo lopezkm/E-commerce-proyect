@@ -245,7 +245,8 @@ server.post( '/', ( request, response ) => {
 	} )
 	.then( ( user ) => {
 		response.status( 200 ).send( user );
-	} );
+	} )
+	.catch(err => response.status ( 409 ).send(err))
 } );
 
 /* =================================================================================
