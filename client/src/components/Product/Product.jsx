@@ -4,6 +4,8 @@ import { Card, Button, Carousel, Container, Col, Row, Badge } from 'react-bootst
 import defaultBanner from '../../assets/banner.jpg';
 import { connect } from 'react-redux';
 import { AddToCart } from '../../redux/actions/actions';
+import ProductCard from '../ProductCard/ProductCard.jsx';
+import { Link } from 'react-router-dom';
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -11,17 +13,37 @@ function Product({ productId, AddToCart }) {
 
 	const [product, setProduct] = useState({});
 	const [isLoading, setLoading] = useState(true);
+	const [productCategories, setProductCategories] = useState("");
+	const [recommendProduct, setRecommendProduct] = useState([]);
+
 
 	const getProduct = () => {
 		axios.get(`${API_URL}/products/${productId}`)
 			.then((response) => {
 				const productData = response.data;
+				const prodCategories = response.data.categories[0].name;
+				setProductCategories(prodCategories);
+
+				console.log(response.data);
 				processMedia(productData);
 
 				setProduct(productData);
 				setLoading(false);
 			});
+
 	}
+
+
+	const getRecommendProduct = () => {
+		axios.get(`${API_URL}/products/category/${productCategories}`)
+			.then((response) => {
+
+				let recommendProds = response.data;
+				setRecommendProduct(recommendProds)
+			});
+	}
+
+
 
 	const processMedia = ({ media }) => {
 		if (!media || (media.length === 0)) {
@@ -44,11 +66,21 @@ function Product({ productId, AddToCart }) {
 
 	useEffect(() => {
 		getProduct();
-	}, []);
+
+		if (productCategories) {
+			setLoading(false)
+		}
+
+		getRecommendProduct();
+
+	}, [isLoading]);
 
 	if (isLoading) {
 		return <div className="App">Loading...</div>;
 	}
+
+	let recoProdFilter = recommendProduct.filter(prod => prod.id !== product.id)
+
 
 	return (
 		<Container>
@@ -107,6 +139,35 @@ function Product({ productId, AddToCart }) {
 								<p>{product.stock}</p>
 							</Col>
 						</Row>
+
+						{product.stock > 0 &&
+							(<Row ><h2> Otros juegos que te pueden interesar:</h2>
+
+								<Row >
+									{
+										recoProdFilter.map((p, i) => (
+											<Col xs={12} sm={6} md={4} lg={3} key={i} className='catalogue__product-col'>
+												<Link to={`/product/${p.id}`}  className='catalogue__product-link'>
+
+													<ProductCard
+														key={p.id}
+														name={p.name}
+														price={p.price}
+														developer={p.developer}
+														media={p.media}
+														stock={p.stock}
+													/>
+
+												</Link>
+											</Col>
+										))
+
+									}
+								</Row>
+							</Row>
+							)
+
+						}
 					</Card.Text>
 				</Card.Body>
 			</Card>

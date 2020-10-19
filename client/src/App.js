@@ -43,6 +43,7 @@ function App( )
 			<Route exact path ='/product/:productId' render={ ( { match } ) =>
 				<Product 
 					productId = { match.params.productId }
+					key={window.location.pathname}
 				/>
 			} />
 			<Route exact path='/Cart' component={ Cart } />
