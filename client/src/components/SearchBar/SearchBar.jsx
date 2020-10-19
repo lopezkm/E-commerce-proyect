@@ -6,7 +6,7 @@ import qs from 'query-string';
 
 function SearchBar( )
 {
-	const [ input, setInput ] = useState( null );
+	const [ input, setInput ] = useState( '' );
 	
 	const inputWrapper = useRef( null );
 	const inputElement = useRef( null );
