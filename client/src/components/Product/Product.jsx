@@ -2,16 +2,15 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Card, Button, Carousel, Container, Col, Row, Badge } from 'react-bootstrap';
 import defaultBanner from '../../assets/banner.jpg';
+import { connect } from 'react-redux';
+import { AddToCart } from '../../redux/actions/actions';
 import ProductCard from '../ProductCard/ProductCard.jsx';
-import { Link, Redirect } from 'react-router-dom';
-import store from '../../redux/store/store.js';
-import CartButton from '../CartButton.jsx';
-
-console.log('product', store.getState());
+import { Link } from 'react-router-dom';
 
 const API_URL = process.env.REACT_APP_API_URL;
 
-function Product({ productId }) {
+function Product({ productId, AddToCart }) {
+
 	const [product, setProduct] = useState({});
 	const [isLoading, setLoading] = useState(true);
 	const [productCategories, setProductCategories] = useState("");
@@ -33,12 +32,6 @@ function Product({ productId }) {
 			});
 
 	}
-
-/* 	const handleReload = (event) =>{
-		event.preventDefault()
-		window.location.reload()
-
-	} */
 
 
 	const getRecommendProduct = () => {
@@ -121,7 +114,7 @@ function Product({ productId }) {
 								{product.stock > 0 ?
 									<div className="action-buttons">
 										<Button className="d-flex ml-auto mr-3">Comprar por ${product.price}</Button>
-										<CartButton />
+										<Button variant="success" onClick={AddToCart}>Agregar al carrito</Button>
 									</div>
 									:
 									<Button className="d-flex ml-auto btn btn-secondary" disabled>Comprar por ${product.price}</Button>
@@ -154,7 +147,7 @@ function Product({ productId }) {
 									{
 										recoProdFilter.map((p, i) => (
 											<Col xs={12} sm={6} md={4} lg={3} key={i} className='catalogue__product-col'>
-												<Link to={`/product/${p.id}`} /* onClick={(e)=> handleReload(e)} */ className='catalogue__product-link'>
+												<Link to={`/product/${p.id}`}  className='catalogue__product-link'>
 
 													<ProductCard
 														key={p.id}
@@ -182,4 +175,4 @@ function Product({ productId }) {
 	);
 }
 
-export default Product;
+export default connect(null, { AddToCart } )(Product);
