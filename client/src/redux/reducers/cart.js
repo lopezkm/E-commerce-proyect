@@ -13,15 +13,22 @@ function reducer( state = initialState, action )
 		
 			return {
 				...state,
-				cart: [ ]
+				cart: [ ],
+				created: true
 			};
 		
 		case actionTypes.EMPTY_CART:
 		
 			return {
 				...state,
-				cart: [ ],
-				created: true
+				cart: [ ]
+			};
+		
+		case actionTypes.EDIT_PRODUCT_IN_CART:
+	
+			return {
+				...state,
+				cart: [ ...cart, action.payload ]
 			};
 		
 		default:

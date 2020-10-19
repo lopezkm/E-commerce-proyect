@@ -3,19 +3,19 @@ import axios from 'axios';
 
 const API_URL = process.env.REACT_APP_API_URL;
 
-export function createCart( user )
+export function createCart( userId )
 {
-	if ( user <= 0 )
+	if ( userId <= 0 )
 	{
 		return {
 			type: actionTypes.CREATE_CART,
-			payload: response.data,
+			payload: [ ],
 			error: null
 		};
 	}
 	
 	return function( dispatch ) {
-		axios.post( `${ API_URL }/users/${ user }/cart` ).then( ( response ) => {
+		axios.post( `${ API_URL }/users/${ userId }/cart` ).then( ( response ) => {
 			dispatch( {
 				type: actionTypes.CREATE_CART,
 				payload: response.data,
@@ -32,9 +32,9 @@ export function createCart( user )
 	};
 }
 
-export function emptyCart( user )
+export function emptyCart( userId )
 {
-	if ( user <= 0 )
+	if ( userId <= 0 )
 	{
 		return {
 			type: actionTypes.EMPTY_CART,
@@ -43,15 +43,44 @@ export function emptyCart( user )
 	}
 	
 	return function( dispatch ) {
-		axios.post( `${ API_URL }/users/${ user }/cart` ).then( ( response ) => {
+		axios.post( `${ API_URL }/users/${ userId }/cart` ).then( ( response ) => {
 			dispatch( {
-				type: actionTypes.CREATE_CART,
+				type: actionTypes.EMPTY_CART,
 				error: null
 			} );
 		} )
 		.catch( ( error ) => {
 			dispatch( {
-				type: actionTypes.CREATE_CART,
+				type: actionTypes.EMPTY_CART,
+				error: error
+			} );
+		} );
+	};
+}
+
+export function editProductInCart( userId, productId, quantity )
+{
+	if ( userId <= 0 )
+	{
+		return {
+			type: actionTypes.EDIT_PRODUCT_IN_CART,
+			payload: productId,
+			error: null
+		};
+	}
+	
+	return function( dispatch ) {
+		axios.post( `${ API_URL }/users/${ userId }/cart` ).then( ( response ) => {
+			dispatch( {
+				type: actionTypes.EDIT_PRODUCT_IN_CART,
+				payload: productId,
+				error: null
+			} );
+		} )
+		.catch( ( error ) => {
+			dispatch( {
+				type: actionTypes.EDIT_PRODUCT_IN_CART,
+				payload: null,
 				error: error
 			} );
 		} );
@@ -62,7 +91,6 @@ export function emptyCart( user )
 
 export const CREATE_CART 				= 'CREATE_CART';
 export const EMPTY_CART 				= 'EMPTY_CART';
-export const ADD_PRODUCT_TO_CART 		= 'ADD_PRODUCT_TO_CART';
 export const EDIT_PRODUCT_IN_CART 		= 'EDIT_PRODUCT_TO_CART';
 export const GET_PRODUCTS_FROM_CART 	= 'GET_PRODUCTS_FROM_CART';
 

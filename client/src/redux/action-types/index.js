@@ -23,6 +23,5 @@ export const GET_USER_BY_ID 			= 'GET_USER_BY_ID';
 
 export const CREATE_CART 				= 'CREATE_CART';
 export const EMPTY_CART 				= 'EMPTY_CART';
-export const ADD_PRODUCT_TO_CART 		= 'ADD_PRODUCT_TO_CART';
-export const EDIT_PRODUCT_IN_CART 		= 'EDIT_PRODUCT_TO_CART';
+export const EDIT_PRODUCT_IN_CART 		= 'EDIT_PRODUCT_IN_CART';
 export const GET_PRODUCTS_FROM_CART 	= 'GET_PRODUCTS_FROM_CART';
