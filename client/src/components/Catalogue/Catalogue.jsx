@@ -1,26 +1,24 @@
 import React, { useCallback, useEffect, useState,useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
+import { useSelector, useStore } from 'react-redux';
 import qs from 'query-string';
 import axios from 'axios';
-
 import ProductCard from '../ProductCard/ProductCard.jsx';
 import Checkable from '../Checkable/Checkable.jsx';
-import SearchBar from '../SearchBar/SearchBar.jsx';
-
 import loadingCircle from '../../assets/loading.svg';
 
 const API_URL = process.env.REACT_APP_API_URL;
 
 function Catalogue( props )
-{	
-	const [ categories, setCategories ] = useState( [ ] );
+{
 	const [ products, setProducts ] = useState( [ ] );
 	const [ checked, setChecked ] = useState( [ ] );
 	const [ expanded, setExpanded ] = useState( false );
 	const [ loading, setLoading ] = useState( { products: true, categories: true } );
 	
 	const firstRender = useRef( true );
+	const categories = useSelector( ( state ) => state.category.categories );
 	
 	const onChangeHandler = useCallback( ( status, id ) => {
 		setChecked( ( state ) => {
@@ -29,11 +27,10 @@ function Catalogue( props )
 	}, [ ] );
 	
 	useEffect( ( ) => {
-		axios.get( `${ API_URL }/products/category` ).then( ( response ) => {
-			setCategories( response.data );
+		if ( categories.length > 0 ) {
 			setLoading( ( state ) => ( { ...state, categories: false } ) );
-		} );
-	}, [ ] );
+		}
+	}, [ categories ] );
 	
 	useEffect( ( ) => {
 		if ( firstRender.current )
