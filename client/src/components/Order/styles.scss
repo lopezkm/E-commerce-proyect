@@ -1,0 +1,25 @@
+.order-container {
+
+    margin-top: 2rem;
+    font-family: $barlow;
+
+    .card {
+        background-color: $grey;
+        border-radius: 10px;
+    }
+
+    .table {
+        background-color: $grey;
+
+        th {
+            font-weight: 500;
+            border: $light-grey solid 2px;
+            width: min-content;
+        }
+
+        td {
+            border: $light-grey solid 2px;
+            width: min-content;
+        }
+    }
+}
