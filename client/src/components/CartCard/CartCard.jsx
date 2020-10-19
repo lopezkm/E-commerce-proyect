@@ -3,7 +3,7 @@ import { Container, Col, Row, Card, Figure } from 'react-bootstrap';
 
 function CartCard () {
     return (
-        <Container>
+        <Container className='card-cart-container'>
             <Card>
                 <Card.Body>
                     <Row>
@@ -16,8 +16,8 @@ function CartCard () {
                             </Figure>    
                         </Col>
                         <Col>
-                            <h2>Product Name</h2>
-                            <p>DescDescDescDescDescDescDescDescDesc</p>
+                            <h2>Rocket League</h2>
+                            <p>AAAAAAAAAAAAAAAAAAAAAAAAAAA</p>
                             <span>$50</span>                   
                         </Col>
                         <Col>
