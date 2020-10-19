@@ -43,8 +43,8 @@ function NavBar( props ){
 					<Nav.Link className="navbar-nav-cart" href="/cart">
 					<FontAwesomeIcon icon={ faShoppingCart }/> <p className="navbar-text">Carrito {cartCounter}</p>
 					</Nav.Link>
-					<Nav.Link className="navbar-nav-user" href="/user">
-						<FontAwesomeIcon icon={ faUser }/> <p className="navbar-text">Mi cuenta</p>
+					<Nav.Link className="navbar-nav-user" href="/userCreate">
+						<FontAwesomeIcon icon={ faUser }/> <p className="navbar-text">Creá tu cuenta</p>
 					</Nav.Link>
 					<SearchBar/>
 				</Nav>
