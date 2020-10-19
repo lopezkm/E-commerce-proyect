@@ -15,15 +15,8 @@ function OrderTable( ) {
             setOrderTable(response.data);
     })}; 
 
-    const getUsers = ( ) => {
-		axios.get( `http://localhost:3000/users`)
-        .then( response => {
-            setUsers(response.data);
-    })}; 
-
     useEffect(() => {
         getOrders();
-        getUsers();
         setLoading(false);
     }, [loading]);  
     
@@ -39,20 +32,6 @@ function OrderTable( ) {
         setOrderSelector(orderTable);
        }
     }
-
-    let selectedUsers;
-    let firstName;
-    let lastName;
-
-    if(orderSelector && users){
-        console.log('ordenes', orderSelector);
-        console.log('todos', users);
-        selectedUsers = users.filter((user) => { 
-        return !orderSelector.find( order => order.userId === user.id);
-    } )}
-        
-        console.log('seleccionados', selectedUsers);
-
     
 	return (
         <Container className="orderTable">
@@ -88,7 +67,7 @@ function OrderTable( ) {
                                         <td>{order.status}</td>
                                     </Link>    
                                     <Link to={ `/orders/${ order.id }` } className="orderTable-orderLink">     
-                                        <td></td>
+                                        <td>{order.user.firstName + ' ' + order.user.lastName}</td>
                                     </Link>
                                 </tr>  
                         )
