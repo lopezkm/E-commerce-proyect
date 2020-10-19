@@ -1,61 +1,69 @@
 import React, { } from 'react';
-import { Container, Card, Row, Col } from 'react-bootstrap';
+import { Container, Card, Row, Col, CardGroup } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronCircleRight } from '@fortawesome/free-solid-svg-icons';
+import { faChevronCircleRight, faExchangeAlt, faPlus, faPlusSquare, faSortAmountUpAlt, faTrash } from '@fortawesome/free-solid-svg-icons';
 
-function PanelAdmin(){
+
+function PanelAdmin() {
     return (
-        <Container className='panelAdmin-container'>
-            <Row className='panelAdmin-row '>
-                <Col xs={4}>
-                    <Link to="/admin/categories">
-                        <Card bg="primary" text="white">
-                            <Card.Body>
-                                <Card.Title bsPrefix='panelAdmin-cardTitle'> Agregar categorias <FontAwesomeIcon icon={ faChevronCircleRight } /> </Card.Title>
-                            </Card.Body>
-                        </Card>
-                    </Link>
-                </Col>
-                <Col xs={4}>
-                    <Link to="/admin/create">
-                        <Card bg="primary" text="white">
-                            <Card.Body>
-                                <Card.Title bsPrefix='panelAdmin-cardTitle'> Agregar producto <FontAwesomeIcon icon={ faChevronCircleRight } /> </Card.Title>
-                            </Card.Body>
-                        </Card>
-                    </Link>
-                </Col>
-                <Col xs={4}>
-                    <Link to="/admin/modify">
-                        <Card bg="primary" text="white">
-                            <Card.Body>
-                                <Card.Title bsPrefix='panelAdmin-cardTitle'> Modificar producto <FontAwesomeIcon icon={ faChevronCircleRight } /> </Card.Title>
-                            </Card.Body>
-                        </Card>
-                    </Link>
-                </Col>
-                <Col xs={4}>
-                    <Link to="/admin/delete">
-                        <Card bg="primary" text="white">
-                            <Card.Body>
-                                <Card.Title bsPrefix='panelAdmin-cardTitle'> Eliminar producto <FontAwesomeIcon icon={ faChevronCircleRight } /> </Card.Title>
-                            </Card.Body>
-                        </Card>
-                    </Link>
-                </Col>
-                <Col xs={4}>
-                    <Link to="/admin/orders">
-                        <Card bg="primary" text="white">
-                            <Card.Body>
-                                <Card.Title bsPrefix='panelAdmin-cardTitle'> Filtrar ordenes <FontAwesomeIcon icon={ faChevronCircleRight } /> </Card.Title>
-                            </Card.Body>
-                        </Card>
-                    </Link>
-                </Col>
-            </Row>
-        </Container>
-            
+        <div className='panelAdmin-container'>
+            <h1>Panel del administrador</h1>
+            <Container bsPrefix='panelAdmin-internal-container'>
+                <Row>
+                    <Col xs={10} lg={2}>
+                        <Link to="/admin/categories">
+                            <Card>
+                                <Card.Body>
+                                    <Card.Title>Agregar categorias</Card.Title>
+                                    <Card.Text><FontAwesomeIcon icon={faPlusSquare} /></Card.Text>
+                                </Card.Body>
+                            </Card>
+                        </Link>
+                    </Col>
+                    <Col xs={10} lg={2}>
+                        <Link to="/admin/create">
+                            <Card>
+                                <Card.Body>
+                                    <Card.Title>Agregar producto</Card.Title>
+                                    <Card.Text><FontAwesomeIcon icon={faPlus} /> </Card.Text>
+                                </Card.Body>
+                            </Card>
+                        </Link>
+                    </Col>
+                    <Col xs={10} lg={2}>
+                        <Link to="/admin/modify">
+                            <Card>
+                                <Card.Body>
+                                    <Card.Title>Modificar producto</Card.Title>
+                                    <Card.Text><FontAwesomeIcon icon={faExchangeAlt} /> </Card.Text>
+                                </Card.Body>
+                            </Card>
+                        </Link>
+                    </Col>
+                    <Col xs={10} lg={2}>
+                        <Link to="/admin/delete">
+                            <Card>
+                                <Card.Body>
+                                    <Card.Title>Eliminar producto</Card.Title>
+                                    <Card.Text> <FontAwesomeIcon icon={faTrash} /> </Card.Text>
+                                </Card.Body>
+                            </Card>
+                        </Link>
+                    </Col>
+                    <Col xs={10} lg={2}>
+                        <Link to="/admin/orders">
+                            <Card>
+                                <Card.Body>
+                                    <Card.Title>Filtrar ordenes</Card.Title>
+                                    <Card.Text><FontAwesomeIcon icon={faSortAmountUpAlt} /> </Card.Text>
+                                </Card.Body>
+                            </Card>
+                        </Link>
+                    </Col>
+                </Row>
+            </Container>
+        </div >
     );
 }
 

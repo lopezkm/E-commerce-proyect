@@ -30,29 +30,23 @@ const _clamp = ( value, min, max ) => {
 	return Math.max( min, Math.min( max, value ) );
 };
 
-const _buildProductsQuery = ( categories, limit, page ) => {
-	let query = `SELECT "products".id FROM "products" $r LIMIT :maxRows OFFSET :offset`;
+const _buildProductsQuery = ( categories ) => {
+	let query = `SELECT "products".id FROM "products" `;
 	
 	if ( categories && ( categories.length > 0 ) )
 	{
-		query = query.replace( '$r', `
+		query = query + `
 			INNER JOIN "product_category" ON "product_category"."productId" = "products"."id"
 			INNER JOIN "categories" ON "product_category"."categoryId" = "categories"."id"
 			WHERE "categories"."id" IN( :list )
 			GROUP BY "products"."id" HAVING COUNT( "products"."id" ) = :length
-		` );
-	}
-	else
-	{
-		query = query.replace( '$r', '' );
+		`;
 	}
 	
 	return conn.query( query, {
 		replacements: {
 			list: categories && categories,
-			length: categories && categories.length,
-			maxRows: limit,
-			offset: ( page * limit )
+			length: categories && categories.length
 		},
 		type: QueryTypes.SELECT
 	} );
@@ -112,7 +106,9 @@ server.get( '/', ( request, response, next ) => {
 			include: [
 				{ model: Category },
 				{ model: Media }
-			]
+			],
+			limit: limit,
+			offset: ( page * limit )
 		} );
 	} )
 	.then( ( products ) => {
