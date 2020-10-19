@@ -1,7 +1,8 @@
 import * as actionTypes from '../action-types';
 
 const initialState = {
-	cart: [ ]
+	cart: [ ],
+	created: false
 };
 
 function reducer( state = initialState, action )
@@ -12,7 +13,15 @@ function reducer( state = initialState, action )
 		
 			return {
 				...state,
-				cart: action.payload
+				cart: [ ]
+			};
+		
+		case actionTypes.EMPTY_CART:
+		
+			return {
+				...state,
+				cart: [ ],
+				created: true
 			};
 		
 		default:

@@ -32,6 +32,32 @@ export function createCart( user )
 	};
 }
 
+export function emptyCart( user )
+{
+	if ( user <= 0 )
+	{
+		return {
+			type: actionTypes.EMPTY_CART,
+			error: null
+		};
+	}
+	
+	return function( dispatch ) {
+		axios.post( `${ API_URL }/users/${ user }/cart` ).then( ( response ) => {
+			dispatch( {
+				type: actionTypes.CREATE_CART,
+				error: null
+			} );
+		} )
+		.catch( ( error ) => {
+			dispatch( {
+				type: actionTypes.CREATE_CART,
+				error: error
+			} );
+		} );
+	};
+}
+
 /*
 
 export const CREATE_CART 				= 'CREATE_CART';
