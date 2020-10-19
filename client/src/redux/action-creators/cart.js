@@ -3,28 +3,48 @@ import axios from 'axios';
 
 const API_URL = process.env.REACT_APP_API_URL;
 
-export function createCart( userId )
+/* =================================================================================
+* 		[ Agrega un producto al carrito ]
+* ================================================================================= */
+
+/*
+	Si no hay producto, y se agrega un producto, se agrega con cantidad 1.
+	Si un producto existe, se edita ese producto incrementando su cantidad en 1.
+*/
+
+export function addProductToCart( userId, productId )
 {
 	if ( userId <= 0 )
 	{
-		return {
-			type: actionTypes.CREATE_CART,
-			payload: [ ],
-			error: null
+		return function( dispatch, getState ) {
+			const cartProduct = getState( ).cartReducer.cart.find( ( value ) => value.productId === productId );
+			const quantity = cartProduct ? 1 : ( cartProduct.quantity + 1 );
+			
+			dispatch( {
+				type: actionTypes.EDIT_PRODUCT_IN_CART,
+				payload: { productId, quantity },
+				error: null
+			} );
 		};
 	}
 	
-	return function( dispatch ) {
-		axios.post( `${ API_URL }/users/${ userId }/cart` ).then( ( response ) => {
+	return function( dispatch, getState ) {
+		const cartProduct = getState( ).cartReducer.cart.find( ( value ) => value.productId === productId );
+		const quantity = cartProduct ? 1 : ( cartProduct.quantity + 1 );
+		
+		axios.put( `${ API_URL }/users/${ userId }/cart`, {
+			productId,
+			quantity
+		} ).then( ( response ) => {
 			dispatch( {
-				type: actionTypes.CREATE_CART,
-				payload: response.data,
+				type: actionTypes.EDIT_PRODUCT_IN_CART,
+				payload: { productId, quantity },
 				error: null
 			} );
 		} )
 		.catch( ( error ) => {
 			dispatch( {
-				type: actionTypes.CREATE_CART,
+				type: actionTypes.EDIT_PRODUCT_IN_CART,
 				payload: null,
 				error: error
 			} );
@@ -32,31 +52,15 @@ export function createCart( userId )
 	};
 }
 
-export function emptyCart( userId )
-{
-	if ( userId <= 0 )
-	{
-		return {
-			type: actionTypes.EMPTY_CART,
-			error: null
-		};
-	}
-	
-	return function( dispatch ) {
-		axios.post( `${ API_URL }/users/${ userId }/cart` ).then( ( response ) => {
-			dispatch( {
-				type: actionTypes.EMPTY_CART,
-				error: null
-			} );
-		} )
-		.catch( ( error ) => {
-			dispatch( {
-				type: actionTypes.EMPTY_CART,
-				error: error
-			} );
-		} );
-	};
-}
+/* =================================================================================
+* 		[ Editar un producto del carrito ]
+* ================================================================================= */
+
+/*
+	Si no hay producto, y se edita un producto, se agrega con esa cantidad.
+	Si un producto existe, se edita ese producto con la cantidad ingresada.
+	Si la cantidad es nula, el producto se elimina del carrito.
+*/
 
 export function editProductInCart( userId, productId, quantity )
 {
@@ -64,16 +68,19 @@ export function editProductInCart( userId, productId, quantity )
 	{
 		return {
 			type: actionTypes.EDIT_PRODUCT_IN_CART,
-			payload: productId,
+			payload: { productId, quantity },
 			error: null
 		};
 	}
 	
 	return function( dispatch ) {
-		axios.post( `${ API_URL }/users/${ userId }/cart` ).then( ( response ) => {
+		axios.put( `${ API_URL }/users/${ userId }/cart`, {
+			productId,
+			quantity
+		} ).then( ( response ) => {
 			dispatch( {
 				type: actionTypes.EDIT_PRODUCT_IN_CART,
-				payload: productId,
+				payload: { productId, quantity },
 				error: null
 			} );
 		} )
@@ -87,11 +94,32 @@ export function editProductInCart( userId, productId, quantity )
 	};
 }
 
-/*
+/* =================================================================================
+* 		[ Remover productos del carrito ]
+* ================================================================================= */
 
-export const CREATE_CART 				= 'CREATE_CART';
-export const EMPTY_CART 				= 'EMPTY_CART';
-export const EDIT_PRODUCT_IN_CART 		= 'EDIT_PRODUCT_TO_CART';
-export const GET_PRODUCTS_FROM_CART 	= 'GET_PRODUCTS_FROM_CART';
-
-*/
+export function removeProductsFromCart( userId )
+{
+	if ( userId <= 0 )
+	{
+		return {
+			type: actionTypes.REMOVE_PRODUCTS_FROM_CART,
+			error: null
+		};
+	}
+	
+	return function( dispatch ) {
+		axios.delete( `${ API_URL }/users/${ userId }/cart` ).then( ( response ) => {
+			dispatch( {
+				type: actionTypes.REMOVE_PRODUCTS_FROM_CART,
+				error: null
+			} );
+		} )
+		.catch( ( error ) => {
+			dispatch( {
+				type: actionTypes.REMOVE_PRODUCTS_FROM_CART,
+				error: error
+			} );
+		} );
+	};
+}

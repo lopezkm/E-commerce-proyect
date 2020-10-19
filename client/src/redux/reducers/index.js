@@ -1,21 +1,11 @@
 import { combineReducers } from 'redux';
+
+import cartReducer from './cart';
 import categoryReducer from './category';
-
-const initialState = {
-	init: 'initial state'
-};
-
-function rootReducer( state = initialState, action )
-{
-	switch ( action.type )
-	{
-		default:
-			
-			return state;
-	}
-}
+import userReducer from './user';
 
 export default combineReducers( {
+	cart: cartReducer,
 	category: categoryReducer,
-	rootReducer
+	user: userReducer
 } );
