@@ -81,6 +81,7 @@ function Product({ productId, AddToCart }) {
 
 	let recoProdFilter = recommendProduct.filter(prod => prod.id !== product.id)
 
+	let dateFormat = product.publishDate && product.publishDate.substring(0,10).split('-').reverse().join('/');
 
 	return (
 		<Container>
@@ -132,7 +133,7 @@ function Product({ productId, AddToCart }) {
 							</Col>
 							<Col sm={3}>
 								<h2>Fecha de publicación:</h2>
-								<p>{product.publishDate.slice(0, 10)}</p>
+								<p>{dateFormat}</p>
 							</Col>
 							<Col sm={3}>
 								<h2>Stock disponible:</h2>
