@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faTimes, faShoppingCart, faUser } from '@fortawesome/free-solid-svg-icons';
 import { ReactComponent as Logo } from '../../assets/logofull.svg';
 import SearchBar from '../SearchBar/SearchBar.jsx';
-import { connect } from 'react-redux';
 import store from '../../redux/store/store.js'
 import { useState } from 'react';
 console.log(store.getState());
