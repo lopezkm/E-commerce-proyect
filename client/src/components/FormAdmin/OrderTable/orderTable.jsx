@@ -4,21 +4,36 @@ import { Table, DropdownButton, Dropdown, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 function OrderTable( ) {
-    const [orderTable, setOrderTable] = useState();
-    const [loading, setLoading] = useState();
+    const [orderTable, setOrderTable]       = useState();
+    const [user, setUser]                   = useState();
+    const [loading, setLoading]             = useState();
     const [orderSelector, setOrderSelector] = useState();
 
 	const getOrders = ( ) => {
 		axios.get( `http://localhost:3000/orders`)
         .then( response => {
             setOrderTable(response.data);
-            console.log('ordenes', response.data)
+    })}; 
+
+    const getUsers = ( ) => {
+		axios.get( `http://localhost:3000/users`)
+        .then( response => {
+            setUser(response.data);
     })}; 
 
     useEffect(() => {
         getOrders();
+        getUsers();
         setLoading(false);
     }, [loading]);
+
+    let users;
+    let firstName;
+    let lastName;
+
+  
+    
+    
 
     const handleStatusChange = (e) =>  {
        let dropdown = document.getElementById('dropdown-basic-button');
@@ -31,6 +46,15 @@ function OrderTable( ) {
         setOrderSelector(orderTable);
        }
     }
+
+       if(orderSelector && user){
+       /*  users = user.filter((users) => { 
+            return !orderSelector.find( id => id === userId); */
+            console.log(orderSelector);
+            console.log(user);
+        } 
+       
+
     
 	return (
         <Container className="orderTable">
@@ -52,7 +76,7 @@ function OrderTable( ) {
                     <tr>
                     <th>Orden N°</th>
                     <th>Estado de la Orden</th>
-                    <th>Pertenece a usuario Id</th>
+                    <th>Pertenece a usuario</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -66,7 +90,7 @@ function OrderTable( ) {
                                         <td>{order.status}</td>
                                     </Link>    
                                     <Link to={ `/orders/${ order.id }` } className="orderTable-orderLink">     
-                                        <td>{order.userId}</td>
+                                        <td></td>
                                     </Link>
                                 </tr>  
                         )
