@@ -208,13 +208,32 @@ server.put( '/:id/cart', ( request, response ) => {
 } );
 
 /* =================================================================================
+* 		[ Obtención de un usuario por email y clave ]
+* ================================================================================= */
+
+server.get( '/auth', ( request, response ) => {
+	let { email, password } = request.body;
+	
+	User.findOne( {
+		email,
+		password
+	} ).then( ( user ) => {
+		if ( !user ) {
+			return response.sendStatus( 404 );
+		}
+		
+		response.status( 200 ).send( user );
+	} );
+} );
+
+/* =================================================================================
 * 		[ Obtención de un usuario particular ]
 * ================================================================================= */
 
 server.get( '/:id', ( request, response ) => {
 	let { id } = request.params;
 	
-	User.findByPk( id ).then( user => {
+	User.findByPk( id ).then( ( user ) => {
 		if ( !user ) {
 			return response.sendStatus( 404 );
 		}
@@ -249,24 +268,6 @@ server.post( '/', ( request, response ) => {
 } );
 
 /* =================================================================================
-* 		[ Eliminación de un usuario ]
-* ================================================================================= */
-
-server.delete( '/:id', ( request, response ) => {
-	let { id } = request.params;
-	
-	User.findByPk( id ).then( ( user ) => {
-		if ( !user ) {
-			return response.sendStatus( 404 );
-		}
-		
-		user.destroy( ).then( ( ) => {
-			response.sendStatus( 204 );
-		} );
-	} );
-} );
-
-/* =================================================================================
 * 		[ Modificación de un usuario ]
 * ================================================================================= */
 
@@ -285,6 +286,24 @@ server.put( '/:id', ( request, response ) => {
 		} )
 		.then( ( user ) => {
 			response.status( 200 ).send( user );
+		} );
+	} );
+} );
+
+/* =================================================================================
+* 		[ Eliminación de un usuario ]
+* ================================================================================= */
+
+server.delete( '/:id', ( request, response ) => {
+	let { id } = request.params;
+	
+	User.findByPk( id ).then( ( user ) => {
+		if ( !user ) {
+			return response.sendStatus( 404 );
+		}
+		
+		user.destroy( ).then( ( ) => {
+			response.sendStatus( 204 );
 		} );
 	} );
 } );
