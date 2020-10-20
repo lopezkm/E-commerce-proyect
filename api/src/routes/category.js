@@ -1,5 +1,5 @@
 const server = require( 'express' ).Router( );
-const { Category } = require( '../db.js' );
+const { Category, Media } = require( '../db.js' );
 const { Op } = require( 'sequelize' );
 
 /* =================================================================================
@@ -46,7 +46,11 @@ server.get( '/:name', ( request, response ) => {
 			return response.sendStatus( 404 );
 		}
 		
-		category.getProducts( ).then( ( products ) => {
+		category.getProducts( {
+			include: [
+				{ model: Media }
+			]
+		} ).then( ( products ) => {
 			response.status( 200 ).send( products );
 		} );
 	} );

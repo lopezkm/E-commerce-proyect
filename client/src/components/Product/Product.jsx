@@ -1,86 +1,93 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import { Card, Button, Carousel, Container, Col, Row, Badge } from 'react-bootstrap';
-import defaultBanner from '../../assets/banner.jpg';
-import { connect } from 'react-redux';
-import { AddToCart } from '../../redux/actions/actions';
-import ProductCard from '../ProductCard/ProductCard.jsx';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
+import { Card, Button, Carousel, Container, Col, Row, Badge } from 'react-bootstrap';
+import { useSelector, useDispatch } from 'react-redux';
+import axios from 'axios';
+import { AddProductToCart } from '../../redux/action-creators/cart';
+import ProductCard from '../ProductCard/ProductCard.jsx';
+import defaultBanner from '../../assets/banner.jpg';
 
 const API_URL = process.env.REACT_APP_API_URL;
 
-function Product({ productId, AddToCart }) {
+function Product( { productId } )
+{
+	const [ product, setProduct ] = useState( null );
+	const [ isLoading, setLoading ] = useState( true );
+	const [ recommendedProducts, setRecommendedProducts ] = useState( [ ] );
+	
+	const userId = useSelector( ( state ) => state.user.id );
+	const dispatch = useDispatch( );
 
-	const [product, setProduct] = useState({});
-	const [isLoading, setLoading] = useState(true);
-	const [productCategories, setProductCategories] = useState("");
-	const [recommendProduct, setRecommendProduct] = useState([]);
-
-
-	const getProduct = () => {
-		axios.get(`${API_URL}/products/${productId}`)
-			.then((response) => {
-				const productData = response.data;
-				const prodCategories = response.data.categories[0].name;
-				setProductCategories(prodCategories);
-
-				console.log(response.data);
-				processMedia(productData);
-
-				setProduct(productData);
-				setLoading(false);
-			});
-
+	const getProduct = ( ) => {
+		axios.get( `${API_URL}/products/${productId}` ).then( ( response ) => {
+			const productData = response.data;
+			
+			processMedia( productData );
+			setProduct( productData );
+			
+			setLoading( false );
+		} );
 	}
-
-
-	const getRecommendProduct = () => {
-		axios.get(`${API_URL}/products/category/${productCategories}`)
-			.then((response) => {
-
-				let recommendProds = response.data;
-				setRecommendProduct(recommendProds)
-			});
-	}
-
-
-
-	const processMedia = ({ media }) => {
-		if (!media || (media.length === 0)) {
-			media = [
-				{
-					type: 'image-big',
-					path: defaultBanner
-				}
-			];
-
+	
+	const getRecommendedProducts = ( ) => {
+		if ( !product.categories || ( product.categories.length === 0 ) )
+		{
 			return;
 		}
-
-		media.forEach(m => {
-			if (!m.path.includes('/')) {
-				m.path = `${API_URL}/${m.path}`;
-			}
-		})
+		
+		axios.get( `${ API_URL }/products/category/${ product.categories[ 0 ].name }` ).then( ( response ) => {
+			const products = response.data.filter( p => p.id !== productId );
+			
+			console.log( response );
+			
+			setRecommendedProducts( products );
+		} );
 	}
-
-	useEffect(() => {
-		getProduct();
-
-		if (productCategories) {
-			setLoading(false)
+	
+	const processMedia = ( { media } ) => {
+		if ( !media || ( media.length === 0 ) ) {
+			media = [ {
+				type: 'image-big',
+				path: defaultBanner
+			} ];
+			
+			return;
 		}
-
-		getRecommendProduct();
-
-	}, [isLoading]);
-
-	if (isLoading) {
-		return <div className="App">Loading...</div>;
+		
+		media.forEach( ( m ) => {
+			if ( !m.path.includes( '/' ) ) {
+				m.path = `${ API_URL }/${ m.path }`;
+			}
+		} );
+	}
+	
+	const handleAddToCartClick = ( e ) => {
+		e.preventDefault( );
+		
+		dispatch( AddProductToCart( userId, productId ) );
 	}
 
-	let recoProdFilter = recommendProduct.filter(prod => prod.id !== product.id)
+	useEffect( ( ) => {
+		getProduct( );
+	}, [ ] );
+	
+	useEffect( ( ) => {
+		if ( !product ) {
+			return;
+		}
+		
+		getRecommendedProducts( );
+	} , [ product ] );
 
+	if ( isLoading ) {
+		return (
+			<div className="App">
+				Loading...
+			</div>
+		);
+	}
+
+	const dateFormat = product.publishDate && product.publishDate.substring( 0, 10 ).split( '-' ).reverse( ).join( '/' );
 
 	return (
 		<Container>
@@ -114,7 +121,7 @@ function Product({ productId, AddToCart }) {
 								{product.stock > 0 ?
 									<div className="action-buttons">
 										<Button className="d-flex ml-auto mr-3">Comprar por ${product.price}</Button>
-										<Button variant="success" onClick={AddToCart}>Agregar al carrito</Button>
+										<Button variant="success" onClick={ handleAddToCartClick }>Agregar al carrito</Button>
 									</div>
 									:
 									<Button className="d-flex ml-auto btn btn-secondary" disabled>Comprar por ${product.price}</Button>
@@ -132,7 +139,7 @@ function Product({ productId, AddToCart }) {
 							</Col>
 							<Col sm={3}>
 								<h2>Fecha de publicación:</h2>
-								<p>{product.publishDate.slice(0, 10)}</p>
+								<p>{dateFormat}</p>
 							</Col>
 							<Col sm={3}>
 								<h2>Stock disponible:</h2>
@@ -145,7 +152,7 @@ function Product({ productId, AddToCart }) {
 
 								<Row >
 									{
-										recoProdFilter.map((p, i) => (
+										recommendedProducts.map( ( p, i ) => (
 											<Col xs={12} sm={6} md={4} lg={3} key={i} className='catalogue__product-col'>
 												<Link to={`/product/${p.id}`}  className='catalogue__product-link'>
 
@@ -175,4 +182,4 @@ function Product({ productId, AddToCart }) {
 	);
 }
 
-export default connect(null, { AddToCart } )(Product);
+export default Product;

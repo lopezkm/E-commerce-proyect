@@ -1,6 +1,6 @@
 const server = require( 'express' ).Router( );
 const { Op } = require( 'sequelize' );
-const { Order, Product } = require( '../db.js' );
+const { Order, Product, User } = require( '../db.js' );
 
 /* =================================================================================
 * 		[ Búsqueda y/o obtención de todas las órdenes ]
@@ -25,6 +25,9 @@ server.get( '/', ( request, response ) => {
 		],
 		include: [
 			{ model: Product }
+		],
+		include: [
+			{ model: User }
 		]
 	};
 	
