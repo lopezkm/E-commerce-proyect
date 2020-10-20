@@ -2,8 +2,6 @@ import React, { useEffect, useState, useRef } from 'react';
 import { Form, Button, FormControl, Container } from 'react-bootstrap';
 import axios from 'axios';
 import NavAdmin from '../NavAdmin/nav_admin.jsx';
-import store from '../../redux/store/store.js';
-console.log('formAdminDelete',store.getState());
 
 const FormAdminDelete = () => {
     const [products, setProducts] = useState([]);

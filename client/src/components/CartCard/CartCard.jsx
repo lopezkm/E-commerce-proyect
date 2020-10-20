@@ -1,7 +1,8 @@
-import React, { } from 'react';
+import React from 'react';
 import { Container, Col, Row, Card, Figure } from 'react-bootstrap';
 
-function CartCard () {
+function CartCard ( )
+{
     return (
         <Container className='card-cart-container'>
             <Card>

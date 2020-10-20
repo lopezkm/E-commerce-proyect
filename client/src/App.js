@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Route } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
+import { GetCategories } from './redux/action-creators/category';
 
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 import './App.scss';
@@ -21,9 +23,15 @@ import PanelAdmin from './components/PanelAdmin/PanelAdmin.jsx';
 
 function App( )
 {
+	const dispatch = useDispatch( );
+	
+	useEffect( ( ) => {
+		dispatch( GetCategories( ) );
+	}, [ ] );
+	
 	return (
 		<Container fluid className="app">
-			<Route path="/" component={ ( ) => <NavBar/> }/>
+			<Route path='/' component={ ( ) => <NavBar/> }/>
 			<Route path='/userCreate' component={ FormCreateUser } />
 			<Route path='/order' component={ Order } />
 			<Route exact path='/Admin' component={ PanelAdmin } />
@@ -36,15 +44,10 @@ function App( )
 			<Route exact path="/Admin/orders" component={ OrderTable } />
 			<Route exact path="/products" component={ Catalogue } />
 			<Route exact path ='/orders/:orderId' render={ ( { match } ) =>
-				<Order 
-					orderId = { match.params.orderId }
-				/>
+				<Order orderId={ match.params.orderId }/>
 			} />
-			<Route exact path ='/product/:productId' render={ ( { match } ) =>
-				<Product 
-					productId = { match.params.productId }
-					key={window.location.pathname}
-				/>
+			<Route exact path='/product/:productId' render={ ( { match } ) =>
+				<Product productId={ match.params.productId }/>
 			} />
 			<Route exact path='/Cart' component={ Cart } />
 		</Container>

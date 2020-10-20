@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 
 function OrderTable( ) {
     const [orderTable, setOrderTable]       = useState();
-    const [users, setUsers]                 = useState();
     const [loading, setLoading]             = useState();
     const [orderSelector, setOrderSelector] = useState();
 

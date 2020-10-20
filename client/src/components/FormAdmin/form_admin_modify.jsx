@@ -5,8 +5,6 @@ import MediaForm from './MediaForm/MediaForm.jsx';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 import NavAdmin from '../NavAdmin/nav_admin.jsx';
-import store from '../../redux/store/store.js';
-console.log('formAdminModify', store.getState());
 
 toast.configure();
 

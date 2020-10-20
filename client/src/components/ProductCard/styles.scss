@@ -83,12 +83,15 @@
 	
 	svg
 	{
-		color: $light-blue;
+		font-size: 1.5rem;
+		color: $green;
+		transition: transform 0.15s ease-in-out;
 	}
 	
 	&:hover svg
 	{
-		color: lighten( $light-blue, 10% );
+		transform: scale( 1.25 );
+		color: lighten( $green, 10% );
 	}
 	
 	&:focus
