@@ -87,6 +87,8 @@ function Product( { productId } )
 		);
 	}
 
+	const dateFormat = product.publishDate && product.publishDate.substring( 0, 10 ).split( '-' ).reverse( ).join( '/' );
+
 	return (
 		<Container>
 			<Carousel interval={5000} className="product-carousel-main">
@@ -137,7 +139,7 @@ function Product( { productId } )
 							</Col>
 							<Col sm={3}>
 								<h2>Fecha de publicación:</h2>
-								<p>{product.publishDate.slice(0, 10)}</p>
+								<p>{dateFormat}</p>
 							</Col>
 							<Col sm={3}>
 								<h2>Stock disponible:</h2>
