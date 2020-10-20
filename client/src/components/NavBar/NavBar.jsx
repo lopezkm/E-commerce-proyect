@@ -1,24 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { Nav, Navbar } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faTimes, faShoppingCart, faUser } from '@fortawesome/free-solid-svg-icons';
 import { ReactComponent as Logo } from '../../assets/logofull.svg';
 import SearchBar from '../SearchBar/SearchBar.jsx';
-import store from '../../redux/store/store.js'
-import { useState } from 'react';
-console.log(store.getState());
 
 function NavBar( props ){
 
-	const [cartCounter, setCartCounter] = useState(store.getState().cartCounter);
-	
-	useEffect(() => {
-		
-		store.subscribe(() => { 
-			setCartCounter(store.getState().cartCounter) 
-		});
-		
-    }, []);
+	const cartProductsCount = useSelector( ( state ) => ( state.cart.count > 0 ) ? `[${ state.cart.count }]` : null );
 
 	return (
 		<Navbar collapseOnSelect expand="lg" fixed="top" variant="dark" className="navbar-main">
@@ -31,20 +22,24 @@ function NavBar( props ){
 			</Navbar.Toggle>
 			<Navbar.Collapse id="navbarCollapse">
 				<Nav className="navbar-nav-left">
-					<Nav.Link href="/products">
+					<Nav.Link as={ Link } to="/products">
 						<p className="navbar-text navbar-text-outline">Tienda</p>
 					</Nav.Link>
 					<div className="navbar-separator"></div>
-					<Nav.Link href="/admin">
+					<Nav.Link as={ Link } to="/admin">
 						<p className="navbar-text navbar-text-outline">Administración</p>
 					</Nav.Link>
 				</Nav>
 				<Nav className="navbar-nav-right">
-					<Nav.Link className="navbar-nav-cart" href="/cart">
-					<FontAwesomeIcon icon={ faShoppingCart }/> <p className="navbar-text">Carrito {cartCounter}</p>
+					<Nav.Link as={ Link } to="/cart" className="navbar-nav-cart">
+						<FontAwesomeIcon icon={ faShoppingCart }/>
+						<p className="navbar-text">
+							Carrito { cartProductsCount && cartProductsCount }
+						</p>
 					</Nav.Link>
-					<Nav.Link className="navbar-nav-user" href="/userCreate">
-						<FontAwesomeIcon icon={ faUser }/> <p className="navbar-text">Creá tu cuenta</p>
+					<Nav.Link as={ Link } to="/userCreate" className="navbar-nav-user">
+						<FontAwesomeIcon icon={ faUser }/>
+						<p className="navbar-text">Creá tu cuenta</p>
 					</Nav.Link>
 					<SearchBar/>
 				</Nav>

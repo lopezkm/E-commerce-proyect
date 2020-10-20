@@ -11,16 +11,18 @@ function reducer( state = initialState, action )
 	{
 		case actionTypes.EDIT_PRODUCT_IN_CART:
 		{
-			const list = [ ...state.products.filter( ( value ) => value.productId !== action.payload.productId ) ];
+			const productsList = [ ...state.products.filter( ( value ) => value.productId !== action.payload.productId ) ];
 			
 			if ( action.payload.quantity > 0 )
 			{
-				list.push( action.payload );
+				productsList.push( action.payload );
 			}
 			
+			const productsCount = productsList.reduce( ( a, p ) => a + p.quantity, 0 );
+			
 			return {
-				products: list,
-				count: ( list.length )
+				products: productsList,
+				count: productsCount
 			};
 		}
 		case actionTypes.REMOVE_PRODUCTS_FROM_CART:
