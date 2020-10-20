@@ -57,11 +57,8 @@ Order.belongsTo( User );
 Order.belongsToMany( Product, { through: OrderProduct } );
 Product.belongsToMany( Order, { through: OrderProduct } );
 
-User.hasMany(Review)
-Review.belongsTo(User)
-
-Product.hasMany(Review)
-Review.belongsTo(Product)
+User.belongsToMany( Product, { through: Review } );
+Product.belongsToMany( User, { through: Review } );
 
 
 /* =================================================================================
