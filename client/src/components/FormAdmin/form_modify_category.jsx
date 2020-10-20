@@ -1,9 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { Form, Button, FormControl, Container, Col, Row } from 'react-bootstrap';
-import MediaForm from './MediaForm/MediaForm.jsx';
-import 'react-toastify/dist/ReactToastify.css';
+import { Form, Button, FormControl, Container} from 'react-bootstrap';
 import axios from 'axios';
-import NavAdmin from '../NavAdmin/nav_admin.jsx';
 
 const FormModifyCategory = () => {
 
@@ -44,28 +41,21 @@ const FormModifyCategory = () => {
         });
     };
 
+    let selectedCategory;
+
     const handleSelectChange = (event) => {
         let selector = document.getElementById("categoryList");
         let clickedOption = selector.options[selector.selectedIndex].id;
-        refreshData(clickedOption);
-        console.log(clickedOption);
-    }
-
-    const refreshData = (id) => {
-
-        axios.get(`http://localhost:3000/products/category/${id}`).then(response => {
-            setInputAdminForm(response.data);
-            console.log(response.data);
-            setCategorySelected(true);
-        })
-    }
+        selectedCategory = categories.filter(item => item.id === parseInt(clickedOption));
+        setInputAdminForm(selectedCategory[0]);
+        setCategorySelected(true);
+    }   
 
     const handleSubmit = (id) => {
         axios.put(`http://localhost:3000/products/category/${id}`, {
             name: inputAdminForm.name,
             description: inputAdminForm.description,
-
-        })
+        }).then(() => window.location.reaload())
     }
 
     const handleCheckChange = (event) => {

@@ -12,6 +12,7 @@ function OrderTable( ) {
 		axios.get( `http://localhost:3000/orders`)
         .then( response => {
             setOrderTable(response.data);
+            console.log(response.data);
     })}; 
 
     useEffect(() => {
