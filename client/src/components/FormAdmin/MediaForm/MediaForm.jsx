@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Form, Row, Col, Container } from 'react-bootstrap';
 import axios from 'axios';
 import bsCustomFileInput from 'bs-custom-file-input';
@@ -15,6 +15,8 @@ function MediaUploader( { productId, productMedias } )
 		type: '',
 		path: ''
 	} );
+	
+	const inputFileElement = useRef( null );
 	
 	const handleInputChange = ( e ) => {
 		const { name } = e.target;
@@ -43,7 +45,13 @@ function MediaUploader( { productId, productMedias } )
 			input.file ?
 				uploadFile( ) : addMediaToProduct( );
 			
-			setInput( { } );
+			setInput( {
+				file: '',
+				type: '',
+				path: ''
+			} );
+			
+			inputFileElement.current.labels[ 0 ].innerHTML = "Seleccionar un archivo";
 		}
 		
 		setError( error );
@@ -83,7 +91,7 @@ function MediaUploader( { productId, productMedias } )
 					<Form className="mediaForm" onSubmit={ handleFormSubmit }>
 						<Form.Row style={ { alignItems: 'center' } }>
 							<Col xs={ 12 }>
-								{ error && <span className="mediaForm__error">{ error }</span> }
+								{ error && <p className="mediaForm__error">{ error }</p> }
 							</Col>
 							
 							<Col xs={ 12 }>
@@ -120,6 +128,7 @@ function MediaUploader( { productId, productMedias } )
 								<Form.Group>
 									<Form.File 
 										custom
+										ref={ inputFileElement }
 										id="custom-file"
 										name="file"
 										label="Seleccionar un archivo"
@@ -153,14 +162,14 @@ function MediaUploader( { productId, productMedias } )
 
 function validate( input )
 {
-	if ( !input.file && !input.path )
+	if ( !input.type || ( input.type === 'none' ) )
 	{
-		return 'Debes ingresar una ruta o un achivo';
+		return '¡Debes elegir un tipo de media!';
 	}
 	
-	if ( input.type === 'none' )
+	if ( !input.file && !input.path )
 	{
-		return 'Debes elegir un tipo de media';
+		return '¡Debes ingresar una ruta o un achivo!';
 	}
 
 	return '';
