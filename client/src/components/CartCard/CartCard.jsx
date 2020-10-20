@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
+import { useEffect } from 'react';
 import { Container, Col, Row, Card, Figure } from 'react-bootstrap';
 import defaultPortrait from '../../assets/portrait.jpg';
 
 const API_URL = process.env.REACT_APP_API_URL;
 
-function CartCard( { name, description, quantity, price, media, onQuantityChange } )
+function CartCard( { id, name, description, quantity, price, media, onQuantityChange } )
 {
 	const getProductPortrait = ( ) => {
 		if ( !media || ( media.length === 0 ) ) {
@@ -24,28 +25,40 @@ function CartCard( { name, description, quantity, price, media, onQuantityChange
 		return portrait.path;
 	};
 	
+	const productQuantity = useState( quantity );
+	const firstRender = useRef( true );
+	const portrait = getProductPortrait( );
+	
+	useEffect( ( ) => {
+		if ( !firstRender.current ) {
+			onQuantityChange( id, quantity );
+		}
+		
+		firstRender.current = false;
+	}, [ onQuantityChange ] );
+	
 	return (
 		<Container className='card-cart-container'>
 			<Card>
 				<Card.Body>
 					<Row>
-						<Col xs={3}>
+						<Col xs={ 3 }>
 							<Figure>
 								<Figure.Image
-									width={150}
-									height={200}
-									src="http://localhost:3000/ab9db99a6fd0856e014085625390fdcc.jpg"
+									width={ 150 }
+									height={ 200 }
+									src={ portrait }
 								/>
 							</Figure>    
 						</Col>
-						<Col xs={8}>
-							<h1>Rocket League</h1>
-							<p>Combina el fútbol de estilo arcade con el caos a cuatro ruedas, unos controles fáciles y una competición fluida y basada en la física.</p>
+						<Col xs={ 8 }>
+							<h1>{ name }</h1>
+							<p>{ description }</p>
 							<span>Cantidad: </span> 
-							<input type="number" id="quantity" name="quantity" placeholder="1" min="1" max="5"/>                 
+							<input value={ productQuantity } type="number" id="quantity" name="quantity" min="1" max="5"/>                 
 						</Col>
-						<Col xs={1}>
-							<span>$50</span>  
+						<Col xs={ 1 }>
+							<span>${ price }</span>  
 						</Col>
 					</Row>
 				</Card.Body>
