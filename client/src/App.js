@@ -28,7 +28,7 @@ function App( )
 	
 	useEffect( ( ) => {
 		dispatch( GetCategories( ) );
-	}, [ ] );
+	}, [ dispatch ] );
 	
 	return (
 		<Container fluid className="app">
