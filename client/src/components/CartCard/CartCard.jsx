@@ -1,5 +1,4 @@
-import React, { useState, useRef } from 'react';
-import { useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Container, Col, Row, Card, Figure } from 'react-bootstrap';
 import defaultPortrait from '../../assets/portrait.jpg';
 
