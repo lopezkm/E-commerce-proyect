@@ -27,14 +27,13 @@ function Catalogue( props )
 	}, [ ] );
 	
 	useEffect( ( ) => {
-		if ( categories.length > 0 ) {
+		if ( categories && ( categories.length > 0 ) ) {
 			setLoading( ( state ) => ( { ...state, categories: false } ) );
 		}
 	}, [ categories ] );
 	
 	useEffect( ( ) => {
-		if ( firstRender.current )
-		{
+		if ( firstRender.current ) {
 			firstRender.current = false;
 			
 			return;
