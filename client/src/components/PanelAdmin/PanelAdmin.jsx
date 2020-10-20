@@ -1,8 +1,8 @@
 import React, { } from 'react';
-import { Container, Card, Row, Col, CardGroup } from 'react-bootstrap';
+import { Container, Card, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronCircleRight, faExchangeAlt, faPlus, faPlusSquare, faSortAmountUpAlt, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faExchangeAlt, faPlus, faPlusSquare, faSortAmountUpAlt, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 
 function PanelAdmin() {
@@ -17,6 +17,16 @@ function PanelAdmin() {
                                 <Card.Body>
                                     <Card.Title>Agregar categorias</Card.Title>
                                     <Card.Text><FontAwesomeIcon icon={faPlusSquare} /></Card.Text>
+                                </Card.Body>
+                            </Card>
+                        </Link>
+                    </Col>
+                    <Col xs={10} lg={2}>
+                        <Link to="/admin/categoriesD">
+                            <Card>
+                                <Card.Body>
+                                    <Card.Title>Eliminar categorias</Card.Title>
+                                    <Card.Text><FontAwesomeIcon icon={faTrash} /></Card.Text>
                                 </Card.Body>
                             </Card>
                         </Link>
