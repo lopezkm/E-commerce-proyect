@@ -39,7 +39,7 @@ function NavBar( props ){
 					</Nav.Link>
 					<Nav.Link as={ Link } to="/userCreate" className="navbar-nav-user">
 						<FontAwesomeIcon icon={ faUser }/>
-						<p className="navbar-text">Creá tu cuenta</p>
+						<p className="navbar-text">Ingresar</p>
 					</Nav.Link>
 					<SearchBar/>
 				</Nav>

@@ -75,7 +75,8 @@ function Catalogue( props )
 									<Col xs={ 12 } sm={ 6 } md={ 4 } lg={ 3 } key={ i } className='catalogue__product-col'>
 										<Link to={ `/product/${ p.id }` } className='catalogue__product-link'>
 											<ProductCard
-												key={ p.id }
+												key={ i }
+												id={ p.id }
 												name={ p.name }
 												price={ p.price }
 												stock={ p.stock }

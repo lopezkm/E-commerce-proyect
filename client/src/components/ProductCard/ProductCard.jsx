@@ -42,7 +42,7 @@ function ProductCard( { id, name, price, media, developer, stock } )
 		dispatch( AddProductToCart( userId, id ) );
 		
 		toast.info( `¡${ name } añadido al carrito!`, {
-			position: 'top-right',
+			position: 'top-center',
 			autoClose: 2000,
 			hideProgressBar: false,
 			closeOnClick: true,
