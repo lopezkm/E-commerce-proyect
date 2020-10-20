@@ -4,21 +4,22 @@ import { Table, DropdownButton, Dropdown, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 function OrderTable( ) {
-    const [orderTable, setOrderTable] = useState();
-    const [loading, setLoading] = useState();
+    const [orderTable, setOrderTable]       = useState();
+    const [users, setUsers]                 = useState();
+    const [loading, setLoading]             = useState();
     const [orderSelector, setOrderSelector] = useState();
 
 	const getOrders = ( ) => {
 		axios.get( `http://localhost:3000/orders`)
         .then( response => {
             setOrderTable(response.data);
-            console.log('ordenes', response.data)
     })}; 
 
     useEffect(() => {
         getOrders();
         setLoading(false);
-    }, [loading]);
+    }, [loading]);  
+    
 
     const handleStatusChange = (e) =>  {
        let dropdown = document.getElementById('dropdown-basic-button');
@@ -52,7 +53,7 @@ function OrderTable( ) {
                     <tr>
                     <th>Orden N°</th>
                     <th>Estado de la Orden</th>
-                    <th>Pertenece a usuario Id</th>
+                    <th>Pertenece a usuario</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -66,7 +67,7 @@ function OrderTable( ) {
                                         <td>{order.status}</td>
                                     </Link>    
                                     <Link to={ `/orders/${ order.id }` } className="orderTable-orderLink">     
-                                        <td>{order.userId}</td>
+                                        <td>{order.user.firstName + ' ' + order.user.lastName}</td>
                                     </Link>
                                 </tr>  
                         )
