@@ -4,7 +4,7 @@ import defaultPortrait from '../../assets/portrait.jpg';
 
 const API_URL = process.env.REACT_APP_API_URL;
 
-function CartCard( { id, name, description, quantity, price, media, onQuantityChange } )
+function CartCard( { id, name, quantity, price, media, onQuantityChange } )
 {
 	const getProductPortrait = ( ) => {
 		if ( !media || ( media.length === 0 ) ) {
@@ -24,21 +24,17 @@ function CartCard( { id, name, description, quantity, price, media, onQuantityCh
 		return portrait.path;
 	};
 	
-	const productQuantity = useState( quantity );
-	const firstRender = useRef( true );
 	const portrait = getProductPortrait( );
 	
-	useEffect( ( ) => {
-		if ( !firstRender.current ) {
-			onQuantityChange( id, quantity );
-		}
+	const handleInputChange = ( e ) => {
+		const { value } = e.target;
 		
-		firstRender.current = false;
-	}, [ onQuantityChange ] );
+		onQuantityChange( id, parseInt( value ) );
+	}
 	
 	return (
-		<Container className='card-cart-container'>
-			<Card>
+		<Container className='cartCard__container'>
+			<Card className="h-100">
 				<Card.Body>
 					<Row>
 						<Col xs={ 3 }>
@@ -50,14 +46,15 @@ function CartCard( { id, name, description, quantity, price, media, onQuantityCh
 								/>
 							</Figure>    
 						</Col>
-						<Col xs={ 8 }>
+						<Col xs={ 7 } className="cartCard__body">
 							<h1>{ name }</h1>
-							<p>{ description }</p>
-							<span>Cantidad: </span> 
-							<input value={ productQuantity } type="number" id="quantity" name="quantity" min="1" max="5"/>                 
+							<div>
+								<span>Cantidad: </span> 
+								<input value={ quantity } onChange={ handleInputChange } type="number" id="quantity" name="quantity" />  
+							</div>
 						</Col>
-						<Col xs={ 1 }>
-							<span>${ price }</span>  
+						<Col xs={ 2 }>
+							<span className="cartCard__price">{ price } US$</span>
 						</Col>
 					</Row>
 				</Card.Body>
