@@ -13,7 +13,7 @@ import Catalogue from './components/Catalogue/Catalogue.jsx';
 import NavBar from './components/NavBar/NavBar.jsx';
 import Order from './components/Order/Order.jsx';
 import FormAdd from './components/FormAdmin/form_add_category.jsx';
-import FormDelete from './components/FormAdmin/form_create_category.jsx';
+import FormDelete from './components/FormAdmin/form_delete_category.jsx';
 import FormModify from './components/FormAdmin/form_modify_category.jsx';
 import FormAdminCreate from './components/FormAdmin/form_admin_create.jsx';
 import FormAdminDelete from './components/FormAdmin/form_admin_delete.jsx';
