@@ -12,7 +12,6 @@ import Product from './components/Product/Product.jsx';
 import Catalogue from './components/Catalogue/Catalogue.jsx'
 import NavBar from './components/NavBar/NavBar.jsx';
 import Order from './components/Order/Order.jsx'
-import CreateUser from './components/FormCreateUser/FormCreateUser.jsx'
 import FormAdd from './components/FormAdmin/form_add_category.jsx'
 import FormAdminCreate from './components/FormAdmin/form_admin_create.jsx';
 import FormAdminDelete from './components/FormAdmin/form_admin_delete.jsx';
@@ -33,7 +32,6 @@ function App( )
 	return (
 		<Container fluid className="app">
 			<Route path='/' component={ ( ) => <NavBar/> }/>
-			<Route path='/userCreate' component={ FormCreateUser } />
 			<Route path='/order' component={ Order } />
 			<Route exact path='/Admin' component={ PanelAdmin } />
 			<Route exact path='/Admin/create' component={ FormAdminCreate } />
@@ -41,7 +39,8 @@ function App( )
 			<Route exact path='/Admin/modify' component={ FormAdminModify } />
 			<Route exact path="/Admin/categories" component={ FormAdd } />
 			<Route exact path='/order' component={ Order } />
-			<Route exact path='/createUser' component={ CreateUser } />
+			<Route exact path='/register' component={ FormCreateUser } />
+			<Route exact path='/login' component={ FormCreateUser } />
 			<Route exact path="/Admin/orders" component={ OrderTable } />
 			<Route exact path="/products" component={ Catalogue } />
 			<Route exact path ='/orders/:orderId' render={ ( { match } ) =>

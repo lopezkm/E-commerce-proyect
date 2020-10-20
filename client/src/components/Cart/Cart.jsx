@@ -5,8 +5,6 @@ import { Container, Col, Row, Card, Button } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 import Promise from 'bluebird';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBacksspanace, faCashRegister } from '@fortawesome/free-solid-svg-icons';
 import CartCard from '../CartCard/CartCard.jsx';
 import { EditProductInCart } from '../../redux/action-creators/cart';
 import loadingCircle from '../../assets/loading.svg';
@@ -27,7 +25,7 @@ function Cart( )
 	const productsPrice = useMemo( ( ) => products.reduce( ( a, p ) => a + ( p.price * p.quantity ), 0.0 ), [ products ] );
 	const shippingCost = useMemo( ( ) => ( productsPrice && SHIPPING_COST ), [ productsPrice ] );
 	const taxesCost = useMemo( ( ) => ( productsPrice * TAXES_PERCENT ), [ productsPrice ] );
-	const totalPrice = useMemo( ( ) => ( productsPrice + shippingCost + taxesCost ), [ productsPrice ] );
+	const totalPrice = useMemo( ( ) => ( productsPrice + shippingCost + taxesCost ), [ productsPrice, shippingCost, taxesCost ] );
 	
 	const dispatch = useDispatch( );
 	
@@ -46,10 +44,6 @@ function Cart( )
 			} );
 		}
 	};
-	
-	const handleRemoveProductClick = ( id, value ) => {
-		
-	}
 	
 	const handleProductQuantityChange = ( id, value ) => {
 		const product = products.find( ( p ) => p.id === id );
@@ -74,6 +68,7 @@ function Cart( )
 	
 	useEffect( ( ) => {
 		if ( !cart.products || ( cart.products.length === 0 ) ) {
+			setProducts( [ ] );
 			setLoading( false );
 			
 			return;
@@ -103,7 +98,7 @@ function Cart( )
 				progress: undefined
 			} );
 		} );
-	}, [ cart.count ] );
+	}, [ cart.count, cart.products ] );
 	
 	if ( loading ) {
 		return renderLoadingCircle( );
@@ -124,7 +119,7 @@ function Cart( )
 						<Card.Body>
 							{
 								products.map( ( p, i ) => (
-									<Row>
+									<Row key={ i }>
 										<CartCard
 											key={ i }
 											id={ p.id }

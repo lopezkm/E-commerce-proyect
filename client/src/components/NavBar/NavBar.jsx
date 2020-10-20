@@ -37,7 +37,7 @@ function NavBar( props ){
 							Carrito { cartProductsCount && cartProductsCount }
 						</p>
 					</Nav.Link>
-					<Nav.Link as={ Link } to="/userCreate" className="navbar-nav-user">
+					<Nav.Link as={ Link } to="/register" className="navbar-nav-user">
 						<FontAwesomeIcon icon={ faUser }/>
 						<p className="navbar-text">Ingresar</p>
 					</Nav.Link>

@@ -62,7 +62,7 @@ const CreateUser = () => {
                         <h1>Crea tu cuenta de</h1>
                         <Logo className='formCreateUser-logo'/>
                         </div>
-                        <Form.Group controlId="formBasicEmail">
+                        <Form.Group>
                             <FloatingLabelInput
                                 name='firstName'
                                 label='Nombre'
@@ -70,7 +70,7 @@ const CreateUser = () => {
                             />
                         </Form.Group>
 
-                        <Form.Group controlId="formBasicEmail">
+                        <Form.Group>
                             <FloatingLabelInput
                                 name='lastName'
                                 label='Apellido'
@@ -78,7 +78,7 @@ const CreateUser = () => {
                             />
                         </Form.Group>
 
-                        <Form.Group controlId="formBasicEmail">
+                        <Form.Group>
                             <FloatingLabelInput
                                 name='email'
                                 label='Email'
@@ -86,10 +86,11 @@ const CreateUser = () => {
                             />
                         </Form.Group>
 
-                        <Form.Group controlId="formBasicPassword">
+                        <Form.Group>
                             <FloatingLabelInput
                                 name='password'
                                 type='password'
+                                autoComplete='password'
                                 label='Contraseña'
                                 onChange={(event) => handleInputChange(event)}
                             />
@@ -97,7 +98,7 @@ const CreateUser = () => {
                         <Button variant="primary" type="submit">
                             Registrarse
                             </Button>
-                        <Link className='linkUserLogin'>Prefiero iniciar sesión</Link>
+                        <Link to="/login" className="linkUserLogin">Prefiero iniciar sesión</Link>
                     </Form>
                 </Col>
             </Row>

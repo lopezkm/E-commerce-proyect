@@ -11,7 +11,7 @@ const API_URL = process.env.REACT_APP_API_URL;
 
 function Product( { productId } )
 {
-	const [ product, setProduct ] = useState( null );
+	const [ product, setProduct ] = useState( { } );
 	const [ isLoading, setLoading ] = useState( true );
 	const [ recommendedProducts, setRecommendedProducts ] = useState( [ ] );
 	
@@ -70,7 +70,7 @@ function Product( { productId } )
 	}, [ getProduct ] );
 	
 	useEffect( ( ) => {
-		if ( !product ) {
+		if ( !product.id ) {
 			return;
 		}
 		
@@ -101,7 +101,7 @@ function Product( { productId } )
 			<Card bsPrefix="product-card">
 				<Card.Body bsPrefix="product-card-info">
 					<Card.Title><h1>{product.name}</h1></Card.Title>
-					<Card.Text bsPrefix="product-card-text">
+					<div className="product-card-text">
 						<Row>
 							<Col sm={10}>
 								{
@@ -173,7 +173,7 @@ function Product( { productId } )
 							)
 
 						}
-					</Card.Text>
+					</div>
 				</Card.Body>
 			</Card>
 		</Container>
