@@ -24,9 +24,7 @@ server.get( '/', ( request, response ) => {
 			[ 'createdAt', 'DESC' ]
 		],
 		include: [
-			{ model: Product }
-		],
-		include: [
+			{ model: Product },
 			{ model: User }
 		]
 	};
@@ -45,7 +43,8 @@ server.get( '/:id', ( request, response ) => {
 	
 	Order.findByPk( id, {
 		include: [
-			{ model: Product }
+			{ model: Product },
+			{ model: User }
 		]
 	} )
 	.then( ( order ) => {
@@ -70,7 +69,8 @@ server.put( '/:id', ( request, response ) => {
 	
 	Order.findByPk( id, {
 		include: [
-			{ model: Product }
+			{ model: Product },
+			{ model: User }
 		]
 	} )
 	.then( ( order ) => {

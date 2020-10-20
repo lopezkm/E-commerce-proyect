@@ -1,8 +1,8 @@
 import React, { } from 'react';
-import { Container, Card, Row, Col, CardGroup } from 'react-bootstrap';
+import { Container, Card, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronCircleRight, faExchangeAlt, faPlus, faPlusSquare, faSortAmountUpAlt, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faExchangeAlt, faPlus, faPlusSquare, faSortAmountUpAlt, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 
 function PanelAdmin() {

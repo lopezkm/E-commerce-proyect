@@ -28,7 +28,7 @@ function MediaRow( { media, onDelete } )
 						<source src={ getRealPath( path ) } type="video/mp4" />
 					</video> :
 					
-					<img src={ getRealPath( path ) } />
+					<img src={ getRealPath( path ) } alt={ type }/>
 			}
 			<div className="mediaRow__tile-overlay">
 				<span className="mediaRow__tile-text">{ type }</span>

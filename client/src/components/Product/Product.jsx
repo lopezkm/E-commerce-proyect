@@ -11,15 +11,15 @@ const API_URL = process.env.REACT_APP_API_URL;
 
 function Product( { productId } )
 {
-	const [ product, setProduct ] = useState( null );
+	const [ product, setProduct ] = useState( { } );
 	const [ isLoading, setLoading ] = useState( true );
 	const [ recommendedProducts, setRecommendedProducts ] = useState( [ ] );
 	
 	const userId = useSelector( ( state ) => state.user.id );
 	const dispatch = useDispatch( );
 
-	const getProduct = ( ) => {
-		axios.get( `${API_URL}/products/${productId}` ).then( ( response ) => {
+	const getProduct = useCallback( ( ) => {
+		axios.get( `${API_URL}/products/${ productId }` ).then( ( response ) => {
 			const productData = response.data;
 			
 			processMedia( productData );
@@ -27,9 +27,9 @@ function Product( { productId } )
 			
 			setLoading( false );
 		} );
-	}
+	}, [ productId ] );
 	
-	const getRecommendedProducts = ( ) => {
+	const getRecommendedProducts = useCallback( ( ) => {
 		if ( !product.categories || ( product.categories.length === 0 ) )
 		{
 			return;
@@ -38,11 +38,9 @@ function Product( { productId } )
 		axios.get( `${ API_URL }/products/category/${ product.categories[ 0 ].name }` ).then( ( response ) => {
 			const products = response.data.filter( p => p.id !== productId );
 			
-			console.log( response );
-			
 			setRecommendedProducts( products );
 		} );
-	}
+	}, [ productId, product.categories ] );
 	
 	const processMedia = ( { media } ) => {
 		if ( !media || ( media.length === 0 ) ) {
@@ -64,20 +62,20 @@ function Product( { productId } )
 	const handleAddToCartClick = ( e ) => {
 		e.preventDefault( );
 		
-		dispatch( AddProductToCart( userId, productId ) );
+		dispatch( AddProductToCart( userId, product.id ) );
 	}
 
 	useEffect( ( ) => {
 		getProduct( );
-	}, [ ] );
+	}, [ getProduct ] );
 	
 	useEffect( ( ) => {
-		if ( !product ) {
+		if ( !product.id ) {
 			return;
 		}
 		
 		getRecommendedProducts( );
-	} , [ product ] );
+	}, [ product, getRecommendedProducts ] );
 
 	if ( isLoading ) {
 		return (
@@ -103,7 +101,7 @@ function Product( { productId } )
 			<Card bsPrefix="product-card">
 				<Card.Body bsPrefix="product-card-info">
 					<Card.Title><h1>{product.name}</h1></Card.Title>
-					<Card.Text bsPrefix="product-card-text">
+					<div className="product-card-text">
 						<Row>
 							<Col sm={10}>
 								{
@@ -175,7 +173,7 @@ function Product( { productId } )
 							)
 
 						}
-					</Card.Text>
+					</div>
 				</Card.Body>
 			</Card>
 		</Container>
