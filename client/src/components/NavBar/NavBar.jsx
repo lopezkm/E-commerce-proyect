@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Nav, Navbar } from 'react-bootstrap';
@@ -37,9 +37,9 @@ function NavBar( props ){
 							Carrito { cartProductsCount && cartProductsCount }
 						</p>
 					</Nav.Link>
-					<Nav.Link as={ Link } to="/userCreate" className="navbar-nav-user">
+					<Nav.Link as={ Link } to="/register" className="navbar-nav-user">
 						<FontAwesomeIcon icon={ faUser }/>
-						<p className="navbar-text">Creá tu cuenta</p>
+						<p className="navbar-text">Ingresar</p>
 					</Nav.Link>
 					<SearchBar/>
 				</Nav>

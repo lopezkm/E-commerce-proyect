@@ -11,7 +11,6 @@ function MediaUploader( { productId, productMedias } )
 	const [ error, setError ] = useState( '' );
 	const [ medias, setMedias ] = useState( productMedias );
 	const [ input, setInput ] = useState( {
-		alias: '',
 		file: '',
 		type: '',
 		path: ''
@@ -154,11 +153,6 @@ function MediaUploader( { productId, productMedias } )
 
 function validate( input )
 {
-	if ( !input.alias )
-	{
-		return 'Debes ingresar un alias';
-	}
-	
 	if ( !input.file && !input.path )
 	{
 		return 'Debes ingresar una ruta o un achivo';

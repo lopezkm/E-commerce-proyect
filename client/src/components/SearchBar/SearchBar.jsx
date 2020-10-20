@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useLayoutEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { useLocation, useHistory } from 'react-router-dom';
@@ -86,7 +86,7 @@ function SearchBar( )
 		
 		setInput( query );
 		showInputElement( inputWrapper.current );
-	}, [ ] );
+	}, [ ] ); // eslint-disable-line
 	
 	return (
 		<form className="searchBar" onSubmit={ handleSubmit }>
