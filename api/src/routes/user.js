@@ -260,7 +260,7 @@ server.post( '/', ( request, response ) => {
 	User.create( {
 		...request.body
 	}, {
-		fields: [ 'firstName', 'lastName', 'email', 'password' ]
+		fields: [ 'firstName', 'lastName', 'email', 'password', 'salt' ]
 	} )
 	.then( ( user ) => {
 		response.status( 200 ).send( user );
@@ -283,7 +283,7 @@ server.put( '/:id', ( request, response ) => {
 		return user.update( {
 			...request.body
 		}, {
-			fields: [ 'firstName', 'lastName', 'email', 'password' ]
+			fields: [ 'firstName', 'lastName', 'email', 'password', 'salt' ]
 		} )
 		.then( ( user ) => {
 			response.status( 200 ).send( user );
