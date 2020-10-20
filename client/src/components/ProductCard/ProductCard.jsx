@@ -1,14 +1,19 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Card, OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { toast } from 'react-toastify';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
-import axios from 'axios';
+import { AddProductToCart } from '../../redux/action-creators/cart';
 import defaultPortrait from '../../assets/portrait.jpg';
 
 const API_URL = process.env.REACT_APP_API_URL;
 
 function ProductCard( { id, name, price, media, developer, stock } )
 {
+	const userId = useSelector( ( state ) => state.user.id );
+	const dispatch = useDispatch( );
+	
 	const getProductPortrait = ( ) => {
 		if ( !media || ( media.length === 0 ) ) {
 			return defaultPortrait;
@@ -34,9 +39,16 @@ function ProductCard( { id, name, price, media, developer, stock } )
 	const handleCartButtonClick = ( e ) => {
 		e.preventDefault( );
 		
-		axios.post( `${ API_URL }/users/1/cart`, {
-			productId: id,
-			quantity: 1
+		dispatch( AddProductToCart( userId, id ) );
+		
+		toast.info( `¡${ name } añadido al carrito!`, {
+			position: 'top-right',
+			autoClose: 2000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: false,
+			draggable: true,
+			progress: undefined
 		} );
 	};
 

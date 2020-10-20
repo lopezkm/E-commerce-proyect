@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Card, Button, Carousel, Container, Col, Row, Badge } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
@@ -38,8 +38,6 @@ function Product( { productId } )
 		axios.get( `${ API_URL }/products/category/${ product.categories[ 0 ].name }` ).then( ( response ) => {
 			const products = response.data.filter( p => p.id !== productId );
 			
-			console.log( response );
-			
 			setRecommendedProducts( products );
 		} );
 	}
@@ -77,7 +75,7 @@ function Product( { productId } )
 		}
 		
 		getRecommendedProducts( );
-	} , [ product ] );
+	}, [ product ] );
 
 	if ( isLoading ) {
 		return (

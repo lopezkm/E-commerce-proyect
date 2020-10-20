@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState,useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
-import { useSelector, useStore } from 'react-redux';
+import { useSelector } from 'react-redux';
 import qs from 'query-string';
 import axios from 'axios';
 import ProductCard from '../ProductCard/ProductCard.jsx';
