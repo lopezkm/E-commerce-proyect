@@ -13,6 +13,23 @@ server.get( '/', ( request, response ) => {
 } );
 
 /* =================================================================================
+* 		[ Obtención de una categoria ]
+* ================================================================================= */
+
+server.get( '/:id', ( request, response ) => {
+	const { id } = request.params;
+	
+	Category.findByPk( id )
+	.then( ( category ) => {
+		if ( !category ) {
+			return response.sendStatus( 404 );
+		}
+		
+		response.status( 200 ).send( category );
+	} );
+} );
+
+/* =================================================================================
 * 		[ Búsqueda de productos por nombre de categoría ]
 * ================================================================================= */
 
