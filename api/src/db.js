@@ -43,7 +43,7 @@ sequelize.models = Object.fromEntries( capsEntries );
 *		      y creamos las relaciones entre estos ]    
 * ================================================================================= */
 
-const { Product, Category, Media, ProductCategory, User, Order, OrderProduct } = sequelize.models;
+const { Product, Category, Media, ProductCategory, User, Order, OrderProduct, Review } = sequelize.models;
 
 Product.belongsToMany( Category, { through: ProductCategory } );
 Category.belongsToMany( Product, { through: ProductCategory } );
@@ -56,6 +56,10 @@ Order.belongsTo( User );
 
 Order.belongsToMany( Product, { through: OrderProduct } );
 Product.belongsToMany( Order, { through: OrderProduct } );
+
+User.belongsToMany( Product, { through: Review } );
+Product.belongsToMany( User, { through: Review } );
+
 
 /* =================================================================================
 * 		[ Creamos un callback para la inserción de datos de prueba luego 

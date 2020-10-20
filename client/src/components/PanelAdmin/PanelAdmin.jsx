@@ -22,6 +22,26 @@ function PanelAdmin() {
                         </Link>
                     </Col>
                     <Col xs={10} lg={2}>
+                        <Link to="/admin/categoriesM">
+                            <Card>
+                                <Card.Body>
+                                    <Card.Title>Modificar categorias</Card.Title>
+                                    <Card.Text><FontAwesomeIcon icon={faExchangeAlt} /></Card.Text>
+                                </Card.Body>
+                            </Card>
+                        </Link>
+                    </Col>
+                    <Col xs={10} lg={2}>
+                        <Link to="/admin/categoriesD">
+                            <Card>
+                                <Card.Body>
+                                    <Card.Title>Eliminar categorias</Card.Title>
+                                    <Card.Text><FontAwesomeIcon icon={faTrash} /></Card.Text>
+                                </Card.Body>
+                            </Card>
+                        </Link>
+                    </Col>
+                    <Col xs={10} lg={2}>
                         <Link to="/admin/create">
                             <Card>
                                 <Card.Body>
