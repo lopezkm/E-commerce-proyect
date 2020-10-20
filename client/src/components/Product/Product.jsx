@@ -35,10 +35,11 @@ function Product( { productId } )
 			return;
 		}
 		
-		axios.get( `${ API_URL }/products/category/${ product.categories[ 0 ].name }` ).then( ( response ) => {
-			const products = response.data.filter( p => p.id !== productId );
-			
-			setRecommendedProducts( products );
+		axios.get( `${ API_URL }/products/category/${ product.categories[ 0 ].id }/related` ).then( ( response ) => {
+			!response.data ?
+				setRecommendedProducts( [ ] ) :
+				setRecommendedProducts( response.data.filter( p => p.id !== productId ).sort( ( ) => Math.random( ) - 0.5 ).splice( 0, 4 ) );
+				
 		} );
 	}, [ productId, product.categories ] );
 	
