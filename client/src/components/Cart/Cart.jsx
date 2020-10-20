@@ -1,15 +1,20 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { Container, Col, Row, Card, Button } from 'react-bootstrap';
 import { toast } from 'react-toastify';
-import CartCard from '../CartCard/CartCard.jsx';
+import axios from 'axios';
+import Promise from 'bluebird';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBacksspanace, faCashRegister } from '@fortawesome/free-solid-svg-icons';
+import CartCard from '../CartCard/CartCard.jsx';
+import { EditProductInCart } from '../../redux/action-creators/cart';
 import loadingCircle from '../../assets/loading.svg';
-import { useEffect } from 'react';
+
+const API_URL = process.env.REACT_APP_API_URL;
 
 const TAXES_PERCENT = 0.75;
-const SHIPPING_COST = 100;
+const SHIPPING_COST = 3.0;
 
 function Cart( )
 {
@@ -19,7 +24,7 @@ function Cart( )
 	const cart = useSelector( ( state ) => state.cart );
 	const user = useSelector( ( state ) => state.user );
 	
-	const productsPrice = useMemo( ( ) => products.reduce( ( a, p ) => a + p.price, 0.0 ), [ products ] );
+	const productsPrice = useMemo( ( ) => products.reduce( ( a, p ) => a + ( p.price * p.quantity ), 0.0 ), [ products ] );
 	const shippingCost = useMemo( ( ) => ( productsPrice && SHIPPING_COST ), [ productsPrice ] );
 	const taxesCost = useMemo( ( ) => ( productsPrice * TAXES_PERCENT ), [ productsPrice ] );
 	const totalPrice = useMemo( ( ) => ( productsPrice + shippingCost + taxesCost ), [ productsPrice ] );
@@ -42,51 +47,127 @@ function Cart( )
 		}
 	};
 	
+	const handleRemoveProductClick = ( id, value ) => {
+		
+	}
+	
+	const handleProductQuantityChange = ( id, value ) => {
+		const product = products.find( ( p ) => p.id === id );
+		
+		if ( !product || ( product.stock < value ) ) {
+			toast.error( `¡No hay suficiente stock!`, {
+				position: 'top-center',
+				autoClose: 2000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: false,
+				draggable: true,
+				limit: 1,
+				progress: undefined
+			} );
+			
+			return;
+		}
+		
+		dispatch( EditProductInCart( user.id, product.id, value ) );
+	}
+	
+	useEffect( ( ) => {
+		if ( !cart.products || ( cart.products.length === 0 ) ) {
+			setLoading( false );
+			
+			return;
+		}
+		
+		setLoading( true );
+		
+		Promise.map( cart.products, ( { productId } ) => {
+			return axios.get( `${ API_URL }/products/${ productId }` );
+		} )
+		.then( ( responses ) => {
+			const prodArray = responses.map( ( response, pos ) => {
+				return { ...response.data, quantity: cart.products[ pos ].quantity };
+			} );
+			
+			setProducts( prodArray );
+			setLoading( false );
+		} )
+		.catch( ( ) => {
+			toast.error( `¡Ha ocurrido un error al recuperar la información de los productos!`, {
+				position: 'top-right',
+				autoClose: 3000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: false,
+				draggable: true,
+				progress: undefined
+			} );
+		} );
+	}, [ cart.count ] );
+	
+	if ( loading ) {
+		return renderLoadingCircle( );
+	}
+	
+	if ( !products || !products.length ) {
+		return renderEmptyCart( );
+	}
+	
 	return (
-		<Container className='cart-container'>
+		<Container className='cart__container'>
 			<Row>
 				<Col xs={8}>
-					<Card className="cart-list">
-						<Card.Header><h1>Carrito de compra</h1></Card.Header>
+					<Card className="cart__list">
+						<Card.Header>
+							<h1>Carrito de compra</h1>
+						</Card.Header>
 						<Card.Body>
-							<Row>
-								<CartCard>
-								</CartCard>
-							</Row>
-							<Row>
-								<CartCard>
-								</CartCard>
-							</Row>
+							{
+								products.map( ( p, i ) => (
+									<Row>
+										<CartCard
+											key={ i }
+											id={ p.id }
+											name={ p.name }
+											description={ p.description }
+											price={ p.price }
+											quantity={ p.quantity }
+											media={ p.media }
+											onQuantityChange={ handleProductQuantityChange }
+										/>
+									</Row>
+								) )
+							}
 						</Card.Body>
 					</Card>
 				</Col>
 				<Col xs={4}>
-					<Card className="cart-summary">
+					<Card className="cart__summary">
 						<Card.Header>
 							<span>Resumen del pedido</span>
 						</Card.Header>
 						<Card.Body>
 							<Row>
-								<Col><span>Articulos (2):</span></Col>
-								<Col><span>${ productsPrice }</span></Col>
+								<Col><span>Articulos ({ cart.count }):</span></Col>
+								<Col><span>{ productsPrice.toFixed( 2 ) } US$</span></Col>
 							</Row>
 							<Row>
 								<Col><span>Envio:</span></Col>
-								<Col><span>${ shippingCost }</span></Col>
+								<Col><span>{ shippingCost.toFixed( 2 ) } US$</span></Col>
 							</Row>
 							<Row>
 								<Col><span>Impuestos:</span></Col>
-								<Col><span>${ taxesCost }</span></Col>
+								<Col><span>{ taxesCost.toFixed( 2 ) } US$</span></Col>
 							</Row>
 						</Card.Body>
 						<Card.Footer>
-							<Row className="cart-total">
+							<Row className="cart__total">
 								<Col><span>Total:</span></Col>
-								<Col><span>{ totalPrice }</span></Col>
+								<Col><span>{ totalPrice.toFixed( 2 ) } US$</span></Col>
 							</Row>
-							<Row className="cart-button">
+							<Row className="cart__button">
 								<Col xs={12}>
-									<Button className='cart-button-buy w-100' onClick={ handleBuyCartClick }>Proceder a pagar</Button>
+									<Button className='cart__button-buy w-100' onClick={ handleBuyCartClick }>Proceder a pagar</Button>
 								</Col>
 							</Row>    
 						</Card.Footer>
@@ -94,6 +175,25 @@ function Cart( )
 				</Col>
 			</Row>
 		</Container>
+	);
+}
+
+function renderLoadingCircle( )
+{
+	return (
+		<div>
+			<img src={ loadingCircle } className='customLoadingSpinner' alt='Loading Circle'/>
+		</div>
+	);
+}
+
+function renderEmptyCart( )
+{
+	return (
+		<div className="cart__emptyCart">
+			<h2>No tienes artículos en el carrito.</h2>
+			<p>¿Tienes una cuenta? <Link to='/createUser'>Inicia sesión</Link> para ver tus artículos.</p>
+		</div>
 	);
 }
 
