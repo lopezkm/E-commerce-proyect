@@ -76,7 +76,7 @@ Product.belongsToMany( User, { through: Review } );
 		const models = Object.keys( mockData );
 		
 		Promise.each( models, ( model ) => {
-			return sequelize.models[ model ].bulkCreate( mockData[ model ] );
+			return sequelize.models[ model ].bulkCreate( mockData[ model ],{individualHooks: true} );
 		} );
 	} );
 } )( );
