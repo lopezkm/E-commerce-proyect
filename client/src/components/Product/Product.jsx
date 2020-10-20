@@ -62,7 +62,7 @@ function Product( { productId } )
 	const handleAddToCartClick = ( e ) => {
 		e.preventDefault( );
 		
-		dispatch( AddProductToCart( userId, productId ) );
+		dispatch( AddProductToCart( userId, product.id ) );
 	}
 
 	useEffect( ( ) => {
