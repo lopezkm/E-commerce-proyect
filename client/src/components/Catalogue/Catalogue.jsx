@@ -124,7 +124,7 @@ function renderLoadingCircle( )
 {
 	return (
 		<div>
-			<img src={ loadingCircle } className='catalogue__loading' alt='Loading Circle'/>
+			<img src={ loadingCircle } className='customLoadingSpinner' alt='Loading Circle'/>
 		</div>
 	);
 }
