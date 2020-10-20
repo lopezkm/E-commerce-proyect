@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { Card, Button, Carousel, Container, Col, Row, Badge } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
@@ -18,8 +18,8 @@ function Product( { productId } )
 	const userId = useSelector( ( state ) => state.user.id );
 	const dispatch = useDispatch( );
 
-	const getProduct = ( ) => {
-		axios.get( `${API_URL}/products/${productId}` ).then( ( response ) => {
+	const getProduct = useCallback( ( ) => {
+		axios.get( `${API_URL}/products/${ productId }` ).then( ( response ) => {
 			const productData = response.data;
 			
 			processMedia( productData );
@@ -27,9 +27,9 @@ function Product( { productId } )
 			
 			setLoading( false );
 		} );
-	}
+	}, [ productId ] );
 	
-	const getRecommendedProducts = ( ) => {
+	const getRecommendedProducts = useCallback( ( ) => {
 		if ( !product.categories || ( product.categories.length === 0 ) )
 		{
 			return;
@@ -40,7 +40,7 @@ function Product( { productId } )
 			
 			setRecommendedProducts( products );
 		} );
-	}
+	}, [ productId, product.categories ] );
 	
 	const processMedia = ( { media } ) => {
 		if ( !media || ( media.length === 0 ) ) {
@@ -67,7 +67,7 @@ function Product( { productId } )
 
 	useEffect( ( ) => {
 		getProduct( );
-	}, [ ] );
+	}, [ getProduct ] );
 	
 	useEffect( ( ) => {
 		if ( !product ) {
@@ -75,7 +75,7 @@ function Product( { productId } )
 		}
 		
 		getRecommendedProducts( );
-	}, [ product ] );
+	}, [ product, getRecommendedProducts ] );
 
 	if ( isLoading ) {
 		return (
