@@ -56,21 +56,3 @@
 {
 	outline: none;
 }
-
-.catalogue__loading
-{
-	display: block;
-	
-	margin: 0 auto;
-	margin-top: 25vh;
-	
-	text-align: center;
-	
-	filter: invert( 100% );
-	
-	&-products
-	{
-		margin: 0 auto;
-		margin-top: 0;
-	}
-}

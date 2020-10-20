@@ -33,17 +33,17 @@ function Product({ productId }) {
 		if (!product.categories || (product.categories.length === 0)) {
 			return;
 		}
-
-		axios.get(`${API_URL}/products/category/${product.categories[0].name}`).then((response) => {
-			const products = response.data.filter(p => p.id !== productId);
-
-			setRecommendedProducts(products);
-		});
-	}, [productId, product.categories]);
-
-	const processMedia = ({ media }) => {
-		if (!media || (media.length === 0)) {
-			media = [{
+    
+    axios.get( `${ API_URL }/products/category/${ product.categories[ 0 ].id }/related` ).then( ( response ) => {
+			!response.data ?
+				setRecommendedProducts( [ ] ) :
+				setRecommendedProducts( response.data.filter( p => p.id !== productId ).sort( ( ) => Math.random( ) - 0.5 ).splice( 0, 4 ) );
+		} );
+	}, [ productId, product.categories ] );
+	
+	const processMedia = ( { media } ) => {
+		if ( !media || ( media.length === 0 ) ) {
+			media = [ {
 				type: 'image-big',
 				path: defaultBanner
 			}];
