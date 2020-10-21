@@ -2,7 +2,7 @@ const server = require( 'express' ).Router( );
 const Promise = require( 'bluebird' );
 const sequelize = require( 'sequelize' );
 const { Op, QueryTypes } = sequelize;
-const { Product, Category, Media, conn } = require( '../db.js' );
+const { Product, Category, Media, conn, Review, User } = require( '../db.js' );
 
 /* =================================================================================
 * 		[ Métodos y constantes de ayuda para las rutas ]
@@ -212,27 +212,6 @@ server.delete( '/:idProduct/category/:idCategory', ( request, response, next ) =
 	} );
 } );
 
-/* =================================================================================
-* 		[ Creación de la relación entre un producto y varias categoría ]
-* ================================================================================= */
-
-server.post( '/:idProduct/category/', ( request, response, next ) => {
-	const { idProduct } = request.params;
-	const { categories } = request.body;
-	let promises=[];
-	
-	Product.findByPk( idProduct )
-	.then(product => product)
-	.then(prod => categories.map(cat => promises.push(prod.addCategory(cat))) )
-	.then(x => {
-
-		Promise.all( promises )
-		.then(data => {
-			response.send(data)
-		})
-		.catch(e => response.send (e))
-	})
-} );
 
 /* =================================================================================
 * 		[ Creación de un producto ]
@@ -306,6 +285,82 @@ server.delete( '/:id', ( request, response ) => {
 		
 		product.destroy( ).then( ( ) => {
 			res.sendStatus( 204 );
+		} );
+	} );
+} );
+
+/* =================================================================================
+* 		[ Creación de una review ]
+* ================================================================================= */
+
+server.post( '/:id/review/:userId', ( request, response ) => {
+
+	const { id, userId } = request.params;
+	const { qualification, description } = request.body;
+		
+	Review.create( {
+		
+		productId: id,
+		userId, 
+		qualification,
+		description
+
+	})
+	.then( ( review ) => {
+		response.status( 201 ).send( review );
+	} );
+} );
+
+/* =================================================================================
+* 		[ Modificación de una review ]
+* ================================================================================= */
+
+server.put( '/:id/review/:userId', ( request, response ) => {
+
+	const { id, userId } = request.params;
+	
+	Review.findOne( {
+		where: {
+			productId: id,
+			userId
+		}
+	})
+	.then( ( review ) => {
+		if ( !review ) {
+			return response.status( 404 ).send();
+		} 
+	
+		return review.update ({
+			...request.body
+		}, {
+			fields: [ 'qualification', 'description' ]
+		})
+		.then( review => {response.status(200).send(review)} )
+		.catch( error => {response.status(500).send(error.message)} );
+	});
+});
+
+/* =================================================================================
+* 		[ Eliminación de una review ]
+* ================================================================================= */
+
+server.delete( '/:id/review/:userId', ( request, response ) => {
+	
+	const { id, userId } = request.params;
+	
+	Review.findOne( {
+		where: {
+			productId: id,
+			userId
+		}
+	})
+	.then( review => {
+		if ( !review ) {
+			return response.status( 404 ).send();
+		}
+
+		review.destroy( ).then( ( ) => {
+			response.sendStatus( 204 );
 		} );
 	} );
 } );

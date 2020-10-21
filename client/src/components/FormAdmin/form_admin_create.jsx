@@ -27,7 +27,7 @@ const FormAdminCreate = () => {
 
     }, [loading]);
 
-    const [inputAdminForm, setInputAdminForm] = React.useState({
+    const [inputAdminForm, setInputAdminForm] = useState({
         name: "",
         description: "",
         price: "",
@@ -49,6 +49,7 @@ const FormAdminCreate = () => {
         let selectedId = selected.id
         let statusCheck = selected.checked;
 
+        console.log(selected);
         if (statusCheck && !selectedCategories.includes(selectedId)) {
             selectedCategories.push(selectedId);
         }
@@ -79,9 +80,8 @@ const FormAdminCreate = () => {
             .then(response => response.data.id)// Respuesta del servidor con producto creado
             .then(idP => axios.post(`http://localhost:3000/products/${idP}/category/`, { categories: selectedCategories }))
             .then(success => {
-                console.log(success);
 
-                toast.info('Categoría agregada con exito', {
+                toast.info('Juego creado con exito', {
                     position: "top-right",
                     autoClose: 3000,
                     hideProgressBar: true,
@@ -217,7 +217,7 @@ const FormAdminCreate = () => {
                                         <Form.Switch bsPrefix='custom-control-label'
                                             key={i}
                                             type="switch"
-                                            id={i + 1}
+                                            id={cat.id}
                                             label={cat.name}
                                             onChange={(e) => handleCategoryChange(e)}
                                         />
