@@ -366,6 +366,28 @@ server.delete( '/:id/review/:userId', ( request, response ) => {
 } );
 
 /* =================================================================================
+* 		[ Obtención de todas las review de un producto ]
+* ================================================================================= */
+
+server.get( '/:id/review', ( request, response ) => {
+	
+	const { id } = request.params;
+	
+	Review.findAll({
+		
+		where: {
+			productId:id
+		}
+	})
+	.then( ( reviews ) => {
+		if ( !reviews ) {
+			return response.sendStatus( 404 );
+		}
+			return response.status( 200 ).send( reviews );
+	} );
+});
+
+/* =================================================================================
 * 		[ Exportamos nuestras rutas ]
 * ================================================================================= */
 
