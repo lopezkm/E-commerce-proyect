@@ -1,5 +1,5 @@
 
-.containerUserCreate {
+.containerUserLogin {
     background-color: $grey;
     margin: 2rem auto 2rem auto;
     max-width: 42rem;
@@ -12,7 +12,7 @@
 }
 
 
-.formUserCreate {
+.formUserLogin {
     font-family: $barlow !important;
     background-color: transparent;
         label {
@@ -83,15 +83,15 @@
     }
 }
 
-.formCreateUser-logo {
+.formUserLogin-logo {
     width: 10rem;
     height: 6rem;
 }
 
-.formCreateUser-title {
+.formUserLogin-title {
     padding-top: 2rem;
     display: flex;
     justify-content: flex-start;
-    padding-left: 1.8rem;
+    padding-left: .2rem;
 }
 

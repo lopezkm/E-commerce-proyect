@@ -23,6 +23,7 @@ import OrderTable from './components/FormAdmin/OrderTable/orderTable.jsx';
 import Cart from './components/Cart/Cart.jsx';
 import PanelAdmin from './components/PanelAdmin/PanelAdmin.jsx';
 import FormAddReview from './components/FormReview/FormAddReview.jsx';
+import FormUserLogin from './components/FormUserLogin/FormUserLogin.jsx';
 
 function App( )
 {
@@ -43,7 +44,7 @@ function App( )
 			<Route exact path="/Admin/categoriesD" component={ FormDelete } />
 			<Route exact path="/Admin/categoriesM" component={ FormModify } />
 			<Route exact path='/register' component={ FormCreateUser } />
-			<Route exact path='/login' component={ FormCreateUser } />
+			<Route exact path='/login' component={ FormUserLogin } />
 			<Route exact path="/Admin/orders" component={ OrderTable } />
 			<Route exact path="/products" component={ Catalogue } />
 			<Route exact path ='/product/:productId/review' render={ ( { match } ) =>
