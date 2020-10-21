@@ -212,27 +212,6 @@ server.delete( '/:idProduct/category/:idCategory', ( request, response, next ) =
 	} );
 } );
 
-/* =================================================================================
-* 		[ Creación de la relación entre un producto y varias categoría ]
-* ================================================================================= */
-
-server.post( '/:idProduct/category/', ( request, response, next ) => {
-	const { idProduct } = request.params;
-	const { categories } = request.body;
-	let promises=[];
-	
-	Product.findByPk( idProduct )
-	.then(product => product)
-	.then(prod => categories.map(cat => promises.push(prod.addCategory(cat))) )
-	.then(x => {
-
-		Promise.all( promises )
-		.then(data => {
-			response.send(data)
-		})
-		.catch(e => response.send (e))
-	})
-} );
 
 /* =================================================================================
 * 		[ Creación de un producto ]

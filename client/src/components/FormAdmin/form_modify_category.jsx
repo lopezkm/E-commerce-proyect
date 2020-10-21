@@ -1,11 +1,12 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Form, Button, FormControl, Container} from 'react-bootstrap';
 import axios from 'axios';
+import store from '../../redux/store/store.js';
+import { useSelector, useDispatch } from 'react-redux';
+import { GetCategories } from '../../redux/action-creators/category.js';
 
 const FormModifyCategory = () => {
 
-    const [categories, setCategories] = useState([]);
-    const [loading, setLoading] = useState(true);
     const [categorySelected, setCategorySelected] = useState(false);
     const [inputSearch, setInputSearch] = useState({ searchInput: "" });
     const searchInput = useRef(null);
@@ -14,18 +15,11 @@ const FormModifyCategory = () => {
         description: ""
     });
 
-    const getCategories = () => {
-        axios.get(`http://localhost:3000/products/category/`)
-            .then(response => {
-                setCategories(response.data);
-            });
-    }
+    const categories = useSelector( ( state ) => state.category.categories );
 
     useEffect(() => {
-        getCategories();
-        setLoading(false);
         searchInput.current.focus()
-    }, [loading]);
+    }, []);
 
     const handleInputChangeForm = (event) => {
         setInputAdminForm({
