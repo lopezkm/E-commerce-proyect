@@ -341,6 +341,31 @@ server.put( '/:id/review/:userId', ( request, response ) => {
 });
 
 /* =================================================================================
+* 		[ Eliminación de una review ]
+* ================================================================================= */
+
+server.delete( '/:id/review/:userId', ( request, response ) => {
+	
+	const { id, userId } = request.params;
+	
+	Review.findOne( {
+		where: {
+			productId: id,
+			userId
+		}
+	})
+	.then( review => {
+		if ( !review ) {
+			return response.status( 404 ).send();
+		}
+
+		review.destroy( ).then( ( ) => {
+			response.sendStatus( 204 );
+		} );
+	} );
+} );
+
+/* =================================================================================
 * 		[ Exportamos nuestras rutas ]
 * ================================================================================= */
 
