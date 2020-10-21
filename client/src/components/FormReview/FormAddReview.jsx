@@ -17,7 +17,6 @@ const FormAddReview = ({ productId }) => {
     const [product, setProduct] = React.useState({})
     const [formInput, setformInput] = React.useState({
         userId: userId,
-        productId: productId,
         qualification: "",
         description: "",
     });
