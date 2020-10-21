@@ -312,6 +312,35 @@ server.post( '/:id/review/:userId', ( request, response ) => {
 } );
 
 /* =================================================================================
+* 		[ Modificación de una review ]
+* ================================================================================= */
+
+server.put( '/:id/review/:userId', ( request, response ) => {
+
+	const { id, userId } = request.params;
+	
+	Review.findOne( {
+		where: {
+			productId: id,
+			userId
+		}
+	})
+	.then( ( review ) => {
+		if ( !review ) {
+			return response.status( 404 ).send();
+		} 
+	
+		return review.update ({
+			...request.body
+		}, {
+			fields: [ 'qualification', 'description' ]
+		})
+		.then( review => {response.status(200).send(review)} )
+		.catch( error => {response.status(500).send(error.message)} );
+	});
+});
+
+/* =================================================================================
 * 		[ Exportamos nuestras rutas ]
 * ================================================================================= */
 
