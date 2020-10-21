@@ -16,7 +16,6 @@ const FormAddReview = ({ productId }) => {
 
     const [product, setProduct] = React.useState({})
     const [formInput, setformInput] = React.useState({
-        userId: userId,
         qualification: "",
         description: "",
     });
@@ -38,7 +37,7 @@ const FormAddReview = ({ productId }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.post(`${API_URL}/products/${productId}/review`, formInput)
+        axios.post(`${API_URL}/products/${productId}/review/${userId}`, formInput)
             .then(response => console.log(response))
             .catch(err => console.log(err))
     };
@@ -75,6 +74,7 @@ const FormAddReview = ({ productId }) => {
 
 
     //Validacion en caso que el usuario no este logueado (UserId = 0);
+    //El post no va a funcionar cuando el UserId sea = 0;
 
     /* if(!userId) {
         return (
