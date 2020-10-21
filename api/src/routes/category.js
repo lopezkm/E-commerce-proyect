@@ -3,12 +3,24 @@ const { Category, Media } = require( '../db.js' );
 const { Op } = require( 'sequelize' );
 
 /* =================================================================================
-* 		[ Obtención de todas las categorías ]
+* 		[ Búsqueda de productos por categoría ]
 * ================================================================================= */
 
-server.get( '/', ( request, response ) => {
-	Category.findAll( ).then( ( categories ) => {
-		response.status( 200 ).send( categories );
+server.get( '/:id/related', ( request, response ) => {
+	const { id } = request.params;
+	
+	Category.findByPk( id ).then( ( category ) => {
+		if ( !category ) {
+			return response.sendStatus( 404 );
+		}
+		
+		category.getProducts( {
+			include: [
+				{ model: Media }
+			]
+		} ).then( ( products ) => {
+			response.status( 200 ).send( products );
+		} );
 	} );
 } );
 
@@ -30,29 +42,12 @@ server.get( '/:id', ( request, response ) => {
 } );
 
 /* =================================================================================
-* 		[ Búsqueda de productos por nombre de categoría ]
+* 		[ Obtención de todas las categorías ]
 * ================================================================================= */
 
-server.get( '/:name', ( request, response ) => {
-	const { name } = request.params;
-	
-	Category.findOne( {
-		where: {
-			name: { [ Op.iLike ]: name }
-		}
-	} )
-	.then( ( category ) => {
-		if ( !category ) {
-			return response.sendStatus( 404 );
-		}
-		
-		category.getProducts( {
-			include: [
-				{ model: Media }
-			]
-		} ).then( ( products ) => {
-			response.status( 200 ).send( products );
-		} );
+server.get( '/', ( request, response ) => {
+	Category.findAll( ).then( ( categories ) => {
+		response.status( 200 ).send( categories );
 	} );
 } );
 

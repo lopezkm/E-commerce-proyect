@@ -6,39 +6,38 @@ import axios from 'axios';
 import { AddProductToCart } from '../../redux/action-creators/cart';
 import ProductCard from '../ProductCard/ProductCard.jsx';
 import defaultBanner from '../../assets/banner.jpg';
+import Review from '../Review/Review.jsx';
 
 const API_URL = process.env.REACT_APP_API_URL;
 
-function Product( { productId } )
-{
-	const [ product, setProduct ] = useState( { } );
-	const [ isLoading, setLoading ] = useState( true );
-	const [ recommendedProducts, setRecommendedProducts ] = useState( [ ] );
-	
-	const userId = useSelector( ( state ) => state.user.id );
-	const dispatch = useDispatch( );
+function Product({ productId }) {
+	const [product, setProduct] = useState({});
+	const [isLoading, setLoading] = useState(true);
+	const [recommendedProducts, setRecommendedProducts] = useState([]);
 
-	const getProduct = useCallback( ( ) => {
-		axios.get( `${API_URL}/products/${ productId }` ).then( ( response ) => {
+	const userId = useSelector((state) => state.user.id);
+	const dispatch = useDispatch();
+
+	const getProduct = useCallback(() => {
+		axios.get(`${API_URL}/products/${productId}`).then((response) => {
 			const productData = response.data;
-			
-			processMedia( productData );
-			setProduct( productData );
-			
-			setLoading( false );
-		} );
-	}, [ productId ] );
-	
-	const getRecommendedProducts = useCallback( ( ) => {
-		if ( !product.categories || ( product.categories.length === 0 ) )
-		{
+
+			processMedia(productData);
+			setProduct(productData);
+
+			setLoading(false);
+		});
+	}, [productId]);
+
+	const getRecommendedProducts = useCallback(() => {
+		if (!product.categories || (product.categories.length === 0)) {
 			return;
 		}
-		
-		axios.get( `${ API_URL }/products/category/${ product.categories[ 0 ].name }` ).then( ( response ) => {
-			const products = response.data.filter( p => p.id !== productId );
-			
-			setRecommendedProducts( products );
+    
+    axios.get( `${ API_URL }/products/category/${ product.categories[ 0 ].id }/related` ).then( ( response ) => {
+			!response.data ?
+				setRecommendedProducts( [ ] ) :
+				setRecommendedProducts( response.data.filter( p => p.id !== productId ).sort( ( ) => Math.random( ) - 0.5 ).splice( 0, 4 ) );
 		} );
 	}, [ productId, product.categories ] );
 	
@@ -47,37 +46,37 @@ function Product( { productId } )
 			media = [ {
 				type: 'image-big',
 				path: defaultBanner
-			} ];
-			
+			}];
+
 			return;
 		}
-		
-		media.forEach( ( m ) => {
-			if ( !m.path.includes( '/' ) ) {
-				m.path = `${ API_URL }/${ m.path }`;
+
+		media.forEach((m) => {
+			if (!m.path.includes('/')) {
+				m.path = `${API_URL}/${m.path}`;
 			}
-		} );
-	}
-	
-	const handleAddToCartClick = ( e ) => {
-		e.preventDefault( );
-		
-		dispatch( AddProductToCart( userId, product.id ) );
+		});
 	}
 
-	useEffect( ( ) => {
-		getProduct( );
-	}, [ getProduct ] );
-	
-	useEffect( ( ) => {
-		if ( !product.id ) {
+	const handleAddToCartClick = (e) => {
+		e.preventDefault();
+
+		dispatch(AddProductToCart(userId, product.id));
+	}
+
+	useEffect(() => {
+		getProduct();
+	}, [getProduct]);
+
+	useEffect(() => {
+		if (!product.id) {
 			return;
 		}
-		
-		getRecommendedProducts( );
-	}, [ product, getRecommendedProducts ] );
 
-	if ( isLoading ) {
+		getRecommendedProducts();
+	}, [product, getRecommendedProducts]);
+
+	if (isLoading) {
 		return (
 			<div className="App">
 				Loading...
@@ -85,7 +84,7 @@ function Product( { productId } )
 		);
 	}
 
-	const dateFormat = product.publishDate && product.publishDate.substring( 0, 10 ).split( '-' ).reverse( ).join( '/' );
+	const dateFormat = product.publishDate && product.publishDate.substring(0, 10).split('-').reverse().join('/');
 
 	return (
 		<Container>
@@ -119,7 +118,7 @@ function Product( { productId } )
 								{product.stock > 0 ?
 									<div className="action-buttons">
 										<Button className="d-flex ml-auto mr-3">Comprar por ${product.price}</Button>
-										<Button variant="success" onClick={ handleAddToCartClick }>Agregar al carrito</Button>
+										<Button variant="success" onClick={handleAddToCartClick}>Agregar al carrito</Button>
 									</div>
 									:
 									<Button className="d-flex ml-auto btn btn-secondary" disabled>Comprar por ${product.price}</Button>
@@ -150,9 +149,9 @@ function Product( { productId } )
 
 								<Row >
 									{
-										recommendedProducts.map( ( p, i ) => (
+										recommendedProducts.map((p, i) => (
 											<Col xs={12} sm={6} md={4} lg={3} key={i} className='catalogue__product-col'>
-												<Link to={`/product/${p.id}`}  className='catalogue__product-link'>
+												<Link to={`/product/${p.id}`} className='catalogue__product-link'>
 
 													<ProductCard
 														key={p.id}
@@ -173,6 +172,25 @@ function Product( { productId } )
 							)
 
 						}
+
+						{/* Base de las reseñas */}
+
+						{/* <Row>
+							<h2>Opiniones sobre {product.name}:</h2>
+							{
+								x.map((review, i) => (
+									<Col lg={8}>
+										<Review
+											user={ review.firstName + ' ' + review.lastName}
+											date={ review.date }
+											stars={ review.quantity }
+											title={ review.title }
+											description={ review.description }
+										/>
+									</Col>
+								))
+							}
+						</Row> */}
 					</div>
 				</Card.Body>
 			</Card>
