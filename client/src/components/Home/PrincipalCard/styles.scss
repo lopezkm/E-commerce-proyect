@@ -3,10 +3,71 @@
     background-color: $grey;
     border-radius: 10px;
     border: $light-grey 2px solid;
+    color: $white;
+    font-family: $barlow;
+    overflow: hidden;
+
+    /* &:hover {
+        transform: scale( 1.03 );
+        transition: 350ms;
+    } */
+
+    .col {
+        padding: 0;
+    }
+
+    &:after {
+            content: "";
+            width: 48.5rem;
+            height: 22.7rem;
+            background-color: $grey;
+            transform: skewX(-18deg);
+            transition: 1.5s;
+            position: absolute; 
+            left: 34rem;          
+    }
+
+    &:hover {
+        &:after {
+            position: absolute; 
+            left: -5rem;
+            transition: 1.5s;          
+    }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    .card-title {
+        font-size: 3rem;
+    }
+
+    .card-text {
+        max-width: 25rem;
+    }
 
     .hola {
 
-        &:after {
+        &:before {
             content: "";
             position: absolute;
             bottom: 0;
@@ -14,7 +75,7 @@
             border-style: solid;
             border-width: 0 0 17.1rem 100px;
             border-color: transparent transparent $grey transparent;
-        } 
+        }
 
         .card-img {
             height: 17rem;
