@@ -2,7 +2,7 @@ const server = require( 'express' ).Router( );
 const Promise = require( 'bluebird' );
 const sequelize = require( 'sequelize' );
 const { Op, QueryTypes } = sequelize;
-const { Product, Category, Media, conn } = require( '../db.js' );
+const { Product, Category, Media, conn, Review, User } = require( '../db.js' );
 
 /* =================================================================================
 * 		[ Métodos y constantes de ayuda para las rutas ]
@@ -286,6 +286,28 @@ server.delete( '/:id', ( request, response ) => {
 		product.destroy( ).then( ( ) => {
 			res.sendStatus( 204 );
 		} );
+	} );
+} );
+
+/* =================================================================================
+* 		[ Creación de una review ]
+* ================================================================================= */
+
+server.post( '/:id/review/:userId', ( request, response ) => {
+
+	const { id, userId } = request.params;
+	const { qualification, description } = request.body;
+		
+	Review.create( {
+		
+		productId: id,
+		userId, 
+		qualification,
+		description
+
+	})
+	.then( ( review ) => {
+		response.status( 201 ).send( review );
 	} );
 } );
 
