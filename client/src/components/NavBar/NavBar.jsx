@@ -7,10 +7,44 @@ import { faBars, faTimes, faShoppingCart, faUser } from '@fortawesome/free-solid
 import { ReactComponent as Logo } from '../../assets/logofull.svg';
 import SearchBar from '../SearchBar/SearchBar.jsx';
 
-function NavBar( props ){
+import axios from 'axios';
 
+function NavBar( )
+{
 	const cartProductsCount = useSelector( ( state ) => ( state.cart.count > 0 ) ? `[${ state.cart.count }]` : null );
-
+	
+	const handleLoginClick = ( e ) => {
+		e.preventDefault( );
+		
+		axios.post( `${ process.env.REACT_APP_API_URL }/auth/login`, {
+			email: 'huguito@masgrande.com',
+			password: '111111111',
+			withCredentials: true,
+			credentials: 'include'
+		} )
+		.then( ( response ) => {
+			console.log( 'Response', response );
+		} )
+		.catch( ( error ) => {
+			console.log( 'Error', error );
+		} );
+	}
+	
+	const handleTestClick = ( e ) => {
+		e.preventDefault( );
+		
+		axios.get( `${ process.env.REACT_APP_API_URL }/auth/test`, {
+			withCredentials: true,
+			credentials: 'include'
+		} )
+		.then( ( response ) => {
+			console.log( 'Response', response );
+		} )
+		.catch( ( error ) => {
+			console.log( 'Error', error );
+		} );
+	}
+	
 	return (
 		<Navbar collapseOnSelect expand="lg" fixed="top" variant="dark" className="navbar-main">
 			<Navbar.Brand>
@@ -28,6 +62,14 @@ function NavBar( props ){
 					<div className="navbar-separator"></div>
 					<Nav.Link as={ Link } to="/admin">
 						<p className="navbar-text navbar-text-outline">Administración</p>
+					</Nav.Link>
+					<div className="navbar-separator"></div>
+					<Nav.Link onClick={ handleLoginClick }>
+						<p className="navbar-text navbar-text-outline">Login</p>
+					</Nav.Link>
+					<div className="navbar-separator"></div>
+					<Nav.Link onClick={ handleTestClick }>
+						<p className="navbar-text navbar-text-outline">Test</p>
 					</Nav.Link>
 				</Nav>
 				<Nav className="navbar-nav-right">

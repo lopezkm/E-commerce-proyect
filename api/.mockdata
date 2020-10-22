@@ -1929,7 +1929,7 @@ const User = [
 		firstName: 'Pascale',
 		lastName: 'Shrubsall',
 		email: 'pshrubsall4@npr.org',
-		password: 'Haitian Creole',
+		password: 'HaitianCreole',
 		isAdmin: false
 	},
 	{
@@ -1957,7 +1957,7 @@ const User = [
 		firstName: 'Bernita',
 		lastName: 'Piscot',
 		email: 'bpiscot8@baidu.com',
-		password: 'Tok Pisin',
+		password: 'TokPisin',
 		isAdmin: false
 	},
 	{
