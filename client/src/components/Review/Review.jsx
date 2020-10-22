@@ -4,13 +4,13 @@ import ReactStars from "react-rating-stars-component";
 
 const Review = ({ title, description, date, user, stars }) => {
 
-    /* const dateFormat = date.substring(0, 10).split('-').reverse().join('/'); */
+    const dateFormat = date.substring(0, 10).split('-').reverse().join('/');
 
     return (
         <Card style = {{ color: "black"}}>
             <Card.Header>
                 <Card.Title>{ user }</Card.Title>
-                <Card.Text>{ date }</Card.Text>
+                <Card.Text>{ dateFormat }</Card.Text>
                 <ReactStars
                     value = { stars }
                     count={5}
