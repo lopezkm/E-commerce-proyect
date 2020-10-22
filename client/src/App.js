@@ -20,7 +20,7 @@ import FormCreateUser from './components/FormCreateUser/FormCreateUser.jsx';
 import OrderTable from './components/FormAdmin/OrderTable/orderTable.jsx'
 import Cart from './components/Cart/Cart.jsx';
 import PanelAdmin from './components/PanelAdmin/PanelAdmin.jsx';
-import PrincipalCard from './components/Home/PrincipalCard/PrincipalCard.jsx';
+import Home from './components/Home/Home.jsx'
 
 function App( )
 {
@@ -33,6 +33,7 @@ function App( )
 	return (
 		<Container fluid className="app">
 			<Route path='/' component={ ( ) => <NavBar/> }/>
+			<Route exact path='/' component={ Home }/>
 			<Route path='/userCreate' component={ FormCreateUser } />
 			<Route path='/order' component={ Order } />
 			<Route exact path='/Admin' component={ PanelAdmin } />
@@ -44,7 +45,6 @@ function App( )
 			<Route exact path='/createUser' component={ CreateUser } />
 			<Route exact path="/Admin/orders" component={ OrderTable } />
 			<Route exact path="/products" component={ Catalogue } />
-			<Route exact path="/home" component={ PrincipalCard } />
 			<Route exact path ='/orders/:orderId' render={ ( { match } ) =>
 				<Order orderId={ match.params.orderId }/>
 			} />

@@ -7,14 +7,22 @@
     font-family: $barlow;
     overflow: hidden;
 
-    /* &:hover {
-        transform: scale( 1.03 );
-        transition: 350ms;
-    } */
-
     .col {
         padding: 0;
     }
+
+    .card-title {
+        font-size: 3.5rem;
+    }
+
+    .card-text {
+        max-width: 27rem;
+        font-size: 1.1rem;
+        text-align: justify;
+    }
+
+
+    //Div dinamico
 
     &:after {
             content: "";
@@ -27,59 +35,67 @@
             left: 34rem;          
     }
 
+    //Texto lateral derecho (estado inicial)
+
+    .principalCard-text-one {
+
+        position: absolute;
+        left: 3rem;
+        transition: 1.5s;
+        z-index: 1;
+
+    }
+
+    //Texto lateral izquierdo (estado inicial)
+
+    .principalCard-text-two {
+
+        position: absolute;
+        left: 3rem;
+        transition: 1.5s;
+        color: transparent;
+        z-index: 1;
+
+        .card-title {
+            font-size: 3rem;
+        }
+
+    }
+
+    //Cambio de poscision
+
     &:hover {
+        
+        //Texto lateral derecho (estado activo)
+
+        .principalCard-text-one {
+
+            position: absolute;
+            left: 3rem;
+            color: transparent;
+            transition: 1.5s;
+    
+        }
+
+        //Texto lateral izquierdo (estado activo)
+
+        .principalCard-text-two {
+
+            position: absolute;
+            left: 3rem;
+            transition: 1.5s;
+            color: $white;
+            z-index: 1;
+    
+        }
+
+        //Mover el div al otro extremo
+
         &:after {
             position: absolute; 
             left: -5rem;
-            transition: 1.5s;          
-    }
-    }
+            transition: 1.5s;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    .card-title {
-        font-size: 3rem;
-    }
-
-    .card-text {
-        max-width: 25rem;
-    }
-
-    .hola {
-
-        &:before {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            right: 0.9rem;
-            border-style: solid;
-            border-width: 0 0 17.1rem 100px;
-            border-color: transparent transparent $grey transparent;
-        }
-
-        .card-img {
-            height: 17rem;
-            border-radius: 10px 0 0 10px;
-        }
+        }          
     }
 }

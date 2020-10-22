@@ -1,0 +1,106 @@
+.secondCard-container {
+
+    overflow: hidden;
+    color: $white;
+    border: 2px solid $light-grey;
+    border-radius: 10px;
+    font-family: $barlow;
+    margin: 2rem 0 0 0;
+    transition: .3s;
+    max-height: 20rem;
+   
+    .card-header {
+        padding: 0;
+        z-index: 0;
+
+    }
+
+    .card-title {
+        font-size: 2rem;
+    }
+
+    .card-text {
+        font-size: 1.2rem;
+        text-align: justify;
+    }
+
+    .seconCard-price {
+        color: $blue;
+        font-size: 2rem;
+        font-style: italic;
+    }
+
+    .seconCard-developer {
+        font-size: 2rem;
+    }
+
+    //Desaparicion
+
+    .card-body {
+        color: transparent;
+        background-color: transparent;
+        transition: .3s;
+        position: absolute;
+        z-index: 1;
+    }
+
+    .seconCard-price {
+        color: transparent;
+        font-size: 2rem;
+        font-style: italic;
+    }
+
+    //Decenso lateral
+
+    /* .card-body {
+        width: 37.3rem;
+        transition: .7s;
+        height: 21.3rem;
+        position: absolute;
+        right: -44rem;
+        top: -18rem;
+        z-index: 1;
+        background-color: rgba(0, 0, 0, 0.85);
+        border-radius: 10px;
+    } */
+
+    &:hover {
+
+        transform: scale( 1.01 );
+        transition: .3s;
+
+        .card-header {
+            margin-bottom: 0;
+        }
+
+        //Decenso lateral
+
+        /* .card-body {
+            transition: 5s;
+            position: absolute;
+            right: 0;
+            top: 0;
+            z-index: 1;
+        } */
+
+        //Desaparicion
+
+        .card-body {
+            width: 37.3rem;
+            transition: .3s;
+            height: 21.3rem;
+            position: absolute;
+            z-index: 1;
+            color: $white;
+            background-color: rgba(0, 0, 0, 0.85);
+            border-radius: 10px;
+        }
+
+        .seconCard-price {
+            color: $blue;
+            font-size: 2rem;
+            font-style: italic;
+        }
+
+    }
+}

@@ -1,0 +1,35 @@
+.home-container {
+
+    margin-bottom: 3rem;
+    
+    .home-secondCard-container {
+        margin: 0 2rem 0 2rem;
+    }
+
+    .home-button-container {
+
+        display: flex;
+        align-items: center;
+        flex-direction: column-reverse;
+        margin-top: 2rem;
+
+        .svg-inline--fa.fa-w-20 {
+            font-size: 6rem;
+            color: $grey;
+        }
+
+        .btn-primary {
+            transition: .5s;
+            font-size: 2rem;
+            font-family: $barlow;
+            background-color: $grey;
+            border-radius: 10px;
+            border: 2px solid $blue;
+            
+            &:hover {
+                transform: scale( 1.02 );
+                transition: .5s;
+            }
+        }
+    }
+}
