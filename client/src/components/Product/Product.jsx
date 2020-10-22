@@ -154,7 +154,8 @@ function Product({ productId }) {
 												<Link to={`/product/${p.id}`} className='catalogue__product-link'>
 
 													<ProductCard
-														key={p.id}
+														key={ i }
+														id={ p.id }
 														name={p.name}
 														price={p.price}
 														developer={p.developer}
