@@ -1865,8 +1865,8 @@ const User = [
 	{
 		firstName: 'Manu',
 		lastName: 'Lozano',
-		email: 'crack@solo.com',
-		password: '444444444',
+		email: 'manu96_lp@hotmail.com',
+		password: '1111',
 		isAdmin: true
 	},
 	{
