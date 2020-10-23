@@ -56,12 +56,15 @@
     padding-bottom: 2rem;
 
     .mod-qty-btn{
-        background: transparent;
-        color: $white;
-        border-radius: 50%;
         display: inline-block;
+        background: transparent;
+        border-radius: 1em;
+        color: $white;
         font-weight: bold;
+        font-size: 90%;
         line-height: 1em;
+        text-align: center;
         width: 1.7em; 
+        margin: 0 .7em 0 .7em;
     }
 }
