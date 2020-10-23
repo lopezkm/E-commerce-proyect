@@ -54,4 +54,14 @@
     flex-flow: column wrap;
     justify-content: space-between;
     padding-bottom: 2rem;
+
+    .mod-qty-btn{
+        background: transparent;
+        color: $white;
+        border-radius: 50%;
+        display: inline-block;
+        font-weight: bold;
+        line-height: 1em;
+        width: 1.7em; 
+    }
 }

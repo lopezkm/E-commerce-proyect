@@ -50,9 +50,9 @@ function CartCard( { id, name, quantity, price, media, onQuantityChange } )
 							<h1>{ name }</h1>
 							<div>
 								<span>Cantidad: </span> 
-							 	<Button name="-" size="sm" onClick={ handleInputChange } variant="secondary">-</Button>
+							 	<Button className="mod-qty-btn" name="-" size="sm" onClick={ handleInputChange }>-</Button>
 								<span> { quantity } </span>
-								<Button name="+" size="sm" onClick={ handleInputChange } variant="secondary">+</Button>
+								<Button className="mod-qty-btn" name="+" size="sm" onClick={ handleInputChange }>+</Button>
 							</div>
 						</Col>
 						<Col xs={ 2 }>
