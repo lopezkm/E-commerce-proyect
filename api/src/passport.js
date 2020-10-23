@@ -74,6 +74,21 @@ const isAuthenticated = ( request, response, next ) => {
 };
 
 /* =================================================================================
+* 		[ Custom middleware para verificar que un usuario tenga suficientes
+*			  permisos (por defecto verifica si es un administrador) ]
+* ================================================================================= */
+
+const hasAccessLevel = ( accessLevel = ACCESS_LEVELS.ACCESS_LEVEL_ADMIN ) => {
+	return function ( request, response, next ) {
+		if ( !request.isAuthenticated( ) || ( !request.user ) || ( request.user.accessLevel < accessLevel ) ) {
+			return response.sendStatus( 401 );
+		}
+		
+		return next( );
+	}
+};
+
+/* =================================================================================
 * 		[ Exportamos los middlerwares ]
 * ================================================================================= */
 
