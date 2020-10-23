@@ -1,50 +1,69 @@
 import React, { useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { Container, Form, Button, Col, Row } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import FloatingLabelInput from 'react-floating-label-input';
-import { ReactComponent as Logo } from '../../assets/logofull.svg';
 import axios from 'axios';
+import { LoadUser, RemoveUser } from '../../redux/action-creators/user';
 
-const FormUserLogin = () => {
+import { ReactComponent as Logo } from '../../assets/logofull.svg';
 
-	const [input, setInput] = useState({
-		email: "",
-		password: ""
-	});
+const API_URL = process.env.REACT_APP_API_URL;
 
-	const handleInputChange = (event) => {
-		setInput({
-			...input,
-			[event.target.name]: event.target.value
-		});
-	};
-
-	const handleSumbit = (event) => {
-		event.preventDefault();
-		axios.post( `http://localhost:3000/auth/login`, input, {
-			withCredentials: true
-		} )
-		.then( ( response ) => {
-			console.log( response );
-		} )
-		.catch( ( error ) => {
-			console.log( error );
-		} );
-	};
+function FormUserLogin( )
+{
+	const history = useHistory( );
+	const dispatch = useDispatch( );
+	const isLogged = useSelector( ( state ) => state.user.isLogged );
 	
-	const handleTestClick = ( e ) => {
-		e.preventDefault( );
+	const [ input, setInput ] = useState( {
+		email: '',
+		password: ''
+	} );
+
+	const handleInputChange = ( event ) => {
+		setInput( {
+			...input,
+			[ event.target.name ]: event.target.value
+		} );
+	};
+
+	const handleSumbit = ( event ) => {
+		event.preventDefault( );
 		
-		axios.get( `http://localhost:3000/auth/test`, {
+		axios.post( `${ API_URL }/auth/login`, input, {
 			withCredentials: true
 		} )
 		.then( ( response ) => {
-			console.log( response );
+			dispatch( LoadUser( response.data ) );
+			
+			setTimeout( ( ) => {
+				history.push( '/products' );
+			}, 3000 );
+			
+			toast.success( `¡Ingresaste correctamente en tu cuenta!`, {
+				position: 'top-right',
+				autoClose: 3000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: false,
+				draggable: true,
+				progress: undefined
+			} );
 		} )
 		.catch( ( error ) => {
-			console.log( error );
+			toast.error( `¡Email o clave incorrectos!`, {
+				position: 'top-right',
+				autoClose: 3000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: false,
+				draggable: true,
+				progress: undefined
+			} );
 		} );
-	}
+	};
 
 	return (
 		<Container className='containerUserLogin'>
@@ -76,9 +95,6 @@ const FormUserLogin = () => {
 						<Button variant="primary" type="submit">
 							Ingresar
 						</Button>
-						<Button variant="primary" type="submit" onClick={ handleTestClick }>
-							Test
-						</Button>
 						<Link to="/register" className="linkUserLogin">Crear cuenta</Link>
 					</Form>
 				</Col>
@@ -88,3 +104,44 @@ const FormUserLogin = () => {
 };
 
 export default FormUserLogin;
+
+/*
+
+//LOGOUT
+
+doLogOut( )
+{
+	dispatch( ResetUser( ) );
+
+	axios.get( `${ API_URL }/auth/logout`, {
+		withCredentials: true
+	} )
+	.then( ( response ) => {
+		setTimeout( ( ) => {
+			history.push( '/products' );
+		}, 3000 );
+		
+		toast.success( `¡Cerraste sesión correctamente!`, {
+			position: 'top-right',
+			autoClose: 3000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: false,
+			draggable: true,
+			progress: undefined
+		} );
+	} )
+	.catch( ( error ) => {
+		toast.error( `Ocurrió un error inesperado`, {
+			position: 'top-right',
+			autoClose: 3000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: false,
+			draggable: true,
+			progress: undefined
+		} );
+	} );
+}
+
+*/
