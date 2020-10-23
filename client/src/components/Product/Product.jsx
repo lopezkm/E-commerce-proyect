@@ -18,7 +18,6 @@ function Product({ productId }) {
 
 	const userId = useSelector((state) => state.user.id);
 	const dispatch = useDispatch();
-	let productosRecomendados = [];
 
 	const getProduct = useCallback(() => {
 		axios.get(`${API_URL}/products/${productId}`).then((response) => {
@@ -37,14 +36,9 @@ function Product({ productId }) {
 		}
     
     	axios.get( `${ API_URL }/products/category/${ product.categories[ 0 ].id }/related` ).then( ( response ) => {
-			productosRecomendados = response.data
 			!response.data ?
 				setRecommendedProducts( [ ] ) :
-				setRecommendedProducts( productosRecomendados.filter( p => p.id !== parseInt(productId) ).sort( ( ) => Math.random( ) - 0.5 ).splice( 0, 4 ))
-
-
-				console.log("FILTER: ", response.data.filter( p => p.id !== productId  ) )
-				console.log("SIN FILTER: ", response.data )
+				setRecommendedProducts( response.data.filter( p => p.id !== parseInt(productId) ).sort( ( ) => Math.random( ) - 0.5 ).splice( 0, 4 ))
 				
 
 
