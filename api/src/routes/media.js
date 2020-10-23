@@ -1,11 +1,12 @@
 const server = require( 'express' ).Router( );
 const { Media } = require( '../db.js' );
+const { hasAccessLevel } = require( '../passport.js' );
 
 /* =================================================================================
 * 		[ Creación de un modelo Media ]
 * ================================================================================= */
 
-server.post( '/', ( request, response ) => {
+server.post( '/', hasAccessLevel( ), ( request, response ) => {
 	Media.create( {
 		...request.body
 	}, {
@@ -20,7 +21,7 @@ server.post( '/', ( request, response ) => {
 * 		[ Eliminación de un modelo Media ]
 * ================================================================================= */
 
-server.delete( '/:id', ( request, response ) => {
+server.delete( '/:id', hasAccessLevel( ), ( request, response ) => {
 	let { id } = request.params;
 	
 	Media.findByPk( id ).then( media => {

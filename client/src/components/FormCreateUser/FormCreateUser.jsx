@@ -1,109 +1,122 @@
 import React, { useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { Container, Form, Button, Col, Row } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import FloatingLabelInput from 'react-floating-label-input';
-import { ReactComponent as Logo } from '../../assets/logofull.svg';
-import axios from 'axios';
 import { toast } from 'react-toastify';
+import FloatingLabelInput from 'react-floating-label-input';
+import axios from 'axios';
+import { ReactComponent as Logo } from '../../assets/logofull.svg';
+import { LoadUser } from '../../redux/action-creators/user';
 
 
 
-const CreateUser = () => {
+function CreateUser( )
+{
+	const history = useHistory( );
+	const dispatch = useDispatch( );
+	
+	const [input, setInput] = useState({
+		firstName: "",
+		lastName: "",
+		email: "",
+		password: ""
+	});
 
-    const [input, setInput] = useState({
-        firstName: "",
-        lastName: "",
-        email: "",
-        password: ""
-    });
+	const handleInputChange = (event) => {
+		setInput({
+			...input,
+			[event.target.name]: event.target.value
+		});
+	};
 
-    const handleInputChange = (event) => {
-        setInput({
-            ...input,
-            [event.target.name]: event.target.value
-        });
-    };
+	const handleSumbit = ( event ) => {
+		event.preventDefault( );
+		
+		axios.post( `http://localhost:3000/auth/register`, input, {
+			withCredentials: true
+		} )
+		.then( ( response ) => {
+			dispatch( LoadUser( response.data ) );
+			
+			setTimeout( ( ) => {
+				history.push( '/products' );
+			}, 3000 );
+			
+			toast.info( 'Usuario creado con exito', {
+				position: "top-right",
+				autoClose: 3000,
+				hideProgressBar: true,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined
+			} );
+		} )
+		.catch( ( error ) => {
+			const message = ( error.request.status === 409 ) ? '¡Ya existe una cuenta con ese email!' : 'Ocurrió un error inesperado';
+			
+			toast.error( message, {
+				position: "top-right",
+				autoClose: 3000,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined
+			} );
+		} );
+	};
 
-    const handleSumbit = (event) => {
-        event.preventDefault();
-        axios.post(`http://localhost:3000/users`, input)
-        .then(response => {
-            console.log(response);
-            toast.info('Usuario creado con exito :)', {
-                position: "top-right",
-                autoClose: 3000,
-                hideProgressBar: true,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-            });
-        })
-        .catch(err => {
-            console.log(err)
-            toast.error('ERROR: Email ya existente :(', {
-                position: "top-right",
-                autoClose: 3000,
-                hideProgressBar: true,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-            });
-        })
-    };
+	return (
+		<Container className='containerUserCreate'>
+			<Row>
+				<Col>
+					<Form className='formUserCreate' onSubmit={(event) => handleSumbit (event)}>
+						<div className='formCreateUser-title'>
+						<h1>Crea tu cuenta de</h1>
+						<Logo className='formCreateUser-logo'/>
+						</div>
+						<Form.Group>
+							<FloatingLabelInput
+								name='firstName'
+								label='Nombre'
+								onChange={(event) => handleInputChange(event)}
+							/>
+						</Form.Group>
 
-    return (
-        <Container className='containerUserCreate'>
-            <Row>
-                <Col>
-                    <Form className='formUserCreate' onSubmit={(event) => handleSumbit (event)}>
-                        <div className='formCreateUser-title'>
-                        <h1>Crea tu cuenta de</h1>
-                        <Logo className='formCreateUser-logo'/>
-                        </div>
-                        <Form.Group>
-                            <FloatingLabelInput
-                                name='firstName'
-                                label='Nombre'
-                                onChange={(event) => handleInputChange(event)}
-                            />
-                        </Form.Group>
+						<Form.Group>
+							<FloatingLabelInput
+								name='lastName'
+								label='Apellido'
+								onChange={(event) => handleInputChange(event)}
+							/>
+						</Form.Group>
 
-                        <Form.Group>
-                            <FloatingLabelInput
-                                name='lastName'
-                                label='Apellido'
-                                onChange={(event) => handleInputChange(event)}
-                            />
-                        </Form.Group>
+						<Form.Group>
+							<FloatingLabelInput
+								name='email'
+								label='Email'
+								onChange={(event) => handleInputChange(event)}
+							/>
+						</Form.Group>
 
-                        <Form.Group>
-                            <FloatingLabelInput
-                                name='email'
-                                label='Email'
-                                onChange={(event) => handleInputChange(event)}
-                            />
-                        </Form.Group>
-
-                        <Form.Group>
-                            <FloatingLabelInput
-                                name='password'
-                                type='password'
-                                autoComplete='password'
-                                label='Contraseña'
-                                onChange={(event) => handleInputChange(event)}
-                            />
-                        </Form.Group>
-                        <Button variant="primary" type="submit">
-                            Registrarse
-                            </Button>
-                        <Link to="/login" className="linkUserLogin">Prefiero iniciar sesión</Link>
-                    </Form>
-                </Col>
-            </Row>
-        </Container>
-    );
+						<Form.Group>
+							<FloatingLabelInput
+								name='password'
+								type='password'
+								autoComplete='password'
+								label='Contraseña'
+								onChange={(event) => handleInputChange(event)}
+							/>
+						</Form.Group>
+						<Button variant="primary" type="submit">
+							Registrarse
+							</Button>
+						<Link to="/login" className="linkUserLogin">Prefiero iniciar sesión</Link>
+					</Form>
+				</Col>
+			</Row>
+		</Container>
+	);
 };
 
 export default CreateUser;

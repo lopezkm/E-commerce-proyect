@@ -2,10 +2,11 @@ import * as actionTypes from '../action-types';
 
 const initialState = {
 	id: 0,
-	firstName: 'Invitado',
+	firstName: '',
 	lastName: '',
 	email: '',
-	isAdmin: false
+	accessLevel: 0,
+	isLogged: false
 };
 
 function reducer( state = initialState, action )
@@ -15,12 +16,8 @@ function reducer( state = initialState, action )
 		case actionTypes.LOAD_USER:
 		{
 			return {
-				...state,
-				id: action.payload.id,
-				firstName: action.payload.firstName,
-				lastName: action.payload.lastName,
-				email: action.payload.email,
-				isAdmin: action.payload.isAdmin
+				...action.payload,
+				isLogged: true
 			};
 		}
 		case actionTypes.REMOVE_USER:

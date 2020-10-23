@@ -43,6 +43,7 @@ export function AddProductToCart( userId, productId )
 			} );
 		} )
 		.catch( ( error ) => {
+			console.log( error );
 			dispatch( {
 				type: actionTypes.EDIT_PRODUCT_IN_CART,
 				payload: null,
