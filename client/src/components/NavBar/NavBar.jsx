@@ -9,7 +9,7 @@ import SearchBar from '../SearchBar/SearchBar.jsx';
 
 function NavBar( props ){
 
-	const cartProductsCount = useSelector( ( state ) => ( state.cart.count > 0 ) ? `[${ state.cart.count }]` : null );
+	const cartProductsCount = useSelector( ( state ) => ( state.cart.count > 0 ) ? `${ state.cart.count }` : null );
 	const userFirstName = useSelector( ( state ) => ( state.user.id > 0 ) ? state.user.firstName : null );
 
 	return (
@@ -35,7 +35,7 @@ function NavBar( props ){
 					<Nav.Link as={ Link } to="/cart" className="navbar-nav-cart">
 						<FontAwesomeIcon icon={ faShoppingCart }/>
 						<p className="navbar-text">
-							Carrito { cartProductsCount && cartProductsCount }
+							Carrito <span className="cart-count">{ cartProductsCount && cartProductsCount }</span>
 						</p>
 					</Nav.Link>
 					<Nav.Link as={ Link } to="/register" className="navbar-nav-user">
