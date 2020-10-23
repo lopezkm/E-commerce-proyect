@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Nav, Navbar } from 'react-bootstrap';
+import { Nav, Navbar, Card, DropdownButton, ButtonGroup,Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faTimes, faShoppingCart, faUser } from '@fortawesome/free-solid-svg-icons';
 import { ReactComponent as Logo } from '../../assets/logofull.svg';
@@ -38,12 +38,50 @@ function NavBar( props ){
 							Carrito { cartProductsCount && cartProductsCount }
 						</p>
 					</Nav.Link>
-					<Nav.Link as={ Link } to="/register" className="navbar-nav-user">
+					{userFirstName ? 
+					<DropdownButton
+						as={ButtonGroup}
+						menuAlign={{ lg: 'right' }}
+						icon = {<FontAwesomeIcon icon={ faUser }/>}
+						title={
+							<p className="navbar-text">
+								{ userFirstName }
+							</p>}
+						id="dropdown-menu-align-responsive-1"
+						>
+						<Card>
+							<Card.Header bsPrefix="card-header">
+								<Card.Title bsPrefix="card-title">Hola  {/* {user.firstName} */} Matias</Card.Title>
+							</Card.Header>
+							
+							<Card.Body bsPrefix="card-body">
+								<Link to="/login/logued/shops">
+									<Card.Text bsPrefix="card-text">Mis Compras</Card.Text>
+								</Link>
+								<div>
+									<hr/>
+								</div>
+								<Link>
+									<Card.Text>Mis Datos</Card.Text>
+								</Link>
+								<div>
+									<hr/>
+								</div>
+								<Link>
+									<Card.Text>Seguridad</Card.Text>
+								</Link>
+							</Card.Body>
+							<Card.Footer>
+								<Button variant="ligth" className="card-button">Salir</Button>
+							</Card.Footer>
+						</Card>
+					</DropdownButton> :
+					<Nav.Link as={ Link } className="navbar-nav-user" to="/register" >
 						<FontAwesomeIcon icon={ faUser }/>
 						<p className="navbar-text">
 							{ userFirstName || 'Ingresar' }
 						</p>
-					</Nav.Link>
+					</Nav.Link>}
 					<SearchBar/>
 				</Nav>
 			</Navbar.Collapse>
