@@ -3,7 +3,7 @@ const Promise = require( 'bluebird' );
 const sequelize = require( 'sequelize' );
 const { Op, QueryTypes } = sequelize;
 
-const { Product, Category, Media, Review, conn } = require( '../db.js' );
+const { Product, Category, Media, Review, conn, User } = require( '../db.js' );
 const { isAuthenticated, hasAccessLevel } = require( '../passport.js' );
 
 /* =================================================================================
