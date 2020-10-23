@@ -34,35 +34,28 @@ const Home = () => {
                     <SecondCard
                         img={'https://steamcdn-a.akamaihd.net/steam/apps/287700/capsule_616x353.jpg?t=1591740509'}
                         name={"Metal Gear Solid V: The Phantom Pain"}
-                        description={'Metal Gear Solid V: The Phantom Pain es un título de aventura y acción basado en la infiltración y ambientado en un mundo abierto desarrollado con el motor Fox Engine por Hideo Kojima y su estudio, Kojima Productions.'}
-                        developer={'Kojima Productions'}
+                        offer={"30$"}
                         price={"50$"}
 
                     />
                 </Col>
                 <Col xs={6}>
                     <SecondCard img={'https://cdn.cloudflare.steamstatic.com/steam/apps/1030840/capsule_616x353.jpg?t=1600210047'}
-                        name={"Metal Gear Solid V: The Phantom Pain"}
-                        description={'Metal Gear Solid V: The Phantom Pain es un título de aventura y acción basado en la infiltración y ambientado en un mundo abierto desarrollado con el motor Fox Engine por Hideo Kojima y su estudio, Kojima Productions.'}
-                        developer={'Kojima Productions'}
+                        name={"Mafia: Definitive Edition"}
                         price={"50$"}
                     />
                 </Col>
                 <Col xs={6}>
                     <Link to='/product/6'>
                         <SecondCard img={'https://steamcdn-a.akamaihd.net/steam/apps/1222730/capsule_616x353.jpg?t=1593539249'}
-                            name={"Metal Gear Solid V: The Phantom Pain"}
-                            description={'Metal Gear Solid V: The Phantom Pain es un título de aventura y acción basado en la infiltración y ambientado en un mundo abierto desarrollado con el motor Fox Engine por Hideo Kojima y su estudio, Kojima Productions.'}
-                            developer={'Kojima Productions'}
+                            name={"Star Wars: Squadrons"}
                             price={"50$"}
                         />
                     </Link>
                 </Col>
                 <Col xs={6}>
                     <SecondCard img={'https://steamcdn-a.akamaihd.net/steam/apps/289650/capsule_616x353.jpg?t=1602601508'}
-                        name={"Metal Gear Solid V: The Phantom Pain"}
-                        description={'Metal Gear Solid V: The Phantom Pain es un título de aventura y acción basado en la infiltración y ambientado en un mundo abierto desarrollado con el motor Fox Engine por Hideo Kojima y su estudio, Kojima Productions.'}
-                        developer={'Kojima Productions'}
+                        name={"Assassin's Creed: Unity"}
                         price={"50$"}
                     />
                 </Col>

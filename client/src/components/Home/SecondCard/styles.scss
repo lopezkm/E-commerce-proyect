@@ -16,27 +16,76 @@
     }
 
     .card-title {
-        font-size: 2rem;
-    }
-
-    .card-text {
         font-size: 1.2rem;
-        text-align: justify;
+        margin-bottom: 0;
+        width: 20rem;
     }
 
-    .seconCard-price {
-        color: $blue;
-        font-size: 2rem;
+    .seconCard-price-original {
+        position: absolute;
+        top: -1.1rem;
+        right: 8.8rem;
+        font-size: 2.1rem;
         font-style: italic;
+        text-decoration: line-through;
+
+        &:after {
+            content: "";
+            height: 3.06rem;
+            background-color: $grey;
+            border-radius: 5px 0 0 5px;
+            position: absolute;
+            top: 0.168rem;
+            width: 5.2rem;
+            right: -0.9rem;
+            transform: skewX(-18deg);
+            z-index: -1;
+        }
+    }
+
+    .seconCard-price-offer {
+        position: absolute;
+        top: -1.1rem;
+        right: 4rem;
+        font-size: 2.1rem;
+        font-style: italic;
+
+        &:after {
+            content: "";
+            width: 3rem;
+            height: 3rem;
+            background-color: $blue;
+            border-radius: 5px;
+            position: absolute;
+            top: 0.2rem;
+            width: 10rem;
+            right: -1rem;
+            transform: skewX(-18deg);
+            z-index: -1;
+
+        }
     }
 
     .seconCard-developer {
         font-size: 2rem;
     }
 
-    //Desaparicion
+    //Barra baja
 
     .card-body {
+        /* display: flex;
+        justify-content: space-between; */
+        position: absolute;
+        z-index: 1;
+        width: 100%;
+        height: 20%;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.85);
+    }
+
+    //Desaparicion
+
+    /* .card-body {
         color: transparent;
         background-color: transparent;
         transition: .3s;
@@ -48,7 +97,7 @@
         color: transparent;
         font-size: 2rem;
         font-style: italic;
-    }
+    } */
 
     //Decenso lateral
 
@@ -76,7 +125,7 @@
         //Decenso lateral
 
         /* .card-body {
-            transition: 5s;
+            transition: 1s;
             position: absolute;
             right: 0;
             top: 0;
@@ -85,7 +134,7 @@
 
         //Desaparicion
 
-        .card-body {
+       /*  .card-body {
             width: 37.3rem;
             transition: .3s;
             height: 21.3rem;
@@ -100,7 +149,7 @@
             color: $blue;
             font-size: 2rem;
             font-style: italic;
-        }
+        } */
 
     }
 }
