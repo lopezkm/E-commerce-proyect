@@ -69,6 +69,34 @@ server.get( '/logout', isAuthenticated, ( request, response, next ) => {
 } );
 
 /* =================================================================================
+* 		[ Promueve un usuario (incrementa su nivel de acceso) ]
+* ================================================================================= */
+
+server.get( '/promote/:id', hasAccessLevel( ACCESS_LEVEL_SUPER ), ( request, response, next ) => {
+	const { id } = request.params;
+	
+	if ( isNaN( id ) ) {
+		return response.sendStatus( 400 );
+	}
+	
+	User.findByPk( id ).then( ( user ) => {
+		if ( !user ) {
+			return response.sendStatus( 404 );
+		}
+		
+		if ( user.accessLevel !== ACCESS_LEVEL_USER ) {
+			return response.sendStatus( 409 );
+		}
+		
+		user.increment( 'accessLevel', { by: 1 } )
+			.then( ( response ) => response.sendStatus( 204 ) );
+	} )
+	.catch( ( error ) => {
+		response.sendStatus( 500 );
+	} );
+} );
+
+/* =================================================================================
 * 		[ Se exportan las rutas ]
 * ================================================================================= */
 
