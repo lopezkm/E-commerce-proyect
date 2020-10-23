@@ -3,6 +3,16 @@ const LocalStrategy = require( 'passport-local' ).Strategy;
 const { User } 		= require( './db.js' );
 
 /* =================================================================================
+* 		[ Definimos los distintos niveles de acceso ]
+* ================================================================================= */
+
+const ACCESS_LEVELS = {
+	ACCESS_LEVEL_USER: 	0, 	// Usuario común autorizado
+	ACCESS_LEVEL_ADMIN: 1, 	// Acceso a panel de administrador
+	ACCESS_LEVEL_SUPER: 2 	// Puede administrar niveles de acceso
+};
+
+/* =================================================================================
 * 		[ Usamos Local Strategy para poder identificar usuarios en
 *		   base a sus credenciales guardadas en la base de datos ]
 * ================================================================================= */
@@ -49,3 +59,11 @@ passport.deserializeUser( function( id, done ) {
 			return done( error );
 		} );
 } );
+
+/* =================================================================================
+* 		[ Exportamos los middlerwares ]
+* ================================================================================= */
+
+module.exports = {
+	ACCESS_LEVELS
+};
