@@ -26,19 +26,19 @@ const UserShops = ({ userId }) => {
                        {/*  {
                             products.map( ( p, i ) => (
                                 
-                        }  ) )}*/}
-                        <Row /* key={ i } */>
-                            <Card>
-                                {//key={ i } 
-                                 //id={ p.id } 
-                                {name: "Spartacus"},//{ p.name }
-                                {description: "Supremo, imposible dejar de jugar"}, //{ p.description }
-                                {price: "$45"}, //{ p.price }
-                                {quantity:"2"}, //{ p.quantity }
-                                {media:"FOTO AQUI"} //{ p.media }
-                                /* onQuantityChange={ handleProductQuantityChange } */}
-                            </Card>
-                        </Row>
+                        }  ) )}
+                        <Row key={ i }>
+                            <CartCard
+                                key={ i }
+                                id={ p.id }
+                                name={ p.name }
+                                description={ p.description }
+                                price={ p.price }
+                                quantity={ p.quantity }
+                                media={ p.media }
+                                onQuantityChange={ handleProductQuantityChange }
+                            />
+                        </Row>*/}
                     </Card.Body>
                 </Card>
             </Col>  
