@@ -14,6 +14,10 @@ function Product({ productId }) {
 	const [product, setProduct] = useState({});
 	const [isLoading, setLoading] = useState(true);
 	const [recommendedProducts, setRecommendedProducts] = useState([]);
+	const [users, setUsers] = useState({})
+
+	console.log(users)
+	console.log(product)
 
 	const userId = useSelector((state) => state.user.id);
 	const dispatch = useDispatch();
@@ -21,10 +25,10 @@ function Product({ productId }) {
 	const getProduct = useCallback(() => {
 		axios.get(`${API_URL}/products/${productId}`).then((response) => {
 			const productData = response.data;
-
 			processMedia(productData);
 			setProduct(productData);
-
+			setUsers(productData.users);
+	
 			setLoading(false);
 		});
 	}, [productId]);
@@ -63,6 +67,14 @@ function Product({ productId }) {
 
 		dispatch(AddProductToCart(userId, product.id));
 	}
+
+	const deleteReview = (productId, userId) => {
+        axios.delete(`${API_URL}/products/${productId}/review/${userId}`)
+        .then(() => {
+			getProduct();
+		})
+        .catch(err => console.log(err))
+    }
 
 	useEffect(() => {
 		getProduct();
@@ -176,22 +188,26 @@ function Product({ productId }) {
 
 						{/* Base de las reseñas */}
 
-						{/* <Row>
+						<Row>
 							<h2>Opiniones sobre {product.name}:</h2>
 							{
-								x.map((review, i) => (
+								users.map((user, i) => (
+									
 									<Col lg={8}>
-										<Review
-											user={ review.firstName + ' ' + review.lastName}
-											date={ review.date }
-											stars={ review.quantity }
-											title={ review.title }
-											description={ review.description }
-										/>
+											<Review
+												deleteReview = { deleteReview }
+												user={ user.firstName + ' ' + user.lastName}
+												userId = {user.id}
+												productId = {product.id}
+												date={ user.review.createdAt }
+												stars={ user.review.qualification }
+												description={ user.review.description }
+												key={i}
+											/>
 									</Col>
 								))
 							}
-						</Row> */}
+						</Row>
 					</div>
 				</Card.Body>
 			</Card>

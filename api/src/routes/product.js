@@ -164,7 +164,8 @@ server.get( '/:id', ( request, response, next ) => {
 	Product.findByPk( id, {
 		include: [
 			{ model: Media },
-			{ model: Category }
+			{ model: Category },
+			{ model: User }
 		]
 	} )
 	.then( ( product ) => {
@@ -444,6 +445,28 @@ server.delete( '/:productId/review/:userId', isAuthenticated, ( request, respons
 		review.destroy( ).then( ( ) => {
 			response.sendStatus( 204 );
 		} );
+	} );
+} );
+
+/* =================================================================================
+* 		[ Obtención de la review de un producto por un usuario especifico ]
+* ================================================================================= */
+
+server.get( '/:id/review/:userId', ( request, response ) => {
+	
+	const { id, userId } = request.params;
+	
+	Review.findOne( {
+		where: {
+			productId: id,
+			userId
+		}
+	})
+	.then( review => {
+		if ( !review ) {
+			return response.status( 404 ).send();
+		}
+		return response.status(200).send(review);
 	} );
 } );
 

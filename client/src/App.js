@@ -23,6 +23,7 @@ import OrderTable from './components/FormAdmin/OrderTable/orderTable.jsx';
 import Cart from './components/Cart/Cart.jsx';
 import PanelAdmin from './components/PanelAdmin/PanelAdmin.jsx';
 import FormAddReview from './components/FormReview/FormAddReview.jsx';
+import FormModifyReview from './components/FormReview/FormModifyReview.jsx';
 import FormUserLogin from './components/FormUserLogin/FormUserLogin.jsx';
 
 function App( )
@@ -47,6 +48,9 @@ function App( )
 			<Route exact path='/login' component={ FormUserLogin } />
 			<Route exact path="/Admin/orders" component={ OrderTable } />
 			<Route exact path="/products" component={ Catalogue } />
+			<Route exact path ='/product/:productId/modifyReview' render={ ( { match } ) =>
+				<FormModifyReview productId={ match.params.productId }/>
+			} />
 			<Route exact path ='/product/:productId/review' render={ ( { match } ) =>
 				<FormAddReview productId={ match.params.productId }/>
 			} />
