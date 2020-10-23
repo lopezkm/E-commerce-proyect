@@ -1,5 +1,9 @@
 const server = require( 'express' ).Router( );
 const passport = require( 'passport' );
+const nodemailer = require( 'nodemailer' );
+const Promise = require( 'bluebird' );
+const { Op } = require( 'sequelize' );
+const { User, ResetToken } = require('../db.js');
 
 const { isAuthenticated, hasAccessLevel, ACCESS_LEVELS } = require( '../passport.js' );
 const { ACCESS_LEVEL_USER, ACCESS_LEVEL_ADMIN, ACCESS_LEVEL_SUPER } = ACCESS_LEVELS;
@@ -66,6 +70,88 @@ server.get( '/me', isAuthenticated, ( request, response, next ) => {
 server.get( '/logout', isAuthenticated, ( request, response, next ) => {
 	request.logout( );
 	response.sendStatus( 200 );
+} );
+
+/* =================================================================================
+* 		[ Envía un mail al usuario para reestablecer su contraseña ]
+* ================================================================================= */
+
+server.post( '/forgot', ( request, response ) => {
+	const { email } = request.body;
+	
+	if ( !email ) {
+		return response.status( 400 ).send( 'Email is required' );
+	}
+	
+	User.findOne( {
+		where: {
+			email
+		}
+	} )
+	.then( ( user ) => {
+		if ( !user ) {
+			response.status( 404 ).send( 'Email does not exist' );
+			
+			return null;
+		}
+		
+		return ResetToken.findOrCreate( {
+			where: [ {
+				userId: user.id,
+				used: false,
+				expiration: {
+					[ Op.gt ]: Date.now( )
+				}
+			} ],
+			defaults: {
+				userId: user.id
+			}
+		} );
+	} )
+	.then( ( data ) => {
+		if ( data === null ) {
+			return;
+		}
+		
+		const [ resetToken, created ] = data;
+		
+		if ( !created ) {
+			const now = Date.now( );
+			
+			if ( ( now - resetToken.requested ) < 300000 ) {
+				return response.status( 409 ).send( 'User already requested a password reset' );
+			}
+			
+			resetToken.update( { request: now } );
+		}
+		
+		const transporter = nodemailer.createTransport( {
+			service: 'gmail',
+			auth: {
+				user: `${ process.env.GMAIL_USER }`,
+				pass: `${ process.env.GMAIL_PASSWORD }`
+			}
+		} );
+
+		const mailOptions = {
+			from: `"Six Games" <${ process.env.GMAIL_USER }>`,
+			to: email,
+			subject: '[Six Games] Reinicio de clave',
+			text: '¡Hola! Estás recibiendo este correo porque tú (o alguien más) requirió reestablecer la clave de tu cuenta.\n' +
+				'Por favor, presiona en el siguiente enlace para reestablecer tu clave (tienes una hora):\n\n' +
+				`${ process.env.FRONT_URL }/reset/${ resetToken.token }\n\n` +
+				'Si no fuiste tú quien pidió el reestablecimiento de tu clave, por favor ignora este mensaje.\n'
+		};
+		
+		transporter.sendMail( mailOptions, ( mailError, mailResponse ) => {
+			mailError ?
+				response.status( 409 ).send( 'Recovery email could not be sent' ) :
+				response.status( 200 ).send( 'Recovery email was sent successfully' );
+		} );
+	} )
+	.catch( ( error ) => {
+		response.sendStatus( 500 );
+	} );
 } );
 
 /* =================================================================================
