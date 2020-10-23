@@ -367,6 +367,28 @@ server.delete( '/:id/review/:userId', ( request, response ) => {
 } );
 
 /* =================================================================================
+* 		[ Obtención de la review de un producto por un usuario especifico ]
+* ================================================================================= */
+
+server.get( '/:id/review/:userId', ( request, response ) => {
+	
+	const { id, userId } = request.params;
+	
+	Review.findOne( {
+		where: {
+			productId: id,
+			userId
+		}
+	})
+	.then( review => {
+		if ( !review ) {
+			return response.status( 404 ).send();
+		}
+		return response.status(200).send(review);
+	} );
+} );
+
+/* =================================================================================
 * 		[ Obtención de todas las review de un producto ]
 * ================================================================================= */
 

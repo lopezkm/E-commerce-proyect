@@ -14,6 +14,10 @@ function Product({ productId }) {
 	const [product, setProduct] = useState({});
 	const [isLoading, setLoading] = useState(true);
 	const [recommendedProducts, setRecommendedProducts] = useState([]);
+	const [users, setUsers] = useState({})
+
+	console.log(users)
+	console.log(product)
 
 	const userId = useSelector((state) => state.user.id);
 	const dispatch = useDispatch();
@@ -23,6 +27,7 @@ function Product({ productId }) {
 			const productData = response.data;
 			processMedia(productData);
 			setProduct(productData);
+			setUsers(productData.users);
 	
 			setLoading(false);
 		});
@@ -62,6 +67,14 @@ function Product({ productId }) {
 
 		dispatch(AddProductToCart(userId, product.id));
 	}
+
+	const deleteReview = (productId, userId) => {
+        axios.delete(`${API_URL}/products/${productId}/review/${userId}`)
+        .then(() => {
+			getProduct();
+		})
+        .catch(err => console.log(err))
+    }
 
 	useEffect(() => {
 		getProduct();
@@ -178,15 +191,19 @@ function Product({ productId }) {
 						<Row>
 							<h2>Opiniones sobre {product.name}:</h2>
 							{
-								product.users.map((user, i) => (
+								users.map((user, i) => (
+									
 									<Col lg={8}>
-										<Review
-											user={ user.firstName + ' ' + user.lastName}
-											date={ user.review.createdAt }
-											stars={ user.review.qualification }
-											description={ user.review.description }
-											key={i}
-										/>
+											<Review
+												deleteReview = { deleteReview }
+												user={ user.firstName + ' ' + user.lastName}
+												userId = {user.id}
+												productId = {product.id}
+												date={ user.review.createdAt }
+												stars={ user.review.qualification }
+												description={ user.review.description }
+												key={i}
+											/>
 									</Col>
 								))
 							}
