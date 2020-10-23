@@ -24,6 +24,8 @@ import Cart from './components/Cart/Cart.jsx';
 import PanelAdmin from './components/PanelAdmin/PanelAdmin.jsx';
 import FormAddReview from './components/FormReview/FormAddReview.jsx';
 
+import  LoguedUser from './components/LoguedUser/logued_user.jsx';
+
 function App( )
 {
 	const dispatch = useDispatch( );
@@ -34,6 +36,8 @@ function App( )
 	
 	return (
 		<Container fluid className="app">
+
+			<Route exact path='/login/logued' component={ LoguedUser } />
 			<Route path='/' component={ ( ) => <NavBar/> }/>
 			<Route exact path='/Admin' component={ PanelAdmin } />
 			<Route exact path='/Admin/create' component={ FormAdminCreate } />
