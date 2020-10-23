@@ -1846,175 +1846,175 @@ const User = [
 		lastName: 'Vega',
 		email: 'huguito@masgrande.com',
 		password: '111111111',
-		isAdmin: true
+		accessLevel: 2
 	},
 	{
 		firstName: 'Mati',
 		lastName: 'Lopez',
 		email: 'ura@calva.com',
 		password: '222222222',
-		isAdmin: true
+		accessLevel: 2
 	},
 	{
-		firstName: 'Fake',
-		lastName: 'Lie',
-		email: 'noemail@fake.com',
-		password: '333333333',
-		isAdmin: true
-	},
-	{
-		firstName: 'Manu',
+		firstName: 'Manuel',
 		lastName: 'Lozano',
 		email: 'manu96_lp@hotmail.com',
-		password: '1111',
-		isAdmin: true
+		password: '1234',
+		accessLevel: 2
 	},
 	{
 		firstName: 'Santi',
 		lastName: 'Martinez',
 		email: 'asado@ux.com',
 		password: '555555555',
-		isAdmin: true
+		accessLevel: 2
 	},
 	{
 		firstName: 'Franco',
 		lastName: 'Bonomo',
 		email: 'streamer@tetris.com',
 		password: '666666666',
-		isAdmin: true
+		accessLevel: 2
 	},
 	{
 		firstName: 'Carlos',
 		lastName: 'Saballe',
 		email: 'me@againme.com',
 		password: '777777777',
-		isAdmin: true
+		accessLevel: 2
+	},
+	{
+		firstName: "Just",
+		lastName: "Admin",
+		email: "just@admin.com",
+		password: "1234",
+		accessLevel: 1
 	},
 	{
 		firstName: "Keen",
 		lastName: "Pohl",
 		email: "kpohl0@shop-pro.jp",
 		password: "Kannada",
-		isAdmin: false
+		accessLevel: 0
 	},
 	{
 		firstName: 'Niel',
 		lastName: 'Hartnup',
 		email: 'nhartnup0@issuu.com',
 		password: 'Portuguese',
-		isAdmin: false
+		accessLevel: 0
 	},
 	{
 		firstName: 'Vale',
 		lastName: 'Schlagh',
 		email: 'vschlagh1@github.io',
 		password: 'Kyrgyz',
-		isAdmin: false
+		accessLevel: 0
 	},
 	{
 		firstName: 'Cynthie',
 		lastName: 'Grindall',
 		email: 'cgrindall2@lulu.com',
 		password: 'Swedish',
-		isAdmin: false
+		accessLevel: 0
 	},
 	{
 		firstName: 'Pammi',
 		lastName: 'Aldis',
 		email: 'paldis3@mozilla.com',
 		password: 'Ndebele',
-		isAdmin: false
+		accessLevel: 0
 	},
 	{
 		firstName: 'Pascale',
 		lastName: 'Shrubsall',
 		email: 'pshrubsall4@npr.org',
 		password: 'Haitian Creole',
-		isAdmin: false
+		accessLevel: 0
 	},
 	{
 		firstName: 'Raquela',
 		lastName: 'Rozec',
 		email: 'rrozec5@barnesandnoble.com',
 		password: 'Punjabi',
-		isAdmin: false
+		accessLevel: 0
 	},
 	{
 		firstName: 'Ilse',
 		lastName: 'McAllister',
 		email: 'imcallister6@apple.com',
 		password: 'Korean',
-		isAdmin: false
+		accessLevel: 0
 	},
 	{
 		firstName: 'Shawn',
 		lastName: 'Greveson',
 		email: 'sgreveson7@howstuffworks.com',
 		password: 'Filipino',
-		isAdmin: false
+		accessLevel: 0
 	},
 	{
 		firstName: 'Bernita',
 		lastName: 'Piscot',
 		email: 'bpiscot8@baidu.com',
 		password: 'Tok Pisin',
-		isAdmin: false
+		accessLevel: 0
 	},
 	{
 		firstName: 'Meriel',
 		lastName: 'Gurrado',
 		email: 'mgurrado9@de.vu',
 		password: 'Kyrgyz',
-		isAdmin: false
+		accessLevel: 0
 	},
 	{
 		firstName: 'Bastien',
 		lastName: 'Snowball',
 		email: 'bsnowballa@friendfeed.com',
 		password: 'Norwegian',
-		isAdmin: false
+		accessLevel: 0
 	},
 	{
 		firstName: 'Grissel',
 		lastName: 'Balaam',
 		email: 'gbalaamb@creativecommons.org',
 		password: 'Kyrgyz',
-		isAdmin: false
+		accessLevel: 0
 	},
 	{
 		firstName: 'Mathilde',
 		lastName: 'Giraudy',
 		email: 'mgiraudyd@uol.com.br',
 		password: 'Tetum',
-		isAdmin: false
+		accessLevel: 0
 	},
 	{
 		firstName: 'Salmon',
 		lastName: 'Gouthier',
 		email: 'sgouthiere@nyu.edu',
 		password: 'Oriya',
-		isAdmin: false
+		accessLevel: 0
 	},
 	{
 		firstName: 'Sheree',
 		lastName: 'Mayston',
 		email: 'smaystonf@msu.edu',
 		password: 'Nepali',
-		isAdmin: false
+		accessLevel: 0
 	},
 	{
 		firstName: 'Talya',
 		lastName: 'Medlen',
 		email: 'tmedleng@mysql.com',
 		password: 'English',
-		isAdmin: false
+		accessLevel: 0
 	},
 	{
 		firstName: 'Kahaleel',
 		lastName: 'Eilert',
 		email: 'keilerth@icq.com',
 		password: 'Malagasy',
-		isAdmin: false
+		accessLevel: 0
 	}
 ];
 
