@@ -17,14 +17,14 @@ const LoguedUser = ({ userId }) => {
 	}, [] );
 
     return (
-            <Container>
+            <Container className="container-logued">
                 <Card>
                     <Card.Header bsPrefix="card-header">
-    <Card.Title bsPrefix="card-title">Hola  {/* {user.firstName} */} Matias</Card.Title>
+                        <Card.Title bsPrefix="card-title">Hola  {/* {user.firstName} */} Matias</Card.Title>
                     </Card.Header>
                     
                     <Card.Body bsPrefix="card-body">
-                        <Link>
+                        <Link to="/login/logued/shops">
                             <Card.Text bsPrefix="card-text">Mis Compras</Card.Text>
                         </Link>
                         <div>
