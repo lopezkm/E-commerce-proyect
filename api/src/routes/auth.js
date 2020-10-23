@@ -155,6 +155,53 @@ server.post( '/forgot', ( request, response ) => {
 } );
 
 /* =================================================================================
+* 		[ Actualiza la contraseña de un usuario con un token de recuperación ]
+* ================================================================================= */
+
+server.get( '/reset/:token', ( request, response ) => {
+	const { token } = request.params;
+	const { password } = request.body;
+	
+	if ( !token || !password ) {
+		return response.status( 400 ).send( 'Missing token or password' );
+	}
+	
+	ResetToken.findOne( {
+		where: {
+			token: token,
+			used: false,
+			expiration: {
+				[ Op.gt ]: Date.now( )
+			}
+		},
+		include: {
+			model: User,
+			required: true
+		}
+	} )
+	.then( ( resetToken ) => {
+		if ( !resetToken ) {
+			response.status( 404 ).send( 'Token not found' );
+			
+			return null;
+		}
+		
+		const promises = [ ];
+		
+		promises.push( resetToken.user.update( { password } ) );
+		promises.push( resetToken.update( { used: true } ) );
+		
+		return Promise.all( promises );
+	} )
+	.then( ( data ) => {
+		response.status( 200 ).send( 'Password changed successfully' );
+	} )
+	.catch( ( error ) => {
+		response.sendStatus( 500 );
+	} );
+} );
+
+/* =================================================================================
 * 		[ Promueve un usuario (incrementa su nivel de acceso) ]
 * ================================================================================= */
 
