@@ -61,6 +61,19 @@ passport.deserializeUser( function( id, done ) {
 } );
 
 /* =================================================================================
+* 				[ Custom middleware para verificar que un 
+*				  usuario esté correctamente autenticado ]
+* ================================================================================= */
+
+const isAuthenticated = ( request, response, next ) => {
+	if ( request.isAuthenticated( ) ) {
+		return next( );
+	}
+	
+	return response.sendStatus( 401 );
+};
+
+/* =================================================================================
 * 		[ Exportamos los middlerwares ]
 * ================================================================================= */
 
