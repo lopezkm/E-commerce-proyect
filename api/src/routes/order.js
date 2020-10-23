@@ -2,6 +2,9 @@ const server = require( 'express' ).Router( );
 const { Op } = require( 'sequelize' );
 const { Order, Product, User } = require( '../db.js' );
 
+const { isAuthenticated, hasAccessLevel, ACCESS_LEVELS } = require( '../passport.js' );
+const { ACCESS_LEVEL_USER } = ACCESS_LEVELS;
+
 /* =================================================================================
 * 		[ Búsqueda y/o obtención de todas las órdenes ]
 * ================================================================================= */
@@ -12,7 +15,7 @@ const { Order, Product, User } = require( '../db.js' );
 	- Devuelve las órdenes ordenadas por fecha de creación (de más nueva a mas vieja)
 */
 
-server.get( '/', ( request, response ) => {
+server.get( '/', hasAccessLevel( ), ( request, response ) => {
 	const { status } = request.query;
 	const options = {
 		where: status && {
@@ -38,7 +41,7 @@ server.get( '/', ( request, response ) => {
 * 		[ Búsqueda de una orden por identificador ]
 * ================================================================================= */
 
-server.get( '/:id', ( request, response ) => {
+server.get( '/:id', isAuthenticated, ( request, response ) => {
 	let { id } = request.params;
 	
 	Order.findByPk( id, {
@@ -50,6 +53,10 @@ server.get( '/:id', ( request, response ) => {
 	.then( ( order ) => {
 		if ( !order ) {
 			return response.sendStatus( 404 );
+		}
+		
+		if ( ( order.user.id !== request.user.id ) && ( request.user.accessLevel === ACCESS_LEVEL_USER ) ) {
+			return response.status( 401 ).send( 'Not allowed to visualize another user\'s order' );
 		}
 		
 		response.status( 200 ).send( order );
@@ -64,7 +71,7 @@ server.get( '/:id', ( request, response ) => {
 	- Se pasan por body las propiedades a cambiar con sus respectivos valores
 */
 
-server.put( '/:id', ( request, response ) => {
+server.put( '/:id', hasAccessLevel( ), ( request, response ) => {
 	const { id } = request.params;
 	
 	Order.findByPk( id, {
