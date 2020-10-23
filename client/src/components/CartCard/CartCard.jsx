@@ -51,7 +51,6 @@ function CartCard( { id, name, quantity, price, media, onQuantityChange } )
 							<div>
 								<span>Cantidad: </span> 
 							 	<Button name="-" size="sm" onClick={ handleInputChange }>-</Button>
-								{/* <label value={ quantity } onChange={ handleInputChange } type="number" id="quantity" name="quantity" />   */}
 								<span> { quantity } </span>
 								<Button name="+" size="sm" onClick={ handleInputChange }>+</Button>
 							</div>
