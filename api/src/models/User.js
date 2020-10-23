@@ -3,7 +3,7 @@ const crypto = require( 'crypto' );
 
 const generateSalt = ( ) => {
 	return crypto.randomBytes( 16 ).toString( 'base64' );
-}
+};
 
 const encryptPassword = ( plainText, salt ) => {
 	return crypto
@@ -11,7 +11,7 @@ const encryptPassword = ( plainText, salt ) => {
 		.update( plainText )
 		.update( salt )
 		.digest( 'hex' );
-}
+};
 
 const setSaltAndPassword = ( user ) => {
 	if ( !user.changed( 'password' ) ) {
@@ -20,7 +20,7 @@ const setSaltAndPassword = ( user ) => {
 	
 	user.salt = generateSalt( );
 	user.password = encryptPassword( user.password( ), user.salt( ) );
-}
+};
 
 module.exports = ( sequelize ) => {
 	const User = sequelize.define( 'user', {
@@ -34,26 +34,29 @@ module.exports = ( sequelize ) => {
 		},
 		email: {
 			type: DataTypes.STRING,
-			isEmail: true,
 			unique: true,
-			allowNull: false
+			allowNull: false,
+			validate: {
+				isEmail: true
+			}
 		},
 		password: {
 			type: DataTypes.STRING,
+			
 			get( ) {
 				return ( ) => this.getDataValue( 'password' );
 			}
 		},
 		salt: {
 			type: DataTypes.STRING,
+			
 			get( ) {
 				return ( ) => this.getDataValue( 'salt' );
 			}
 		},
-		isAdmin: {
-			type: DataTypes.BOOLEAN,
-			defaultValue: false,
-			allowNull: false
+		accessLevel: {
+			type: DataTypes.INTEGER,
+			defaultValue: 0
 		}
 	}, {
 		hooks: {

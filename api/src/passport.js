@@ -93,5 +93,8 @@ const hasAccessLevel = ( accessLevel = ACCESS_LEVELS.ACCESS_LEVEL_ADMIN ) => {
 * ================================================================================= */
 
 module.exports = {
+	isAuthenticated,
+	hasAccessLevel,
+	
 	ACCESS_LEVELS
 };
