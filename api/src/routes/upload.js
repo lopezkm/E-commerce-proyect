@@ -2,6 +2,7 @@ const server = require( 'express' ).Router( );
 const fs = require( 'fs' );
 const path = require( 'path' );
 const crypto = require( 'crypto' );
+const { hasAccessLevel } = require( '../passport.js' );
 
 /* =================================================================================
 * 		[ Extensiones válidas para un archivo media ]
@@ -25,7 +26,7 @@ const validExtensions = [
 * 		[ Subida de un archivo media ]
 * ================================================================================= */
 
-server.post( '/', ( request, response ) => {
+server.post( '/', hasAccessLevel( ), ( request, response ) => {
 	if ( !request.files ) {
 		return response.status( 500 ).send( 'File not found' );
 	}

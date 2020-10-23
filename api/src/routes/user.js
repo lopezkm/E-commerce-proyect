@@ -1,6 +1,9 @@
 const server = require( 'express' ).Router( );
 const { Op } = require( 'sequelize' );
-const { User, Order, Product } = require( '../db.js' );
+const { User, Order, Product, OrderProduct } = require( '../db.js' );
+
+const { isAuthenticated, hasAccessLevel, ACCESS_LEVELS } = require( '../passport.js' );
+const { ACCESS_LEVEL_USER } = ACCESS_LEVELS;
 
 /* =================================================================================
 * 		[ Obtención de todas las órdenes de un usuario ]
@@ -12,8 +15,12 @@ const { User, Order, Product } = require( '../db.js' );
 	- Devuelve las órdenes ordenadas por fecha de creación (de más nueva a mas vieja)
 */
 
-server.get( '/:id/orders', ( request, response ) => {
+server.get( '/:id/orders', isAuthenticated, ( request, response ) => {
 	const { id } = request.params;
+	
+	if ( ( id !== request.user.id ) && ( request.user.accessLevel === ACCESS_LEVEL_USER ) ) {
+		return response.status( 401 ).send( 'Not allowed to visualize another user\'s orders' );
+	}
 	
 	User.findByPk( id ).then( ( user ) => {
 		if ( !user ) {
@@ -23,7 +30,10 @@ server.get( '/:id/orders', ( request, response ) => {
 		user.getOrders( {
 			order: [
 				[ 'createdAt', 'DESC' ]
-			]
+			],
+			include: {
+				model: Product
+			}
 		} ).then( ( orders ) => {
 			response.status( 200 ).send( orders );
 		} );
@@ -39,7 +49,7 @@ server.get( '/:id/orders', ( request, response ) => {
 	- No agrega un producto sino que sirve para "inicializar" el carrito
 */
 
-server.post( '/:id/cart', ( request, response ) => {
+server.post( '/:id/cart', isAuthenticated, ( request, response ) => {
 	const { id } = request.params;
 	
 	Order.findOne( {
@@ -74,7 +84,7 @@ server.post( '/:id/cart', ( request, response ) => {
 	- Si no tiene orden abierta retorna un estado 404
 */
 
-server.get( '/:id/cart', ( request, response ) => {
+server.get( '/:id/cart', isAuthenticated, ( request, response ) => {
 	const { id } = request.params;
 	
 	Order.findOne( {
@@ -104,7 +114,7 @@ server.get( '/:id/cart', ( request, response ) => {
 	- Remueve los productos del carrito sin borrar el carrito
 */
 
-server.delete( '/:id/cart', ( request, response ) => {
+server.delete( '/:id/cart', isAuthenticated, ( request, response ) => {
 	const { id } = request.params;
 	
 	Order.findOne( {
@@ -136,7 +146,7 @@ server.delete( '/:id/cart', ( request, response ) => {
 	- Si la operación falló se devuelve un error 400
 */
 
-server.put( '/:id/cart', ( request, response ) => {
+server.put( '/:id/cart', isAuthenticated, ( request, response ) => {
 	const { id } = request.params;
 	const { productId, quantity } = request.body;
 	
@@ -208,29 +218,10 @@ server.put( '/:id/cart', ( request, response ) => {
 } );
 
 /* =================================================================================
-* 		[ Obtención de un usuario por email y clave ]
-* ================================================================================= */
-
-server.get( '/auth', ( request, response ) => {
-	let { email, password } = request.body;
-	
-	User.findOne( {
-		email,
-		password
-	} ).then( ( user ) => {
-		if ( !user ) {
-			return response.sendStatus( 404 );
-		}
-		
-		response.status( 200 ).send( user );
-	} );
-} );
-
-/* =================================================================================
 * 		[ Obtención de un usuario particular ]
 * ================================================================================= */
 
-server.get( '/:id', ( request, response ) => {
+server.get( '/:id', hasAccessLevel( ), ( request, response ) => {
 	let { id } = request.params;
 	
 	User.findByPk( id ).then( ( user ) => {
@@ -246,33 +237,17 @@ server.get( '/:id', ( request, response ) => {
 * 		[ Obtención de todos los usuarios ]
 * ================================================================================= */
 
-server.get( '/', ( request, response ) => {
+server.get( '/', hasAccessLevel( ), ( request, response ) => {
 	User.findAll( ).then( ( users ) => {
 		response.status( 200 ).send( users );
 	} );
 } );
 
 /* =================================================================================
-* 		[ Creación de un usuario ]
-* ================================================================================= */
-
-server.post( '/', ( request, response ) => {
-	User.create( {
-		...request.body
-	}, {
-		fields: [ 'firstName', 'lastName', 'email', 'password', 'salt' ]
-	} )
-	.then( ( user ) => {
-		response.status( 200 ).send( user );
-	} )
-	.catch(err => response.status ( 409 ).send(err))
-} );
-
-/* =================================================================================
 * 		[ Modificación de un usuario ]
 * ================================================================================= */
 
-server.put( '/:id', ( request, response ) => {
+server.put( '/:id', hasAccessLevel( ), ( request, response ) => {
 	const { id } = request.params;
 	
 	User.findByPk( id ).then( ( user ) => {
@@ -283,7 +258,7 @@ server.put( '/:id', ( request, response ) => {
 		return user.update( {
 			...request.body
 		}, {
-			fields: [ 'firstName', 'lastName', 'email', 'password', 'salt' ]
+			fields: [ 'firstName', 'lastName', 'email' ]
 		} )
 		.then( ( user ) => {
 			response.status( 200 ).send( user );
@@ -295,7 +270,7 @@ server.put( '/:id', ( request, response ) => {
 * 		[ Eliminación de un usuario ]
 * ================================================================================= */
 
-server.delete( '/:id', ( request, response ) => {
+server.delete( '/:id', hasAccessLevel( ), ( request, response ) => {
 	let { id } = request.params;
 	
 	User.findByPk( id ).then( ( user ) => {

@@ -1,33 +1,44 @@
-import { createStore, applyMiddleware, compose } from 'redux';
+import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
 import { persistStore, persistReducer } from 'redux-persist';
-import defaultStorage from 'redux-persist/lib/storage';
 import thunk from 'redux-thunk';
-import rootReducer from '../reducers/index.js';
+import defaultStorage from 'redux-persist/lib/storage';
+import sessionStorage from 'redux-persist/lib/storage/session';
+
+import cartReducer from '../reducers/cart';
+import categoryReducer from '../reducers/category';
+import userReducer from '../reducers/user';
 
 /* =================================================================================
-* 		[ Añade la posibilidad de usar Redux DevTools ]
+* 		[ Se combinan y configuran los distintos reducers ]
 * ================================================================================= */
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
-/* =================================================================================
-* 		[ Se configura el persistor para únicamente guardar el carrito ]
-* ================================================================================= */
-
-const persistConfig = {
+const rootPersistConfig = {
 	key: 'root',
 	storage: defaultStorage,
 	whitelist: [ 'cart' ]
-}
+};
+
+const authPersistConfig = {
+	key: 'user',
+	storage: sessionStorage
+};
+
+const rootReducer = combineReducers( {
+	cart: cartReducer,
+	category: categoryReducer,
+	user: persistReducer( authPersistConfig, userReducer )
+} );
 
 const persistedReducer = persistReducer(
-	persistConfig,
+	rootPersistConfig,
 	rootReducer
 );
 
 /* =================================================================================
-* 		[ Se crea un store con sus middlewares y un persistor del mismo ]
+* 		[ Se crea el store y un persistor del mismo ]
 * ================================================================================= */
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(
 	persistedReducer,
@@ -39,7 +50,7 @@ const persistor = persistStore(
 );
 
 /* =================================================================================
-* 		[ Se exporta el store y el persistor ]
+* 		[ Se exporta store y persistor ]
 * ================================================================================= */
 
 export {

@@ -7,26 +7,12 @@ const API_URL = process.env.REACT_APP_API_URL;
 * 		[ Busca y carga un usuario por email y clave ]
 * ================================================================================= */
 
-export function LoadUser( email, password )
+export function LoadUser( user )
 {
-	return function( dispatch ) {
-		axios.post( `${ API_URL }/users/auth`, {
-			email, password
-		} )
-		.then( ( response ) => {
-			dispatch( {
-				type: actionTypes.LOAD_USER,
-				payload: response.data,
-				error: null
-			} );
-		} )
-		.catch( ( error ) => {
-			dispatch( {
-				type: actionTypes.LOAD_USER,
-				payload: null,
-				error: error
-			} );
-		} );
+	return {
+		type: actionTypes.LOAD_USER,
+		payload: user,
+		error: null
 	};
 }
 

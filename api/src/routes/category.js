@@ -1,6 +1,7 @@
 const server = require( 'express' ).Router( );
 const { Category, Media } = require( '../db.js' );
 const { Op } = require( 'sequelize' );
+const { hasAccessLevel } = require( '../passport.js' );
 
 /* =================================================================================
 * 		[ Búsqueda de productos por categoría ]
@@ -55,7 +56,7 @@ server.get( '/', ( request, response ) => {
 * 		[ Creación de una categoría ]
 * ================================================================================= */
 
-server.post( '/', ( request, response ) => {
+server.post( '/', hasAccessLevel( ), ( request, response ) => {
 	const { name } = request.body;
 	
 	Category.findOne( {
@@ -82,7 +83,7 @@ server.post( '/', ( request, response ) => {
 * 		[ Modificación de una categoría ]
 * ================================================================================= */
 
-server.put( '/:id', ( request, response ) => {
+server.put( '/:id', hasAccessLevel( ), ( request, response ) => {
 	const { id } = request.params;
 	
 	Category.findByPk( id ).then( ( category ) => {
@@ -105,7 +106,7 @@ server.put( '/:id', ( request, response ) => {
 * 		[ Eliminación de una categoría ]
 * ================================================================================= */
 
-server.delete( '/:id', ( request, response ) => {
+server.delete( '/:id', hasAccessLevel( ), ( request, response ) => {
 	const { id } = request.params;
 	
 	Category.findByPk( id ).then( category => {

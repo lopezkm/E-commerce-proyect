@@ -10,6 +10,7 @@ import SearchBar from '../SearchBar/SearchBar.jsx';
 function NavBar( props ){
 
 	const cartProductsCount = useSelector( ( state ) => ( state.cart.count > 0 ) ? `[${ state.cart.count }]` : null );
+	const userFirstName = useSelector( ( state ) => ( state.user.id > 0 ) ? state.user.firstName : null );
 
 	return (
 		<Navbar collapseOnSelect expand="lg" fixed="top" variant="dark" className="navbar-main">
@@ -39,7 +40,9 @@ function NavBar( props ){
 					</Nav.Link>
 					<Nav.Link as={ Link } to="/register" className="navbar-nav-user">
 						<FontAwesomeIcon icon={ faUser }/>
-						<p className="navbar-text">Ingresar</p>
+						<p className="navbar-text">
+							{ userFirstName || 'Ingresar' }
+						</p>
 					</Nav.Link>
 					<SearchBar/>
 				</Nav>
