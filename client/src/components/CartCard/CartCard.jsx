@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Col, Row, Card, Figure } from 'react-bootstrap';
+import { Container, Col, Row, Card, Figure, Button } from 'react-bootstrap';
 import defaultPortrait from '../../assets/portrait.jpg';
 
 const API_URL = process.env.REACT_APP_API_URL;
@@ -27,9 +27,9 @@ function CartCard( { id, name, quantity, price, media, onQuantityChange } )
 	const portrait = getProductPortrait( );
 	
 	const handleInputChange = ( e ) => {
-		const { value } = e.target;
-		
-		onQuantityChange( id, parseInt( value ) );
+		const { name } = e.target;
+		name === '+' ? quantity++ : quantity--;
+		onQuantityChange( id, parseInt( quantity ) );
 	}
 	
 	return (
@@ -50,7 +50,10 @@ function CartCard( { id, name, quantity, price, media, onQuantityChange } )
 							<h1>{ name }</h1>
 							<div>
 								<span>Cantidad: </span> 
-								<input value={ quantity } onChange={ handleInputChange } type="number" id="quantity" name="quantity" />  
+							 	<Button name="-" size="sm" onClick={ handleInputChange }>-</Button>
+								{/* <label value={ quantity } onChange={ handleInputChange } type="number" id="quantity" name="quantity" />   */}
+								<span> { quantity } </span>
+								<Button name="+" size="sm" onClick={ handleInputChange }>+</Button>
 							</div>
 						</Col>
 						<Col xs={ 2 }>
