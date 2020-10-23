@@ -16,11 +16,9 @@ function Product({ productId }) {
 	const [recommendedProducts, setRecommendedProducts] = useState([]);
 	const [users, setUsers] = useState({})
 
-	console.log(users)
-	console.log(product)
-
 	const userId = useSelector((state) => state.user.id);
 	const dispatch = useDispatch();
+	let productosRecomendados = [];
 
 	const getProduct = useCallback(() => {
 		axios.get(`${API_URL}/products/${productId}`).then((response) => {
@@ -39,9 +37,17 @@ function Product({ productId }) {
 		}
     
     	axios.get( `${ API_URL }/products/category/${ product.categories[ 0 ].id }/related` ).then( ( response ) => {
+			productosRecomendados = response.data
 			!response.data ?
 				setRecommendedProducts( [ ] ) :
-				setRecommendedProducts( response.data.filter( p => p.id !== productId ).sort( ( ) => Math.random( ) - 0.5 ).splice( 0, 4 ) );
+				setRecommendedProducts( productosRecomendados.filter( p => p.id !== parseInt(productId) ).sort( ( ) => Math.random( ) - 0.5 ).splice( 0, 4 ))
+
+
+				console.log("FILTER: ", response.data.filter( p => p.id !== productId  ) )
+				console.log("SIN FILTER: ", response.data )
+				
+
+
 		} );
 	}, [ productId, product.categories ] );
 	
@@ -156,8 +162,8 @@ function Product({ productId }) {
 							</Col>
 						</Row>
 
-						{product.stock > 0 &&
-							(<Row ><h2> Otros juegos que te pueden interesar:</h2>
+						
+							<Row ><h2> Otros juegos que te pueden interesar:</h2>
 
 								<Row >
 									{
@@ -182,9 +188,9 @@ function Product({ productId }) {
 									}
 								</Row>
 							</Row>
-							)
+							
 
-						}
+						
 
 						{/* Base de las reseñas */}
 
