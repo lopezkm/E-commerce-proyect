@@ -97,6 +97,34 @@ server.get( '/promote/:id', hasAccessLevel( ACCESS_LEVEL_SUPER ), ( request, res
 } );
 
 /* =================================================================================
+* 		[ Degrada un usuario (decrementa su nivel de acceso) ]
+* ================================================================================= */
+
+server.get( '/demote/:id', hasAccessLevel( ACCESS_LEVEL_SUPER ), ( request, response, next ) => {
+	const { id } = request.params;
+	
+	if ( isNaN( id ) ) {
+		return response.sendStatus( 400 );
+	}
+	
+	User.findByPk( id ).then( ( user ) => {
+		if ( !user ) {
+			return response.sendStatus( 404 );
+		}
+		
+		if ( user.accessLevel !== ACCESS_LEVEL_ADMIN ) {
+			return response.sendStatus( 409 );
+		}
+		
+		user.decrement( 'accessLevel', { by: 1 } )
+			.then( ( response ) => response.sendStatus( 204 ) );
+	} )
+	.catch( ( error ) => {
+		response.sendStatus( 500 );
+	} );
+} );
+
+/* =================================================================================
 * 		[ Se exportan las rutas ]
 * ================================================================================= */
 
