@@ -12,11 +12,15 @@ const API_URL = process.env.REACT_APP_API_URL;
 
 const Home = () => {
 
-    const [products, setProducts] = React.useState({});
+    const [products, setProducts] = React.useState([]);
+    console.log(products)
+
+    let secondCards = products.sort( ( ) => Math.random( ) - 0.5 ).splice( 0, 4 );
+    console.log(secondCards)
 
     const getProducts = () => {
         axios.get(`${API_URL}/products`)
-        .then(response => setProducts(response))
+        .then(response => setProducts(response.data))
         .catch(err => console.log(err))
     }
 
@@ -30,7 +34,24 @@ const Home = () => {
         <Container className='home-container' fluid>
             <PrincipalCard />
             <Row className='home-secondCard-container'>
-                <Col xs={6}>
+                {
+                    secondCards.map((card, i) => (
+
+                        <Col xs={6}>
+                            <Link to={`/product/${card.id}`}>
+                                <SecondCard
+                                    img={'https://steamcdn-a.akamaihd.net/steam/apps/287700/capsule_616x353.jpg?t=1591740509'}
+                                    name={card.name}
+                                    offer={"30$"}
+                                    price={card.price}
+                                    key={i}
+                                />
+                            </Link>
+                        </Col>
+                    ))
+                }
+
+                {/* <Col xs={6}>
                     <SecondCard
                         img={'https://steamcdn-a.akamaihd.net/steam/apps/287700/capsule_616x353.jpg?t=1591740509'}
                         name={"Metal Gear Solid V: The Phantom Pain"}
@@ -58,7 +79,7 @@ const Home = () => {
                         name={"Assassin's Creed: Unity"}
                         price={"50$"}
                     />
-                </Col>
+                </Col> */}
             </Row>
             <div className='home-button-container'>
                 <FontAwesomeIcon icon={faGamepad} />

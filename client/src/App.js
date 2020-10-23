@@ -38,6 +38,7 @@ function App( )
 	return (
 		<Container fluid className="app">
 			<Route path='/' component={ ( ) => <NavBar/> }/>
+			<Route exact path='/' component={ Home }/>
 			<Route exact path='/Admin' component={ PanelAdmin } />
 			<Route exact path='/Admin/create' component={ FormAdminCreate } />
 			<Route exact path='/Admin/delete' component={ FormAdminDelete } />
