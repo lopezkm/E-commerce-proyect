@@ -21,10 +21,9 @@ function Product({ productId }) {
 	const getProduct = useCallback(() => {
 		axios.get(`${API_URL}/products/${productId}`).then((response) => {
 			const productData = response.data;
-
 			processMedia(productData);
 			setProduct(productData);
-
+	
 			setLoading(false);
 		});
 	}, [productId]);
@@ -154,7 +153,8 @@ function Product({ productId }) {
 												<Link to={`/product/${p.id}`} className='catalogue__product-link'>
 
 													<ProductCard
-														key={p.id}
+														key={ i }
+														id={ p.id }
 														name={p.name}
 														price={p.price}
 														developer={p.developer}
@@ -175,22 +175,22 @@ function Product({ productId }) {
 
 						{/* Base de las reseñas */}
 
-						{/* <Row>
+						<Row>
 							<h2>Opiniones sobre {product.name}:</h2>
 							{
-								x.map((review, i) => (
+								product.users.map((user, i) => (
 									<Col lg={8}>
 										<Review
-											user={ review.firstName + ' ' + review.lastName}
-											date={ review.date }
-											stars={ review.quantity }
-											title={ review.title }
-											description={ review.description }
+											user={ user.firstName + ' ' + user.lastName}
+											date={ user.review.createdAt }
+											stars={ user.review.qualification }
+											description={ user.review.description }
+											key={i}
 										/>
 									</Col>
 								))
 							}
-						</Row> */}
+						</Row>
 					</div>
 				</Card.Body>
 			</Card>

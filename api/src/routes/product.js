@@ -130,7 +130,8 @@ server.get( '/:id', ( request, response, next ) => {
 	Product.findByPk( id, {
 		include: [
 			{ model: Media },
-			{ model: Category }
+			{ model: Category },
+			{ model: User }
 		]
 	} )
 	.then( ( product ) => {
@@ -377,7 +378,7 @@ server.get( '/:id/review', ( request, response ) => {
 		
 		where: {
 			productId:id
-		}
+		},
 	})
 	.then( ( reviews ) => {
 		if ( !reviews ) {
