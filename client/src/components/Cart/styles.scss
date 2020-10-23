@@ -1,81 +1,123 @@
-.cart-container {
-    margin: 1rem auto 1rem auto;
-    padding: 1rem;
-    color: $white;
-    font-family: $barlow;
+.cart__container
+{
+	margin: 1rem auto 1rem auto;
+	padding: 1rem;
+	color: $white;
+	font-family: $barlow;
 
-    .card, .card-body, .card-header, .card-footer {
-        border: 0px;
-    }
+	.card, .card-body, .card-header, .card-footer
+	{
+		border: 0px;
+	}
 
-    .cart-list {
-        background-color: $black;
-        .card-body, .card-header, .card-footer {
-            background-color: $black;
-        }
-        h1 {
-            font-family: $kanit;
-            color: $white;
-            font-size: 2.5rem;
-            margin-bottom: 0;
-        }
-        .card-header{
-            padding-bottom: 0;
-        }
-    }
+	.cart__list
+	{
+		background-color: $black;
+		
+		.card-body, .card-header, .card-footer
+		{
+			background-color: $black;
+		}
+		
+		h1
+		{
+			font-family: $kanit;
+			color: $white;
+			font-size: 2.5rem;
+			margin-bottom: 0;
+		}
+		
+		.card-header
+		{
+			padding-bottom: 0;
+		}
+	}
 }
 
-.cart-summary {
-    background-color: $grey;
-    
-    .card-header {
-        padding-bottom: 0rem;
-        span {
-            font-family: $kanit;
-            color: $white;
-            font-size: 1.75rem;
-        }
-    }
+.cart__summary
+{
+	background-color: $grey;
+	
+	.card-header
+	{
+		padding-bottom: 0rem;
+		
+		span
+		{
+			font-family: $kanit;
+			color: $white;
+			font-size: 1.75rem;
+		}
+	}
 
-    .card-body {
-        padding-bottom: 0rem;
-        padding-top: 0.5rem;
-        span {
-            font-family: $barlow;
-            color: $white;
-            font-size: 1.15rem;
-            font-style: italic
-        }
-    }
+	.card-body
+	{
+		padding-bottom: 0rem;
+		padding-top: 0.5rem;
+		
+		span
+		{
+			font-family: $barlow;
+			color: $white;
+			font-size: 1.15rem;
+			font-style: italic
+		}
+	}
 
-    .card-footer{
-        span, p {
-            font-family: $barlow;
-            color: $white;
-            font-size: 1.50rem;
-            font-weight: 600;
-            font-style: italic;
-            margin: 0 -0.1rem;
-        }
+	.card-footer
+	{
+		span, p
+		{
+			font-family: $barlow;
+			color: $white;
+			font-size: 1.50rem;
+			font-weight: 600;
+			font-style: italic;
+			margin: 0 -0.1rem;
+		}
 
-        .cart-total{
-            border-top: 1px solid $light-grey;
-            border-bottom: 1px solid $light-grey;
-            padding: 0.5rem 0;
-        }
+		.cart__total
+		{
+			border-top: 1px solid $light-grey;
+			border-bottom: 1px solid $light-grey;
+			padding: 0.5rem 0;
+		}
 
-        .cart-button {
-            display: flex;
-            justify-content: center;
-            .cart-button-buy {
-                font-size: 1.5rem;
-                background-color: $blue;
-                font-family: $barlow;
-                margin-top: 1rem;
-                &:hover {
-                    box-shadow: 0 0 8px $blue;
-                }
-            }
-        }
-    }
+		.cart__button
+		{
+			display: flex;
+			justify-content: center;
+			
+			.cart__button-buy
+			{
+				font-size: 1.5rem;
+				background-color: $blue;
+				font-family: $barlow;
+				margin-top: 1rem;
+				&:hover {
+					box-shadow: 0 0 8px $blue;
+				}
+			}
+		}
+	}
+}
+
+.cart__emptyCart
+{
+	display: block;
+	padding: 1rem;
+	color: #ccc;
+	text-align: center;
+	margin-top: 7rem;
+	
+	h2
+	{
+		margin-bottom: 2rem;
+	}
+	
+	a
+	{
+		font-weight: 600;
+		color: #acdaff;
+	}
 }

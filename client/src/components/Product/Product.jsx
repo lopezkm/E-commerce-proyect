@@ -6,80 +6,89 @@ import axios from 'axios';
 import { AddProductToCart } from '../../redux/action-creators/cart';
 import ProductCard from '../ProductCard/ProductCard.jsx';
 import defaultBanner from '../../assets/banner.jpg';
+import Review from '../Review/Review.jsx';
 
 const API_URL = process.env.REACT_APP_API_URL;
 
-function Product( { productId } )
-{
-	const [ product, setProduct ] = useState( null );
-	const [ isLoading, setLoading ] = useState( true );
-	const [ recommendedProducts, setRecommendedProducts ] = useState( [ ] );
-	
-	const userId = useSelector( ( state ) => state.user.id );
-	const dispatch = useDispatch( );
+function Product({ productId }) {
+	const [product, setProduct] = useState({});
+	const [isLoading, setLoading] = useState(true);
+	const [recommendedProducts, setRecommendedProducts] = useState([]);
+	const [users, setUsers] = useState({})
 
-	const getProduct = ( ) => {
-		axios.get( `${API_URL}/products/${productId}` ).then( ( response ) => {
+	console.log(users)
+	console.log(product)
+
+	const userId = useSelector((state) => state.user.id);
+	const dispatch = useDispatch();
+
+	const getProduct = useCallback(() => {
+		axios.get(`${API_URL}/products/${productId}`).then((response) => {
 			const productData = response.data;
-			
-			processMedia( productData );
-			setProduct( productData );
-			
-			setLoading( false );
-		} );
-	}
+			processMedia(productData);
+			setProduct(productData);
+			setUsers(productData.users);
 	
-	const getRecommendedProducts = ( ) => {
-		if ( !product.categories || ( product.categories.length === 0 ) )
-		{
+			setLoading(false);
+		});
+	}, [productId]);
+
+	const getRecommendedProducts = useCallback(() => {
+		if (!product.categories || (product.categories.length === 0)) {
 			return;
 		}
-		
-		axios.get( `${ API_URL }/products/category/${ product.categories[ 0 ].name }` ).then( ( response ) => {
-			const products = response.data.filter( p => p.id !== productId );
-			
-			console.log( response );
-			
-			setRecommendedProducts( products );
+    
+    	axios.get( `${ API_URL }/products/category/${ product.categories[ 0 ].id }/related` ).then( ( response ) => {
+			!response.data ?
+				setRecommendedProducts( [ ] ) :
+				setRecommendedProducts( response.data.filter( p => p.id !== productId ).sort( ( ) => Math.random( ) - 0.5 ).splice( 0, 4 ) );
 		} );
-	}
+	}, [ productId, product.categories ] );
 	
 	const processMedia = ( { media } ) => {
 		if ( !media || ( media.length === 0 ) ) {
 			media = [ {
 				type: 'image-big',
 				path: defaultBanner
-			} ];
-			
+			}];
+
 			return;
 		}
-		
-		media.forEach( ( m ) => {
-			if ( !m.path.includes( '/' ) ) {
-				m.path = `${ API_URL }/${ m.path }`;
+
+		media.forEach((m) => {
+			if (!m.path.includes('/')) {
+				m.path = `${API_URL}/${m.path}`;
 			}
-		} );
-	}
-	
-	const handleAddToCartClick = ( e ) => {
-		e.preventDefault( );
-		
-		dispatch( AddProductToCart( userId, productId ) );
+		});
 	}
 
-	useEffect( ( ) => {
-		getProduct( );
-	}, [ ] );
-	
-	useEffect( ( ) => {
-		if ( !product ) {
+	const handleAddToCartClick = (e) => {
+		e.preventDefault();
+
+		dispatch(AddProductToCart(userId, product.id));
+	}
+
+	const deleteReview = (productId, userId) => {
+        axios.delete(`${API_URL}/products/${productId}/review/${userId}`)
+        .then(() => {
+			getProduct();
+		})
+        .catch(err => console.log(err))
+    }
+
+	useEffect(() => {
+		getProduct();
+	}, [getProduct]);
+
+	useEffect(() => {
+		if (!product.id) {
 			return;
 		}
-		
-		getRecommendedProducts( );
-	} , [ product ] );
 
-	if ( isLoading ) {
+		getRecommendedProducts();
+	}, [product, getRecommendedProducts]);
+
+	if (isLoading) {
 		return (
 			<div className="App">
 				Loading...
@@ -87,7 +96,7 @@ function Product( { productId } )
 		);
 	}
 
-	const dateFormat = product.publishDate && product.publishDate.substring( 0, 10 ).split( '-' ).reverse( ).join( '/' );
+	const dateFormat = product.publishDate && product.publishDate.substring(0, 10).split('-').reverse().join('/');
 
 	return (
 		<Container>
@@ -103,7 +112,7 @@ function Product( { productId } )
 			<Card bsPrefix="product-card">
 				<Card.Body bsPrefix="product-card-info">
 					<Card.Title><h1>{product.name}</h1></Card.Title>
-					<Card.Text bsPrefix="product-card-text">
+					<div className="product-card-text">
 						<Row>
 							<Col sm={10}>
 								{
@@ -121,7 +130,7 @@ function Product( { productId } )
 								{product.stock > 0 ?
 									<div className="action-buttons">
 										<Button className="d-flex ml-auto mr-3">Comprar por ${product.price}</Button>
-										<Button variant="success" onClick={ handleAddToCartClick }>Agregar al carrito</Button>
+										<Button variant="success" onClick={handleAddToCartClick}>Agregar al carrito</Button>
 									</div>
 									:
 									<Button className="d-flex ml-auto btn btn-secondary" disabled>Comprar por ${product.price}</Button>
@@ -152,12 +161,13 @@ function Product( { productId } )
 
 								<Row >
 									{
-										recommendedProducts.map( ( p, i ) => (
+										recommendedProducts.map((p, i) => (
 											<Col xs={12} sm={6} md={4} lg={3} key={i} className='catalogue__product-col'>
-												<Link to={`/product/${p.id}`}  className='catalogue__product-link'>
+												<Link to={`/product/${p.id}`} className='catalogue__product-link'>
 
 													<ProductCard
-														key={p.id}
+														key={ i }
+														id={ p.id }
 														name={p.name}
 														price={p.price}
 														developer={p.developer}
@@ -175,7 +185,30 @@ function Product( { productId } )
 							)
 
 						}
-					</Card.Text>
+
+						{/* Base de las reseñas */}
+
+						<Row>
+							<h2>Opiniones sobre {product.name}:</h2>
+							{
+								users.map((user, i) => (
+									
+									<Col lg={8}>
+											<Review
+												deleteReview = { deleteReview }
+												user={ user.firstName + ' ' + user.lastName}
+												userId = {user.id}
+												productId = {product.id}
+												date={ user.review.createdAt }
+												stars={ user.review.qualification }
+												description={ user.review.description }
+												key={i}
+											/>
+									</Col>
+								))
+							}
+						</Row>
+					</div>
 				</Card.Body>
 			</Card>
 		</Container>

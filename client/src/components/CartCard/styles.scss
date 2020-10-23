@@ -1,14 +1,18 @@
-.card-cart-container {
-
-    .card {
+.cartCard__container
+{
+    .card
+    {
         margin: 0.5rem 0 0.5rem 0;
         border-top: 1px solid $light-grey;
-        .card-body{
+        
+        .card-body
+        {
             padding-bottom: 0rem;
         }
     }
 
-    h1 {
+    h1
+    {
         font-family: $kanit;
         color: $white;
         font-size: 2.5rem;
@@ -16,7 +20,8 @@
         font-style: italic;
     }
 
-    input {
+    input
+    {
         margin-top: 0.8rem;
         font-family: $kanit;
         background-color: transparent;
@@ -25,12 +30,28 @@
         width: 2.25rem;
     }
 
-    input:focus{
+    input:focus
+    {
         outline: none;
     }
 
-    input[type=number]::-webkit-inner-spin-button, 
-    input[type=number]::-webkit-outer-spin-button {  
+    input[ type=number ]::-webkit-inner-spin-button, 
+    input[ type=number ]::-webkit-outer-spin-button
+    {  
         opacity: 1;
     }
+}
+
+.cartCard__price
+{
+    float: right;
+    margin-top: 0.5rem;
+}
+
+.cartCard__body
+{
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: space-between;
+    padding-bottom: 2rem;
 }

@@ -1,30 +1,16 @@
 const server = require( 'express' ).Router( );
 const { Category, Media } = require( '../db.js' );
 const { Op } = require( 'sequelize' );
+const { hasAccessLevel } = require( '../passport.js' );
 
 /* =================================================================================
-* 		[ Obtención de todas las categorías ]
+* 		[ Búsqueda de productos por categoría ]
 * ================================================================================= */
 
-server.get( '/', ( request, response ) => {
-	Category.findAll( ).then( ( categories ) => {
-		response.status( 200 ).send( categories );
-	} );
-} );
-
-/* =================================================================================
-* 		[ Búsqueda de productos por nombre de categoría ]
-* ================================================================================= */
-
-server.get( '/:name', ( request, response ) => {
-	const { name } = request.params;
+server.get( '/:id/related', ( request, response ) => {
+	const { id } = request.params;
 	
-	Category.findOne( {
-		where: {
-			name: { [ Op.iLike ]: name }
-		}
-	} )
-	.then( ( category ) => {
+	Category.findByPk( id ).then( ( category ) => {
 		if ( !category ) {
 			return response.sendStatus( 404 );
 		}
@@ -40,10 +26,37 @@ server.get( '/:name', ( request, response ) => {
 } );
 
 /* =================================================================================
+* 		[ Obtención de una categoria ]
+* ================================================================================= */
+
+server.get( '/:id', ( request, response ) => {
+	const { id } = request.params;
+	
+	Category.findByPk( id )
+	.then( ( category ) => {
+		if ( !category ) {
+			return response.sendStatus( 404 );
+		}
+		
+		response.status( 200 ).send( category );
+	} );
+} );
+
+/* =================================================================================
+* 		[ Obtención de todas las categorías ]
+* ================================================================================= */
+
+server.get( '/', ( request, response ) => {
+	Category.findAll( ).then( ( categories ) => {
+		response.status( 200 ).send( categories );
+	} );
+} );
+
+/* =================================================================================
 * 		[ Creación de una categoría ]
 * ================================================================================= */
 
-server.post( '/', ( request, response ) => {
+server.post( '/', hasAccessLevel( ), ( request, response ) => {
 	const { name } = request.body;
 	
 	Category.findOne( {
@@ -70,7 +83,7 @@ server.post( '/', ( request, response ) => {
 * 		[ Modificación de una categoría ]
 * ================================================================================= */
 
-server.put( '/:id', ( request, response ) => {
+server.put( '/:id', hasAccessLevel( ), ( request, response ) => {
 	const { id } = request.params;
 	
 	Category.findByPk( id ).then( ( category ) => {
@@ -93,7 +106,7 @@ server.put( '/:id', ( request, response ) => {
 * 		[ Eliminación de una categoría ]
 * ================================================================================= */
 
-server.delete( '/:id', ( request, response ) => {
+server.delete( '/:id', hasAccessLevel( ), ( request, response ) => {
 	const { id } = request.params;
 	
 	Category.findByPk( id ).then( category => {

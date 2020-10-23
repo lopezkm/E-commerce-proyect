@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Nav, Navbar } from 'react-bootstrap';
@@ -10,6 +10,7 @@ import SearchBar from '../SearchBar/SearchBar.jsx';
 function NavBar( props ){
 
 	const cartProductsCount = useSelector( ( state ) => ( state.cart.count > 0 ) ? `[${ state.cart.count }]` : null );
+	const userFirstName = useSelector( ( state ) => ( state.user.id > 0 ) ? state.user.firstName : null );
 
 	return (
 		<Navbar collapseOnSelect expand="lg" fixed="top" variant="dark" className="navbar-main">
@@ -37,9 +38,11 @@ function NavBar( props ){
 							Carrito { cartProductsCount && cartProductsCount }
 						</p>
 					</Nav.Link>
-					<Nav.Link as={ Link } to="/userCreate" className="navbar-nav-user">
+					<Nav.Link as={ Link } to="/register" className="navbar-nav-user">
 						<FontAwesomeIcon icon={ faUser }/>
-						<p className="navbar-text">Creá tu cuenta</p>
+						<p className="navbar-text">
+							{ userFirstName || 'Ingresar' }
+						</p>
 					</Nav.Link>
 					<SearchBar/>
 				</Nav>

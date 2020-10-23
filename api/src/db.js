@@ -43,7 +43,7 @@ sequelize.models = Object.fromEntries( capsEntries );
 *		      y creamos las relaciones entre estos ]    
 * ================================================================================= */
 
-const { Product, Category, Media, ProductCategory, User, Order, OrderProduct } = sequelize.models;
+const { Product, Category, Media, User, Order, Review, ResetToken, ProductCategory, OrderProduct } = sequelize.models;
 
 Product.belongsToMany( Category, { through: ProductCategory } );
 Category.belongsToMany( Product, { through: ProductCategory } );
@@ -56,6 +56,12 @@ Order.belongsTo( User );
 
 Order.belongsToMany( Product, { through: OrderProduct } );
 Product.belongsToMany( Order, { through: OrderProduct } );
+
+User.belongsToMany( Product, { through: Review } );
+Product.belongsToMany( User, { through: Review } );
+
+User.hasMany( ResetToken );
+ResetToken.belongsTo( User );
 
 /* =================================================================================
 * 		[ Creamos un callback para la inserción de datos de prueba luego 
@@ -72,7 +78,7 @@ Product.belongsToMany( Order, { through: OrderProduct } );
 		const models = Object.keys( mockData );
 		
 		Promise.each( models, ( model ) => {
-			return sequelize.models[ model ].bulkCreate( mockData[ model ] );
+			return sequelize.models[ model ].bulkCreate( mockData[ model ],{individualHooks: true} );
 		} );
 	} );
 } )( );

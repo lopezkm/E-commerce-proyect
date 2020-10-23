@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState,useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
-import { useSelector, useStore } from 'react-redux';
+import { useSelector } from 'react-redux';
 import qs from 'query-string';
 import axios from 'axios';
 import ProductCard from '../ProductCard/ProductCard.jsx';
@@ -27,14 +27,13 @@ function Catalogue( props )
 	}, [ ] );
 	
 	useEffect( ( ) => {
-		if ( categories.length > 0 ) {
+		if ( categories && ( categories.length > 0 ) ) {
 			setLoading( ( state ) => ( { ...state, categories: false } ) );
 		}
 	}, [ categories ] );
 	
 	useEffect( ( ) => {
-		if ( firstRender.current )
-		{
+		if ( firstRender.current ) {
 			firstRender.current = false;
 			
 			return;
@@ -75,7 +74,8 @@ function Catalogue( props )
 									<Col xs={ 12 } sm={ 6 } md={ 4 } lg={ 3 } key={ i } className='catalogue__product-col'>
 										<Link to={ `/product/${ p.id }` } className='catalogue__product-link'>
 											<ProductCard
-												key={ p.id }
+												key={ i }
+												id={ p.id }
 												name={ p.name }
 												price={ p.price }
 												stock={ p.stock }
@@ -124,7 +124,7 @@ function renderLoadingCircle( )
 {
 	return (
 		<div>
-			<img src={ loadingCircle } className='catalogue__loading' alt='Loading Circle'/>
+			<img src={ loadingCircle } className='customLoadingSpinner' alt='Loading Circle'/>
 		</div>
 	);
 }

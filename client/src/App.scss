@@ -15,10 +15,8 @@
 @import './components/FormCreateUser/styles.scss';
 @import './components/PanelAdmin/styles.scss';
 @import './components/Cart/styles.scss';
-@import './components//CartCard/styles.scss';
-@import './components/Home/PrincipalCard/styles.scss';
-@import './components/Home/SecondCard/styles.scss';
-@import './components/Home/styles.scss';
+@import './components/CartCard/styles.scss';
+@import './components/FormUserLogin/styles.scss';
 
 
 body
@@ -48,4 +46,22 @@ body
 {
 	padding-left: 0;
 	padding-right: 0;
+}
+
+.customLoadingSpinner
+{
+	display: block;
+	
+	margin: 0 auto;
+	margin-top: 25vh;
+	
+	text-align: center;
+	
+	filter: invert( 100% );
+	
+	&-products
+	{
+		margin: 0 auto;
+		margin-top: 0;
+	}
 }

@@ -2,7 +2,9 @@ const server = require( 'express' ).Router( );
 const Promise = require( 'bluebird' );
 const sequelize = require( 'sequelize' );
 const { Op, QueryTypes } = sequelize;
-const { Product, Category, Media, conn } = require( '../db.js' );
+
+const { Product, Category, Media, Review, conn } = require( '../db.js' );
+const { isAuthenticated, hasAccessLevel } = require( '../passport.js' );
 
 /* =================================================================================
 * 		[ Métodos y constantes de ayuda para las rutas ]
@@ -23,8 +25,8 @@ const _MAX_PRICE = 200.0;
 const _MAX_PAGE = 1000;
 
 const _MIN_PER_PAGE = 5;
-const _MAX_PER_PAGE = 20;
-const _DEF_PER_PAGE = 20;
+const _MAX_PER_PAGE = 50;
+const _DEF_PER_PAGE = 50;
 
 const _clamp = ( value, min, max ) => {
 	return Math.max( min, Math.min( max, value ) );
@@ -71,6 +73,7 @@ server.get( '/', ( request, response, next ) => {
 	query = query && `%${query}%`;
 	categories = categories && categories.split && categories.split( ',' ).map( c => parseInt( c ) || undefined );
 	
+	// TO-DO: fix, very inefficient with a high amount of products
 	_buildProductsQuery( categories, limit, page ).then( ( data ) => {
 		if ( !data || ( data.length === 0 ) ) {
 			response.status( 200 ).send( [ ] );
@@ -121,6 +124,37 @@ server.get( '/', ( request, response, next ) => {
 } );
 
 /* =================================================================================
+* 		[ Búsqueda de varios productos por identificador ]
+* ================================================================================= */
+
+server.get( '/some', ( request, response, next ) => {
+	const { ids } = request.body;
+	
+	if ( !ids || !Array.isArray( ids ) || ids.some( id => isNaN( id ) ) ) {
+		return response.sendStatus( 400 );
+	}
+	
+	Product.findAll( {
+		where: {
+			id: {
+				[ Op.in ]: ids
+			}
+		},
+		include: [
+			{ model: Media },
+			{ model: Category }
+		]
+	} )
+	.then( ( products ) => {
+		if ( !products ) {
+			return response.sendStatus( 404 );
+		}
+		
+		response.status( 200 ).send( products );
+	} );
+} );
+
+/* =================================================================================
 * 		[ Búsqueda de un producto por identificador ]
 * ================================================================================= */
 
@@ -130,7 +164,8 @@ server.get( '/:id', ( request, response, next ) => {
 	Product.findByPk( id, {
 		include: [
 			{ model: Media },
-			{ model: Category }
+			{ model: Category },
+			{ model: User }
 		]
 	} )
 	.then( ( product ) => {
@@ -146,7 +181,7 @@ server.get( '/:id', ( request, response, next ) => {
 * 		[ Creación de la relación entre un producto y una categoría ]
 * ================================================================================= */
 
-server.post( '/:idProduct/category/:idCategory', ( request, response, next ) => {
+server.post( '/:idProduct/category/:idCategory', hasAccessLevel( ), ( request, response, next ) => {
 	const { idProduct, idCategory } = request.params;
 	const promises = [ ];
 	
@@ -167,32 +202,39 @@ server.post( '/:idProduct/category/:idCategory', ( request, response, next ) => 
 } );
 
 /* =================================================================================
-* 		[ Creación de la relación entre un producto y varias categoría ]
+* 		[ Creación de la relación entre un producto y varias categorías ]
 * ================================================================================= */
 
-server.post( '/:idProduct/category/', ( request, response, next ) => {
+server.post( '/:idProduct/category/', hasAccessLevel( ), ( request, response, next ) => {
 	const { idProduct } = request.params;
 	const { categories } = request.body;
-	let promises=[];
 	
 	Product.findByPk( idProduct )
-	.then(product => product)
-	.then(prod => categories.map(cat => promises.push(prod.addCategory(cat))) )
-	.then(x => {
-
-		Promise.all( promises )
-		.then(data => {
-			response.send(data)
-		})
-		.catch(e => response.send (e))
-	})
+		.then( ( product ) => {
+			if ( !product ) {
+				return response.sendStatus( 404 );
+			}
+			
+			Promise.map( categories, ( category ) => {
+				return product.addCategory( category );
+			} )
+			.then( ( response ) => {
+				response.sendStatus( 200 );
+			} )
+			.catch( ( error ) => {
+				response.sendStatus( 400 );
+			} );
+		} )
+		.catch( ( error ) => {
+			response.sendStatus( 500 );
+		} );
 } );
 
 /* =================================================================================
 * 		[ Eliminación de la relación entre un producto y una categoría ]
 * ================================================================================= */
 
-server.delete( '/:idProduct/category/:idCategory', ( request, response, next ) => {
+server.delete( '/:idProduct/category/:idCategory', hasAccessLevel( ), ( request, response, next ) => {
 	const { idProduct, idCategory } = request.params;
 	const promises = [ ];
 	
@@ -213,32 +255,10 @@ server.delete( '/:idProduct/category/:idCategory', ( request, response, next ) =
 } );
 
 /* =================================================================================
-* 		[ Creación de la relación entre un producto y varias categoría ]
-* ================================================================================= */
-
-server.post( '/:idProduct/category/', ( request, response, next ) => {
-	const { idProduct } = request.params;
-	const { categories } = request.body;
-	let promises=[];
-	
-	Product.findByPk( idProduct )
-	.then(product => product)
-	.then(prod => categories.map(cat => promises.push(prod.addCategory(cat))) )
-	.then(x => {
-
-		Promise.all( promises )
-		.then(data => {
-			response.send(data)
-		})
-		.catch(e => response.send (e))
-	})
-} );
-
-/* =================================================================================
 * 		[ Creación de un producto ]
 * ================================================================================= */
 
-server.post( '/', ( request, response ) => {
+server.post( '/', hasAccessLevel( ), ( request, response ) => {
 	Product.create( {
 		...request.body
 	}, {
@@ -273,7 +293,7 @@ server.post( '/', ( request, response ) => {
 * 		[ Modificación de un producto ]
 * ================================================================================= */
 
-server.put( '/:id', ( request, response ) => {
+server.put( '/:id', hasAccessLevel( ), ( request, response ) => {
 	const { id } = request.params;
 	
 	Product.findByPk( id ).then( ( product ) => {
@@ -296,7 +316,7 @@ server.put( '/:id', ( request, response ) => {
 * 		[ Eliminación de un producto ]
 * ================================================================================= */
 
-server.delete( '/:id', ( request, response ) => {
+server.delete( '/:id', hasAccessLevel( ), ( request, response ) => {
 	let { id } = request.params;
 	
 	Product.findByPk( id ).then( ( product ) => {
@@ -309,6 +329,167 @@ server.delete( '/:id', ( request, response ) => {
 		} );
 	} );
 } );
+
+/* =================================================================================
+* 		[ Creación de una review ]
+* ================================================================================= */
+
+server.post( '/:productId/review/:userId', isAuthenticated, ( request, response ) => {
+	const { productId, userId } = request.params;
+	const { qualification, description } = request.body;
+	
+	Order.count( {
+		where: {
+			userId
+		},
+		include: {
+			model: Product,
+			required: true,
+			where: {
+				id: productId
+			}
+		}
+	} )
+	.then( ( order ) => {
+		if ( !order ) {
+			response.status( 404 ).send( 'User has never bought this product' );
+			
+			return null;
+		}
+		
+		return Review.findOrCreate( {
+			where: {
+				productId,
+				userId
+			},
+			defaults: {
+				qualification,
+				description
+			}
+		} );
+	} )
+	.then( ( data ) => {
+		if ( data === null ) {
+			return;
+		}
+		
+		if ( !data.created ) {
+			response.status( 409 ).send( 'User already submitted a review of this product' );
+		}
+		
+		response.status( 201 ).send( data.review );
+	} )
+	.catch( ( error ) => {
+		response.sendStatus( 500 );
+	} );
+} );
+
+/* =================================================================================
+* 		[ Modificación de una review ]
+* ================================================================================= */
+
+server.put( '/:productId/review/:userId', isAuthenticated, ( request, response ) => {
+
+	const { productId, userId } = request.params;
+	
+	Review.findOne( {
+		where: {
+			productId,
+			userId
+		}
+	} )
+	.then( ( review ) => {
+		if ( !review ) {
+			response.status( 404 ).send( 'User has never submitted a review for this product' );
+			
+			return null;
+		} 
+	
+		return review.update( {
+			...request.body
+		}, {
+			fields: [ 'qualification', 'description' ]
+		} );
+	} )
+	.then( ( data ) => {
+		if ( data === null ) {
+			return;
+		}
+		
+		response.status( 200 ).send( review );
+	} )
+	.catch( ( error ) => {
+		response.sendStatus( 500 );
+	} );
+} );
+
+/* =================================================================================
+* 		[ Eliminación de una review ]
+* ================================================================================= */
+
+server.delete( '/:productId/review/:userId', isAuthenticated, ( request, response ) => {
+	
+	const { productId, userId } = request.params;
+	
+	Review.findOne( {
+		where: {
+			productId,
+			userId
+		}
+	} )
+	.then( ( review ) => {
+		if ( !review ) {
+			return response.status( 404 ).send( 'User has never submitted a review for this product' );
+		}
+		
+		review.destroy( ).then( ( ) => {
+			response.sendStatus( 204 );
+		} );
+	} );
+} );
+
+/* =================================================================================
+* 		[ Obtención de la review de un producto por un usuario especifico ]
+* ================================================================================= */
+
+server.get( '/:id/review/:userId', ( request, response ) => {
+	
+	const { id, userId } = request.params;
+	
+	Review.findOne( {
+		where: {
+			productId: id,
+			userId
+		}
+	})
+	.then( review => {
+		if ( !review ) {
+			return response.status( 404 ).send();
+		}
+		return response.status(200).send(review);
+	} );
+} );
+
+/* =================================================================================
+* 		[ Obtención de todas las review de un producto ]
+* ================================================================================= */
+
+server.get( '/:productId/review', ( request, response ) => {
+	const { productId } = request.params;
+	
+	Review.findAll( {
+		where: {
+			productId
+		}
+	} )
+	.then( ( reviews ) => {
+		if ( !reviews ) {
+			return response.status( 404 ).send( 'There are no reviews for this product' );
+		}
+		
+		return response.status( 200 ).send( reviews );
+	} );
+});
 
 /* =================================================================================
 * 		[ Exportamos nuestras rutas ]
