@@ -12,7 +12,7 @@ export function AddCategory( name )
 	return function( dispatch ) {
 		axios.post( `${ API_URL }/products/category`, {
 			name
-		} )
+		}, { withCredentials: true } )
 		.then( ( response ) => {
 			dispatch( {
 				type: actionTypes.ADD_CATEGORY,
@@ -39,7 +39,7 @@ export function ModifyCategory( id, name )
 	return function( dispatch ) {
 		axios.put( `${ API_URL }/products/category/${ id }`, {
 			name
-		} )
+		}, { withCredentials: true } )
 		.then( ( response ) => {
 			dispatch( {
 				type: actionTypes.MODIFY_CATEGORY,
@@ -64,7 +64,8 @@ export function ModifyCategory( id, name )
 export function DeleteCategory( id )
 {
 	return function( dispatch ) {
-		axios.delete( `${ API_URL }/products/category/${ id }` ).then( ( response ) => {
+		axios.delete( `${ API_URL }/products/category/${ id }`, { withCredentials: true } )
+		.then( ( response ) => {
 			dispatch( {
 				type: actionTypes.DELETE_CATEGORY,
 				payload: { id },

@@ -7,19 +7,19 @@ import { faBars, faTimes, faShoppingCart, faUser } from '@fortawesome/free-solid
 import { ReactComponent as Logo } from '../../assets/logofull.svg';
 import SearchBar from '../SearchBar/SearchBar.jsx';
 
-function NavBar( props ){
+function NavBar(props) {
 
-	const cartProductsCount = useSelector( ( state ) => ( state.cart.count > 0 ) ? `${ state.cart.count }` : null );
-	const userFirstName = useSelector( ( state ) => ( state.user.id > 0 ) ? state.user.firstName : null );
+	const cartProductsCount = useSelector((state) => (state.cart.count > 0) ? `${state.cart.count}` : null);
+	const userFirstName = useSelector((state) => (state.user.id > 0) ? state.user.firstName : null);
 
 	return (
 		<Navbar collapseOnSelect expand="lg" fixed="top" variant="dark" className="navbar-main">
 			<Navbar.Brand>
-				<Logo className="navbar-logo"/>
+				<Logo className="navbar-logo" />
 			</Navbar.Brand>
 			<Navbar.Toggle aria-controls="navbarCollapse">
-				<FontAwesomeIcon icon={ faBars } className="navbar-open-menu"/>
-				<FontAwesomeIcon icon={ faTimes } className="navbar-close-menu"/>
+				<FontAwesomeIcon icon={faBars} className="navbar-open-menu" />
+				<FontAwesomeIcon icon={faTimes} className="navbar-close-menu" />
 			</Navbar.Toggle>
 			<Navbar.Collapse id="navbarCollapse">
 				<Nav className="navbar-nav-left">
@@ -35,7 +35,7 @@ function NavBar( props ){
 					<NavLink as={ Link } exact activeClassName="active" to="/cart" className="navbar-nav-cart">
 						<FontAwesomeIcon icon={ faShoppingCart }/>
 						<p className="navbar-text">
-							Carrito <span className="cart-count">{ cartProductsCount && cartProductsCount }</span>
+							Carrito <span className="cart-count">{cartProductsCount && cartProductsCount}</span>
 						</p>
 					</NavLink>
 					{userFirstName ? 

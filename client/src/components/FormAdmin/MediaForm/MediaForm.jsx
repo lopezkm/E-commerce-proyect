@@ -30,7 +30,7 @@ function MediaUploader( { productId, productMedias } )
 	const handleMediaDelete = ( e, id ) => {
 		e.preventDefault( );
 		
-		axios.delete( `${ API_URL }/medias/${ id }` )
+		axios.delete( `${ API_URL }/medias/${ id }`, { withCredentials: true })
 			.then( ( response ) => setMedias( medias.filter( m => m.id !== id ) ) )
 			.catch( ( error ) => console.log( error ) );
 	}
@@ -63,7 +63,7 @@ function MediaUploader( { productId, productMedias } )
 			type: input.type,
 			path: url || input.path,
 			productId
-		} )
+		}, { withCredentials: true } )
 		.then( ( response ) => setMedias( [ ...medias, response.data ] ) )
 		.catch( ( error ) => console.log( error ) );
 	}
@@ -73,7 +73,7 @@ function MediaUploader( { productId, productMedias } )
 		
 		formData.append( 'file', input.file );
 		
-		axios.post( `${ API_URL }/uploads/`, formData )
+		axios.post( `${ API_URL }/uploads/`, formData, { withCredentials: true } )
 			.then( ( response ) => addMediaToProduct( `${API_URL}/${response.data}` ) )
 			.catch( ( error ) => console.log( error ) );
 	};

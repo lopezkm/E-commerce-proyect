@@ -9,7 +9,7 @@ function OrderTable( ) {
     const [orderSelector, setOrderSelector] = useState();
 
 	const getOrders = ( ) => {
-		axios.get( `http://localhost:3000/orders`)
+		axios.get( `http://localhost:3000/orders`, { withCredentials: true })
         .then( response => {
             setOrderTable(response.data);
             console.log(response.data);
