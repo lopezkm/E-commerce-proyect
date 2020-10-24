@@ -1,7 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { Nav, Navbar, Card, DropdownButton, ButtonGroup, Button } from 'react-bootstrap';
+
+import { Link, NavLink } from 'react-router-dom';
+import { Nav, Navbar, Card, DropdownButton, ButtonGroup,Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faTimes, faShoppingCart, faUser } from '@fortawesome/free-solid-svg-icons';
 import { ReactComponent as Logo } from '../../assets/logofull.svg';
@@ -23,60 +24,68 @@ function NavBar(props) {
 			</Navbar.Toggle>
 			<Navbar.Collapse id="navbarCollapse">
 				<Nav className="navbar-nav-left">
-					<Nav.Link as={Link} to="/products">
+
+					<NavLink as={ Link }  exact activeClassName= "active"  to="/products">
 						<p className="navbar-text navbar-text-outline">Tienda</p>
-					</Nav.Link>
+					</NavLink>
 					<div className="navbar-separator"></div>
-					<Nav.Link as={Link} to="/admin">
+					<NavLink as={ Link }  exact activeClassName="active" to="/admin">
 						<p className="navbar-text navbar-text-outline">Administración</p>
-					</Nav.Link>
+					</NavLink>
 				</Nav>
 				<Nav className="navbar-nav-right">
-					<Nav.Link as={Link} to="/cart" className="navbar-nav-cart">
-						<FontAwesomeIcon icon={faShoppingCart} />
+
+					<NavLink as={ Link } exact activeClassName="active" to="/cart" className="navbar-nav-cart">
+						<FontAwesomeIcon icon={ faShoppingCart }/>
 						<p className="navbar-text">
 							Carrito <span className="cart-count">{cartProductsCount && cartProductsCount}</span>
 						</p>
-					</Nav.Link>
-					{userFirstName ?
-						<DropdownButton className='navbar-user-options'
-							as={ButtonGroup}
-							menuAlign={{ lg: 'right' }}
-							icon={<FontAwesomeIcon icon={faUser} />}
-							title={
-								<p className="navbar-text">
-									{userFirstName}
-								</p>}
-							id="dropdown-menu-align-responsive-1"
-						>
-							<Card>
-								<Card.Header bsPrefix="card-header">
-									<Card.Title bsPrefix="card-title">Hola {userFirstName}</Card.Title>
-								</Card.Header>
-
-								<Card.Body bsPrefix="card-body">
-										<Link to="/login/logued/shops">
-											<Card.Text bsPrefix="card-text">Mis Compras</Card.Text>
-										</Link>
-										<Link>
-											<Card.Text>Mis Datos</Card.Text>
-										</Link>
-										<Link>
-											<Card.Text>Seguridad</Card.Text>
-										</Link>
-								</Card.Body>
-								<Card.Footer>
-									<Button className="card-button">Salir</Button>
-								</Card.Footer>
-							</Card>
-						</DropdownButton> :
-						<Nav.Link as={Link} className="navbar-nav-user" to="/register" >
-							<FontAwesomeIcon icon={faUser} />
+					</NavLink>
+					{userFirstName ? 
+					<DropdownButton
+						as={ButtonGroup}
+						menuAlign={{ lg: 'right' }}
+						icon = {<FontAwesomeIcon icon={ faUser }/>}
+						title={
 							<p className="navbar-text">
-								{userFirstName || 'Ingresar'}
-							</p>
-						</Nav.Link>}
-					<SearchBar />
+								{ userFirstName }
+							</p>}
+						id="dropdown-menu-align-responsive-1"
+						>
+						<Card>
+							<Card.Header bsPrefix="card-header">
+								<Card.Title bsPrefix="card-title">Hola  {/* {user.firstName} */} Matias</Card.Title>
+							</Card.Header>
+							
+							<Card.Body bsPrefix="card-body">
+								<Link to="/login/logued/shops">
+									<Card.Text bsPrefix="card-text">Mis Compras</Card.Text>
+								</Link>
+								<div>
+									<hr/>
+								</div>
+								<Link>
+									<Card.Text>Mis Datos</Card.Text>
+								</Link>
+								<div>
+									<hr/>
+								</div>
+								<Link>
+									<Card.Text>Seguridad</Card.Text>
+								</Link>
+							</Card.Body>
+							<Card.Footer>
+								<Button variant="ligth" className="card-button">Salir</Button>
+							</Card.Footer>
+						</Card>
+					</DropdownButton> :
+					<NavLink as={ Link } className="navbar-nav-user" exact activeClassName="active" to="/register" >
+						<FontAwesomeIcon icon={ faUser }/>
+						<p className="navbar-text">
+							{ userFirstName || 'Ingresar' }
+						</p>
+					</NavLink>}
+					<SearchBar/>
 				</Nav>
 			</Navbar.Collapse>
 		</Navbar>
