@@ -93,7 +93,7 @@ const FormAdminModify = () => {
             developer: inputAdminForm.developer,
             publisher: inputAdminForm.publisher,
             publishDate: inputAdminForm.publishDate
-        })
+        }, { withCredentials: true })
     }
 
     const handleCheckChange = (event) => {
@@ -115,7 +115,7 @@ const FormAdminModify = () => {
     const deleteCategoryProduct = (idC) => {
         let selector = document.getElementById("productList");
         let idP = selector.options[selector.selectedIndex].id;
-        axios.delete(`http://localhost:3000/products/${idP}/category/${idC}`)
+        axios.delete(`http://localhost:3000/products/${idP}/category/${idC}`, { withCredentials: true })
             .then(() => {
                 axios.get(`http://localhost:3000/products/${idP}`)
                     .then(response => {
@@ -143,7 +143,7 @@ const FormAdminModify = () => {
     const addCategoryProduct = (idC) => {
         let selector = document.getElementById("productList");
         let idP = selector.options[selector.selectedIndex].id;
-        axios.post(`http://localhost:3000/products/${idP}/category/${idC}`)
+        axios.post(`http://localhost:3000/products/${idP}/category/${idC}`, { withCredentials: true })
             .then(() => {
                 axios.get(`http://localhost:3000/products/${idP}`)
                     .then((response) => {
