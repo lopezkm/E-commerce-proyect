@@ -45,9 +45,9 @@ function PanelAdmin() {
                 <Row>
                     <Col xs={10} lg={2}>
                         <Link to="/admin/categories">
-                            <Card className="card-categories">
+                            <Card>
                                 <Card.Body>
-                                    <Card.Title bsPrefix="card-categories-title">Agregar categorias</Card.Title>
+                                    <Card.Title>Agregar categorias</Card.Title>
                                     <Card.Text><FontAwesomeIcon icon={faPlusSquare} /></Card.Text>
                                 </Card.Body>
                             </Card>
@@ -55,9 +55,9 @@ function PanelAdmin() {
                     </Col>
                     <Col xs={10} lg={2}>
                         <Link to="/admin/categoriesM">
-                            <Card className="card-categories">
+                            <Card>
                                 <Card.Body>
-                                    <Card.Title bsPrefix="card-categories-title">Modificar categorias</Card.Title>
+                                    <Card.Title>Modificar categorias</Card.Title>
                                     <Card.Text><FontAwesomeIcon icon={faExchangeAlt} /></Card.Text>
                                 </Card.Body>
                             </Card>
@@ -65,22 +65,22 @@ function PanelAdmin() {
                     </Col>
                     <Col xs={10} lg={2}>
                         <Link to="/admin/categoriesD">
-                            <Card className="card-categories">
+                            <Card>
                                 <Card.Body >
-                                    <Card.Title bsPrefix="card-categories-title">Eliminar categorias</Card.Title>
+                                    <Card.Title>Eliminar categorias</Card.Title>
                                     <Card.Text><FontAwesomeIcon icon={faTrash} /></Card.Text>
                                 </Card.Body>
                             </Card>
                         </Link>
                     </Col>
                 </Row> 
-                <Row className="row-filter">   
-                    <Col xs={10} lg={2}>
+                <Row >   
+                    <Col xs={10} lg={6}>
                         <Link to="/admin/orders">
-                            <Card className="card-filter">
-                                <Card.Body bsPrefix="card-filter-body">
-                                    <Card.Title bsPrefix="card-filter-title">Filtrar ordenes</Card.Title>
-                                    <Card.Text bsPrefix="card-filter-text"><FontAwesomeIcon icon={faSortAmountUpAlt} /> </Card.Text>
+                            <Card className="card-filter" >
+                                <Card.Body  className="card-filter-body" >
+                                    <Card.Title  className="card-filter-title" >Filtrar ordenes</Card.Title>
+                                    <Card.Text><FontAwesomeIcon icon={faSortAmountUpAlt} /> </Card.Text>
                                 </Card.Body>
                             </Card>
                         </Link>

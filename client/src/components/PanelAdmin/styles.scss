@@ -1,5 +1,9 @@
 .panelAdmin-container {
 
+    a:hover{
+        text-decoration: none;
+    }
+
     h1 {
         font-family: $kanit;
         background-color: $black;
@@ -19,52 +23,13 @@
             display: flex;
             justify-content: center;
         }
-        
-        .row-filter {
-            display: flex;
-            justify-content: start;
-            margin-left: 18.7rem;
-        }
-
-
-        .card-filter {
-            min-height: 4rem !important;
-            width: 37.3rem;
-            
-            .card-filter-body {
-                display: flex;
-                flex-direction: row-reverse !important;
-                justify-content: center;
-
-                .card-filter-text {
-                    font-size: 3.5rem;
-                    display: inline-block;
-                    margin-top: 0.5rem;
-                    margin-bottom: 0.5rem;
-                }
-                .card-filter-title {
-                    margin-top: 2rem;
-                    margin-left: 3.5rem;
-                    font-size: 2rem;
-                }
-            }
-            
-
-        }
-        .card-categories {
-
-            .card-categories-title {
-        
-                text-align: center;
-            }
-        }
 
         .card {
             background-color: $blue;
             color: $white;
             min-height: 13rem;
             margin-top: 2rem;
-            border-radius: 10px !important;
+            border-radius: 10px;
 
             &:hover {
                 transform: scale( 1.07 );
@@ -82,8 +47,36 @@
             .card-body {
                 display: flex;
                 flex-direction: column-reverse;
-                margin-bottom: 0.5rem;
             }
+        }
+
+        .card-filter {
+            min-height: 4rem ;
+            width: auto;
+            
+            @media (max-width: 991px){
+                min-height: 13rem ;
+            }
+            
+            .card-filter-body {
+                flex-direction: row-reverse ;
+                justify-content: center;
+
+                @media (max-width: 991px){
+                    flex-direction: column-reverse;
+                }
+
+                .card-filter-title {
+                    @media (min-width: 991px){
+                        display: flex;
+                        align-items: center;
+                        padding-left: 0.5rem;
+                    }
+
+                } 
+            }
+            
+
         }
     }
 }
