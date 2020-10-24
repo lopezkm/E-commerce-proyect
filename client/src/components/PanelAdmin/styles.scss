@@ -32,6 +32,10 @@
             margin-top: 2rem;
             border-radius: 10px;
             
+            @media (max-width: 991px){
+                min-height: 13rem ;
+            }
+            
             .card-filter-body {
                 display: flex;
                 flex-direction: row-reverse ;
