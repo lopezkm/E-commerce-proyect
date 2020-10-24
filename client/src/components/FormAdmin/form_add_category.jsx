@@ -21,7 +21,7 @@ const FormAddCategory = () => {
         axios.post('http://localhost:3000/products/category', {
             name: formInput.categoryName,
             description: formInput.categoryDescription
-        })
+        }, { withCredentials: true })
         .then(response => {
             if(!alert(`La categoria ${response.data.name} ha sido creada exitosamente`)) window.location.reload()})// Respuesta del servidor
         .catch(e => {
