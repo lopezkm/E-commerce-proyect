@@ -1,16 +1,61 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { Nav, Navbar, Card, DropdownButton, ButtonGroup, Button } from 'react-bootstrap';
+import { useSelector, useDispatch } from 'react-redux';
+import { Link, useHistory } from 'react-router-dom';
+import { Nav, Navbar, Card, DropdownButton, ButtonGroup, Button, Form } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faTimes, faShoppingCart, faUser } from '@fortawesome/free-solid-svg-icons';
 import { ReactComponent as Logo } from '../../assets/logofull.svg';
 import SearchBar from '../SearchBar/SearchBar.jsx';
+import { RemoveUser } from '../../redux/action-creators/user';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 
 function NavBar(props) {
 
+	const history = useHistory( );
+	const dispatch = useDispatch( );
 	const cartProductsCount = useSelector((state) => (state.cart.count > 0) ? `${state.cart.count}` : null);
 	const userFirstName = useSelector((state) => (state.user.id > 0) ? state.user.firstName : null);
+
+	const API_URL = process.env.REACT_APP_API_URL;
+
+	const handleSumbit = ( event ) => {
+		event.preventDefault( );
+		console.log(event)
+	
+		dispatch( RemoveUser( ) );
+
+		axios.get( `${ API_URL }/auth/logout`, {
+			withCredentials: true
+		} )
+		.then( ( response ) => {
+			setTimeout( ( ) => {
+				history.push( '/products' );
+			}, 3000 );
+			
+			toast.success( `¡Cerraste sesión correctamente!`, {
+				position: 'top-right',
+				autoClose: 3000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: false,
+				draggable: true,
+				progress: undefined
+			} );
+		} )
+		.catch( ( error ) => {
+			toast.error( `Ocurrió un error inesperado`, {
+				position: 'top-right',
+				autoClose: 3000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: false,
+				draggable: true,
+				progress: undefined
+			} );
+		} );
+				
+	}
 
 	return (
 		<Navbar collapseOnSelect expand="lg" fixed="top" variant="dark" className="navbar-main">
@@ -49,26 +94,30 @@ function NavBar(props) {
 								</p>}
 							id="dropdown-menu-align-responsive-1"
 						>
-							<Card>
-								<Card.Header bsPrefix="card-header">
-									<Card.Title bsPrefix="card-title">Hola {userFirstName}</Card.Title>
-								</Card.Header>
+							<Form onSubmit={(event) => handleSumbit (event)}>
+								<Card>
+									<Card.Header bsPrefix="card-header">
+										<Card.Title bsPrefix="card-title">Hola {userFirstName}</Card.Title>
+									</Card.Header>
 
-								<Card.Body bsPrefix="card-body">
-										<Link to="/login/logued/shops">
-											<Card.Text bsPrefix="card-text">Mis Compras</Card.Text>
-										</Link>
-										<Link>
-											<Card.Text>Mis Datos</Card.Text>
-										</Link>
-										<Link>
-											<Card.Text>Seguridad</Card.Text>
-										</Link>
-								</Card.Body>
-								<Card.Footer>
-									<Button className="card-button">Salir</Button>
-								</Card.Footer>
-							</Card>
+									<Card.Body bsPrefix="card-body">
+											<Link to="/login/logued/shops">
+												<Card.Text bsPrefix="card-text">Mis Compras</Card.Text>
+											</Link>
+											<Link>
+												<Card.Text>Mis Datos</Card.Text>
+											</Link>
+											<Link>
+												<Card.Text>Seguridad</Card.Text>
+											</Link>
+									</Card.Body>
+									<Card.Footer>
+										<Button type= "submit" className="card-button">
+											Salir
+										</Button>
+									</Card.Footer>
+								</Card>
+							</Form>
 						</DropdownButton> :
 						<Nav.Link as={Link} className="navbar-nav-user" to="/register" >
 							<FontAwesomeIcon icon={faUser} />
