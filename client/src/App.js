@@ -22,6 +22,7 @@ import FormCreateUser from './components/FormCreateUser/FormCreateUser.jsx';
 import OrderTable from './components/FormAdmin/OrderTable/orderTable.jsx';
 import Cart from './components/Cart/Cart.jsx';
 import PanelAdmin from './components/PanelAdmin/PanelAdmin.jsx';
+import Home from './components/Home/Home.jsx'
 import FormAddReview from './components/FormReview/FormAddReview.jsx';
 import FormModifyReview from './components/FormReview/FormModifyReview.jsx';
 import FormUserLogin from './components/FormUserLogin/FormUserLogin.jsx';
@@ -41,6 +42,7 @@ function App( )
 			<Route exact path='/login/logued/shops' component={ UserShops } />
 			
 			<Route path='/' component={ ( ) => <NavBar/> }/>
+			<Route exact path='/' component={ Home }/>
 			<Route exact path='/Admin' component={ PanelAdmin } />
 			<Route exact path='/Admin/create' component={ FormAdminCreate } />
 			<Route exact path='/Admin/delete' component={ FormAdminDelete } />
