@@ -72,7 +72,7 @@
 	{
 		padding: 0;
 		
-		.nav-link:hover
+		a:hover
 		{
 			color: #ccc;
 			
@@ -83,7 +83,7 @@
 		}
 	}
 	
-	.navbar-nav-left .nav-link
+	.navbar-nav-left a
 	{
 		display: inline-block;
 		position: relative;
@@ -127,13 +127,14 @@
 		justify-content: space-around;
 		margin-top: 1rem;
 		
-		& .nav-link
+		& a
 		{
 			display: flex;
 			align-items: center;
 			padding-left: 1rem;
 			padding-right: 1rem;
 			font-size: 1.25rem;
+			text-decoration: none;
 		}
 		
 		.navbar-nav-cart, .navbar-nav-user
@@ -226,5 +227,15 @@
 			top: 50%;
 			transform: translateY( -50% );
 		}
+	}
+
+	.active{
+
+		.navbar-text, svg
+		{
+			color: white !important;
+		}
+
+		
 	}
 }
