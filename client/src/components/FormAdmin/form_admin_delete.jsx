@@ -43,7 +43,7 @@ const FormAdminDelete = () => {
         {
             return alert("Seleccione el juego que quiere eliminar")     
         }
-        axios.delete(`http://localhost:3000/products/${id}`) 
+        axios.delete(`http://localhost:3000/products/${id}`, { withCredentials: true }) 
         window.location.reload()
     }
 
