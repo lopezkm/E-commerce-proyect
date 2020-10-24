@@ -35,7 +35,7 @@ export function AddProductToCart( userId, productId )
 		axios.put( `${ API_URL }/users/${ userId }/cart`, {
 			productId,
 			quantity
-		} ).then( ( response ) => {
+		}, { withCredentials: true } ).then( ( response ) => {
 			dispatch( {
 				type: actionTypes.EDIT_PRODUCT_IN_CART,
 				payload: { productId, quantity },
@@ -78,7 +78,8 @@ export function EditProductInCart( userId, productId, quantity )
 		axios.put( `${ API_URL }/users/${ userId }/cart`, {
 			productId,
 			quantity
-		} ).then( ( response ) => {
+		}, { withCredentials: true } )
+		.then( ( response ) => {
 			dispatch( {
 				type: actionTypes.EDIT_PRODUCT_IN_CART,
 				payload: { productId, quantity },
@@ -115,7 +116,7 @@ export function RemoveProductsFromCart( userId )
 				type: actionTypes.REMOVE_PRODUCTS_FROM_CART,
 				error: null
 			} );
-		} )
+		}, { withCredentials: true } )
 		.catch( ( error ) => {
 			dispatch( {
 				type: actionTypes.REMOVE_PRODUCTS_FROM_CART,
