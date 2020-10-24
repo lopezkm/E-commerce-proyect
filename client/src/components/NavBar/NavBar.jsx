@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useHistory, NavLink } from 'react-router-dom';
 import { Nav, Navbar, Card, DropdownButton, ButtonGroup, Button, Form } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faTimes, faShoppingCart, faUser } from '@fortawesome/free-solid-svg-icons';
@@ -68,21 +68,23 @@ function NavBar(props) {
 			</Navbar.Toggle>
 			<Navbar.Collapse id="navbarCollapse">
 				<Nav className="navbar-nav-left">
-					<Nav.Link as={Link} to="/products">
+
+					<NavLink as={ Link }  exact activeClassName= "active"  to="/products">
 						<p className="navbar-text navbar-text-outline">Tienda</p>
-					</Nav.Link>
+					</NavLink>
 					<div className="navbar-separator"></div>
-					<Nav.Link as={Link} to="/admin">
+					<NavLink as={ Link }  exact activeClassName="active" to="/admin">
 						<p className="navbar-text navbar-text-outline">Administración</p>
-					</Nav.Link>
+					</NavLink>
 				</Nav>
 				<Nav className="navbar-nav-right">
-					<Nav.Link as={Link} to="/cart" className="navbar-nav-cart">
-						<FontAwesomeIcon icon={faShoppingCart} />
+
+					<NavLink as={ Link } exact activeClassName="active" to="/cart" className="navbar-nav-cart">
+						<FontAwesomeIcon icon={ faShoppingCart }/>
 						<p className="navbar-text">
 							Carrito <span className="cart-count">{cartProductsCount && cartProductsCount}</span>
 						</p>
-					</Nav.Link>
+					</NavLink>
 					{userFirstName ?
 						<DropdownButton className='navbar-user-options'
 							as={ButtonGroup}
@@ -119,13 +121,13 @@ function NavBar(props) {
 								</Card>
 							</Form>
 						</DropdownButton> :
-						<Nav.Link as={Link} className="navbar-nav-user" to="/register" >
-							<FontAwesomeIcon icon={faUser} />
-							<p className="navbar-text">
-								{userFirstName || 'Ingresar'}
-							</p>
-						</Nav.Link>}
-					<SearchBar />
+					<NavLink as={ Link } className="navbar-nav-user" exact activeClassName="active" to="/register" >
+						<FontAwesomeIcon icon={ faUser }/>
+						<p className="navbar-text">
+							{ userFirstName || 'Ingresar' }
+						</p>
+					</NavLink>}
+					<SearchBar/>
 				</Nav>
 			</Navbar.Collapse>
 		</Navbar>
