@@ -74,13 +74,13 @@ function PanelAdmin() {
                         </Link>
                     </Col>
                 </Row> 
-                <Row className="row-filter">   
-                    <Col xs={10} lg={2}>
+                <Row >   
+                    <Col xs={10} lg={6}>
                         <Link to="/admin/orders">
-                            <Card className="card-filter">
-                                <Card.Body bsPrefix="card-filter-body">
-                                    <Card.Title bsPrefix="card-filter-title">Filtrar ordenes</Card.Title>
-                                    <Card.Text bsPrefix="card-filter-text"><FontAwesomeIcon icon={faSortAmountUpAlt} /> </Card.Text>
+                            <Card bsPrefix="card-filter" >
+                                <Card.Body  bsPrefix="card-filter-body" >
+                                    <Card.Title  bsPrefix="card-filter-title" >Filtrar ordenes</Card.Title>
+                                    <Card.Text  bsPrefix="card-filter-text" ><FontAwesomeIcon icon={faSortAmountUpAlt} /> </Card.Text>
                                 </Card.Body>
                             </Card>
                         </Link>

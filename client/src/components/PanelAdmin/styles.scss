@@ -24,32 +24,29 @@
             justify-content: center;
         }
         
-        .row-filter {
-            display: flex;
-            justify-content: start;
-            margin-left: 18.7rem;
-        }
-
-
         .card-filter {
-            min-height: 4rem !important;
-            width: 37.3rem;
+            min-height: 4rem ;
+            width: auto;
+            background-color: $blue;
+            color: $white;
+            margin-top: 2rem;
+            border-radius: 10px;
             
             .card-filter-body {
                 display: flex;
-                flex-direction: row-reverse !important;
+                flex-direction: row-reverse ;
                 justify-content: center;
 
                 .card-filter-text {
-                    font-size: 3.5rem;
+                    font-size: 3rem;
                     display: inline-block;
                     margin-top: 0.5rem;
                     margin-bottom: 0.5rem;
                 }
                 .card-filter-title {
                     margin-top: 2rem;
-                    margin-left: 3.5rem;
-                    font-size: 2rem;
+                    margin-left: 1.5rem;
+                    font-size: 1.25rem;
                 }
             }
             
@@ -61,7 +58,7 @@
             color: $white;
             min-height: 13rem;
             margin-top: 2rem;
-            border-radius: 10px !important;
+            border-radius: 10px;
 
             &:hover {
                 transform: scale( 1.07 );
