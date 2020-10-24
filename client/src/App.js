@@ -27,6 +27,8 @@ import FormAddReview from './components/FormReview/FormAddReview.jsx';
 import FormModifyReview from './components/FormReview/FormModifyReview.jsx';
 import FormUserLogin from './components/FormUserLogin/FormUserLogin.jsx';
 
+import  UserShops from './components/UserShops/UserShops.jsx';
+
 function App( )
 {
 	const dispatch = useDispatch( );
@@ -37,6 +39,8 @@ function App( )
 	
 	return (
 		<Container fluid className="app">
+			<Route exact path='/login/logued/shops' component={ UserShops } />
+			
 			<Route path='/' component={ ( ) => <NavBar/> }/>
 			<Route exact path='/' component={ Home }/>
 			<Route exact path='/Admin' component={ PanelAdmin } />

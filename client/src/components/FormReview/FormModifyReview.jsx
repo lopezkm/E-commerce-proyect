@@ -37,7 +37,7 @@ const FormModifyReview = ({ productId }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.put(`${API_URL}/products/${productId}/review/${userId}`, formInput)
+        axios.put(`${API_URL}/products/${productId}/review/${userId}`, formInput, { withCredentials: true })
             .then(response => console.log(response))
             .catch(err => console.log(err))
     };

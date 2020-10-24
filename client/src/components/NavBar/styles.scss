@@ -150,6 +150,22 @@
 			{
 				color: #ccc;
 			}
+
+			.cart-count
+			{
+				-moz-border-radius: 0.8em;
+				-webkit-border-radius: 0.8em;
+				background: red;
+				border-radius: 0.8em;
+			   color: #ffffff;
+			   display: inline-block;
+			   font-weight: bold;
+			   font-size: 90%;
+			   line-height: 1.52em;
+			   padding-right: 1px;
+			   text-align: center;
+			   width: 1.5em; 
+			}
 		}
 		
 		.navbar-nav-user { background-color: $blue; }
@@ -184,6 +200,73 @@
 		font-weight: 800;
 		font-family: 'Open Sans', sans-serif, arial;
 		text-transform: uppercase;
+	}
+
+	//Menu de usuario desplegable
+
+	.navbar-user-options {
+		margin: 0 1rem 0 0;
+		
+
+		.btn-primary {
+			background-color: transparent;
+			border: none;
+		}
+
+		.dropdown-menu {
+			background-color: transparent;
+		}
+
+		.card {
+			background-color: $grey;
+			font-family: $barlow;
+			color: $white;
+			right: 2.4rem;
+			transition: 3s !important;
+		}
+
+		.card-header {
+			padding: 0;
+			margin: 0 1rem 0 1rem;
+		}
+
+		.card-title {
+			font-size: 1.5rem;
+			padding-bottom: 0;
+			margin-bottom: 0;
+		}
+
+		.card-body {
+			padding: 0;
+		}
+
+		.card-text {
+
+			padding: .7rem 0 .7rem 1rem;
+			font-weight: 500;
+			border: transparent 2px solid;
+			font-size: 1.2rem;
+				
+			&:hover {
+				border: solid $light-grey 2px;
+				color: $blue;
+			}
+		}
+
+		a {
+			text-decoration: none;
+		}
+
+		.card-footer {
+			margin: 0 0 .2rem 1rem;
+			padding: 0;
+		}
+
+		.card-button {
+			margin: .2rem 0 .2rem 0;
+			background-color: $blue;
+		}
+
 	}
 	
 	.navbar-separator

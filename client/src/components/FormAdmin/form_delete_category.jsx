@@ -41,7 +41,7 @@ const FormDeleteCategory = () => {
         {
             return alert("Seleccione la categoria que quiere eliminar")     
         }
-        axios.delete(`http://localhost:3000/products/category/${id}`) 
+        axios.delete(`http://localhost:3000/products/category/${id}`, { withCredentials: true }) 
         window.location.reload()
     }
 
