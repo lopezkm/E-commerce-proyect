@@ -60,7 +60,9 @@ function NavBar(props) {
 	return (
 		<Navbar collapseOnSelect expand="lg" fixed="top" variant="dark" className="navbar-main">
 			<Navbar.Brand>
-				<Logo className="navbar-logo" />
+				<Nav.Link as={Link} to="/">
+					<Logo className="navbar-logo" />
+				</Nav.Link>
 			</Navbar.Brand>
 			<Navbar.Toggle aria-controls="navbarCollapse">
 				<FontAwesomeIcon icon={faBars} className="navbar-open-menu" />
@@ -68,25 +70,23 @@ function NavBar(props) {
 			</Navbar.Toggle>
 			<Navbar.Collapse id="navbarCollapse">
 				<Nav className="navbar-nav-left">
-
-					<NavLink as={ Link }  exact activeClassName= "active"  to="/products">
+					<NavLink as={Link} exact activeClassName="active" to="/products">
 						<p className="navbar-text navbar-text-outline">Tienda</p>
 					</NavLink>
 					<div className="navbar-separator"></div>
-					<NavLink as={ Link }  exact activeClassName="active" to="/admin">
+					<NavLink as={Link} exact activeClassName="active" to="/admin">
 						<p className="navbar-text navbar-text-outline">Administración</p>
 					</NavLink>
 				</Nav>
 				<Nav className="navbar-nav-right">
-
-					<NavLink as={ Link } exact activeClassName="active" to="/cart" className="navbar-nav-cart">
-						<FontAwesomeIcon icon={ faShoppingCart }/>
+					<NavLink as={Link} exact activeClassName="active" to="/cart" className="navbar-nav-cart">
+						<FontAwesomeIcon icon={faShoppingCart} />
 						<p className="navbar-text">
 							Carrito <span className="cart-count">{cartProductsCount && cartProductsCount}</span>
 						</p>
 					</NavLink>
 					{userFirstName ?
-						<DropdownButton className='navbar-user-options'
+						<DropdownButton
 							as={ButtonGroup}
 							menuAlign={{ lg: 'right' }}
 							icon={<FontAwesomeIcon icon={faUser} />}
