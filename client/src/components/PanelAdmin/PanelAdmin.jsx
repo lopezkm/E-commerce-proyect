@@ -45,9 +45,9 @@ function PanelAdmin() {
                 <Row>
                     <Col xs={10} lg={2}>
                         <Link to="/admin/categories">
-                            <Card className="card-categories">
+                            <Card>
                                 <Card.Body>
-                                    <Card.Title bsPrefix="card-categories-title">Agregar categorias</Card.Title>
+                                    <Card.Title>Agregar categorias</Card.Title>
                                     <Card.Text><FontAwesomeIcon icon={faPlusSquare} /></Card.Text>
                                 </Card.Body>
                             </Card>
@@ -55,9 +55,9 @@ function PanelAdmin() {
                     </Col>
                     <Col xs={10} lg={2}>
                         <Link to="/admin/categoriesM">
-                            <Card className="card-categories">
+                            <Card>
                                 <Card.Body>
-                                    <Card.Title bsPrefix="card-categories-title">Modificar categorias</Card.Title>
+                                    <Card.Title>Modificar categorias</Card.Title>
                                     <Card.Text><FontAwesomeIcon icon={faExchangeAlt} /></Card.Text>
                                 </Card.Body>
                             </Card>
@@ -65,9 +65,9 @@ function PanelAdmin() {
                     </Col>
                     <Col xs={10} lg={2}>
                         <Link to="/admin/categoriesD">
-                            <Card className="card-categories">
+                            <Card>
                                 <Card.Body >
-                                    <Card.Title bsPrefix="card-categories-title">Eliminar categorias</Card.Title>
+                                    <Card.Title>Eliminar categorias</Card.Title>
                                     <Card.Text><FontAwesomeIcon icon={faTrash} /></Card.Text>
                                 </Card.Body>
                             </Card>
