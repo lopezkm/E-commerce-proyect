@@ -76,9 +76,10 @@ const FormAdminCreate = () => {
             developer: inputAdminForm.developer,
             publisher: inputAdminForm.publisher,
             publishDate: inputAdminForm.publishDate
-        })
+        }, { withCredentials: true } )
             .then(response => response.data.id)// Respuesta del servidor con producto creado
-            .then(idP => axios.post(`http://localhost:3000/products/${idP}/category/`, { categories: selectedCategories }))
+            .then(idP => axios.post(`http://localhost:3000/products/${idP}/category/`, 
+            { categories: selectedCategories } , { withCredentials: true } ))
             .then(success => {
 
                 toast.info('Juego creado con exito', {

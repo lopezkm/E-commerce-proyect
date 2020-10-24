@@ -49,7 +49,7 @@ const FormModifyCategory = () => {
         axios.put(`http://localhost:3000/products/category/${id}`, {
             name: inputAdminForm.name,
             description: inputAdminForm.description,
-        }).then(() => window.location.reaload())
+        }, { withCredentials: true }).then(() => window.location.reaload())
     }
 
     const handleCheckChange = (event) => {

@@ -69,7 +69,7 @@ function Product({ productId }) {
 	}
 
 	const deleteReview = (productId, userId) => {
-        axios.delete(`${API_URL}/products/${productId}/review/${userId}`)
+        axios.delete(`${API_URL}/products/${productId}/review/${userId}`, { withCredentials: true })
         .then(() => {
 			getProduct();
 		})
