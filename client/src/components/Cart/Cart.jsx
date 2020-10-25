@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import axios from 'axios';
 import Promise from 'bluebird';
 import CartCard from '../CartCard/CartCard.jsx';
-import { EditProductInCart } from '../../redux/action-creators/cart';
+import { editProductInCart } from '../../redux/action-creators/cart';
 import loadingCircle from '../../assets/loading.svg';
 
 const API_URL = process.env.REACT_APP_API_URL;
@@ -63,7 +63,7 @@ function Cart( )
 			return;
 		}
 		
-		dispatch( EditProductInCart( user.id, product.id, value ) );
+		dispatch( editProductInCart( user.id, product.id, value ) );
 	}
 	
 	useEffect( ( ) => {
