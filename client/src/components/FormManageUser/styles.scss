@@ -1,0 +1,24 @@
+.button-user-accessLevel, .button-user-passwordReset, .button-user-delete {
+    display: flex;
+}
+
+.button-user-passwordReset {
+    justify-content: flex-end;
+}
+
+.button-user-delete{
+    justify-content: flex-end;
+}
+
+.button-user-accessLevel{
+    color: white;
+    font-family: $barlow;
+}
+
+.manage-user-fullName {
+    h1 {
+        color: white;
+        font-family: $kanit;
+        font-style: italic;
+    }
+}
