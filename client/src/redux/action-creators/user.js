@@ -53,6 +53,8 @@ export function verifyUser( user )
 				type: actionTypes.VERIFY_USER_FAILED,
 				error: error
 			} );
+			
+			dispatch( removeProductsFromCart( 0 ) );
 		} );
 	};
 }
