@@ -8,7 +8,7 @@ const Order = ( { orderId } ) => {
 	const [ loading, setLoading ] 	= useState( true );
 
 	useEffect( ( ) => {
-		axios.get( `http://localhost:3000/orders/${ orderId }` ).then( ( response ) => {
+		axios.get( `http://localhost:3000/orders/${ orderId }`, { withCredentials: true } ).then( ( response ) => {
 			setOrder( response.data );
 			setLoading( false ); 
 		} );
