@@ -86,7 +86,7 @@ function NavBar(props) {
 						</p>
 					</NavLink>
 					{userFirstName ?
-						<DropdownButton
+						<DropdownButton className="navbar-user-options"
 							as={ButtonGroup}
 							menuAlign={{ lg: 'right' }}
 							icon={<FontAwesomeIcon icon={faUser} />}

@@ -187,7 +187,7 @@ function renderEmptyCart( )
 	return (
 		<div className="cart__emptyCart">
 			<h2>No tienes artículos en el carrito.</h2>
-			<p>¿Tienes una cuenta? <Link to='/createUser'>Inicia sesión</Link> para ver tus artículos.</p>
+			<p>¿Tienes una cuenta? <Link to='/login'>Inicia sesión</Link> para ver tus artículos.</p>
 		</div>
 	);
 }
