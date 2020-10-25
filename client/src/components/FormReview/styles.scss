@@ -1,0 +1,36 @@
+.formReview-container {
+    background-color: $grey;
+    margin-top: 2.5rem;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+
+    .figure {
+        margin-top: 1.7rem;
+        width: 60%;
+        font-family: $barlow; 
+    }
+
+    .figure-img {
+        border-radius: 7px
+    }
+
+    .figure-caption {
+        height: min-content;
+    }
+
+    .review-productName {
+        font-size: 2rem;
+        color: $white;
+    }
+
+    .review-productDeveloper {
+        padding-top: .9rem;
+        font-size: 1rem;
+        color: $white;
+    }
+
+    .form-label {
+        color: $white;
+    }
+}
