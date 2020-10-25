@@ -2,7 +2,7 @@ import React, { } from 'react';
 import { Container, Card, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faExchangeAlt, faPlus, faPlusSquare, faSortAmountUpAlt, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faExchangeAlt, faPlus, faPlusSquare, faSortAmountUpAlt, faTrash, faUsers } from '@fortawesome/free-solid-svg-icons';
 
 
 function PanelAdmin() {
@@ -74,7 +74,7 @@ function PanelAdmin() {
                         </Link>
                     </Col>
                 </Row> 
-                <Row >   
+                <Row>   
                     <Col xs={10} lg={6}>
                         <Link to="/admin/orders">
                             <Card className="card-filter" >
@@ -85,7 +85,19 @@ function PanelAdmin() {
                             </Card>
                         </Link>
                     </Col>
-                </Row>     
+                </Row>
+                <Row>   
+                    <Col xs={10} lg={6}>
+                        <Link to="/admin/users">
+                            <Card className="card-filter" >
+                                <Card.Body  className="card-filter-body" >
+                                    <Card.Title  className="card-filter-title" >Control de usuarios</Card.Title>
+                                    <Card.Text><FontAwesomeIcon icon={faUsers} /> </Card.Text>
+                                </Card.Body>
+                            </Card>
+                        </Link>
+                    </Col>
+                </Row>      
             </Container>
         </div >
     );

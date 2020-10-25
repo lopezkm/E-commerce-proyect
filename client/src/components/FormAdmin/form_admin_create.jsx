@@ -45,8 +45,8 @@ const FormAdminCreate = () => {
     };
 
     const handleCategoryChange = (event) => {
-        let selected = document.getElementById(event.target.id)
-        let selectedId = selected.id
+        let selected = document.getElementById(event.target.id);
+        let selectedId = parseInt(selected.id);
         let statusCheck = selected.checked;
 
         console.log(selected);
@@ -66,7 +66,7 @@ const FormAdminCreate = () => {
         }
 
         setValidated(true);
-
+        console.log(selectedCategories);
         event.preventDefault();
         axios.post('http://localhost:3000/products', {
             name: inputAdminForm.name,
