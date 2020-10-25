@@ -222,7 +222,7 @@ server.get( '/promote/:id', hasAccessLevel( ACCESS_LEVEL_SUPER ), ( request, res
 		}
 		
 		user.increment( 'accessLevel', { by: 1 } )
-			.then( ( response ) => response.sendStatus( 204 ) );
+			.then( ( ) => response.sendStatus( 204 ) );
 	} )
 	.catch( ( error ) => {
 		response.sendStatus( 500 );
@@ -250,7 +250,7 @@ server.get( '/demote/:id', hasAccessLevel( ACCESS_LEVEL_SUPER ), ( request, resp
 		}
 		
 		user.decrement( 'accessLevel', { by: 1 } )
-			.then( ( response ) => response.sendStatus( 204 ) );
+			.then( ( ) => response.sendStatus( 204 ) );
 	} )
 	.catch( ( error ) => {
 		response.sendStatus( 500 );
