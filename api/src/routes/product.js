@@ -218,7 +218,7 @@ server.post( '/:idProduct/category/', hasAccessLevel( ), ( request, response, ne
 			Promise.map( categories, ( category ) => {
 				return product.addCategory( category );
 			} )
-			.then( ( response ) => {
+			.then( ( data ) => {
 				response.sendStatus( 200 );
 			} )
 			.catch( ( error ) => {

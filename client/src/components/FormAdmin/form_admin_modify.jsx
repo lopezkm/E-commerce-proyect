@@ -39,6 +39,7 @@ const FormAdminModify = () => {
     const getProducts = () => {
         axios.get(`http://localhost:3000/products/`)
             .then(response => {
+                console.log(response.data)
                 setProducts(response.data);
             });
     }
@@ -143,7 +144,7 @@ const FormAdminModify = () => {
     const addCategoryProduct = (idC) => {
         let selector = document.getElementById("productList");
         let idP = selector.options[selector.selectedIndex].id;
-        axios.post(`http://localhost:3000/products/${idP}/category/${idC}`, { withCredentials: true })
+        axios.post(`http://localhost:3000/products/${idP}/category/${idC}`, {}, { withCredentials: true })
             .then(() => {
                 axios.get(`http://localhost:3000/products/${idP}`)
                     .then((response) => {
