@@ -34,6 +34,20 @@ function reducer( state = initialState, action )
 				count: 0
 			};
 		}
+		case actionTypes.VERIFY_CART_SUCCESS:
+		{
+			let productsList = action.payload.sort( ( a, b ) => a.productId - b.productId );
+			let productsCount = productsList.reduce( ( a, p ) => ( a + p.quantity ), 0 );
+			
+			return {
+				products: productsList,
+				count: productsCount
+			};
+		}
+		case actionTypes.VERIFY_CART_FAILED:
+		{
+			return state;
+		}
 		default:
 		{
 			return state;

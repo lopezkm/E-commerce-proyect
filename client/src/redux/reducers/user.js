@@ -24,6 +24,21 @@ function reducer( state = initialState, action )
 		{
 			return initialState;
 		}
+		case actionTypes.VERIFY_USER_SUCCESS:
+		{
+			return {
+				...state,
+				isLogged: true
+			};
+		}
+		case actionTypes.VERIFY_USER_FAILED:
+		{
+			return {
+				...state,
+				id: 0,
+				isLogged: false
+			};
+		}
 		default:
 		{
 			return state;
