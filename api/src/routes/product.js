@@ -3,7 +3,7 @@ const Promise = require( 'bluebird' );
 const sequelize = require( 'sequelize' );
 const { Op, QueryTypes } = sequelize;
 
-const { Product, Category, Media, Review, conn, User } = require( '../db.js' );
+const { Product, Category, Media, Review, Order, conn, User } = require( '../db.js' );
 const { isAuthenticated, hasAccessLevel } = require( '../passport.js' );
 
 /* =================================================================================
@@ -334,7 +334,7 @@ server.delete( '/:id', hasAccessLevel( ), ( request, response ) => {
 * 		[ Creación de una review ]
 * ================================================================================= */
 
-server.post( '/:productId/review/:userId', isAuthenticated, ( request, response ) => {
+server.post( '/:productId/review/:userId', isAuthenticated, ( request, response, next ) => {
 	const { productId, userId } = request.params;
 	const { qualification, description } = request.body;
 	
@@ -373,14 +373,16 @@ server.post( '/:productId/review/:userId', isAuthenticated, ( request, response 
 			return;
 		}
 		
-		if ( !data.created ) {
-			response.status( 409 ).send( 'User already submitted a review of this product' );
+		const [ review, created ] = data;
+		
+		if ( !created ) {
+			return response.status( 409 ).send( 'User already submitted a review of this product' );
 		}
 		
-		response.status( 201 ).send( data.review );
+		response.status( 201 ).send( review );
 	} )
 	.catch( ( error ) => {
-		response.sendStatus( 500 );
+		next( 500 );
 	} );
 } );
 
