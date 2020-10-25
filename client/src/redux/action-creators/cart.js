@@ -207,11 +207,9 @@ export function removeProductsFromCart( userId )
 function UTIL_MergeProducts( cartProducts, userProducts )
 {
 	const merger = ( acc, curr ) => {
-		const pos = acc.findIndex( ( v ) => v.productId === curr.id );
-		
-		( pos < 0 ) ?
-			acc.push( { productId: curr.id, quantity: curr.OrderProduct.quantity } ) :
-			acc[ pos ].quantity = curr.OrderProduct.quantity;
+		if ( !acc.includes( curr ) ) {
+			acc.push( { productId: curr.id, quantity: curr.OrderProduct.quantity } );
+		}
 		
 		return acc;
 	};
