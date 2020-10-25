@@ -32,7 +32,7 @@ function CreateUser( )
 	const handleSumbit = ( event ) => {
 		event.preventDefault( );
 		
-		axios.post( `http://localhost:3000/auth/register`, input, {
+		axios.post( `http://localhost:3000/auth/singup`, input, {
 			withCredentials: true
 		} )
 		.then( ( response ) => {
