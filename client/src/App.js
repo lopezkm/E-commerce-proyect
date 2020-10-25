@@ -2,10 +2,10 @@ import React, { useEffect } from 'react';
 import { Route } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
-import { GetCategories } from './redux/action-creators/category';
 
-import "slick-carousel/slick/slick.css"; 
-import "slick-carousel/slick/slick-theme.css";
+import { verifyUser } from './redux/action-creators/user';
+import { loadCategories } from './redux/action-creators/category';
+
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 import 'react-toastify/dist/ReactToastify.css';
 import './App.scss';
@@ -36,7 +36,8 @@ function App( )
 	const dispatch = useDispatch( );
 	
 	useEffect( ( ) => {
-		dispatch( GetCategories( ) );
+		dispatch( verifyUser( ) );
+		dispatch( loadCategories( ) );
 	}, [ dispatch ] );
 	
 	return (
