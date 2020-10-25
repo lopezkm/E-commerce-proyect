@@ -5,7 +5,7 @@ import { Container, Form, Button, Col, Row } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 import FloatingLabelInput from 'react-floating-label-input';
 import axios from 'axios';
-import { LoadUser, RemoveUser } from '../../redux/action-creators/user';
+import { loadUser } from '../../redux/action-creators/user';
 
 import { ReactComponent as Logo } from '../../assets/logofull.svg';
 
@@ -36,15 +36,15 @@ function FormUserLogin( )
 			withCredentials: true
 		} )
 		.then( ( response ) => {
-			dispatch( LoadUser( response.data ) );
+			dispatch( loadUser( response.data ) );
 			
 			setTimeout( ( ) => {
 				history.push( '/products' );
-			}, 3000 );
+			}, 1500 );
 			
 			toast.success( `¡Ingresaste correctamente en tu cuenta!`, {
 				position: 'top-right',
-				autoClose: 3000,
+				autoClose: 1500,
 				hideProgressBar: false,
 				closeOnClick: true,
 				pauseOnHover: false,

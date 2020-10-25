@@ -28,7 +28,7 @@ function CartCard( { id, name, quantity, price, media, onQuantityChange } )
 	
 	const handleInputChange = ( e ) => {
 		const { name } = e.target;
-		name === '+' ? quantity++ : quantity--;
+		name === '+' ? quantity++ : name === '-' ? quantity-- : quantity = 0;
 		onQuantityChange( id, parseInt( quantity ) );
 	}
 	
@@ -53,6 +53,7 @@ function CartCard( { id, name, quantity, price, media, onQuantityChange } )
 							 	<Button className="mod-qty-btn" name="-" size="sm" onClick={ handleInputChange }>-</Button>
 								<span> { quantity } </span>
 								<Button className="mod-qty-btn" name="+" size="sm" onClick={ handleInputChange }>+</Button>
+								<Button className="delete-btn"  name="d" variant="link" onClick={ handleInputChange }>Quitar del carrito</Button>
 							</div>
 						</Col>
 						<Col xs={ 2 }>
@@ -65,4 +66,4 @@ function CartCard( { id, name, quantity, price, media, onQuantityChange } )
 	);
 }
 
-export default CartCard;
+export default CartCard;   

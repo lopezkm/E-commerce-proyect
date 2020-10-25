@@ -4,7 +4,7 @@ import { Card, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
-import { AddProductToCart } from '../../redux/action-creators/cart';
+import { addProductToCart } from '../../redux/action-creators/cart';
 import defaultPortrait from '../../assets/portrait.jpg';
 
 const API_URL = process.env.REACT_APP_API_URL;
@@ -39,7 +39,7 @@ function ProductCard( { id, name, price, media, developer, stock } )
 	const handleCartButtonClick = ( e ) => {
 		e.preventDefault( );
 		
-		dispatch( AddProductToCart( userId, id ) );
+		dispatch( addProductToCart( userId, id ) );
 		
 		toast.info( `¡${ name } añadido al carrito!`, {
 			position: 'top-center',
