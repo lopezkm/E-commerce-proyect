@@ -7,6 +7,7 @@ import { AddProductToCart } from '../../redux/action-creators/cart';
 import ProductCard from '../ProductCard/ProductCard.jsx';
 import defaultBanner from '../../assets/banner.jpg';
 import Review from '../Review/Review.jsx';
+import Slider from "react-slick";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -98,9 +99,53 @@ function Product({ productId }) {
 
 	const dateFormat = product.publishDate && product.publishDate.substring(0, 10).split('-').reverse().join('/');
 
+	const settings = {
+		centerMode: true,
+		centerPadding: '275px',
+		slidesToShow: 1,
+		autoplay: true,
+		autoplaySpeed: 3000,
+		/* fade: true, */
+		responsive: [
+		  {
+			breakpoint: 768,
+			settings: {
+				arrows: false,
+				centerMode: true,
+				centerPadding: '200px',
+				slidesToShow: 1,
+				autoplay: true,
+				autoplaySpeed: 4000,
+			}
+		  },
+		  {
+			breakpoint: 480,
+			settings: {
+				arrows: false,
+				centerMode: true,
+				centerPadding: '200px',
+				slidesToShow: 1,
+				autoplay: true,
+				autoplaySpeed: 3000,
+			}
+		  }
+		]
+	};
+
 	return (
 		<Container>
-			<Carousel interval={5000} className="product-carousel-main">
+			 <div>
+				<Slider {...settings}>
+				{
+					product.media.map((media, i) => media.type.includes("image-big") &&
+						<div key={i}>
+							<img src={media.path} className="d-block w-100" alt="" />
+						</div>
+					)
+				}
+				</Slider>
+      		</div>
+			{/* <Carousel interval={5000} className="product-carousel-main">
 				{
 					product.media.map((media, i) => media.type.includes("image-big") &&
 						<Carousel.Item key={i}>
@@ -108,7 +153,7 @@ function Product({ productId }) {
 						</Carousel.Item>
 					)
 				}
-			</Carousel>
+			</Carousel> */}
 			<Card bsPrefix="product-card">
 				<Card.Body bsPrefix="product-card-info">
 					<Card.Title><h1>{product.name}</h1></Card.Title>
