@@ -6,24 +6,24 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faTimes, faShoppingCart, faUser } from '@fortawesome/free-solid-svg-icons';
 import { ReactComponent as Logo } from '../../assets/logofull.svg';
 import SearchBar from '../SearchBar/SearchBar.jsx';
-import { RemoveUser } from '../../redux/action-creators/user';
+import { removeUser } from '../../redux/action-creators/user';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
-function NavBar(props) {
-
+function NavBar( )
+{
 	const history = useHistory( );
 	const dispatch = useDispatch( );
-	const cartProductsCount = useSelector((state) => (state.cart.count > 0) ? `${state.cart.count}` : null);
-	const userFirstName = useSelector((state) => (state.user.id > 0) ? state.user.firstName : null);
+	
+	const cartProductsCount = useSelector( ( state ) => ( state.cart.count > 0 ) ? `${ state.cart.count }` : null );
+	const userFirstName = useSelector( ( state ) => ( state.user.id > 0 ) ? state.user.firstName : null );
 
 	const API_URL = process.env.REACT_APP_API_URL;
 
 	const handleSumbit = ( event ) => {
 		event.preventDefault( );
-		console.log(event)
 	
-		dispatch( RemoveUser( ) );
+		dispatch( removeUser( ) );
 
 		axios.get( `${ API_URL }/auth/logout`, {
 			withCredentials: true
