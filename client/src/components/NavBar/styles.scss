@@ -14,6 +14,11 @@
 		@include padding( $l: 1rem );
 	}
 	
+	.navbar-brand
+	{
+		padding: 0;
+	}
+	
 	.navbar-toggler
 	{
 		min-height: 3.25rem;
