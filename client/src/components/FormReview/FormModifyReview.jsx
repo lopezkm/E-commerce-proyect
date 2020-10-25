@@ -102,41 +102,7 @@ const FormModifyReview = ({ productId }) => {
     } */
 
     return (
-        <Container>
-            <Card style={{ width: '18rem' }}>
-                <Card.Img variant="top" src={ getProductPortrait(product.media)} />
-                <Card.Body>
-                    <Card.Title>{product.name}</Card.Title>
-                    <Card.Text>{product.developer}</Card.Text>
-                </Card.Body>
-            </Card>
-            <Form onSubmit={(e) => handleSubmit(e)}>
-                <Form.Group>
-                    <Form.Label>¿Cuantos estrellas le darias?</Form.Label>
-                    <ReactStars
-                        count={5}
-                        onChange={newValue => setRatingStars(newValue)}
-                        value={formInput.qualification}
-                        size={24}
-                        isHalf={false}
-                        emptyIcon={<i className="far fa-star"></i>}
-                        halfIcon={<i className="fa fa-star-half-alt"></i>}
-                        fullIcon={<i className="fa fa-star"></i>}
-                        activeColor="#ffd700"
-                    />
-                </Form.Group>
-
-                <Form.Group>
-                    <Form.Label>¿Que opinas del producto?</Form.Label>
-                    <Form.Control
-                        name='description'
-                        type='text'
-                        onChange={(e) => handleInputChange(e)}
-                        value={formInput.description}
-                    />
-                </Form.Group>
-                <Button variant="primary" type="submit">Submit</Button>
-            </Form>
+        <Container className='formReview-container'>
             <Figure>
                 <Row>
                     <Col xs={12} md={6}>
@@ -153,6 +119,7 @@ const FormModifyReview = ({ productId }) => {
                         <Form onSubmit={(e) => handleSubmit(e)}>
                             <Form.Group>
                                 <ReactStars
+                                    value={formInput.qualification}
                                     count={5}
                                     onChange={newValue => setRatingStars(newValue)}
                                     size={50}
@@ -167,6 +134,7 @@ const FormModifyReview = ({ productId }) => {
                             <Form.Group>
                                 <Form.Label>Danos tu opinión sobre el producto :D</Form.Label>
                                 <Form.Control
+                                    value={formInput.description}
                                     name='description'
                                     type='text'
                                     as="textarea"
