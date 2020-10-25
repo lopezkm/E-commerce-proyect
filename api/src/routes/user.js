@@ -101,7 +101,7 @@ server.get( '/:id/cart', isAuthenticated, ( request, response ) => {
 		}
 		
 		order.getProducts( ).then( ( products ) => {
-			response.send( 200 ).status( products );
+			response.status( 200 ).send( products );
 		} );
 	} );
 } );
@@ -146,9 +146,11 @@ server.delete( '/:id/cart', isAuthenticated, ( request, response ) => {
 	- Si la operación falló se devuelve un error 400
 */
 
-server.put( '/:id/cart', isAuthenticated, ( request, response ) => {
+server.put( '/:id/cart', isAuthenticated, ( request, response, next ) => {
 	const { id } = request.params;
 	const { productId, quantity } = request.body;
+	
+	let price;
 	
 	Product.findByPk( productId ).then( ( product ) => {
 		if ( !product ) {
@@ -158,6 +160,8 @@ server.put( '/:id/cart', isAuthenticated, ( request, response ) => {
 		if ( product.stock < quantity ) {
 			throw new Error( 'Not enough stock' );
 		}
+		
+		price = product.price;
 		
 		return Order.findOne( {
 			where: {
@@ -194,7 +198,7 @@ server.put( '/:id/cart', isAuthenticated, ( request, response ) => {
 				productId
 			},
 			defaults: {
-				price: product.price,
+				price,
 				quantity
 			}
 		} );
@@ -214,6 +218,9 @@ server.put( '/:id/cart', isAuthenticated, ( request, response ) => {
 		orderline.update( { quantity } ).then( ( ) => {
 			response.sendStatus( 200 );
 		} );
+	} )
+	.catch( ( error ) => {
+		next( error );
 	} );
 } );
 

@@ -3,11 +3,14 @@ import { Link } from 'react-router-dom';
 import { Card, Button, Carousel, Container, Col, Row, Badge } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
-import { AddProductToCart } from '../../redux/action-creators/cart';
+import { addProductToCart } from '../../redux/action-creators/cart';
 import ProductCard from '../ProductCard/ProductCard.jsx';
 import defaultBanner from '../../assets/banner.jpg';
 import Review from '../Review/Review.jsx';
 import Slider from "react-slick";
+
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -66,7 +69,7 @@ function Product({ productId }) {
 	const handleAddToCartClick = (e) => {
 		e.preventDefault();
 
-		dispatch(AddProductToCart(userId, product.id));
+		dispatch(addProductToCart(userId, product.id));
 	}
 
 	const deleteReview = (productId, userId) => {

@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import FloatingLabelInput from 'react-floating-label-input';
 import axios from 'axios';
 import { ReactComponent as Logo } from '../../assets/logofull.svg';
-import { LoadUser } from '../../redux/action-creators/user';
+import { loadUser } from '../../redux/action-creators/user';
 
 
 
@@ -36,16 +36,15 @@ function CreateUser( )
 			withCredentials: true
 		} )
 		.then( ( response ) => {
-			dispatch( LoadUser( response.data ) );
+			dispatch( loadUser( response.data ) );
 			
 			setTimeout( ( ) => {
 				history.push( '/products' );
-			}, 3000 );
+			}, 1500 );
 			
 			toast.info( 'Usuario creado con exito', {
 				position: "top-right",
-				autoClose: 3000,
-				hideProgressBar: true,
+				autoClose: 1500,
 				closeOnClick: true,
 				pauseOnHover: true,
 				draggable: true,
