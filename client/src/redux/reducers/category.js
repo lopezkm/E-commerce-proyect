@@ -29,7 +29,7 @@ function reducer( state = initialState, action )
 				categories: state.categories.filter( c => c.id !== action.payload.id )
 			}
 		
-		case actionTypes.GET_CATEGORIES:
+		case actionTypes.LOAD_CATEGORIES:
 			
 			return {
 				...state,
