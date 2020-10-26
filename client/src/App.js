@@ -8,6 +8,8 @@ import { loadCategories } from './redux/action-creators/category';
 
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 import 'react-toastify/dist/ReactToastify.css';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 import './App.scss';
 
 import Product from './components/Product/Product.jsx';

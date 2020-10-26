@@ -1,19 +1,14 @@
-.product-carousel-main
+.product-wrapper
 {
-	margin: 1rem;
-	
-	img
-	{
-		border-radius: 1%;
-	}
+	margin-top: 1rem;
 }
 
-.product-card
+.product__card
 {
 	border: none;
 }
 
-.product-card-info
+.product__card-info
 {
 	background-color: $black;
 	color: white;
@@ -43,7 +38,7 @@
 	padding-left: 0;
 }
 
-.product-card-text
+.product__card-text
 {
 	font-family:$barlow;
 	text-align: left;
@@ -89,19 +84,59 @@
 
 .slick-slide
 {
-	padding: 25px;
-	transition: all 1s ease;
-	opacity: 0.5;
+	transition: all 0.75s ease;
+	opacity: 0.25;
 	
 	.slick-slide__item
 	{
 		width: 100%;
 		height: auto;
 	}
+	
+	@include mq( 'lg' )
+	{
+		padding: 50px;
+	}
 }
 
 .slick-center
 {
 	opacity: 1;
-	transform: scale( 1.1 );
+	transform: scale( 1.25 );
+}
+
+.slick-arrow
+{
+	position: absolute;
+	z-index: 1;
+	width: 45px;
+	height: 45px;
+	border-radius: 5px;
+	
+	&:before
+	{
+		font-size: 3rem;
+	}
+}
+
+.slick-next
+{
+	left: none;
+	right: 5%;
+	
+	@include mq( 'lg' )
+	{
+		right: 17.5%;
+	}
+}
+
+.slick-prev
+{
+	right: none;
+	left: 5%;
+	
+	@include mq( 'lg' )
+	{
+		left: 17.5%;
+	}
 }
