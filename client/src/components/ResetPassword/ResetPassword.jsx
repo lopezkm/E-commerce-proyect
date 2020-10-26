@@ -67,7 +67,7 @@ function ResetPassword( { token } )
 			return;
 		}
 		
-		axios.get( `${ API_URL }/auth/reset/${ token }`, {
+		axios.post( `${ API_URL }/auth/reset/${ token }`, {
 			password
 		} )
 		.then( ( response ) => {
