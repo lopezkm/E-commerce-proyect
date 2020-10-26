@@ -31,8 +31,8 @@ function NavBar( )
 		} )
 		.then( ( response ) => {
 			setTimeout( ( ) => {
-				history.push( '/products' );
-			}, 3000 );
+				history.push( '/' );
+			}, 1500 );
 			
 			toast.success( `¡Cerraste sesión correctamente!`, {
 				position: 'top-right',
@@ -55,7 +55,6 @@ function NavBar( )
 				progress: undefined
 			} );
 		} );
-				
 	}
 
 	return (
@@ -87,7 +86,8 @@ function NavBar( )
 							Carrito <span className="cart-count">{cartProductsCount && cartProductsCount}</span>
 						</p>
 					</NavLink>
-					{userFirstName ?
+					{
+						userFirstName ?
 						<DropdownButton className="navbar-user-options"
 							as={ButtonGroup}
 							menuAlign={{ lg: 'right' }}
@@ -123,12 +123,13 @@ function NavBar( )
 								</Card>
 							</Form>
 						</DropdownButton> :
-					<NavLink as={ Link } className="navbar-nav-user" exact activeClassName="active" to="/register" >
-						<FontAwesomeIcon icon={ faUser }/>
-						<p className="navbar-text">
-							{ userFirstName || 'Ingresar' }
-						</p>
-					</NavLink>}
+						<NavLink as={ Link } className="navbar-nav-user" exact activeClassName="active" to="/login" >
+							<FontAwesomeIcon icon={ faUser }/>
+							<p className="navbar-text">
+								{ userFirstName || 'Ingresar' }
+							</p>
+						</NavLink>
+					}
 					<SearchBar/>
 				</Nav>
 			</Navbar.Collapse>
