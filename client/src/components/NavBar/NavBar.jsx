@@ -17,6 +17,7 @@ function NavBar( )
 	
 	const cartProductsCount = useSelector( ( state ) => ( state.cart.count > 0 ) ? `${ state.cart.count }` : null );
 	const userFirstName = useSelector( ( state ) => ( state.user.id > 0 ) ? state.user.firstName : null );
+	const userAccessLevel = useSelector((state) => state.user.accessLevel);
 
 	const API_URL = process.env.REACT_APP_API_URL;
 
@@ -74,9 +75,10 @@ function NavBar( )
 						<p className="navbar-text navbar-text-outline">Tienda</p>
 					</NavLink>
 					<div className="navbar-separator"></div>
-					<NavLink as={Link} exact activeClassName="active" to="/admin">
+					{userAccessLevel > 0 ?
+					 <NavLink as={Link} exact activeClassName="active" to="/admin">
 						<p className="navbar-text navbar-text-outline">Administración</p>
-					</NavLink>
+					</NavLink> : null}
 				</Nav>
 				<Nav className="navbar-nav-right">
 					<NavLink as={Link} exact activeClassName="active" to="/cart" className="navbar-nav-cart">
