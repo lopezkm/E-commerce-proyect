@@ -1,101 +1,86 @@
-.principalCard-container {
-    margin: 1rem 3rem 1rem 3rem;
-    background-color: $grey;
-    border-radius: 10px;
-    border: $light-grey 2px solid;
-    color: $white;
-    font-family: $barlow;
-    overflow: hidden;
+.principalCard-container
+{
+	margin: 1rem 3rem 1rem 3rem;
+	background-color: $grey;
+	border-radius: 10px;
+	border: $light-grey 2px solid;
+	color: $white;
+	font-family: $barlow;
+	overflow: hidden;
 
-    .col {
-        padding: 0;
-    }
+	.col
+	{
+		padding: 0;
+	}
 
-    .card-title {
-        font-size: 3.5rem;
-    }
+	.card-title
+	{
+		font-size: 3.5rem;
+	}
 
-    .card-text {
-        max-width: 27rem;
-        font-size: 1.1rem;
-        text-align: justify;
-    }
+	.card-text
+	{
+		max-width: 27rem;
+		font-size: 1.1rem;
+		text-align: justify;
+	}
 
+	&:after
+	{
+		content: "";
+		width: 65%;
+		height: 100%;
+		background-color: $grey;
+		transform: skewX( -18deg );
+		transition: 1.5s;
+		position: absolute;
+		left: 45%;
+	}
 
-    //Div dinamico
+	.principalCard-text-one
+	{
+		position: absolute;
+		left: 3rem;
+		transition: 1.5s;
+		z-index: 1;
+	}
 
-    &:after {
-            content: "";
-            width: 48.5rem;
-            height: 22.7rem;
-            background-color: $grey;
-            transform: skewX(-18deg);
-            transition: 1.5s;
-            position: absolute; 
-            left: 34rem;          
-    }
+	.principalCard-text-two
+	{
+		position: absolute;
+		left: 3rem;
+		transition: 1.5s;
+		color: transparent;
+		z-index: 1;
 
-    //Texto lateral derecho (estado inicial)
+		.card-title
+		{
+			font-size: 3rem;
+		}
+	}
 
-    .principalCard-text-one {
+	&:hover
+	{
+		.principalCard-text-one
+		{
+			position: absolute;
+			left: 3rem;
+			color: transparent;
+			transition: 1.5s;
+		}
 
-        position: absolute;
-        left: 3rem;
-        transition: 1.5s;
-        z-index: 1;
+		.principalCard-text-two
+		{
+			position: absolute;
+			left: 3rem;
+			transition: 1.5s;
+			color: $white;
+			z-index: 1;
+		}
 
-    }
-
-    //Texto lateral izquierdo (estado inicial)
-
-    .principalCard-text-two {
-
-        position: absolute;
-        left: 3rem;
-        transition: 1.5s;
-        color: transparent;
-        z-index: 1;
-
-        .card-title {
-            font-size: 3rem;
-        }
-
-    }
-
-    //Cambio de poscision
-
-    &:hover {
-        
-        //Texto lateral derecho (estado activo)
-
-        .principalCard-text-one {
-
-            position: absolute;
-            left: 3rem;
-            color: transparent;
-            transition: 1.5s;
-    
-        }
-
-        //Texto lateral izquierdo (estado activo)
-
-        .principalCard-text-two {
-
-            position: absolute;
-            left: 3rem;
-            transition: 1.5s;
-            color: $white;
-            z-index: 1;
-    
-        }
-
-        //Mover el div al otro extremo
-
-        &:after {
-            position: absolute; 
-            left: -5rem;
-            transition: 1.5s;
-
-        }          
-    }
+		&:after
+		{
+			left: -10%;
+		}
+	}
 }

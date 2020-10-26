@@ -17,7 +17,7 @@ export function verifyCart( userId )
 	if ( userId <= 0 )
 	{
 		return {
-			type: actionTypes.VERIFY_CART_FAILED
+			type: actionTypes.CART_ERROR
 		};
 	}
 	
@@ -38,7 +38,7 @@ export function verifyCart( userId )
 		.catch( ( error ) => {
 			if ( !error.request || ( error.request.status !== 404 ) ) {
 				dispatch( {
-					type: actionTypes.VERIFY_CART_FAILED,
+					type: actionTypes.CART_ERROR,
 					error: error
 				} );
 				
@@ -61,7 +61,7 @@ export function verifyCart( userId )
 		} )
 		.catch( ( error ) => {
 			dispatch( {
-				type: actionTypes.VERIFY_CART_FAILED,
+				type: actionTypes.CART_ERROR,
 				error: error
 			} );
 		} );
@@ -87,8 +87,7 @@ export function addProductToCart( userId, productId )
 			
 			dispatch( {
 				type: actionTypes.EDIT_PRODUCT_IN_CART,
-				payload: { productId, quantity },
-				error: null
+				payload: { productId, quantity }
 			} );
 		};
 	}
@@ -106,14 +105,12 @@ export function addProductToCart( userId, productId )
 		.then( ( response ) => {
 			dispatch( {
 				type: actionTypes.EDIT_PRODUCT_IN_CART,
-				payload: { productId, quantity },
-				error: null
+				payload: { productId, quantity }
 			} );
 		} )
 		.catch( ( error ) => {
 			dispatch( {
-				type: actionTypes.EDIT_PRODUCT_IN_CART,
-				payload: null,
+				type: actionTypes.CART_ERROR,
 				error: error
 			} );
 		} );
@@ -136,8 +133,7 @@ export function editProductInCart( userId, productId, quantity )
 	{
 		return {
 			type: actionTypes.EDIT_PRODUCT_IN_CART,
-			payload: { productId, quantity },
-			error: null
+			payload: { productId, quantity }
 		};
 	}
 	
@@ -151,14 +147,12 @@ export function editProductInCart( userId, productId, quantity )
 		.then( ( response ) => {
 			dispatch( {
 				type: actionTypes.EDIT_PRODUCT_IN_CART,
-				payload: { productId, quantity },
-				error: null
+				payload: { productId, quantity }
 			} );
 		} )
 		.catch( ( error ) => {
 			dispatch( {
-				type: actionTypes.EDIT_PRODUCT_IN_CART,
-				payload: null,
+				type: actionTypes.CART_ERROR,
 				error: error
 			} );
 		} );
@@ -207,7 +201,7 @@ export function removeProductsFromCart( userId )
 function UTIL_MergeProducts( cartProducts, userProducts )
 {
 	const merger = ( acc, curr ) => {
-		if ( !acc.includes( curr ) ) {
+		if ( !acc.find( ( v ) => v.productId === curr.id ) ) {
 			acc.push( { productId: curr.id, quantity: curr.OrderProduct.quantity } );
 		}
 		

@@ -1,72 +1,142 @@
-.product-carousel-main  {
-    margin: 1rem;
-    img {
-        border-radius: 1%;
-    }
+.product-wrapper
+{
+	margin-top: 1rem;
 }
 
-.product-card {
-    border: none;
+.product__card
+{
+	border: none;
 }
 
-.product-card-info{
-    background-color: $black;
-    color: white;
+.product__card-info
+{
+	background-color: $black;
+	color: white;
 
-    h1 {
-        font-family:$kanit;
-        font-style: italic;
-        font-size: 2.5rem;
-        text-align: center;
-    }
+	h1
+	{
+		font-family:$kanit;
+		font-style: italic;
+		font-size: 2.5rem;
+		text-align: center;
+	}
 }
 
-.product-row-border-top {
-    border-top: 3px solid $grey;
-    padding-top: 1rem;
+.product-row-border-top
+{
+	border-top: 3px solid $grey;
+	padding-top: 1rem;
 }
 
-.product-title-review-container {
-    width: 100%;
+.product-title-review-container
+{
+	width: 100%;
 }
 
-.product-container-reviews {
-    padding-left: 0;
+.product-container-reviews
+{
+	padding-left: 0;
 }
 
-.product-card-text {
-    font-family:$barlow;
-    text-align: left;
-    font-size: 1.25rem;
-    
-    .row {
-        justify-content: space-between;
-        margin: 1rem 0;
-    }
+.product__card-text
+{
+	font-family:$barlow;
+	text-align: left;
+	font-size: 1.25rem;
+	
+	.row
+	{
+		justify-content: space-between;
+		margin: 1rem 0;
+	}
 
-    button {
-        padding: 0.5rem 1rem;
-    }
+	button
+	{
+		padding: 0.5rem 1rem;
+	}
 
-    span{
-        font-size: 1.25rem;
-    }
+	span
+	{
+		font-size: 1.25rem;
+	}
 
-    .badge {
-        margin: 0.40rem;
-        padding: 0.5rem 0.75rem;
-        font-size: 1rem;
-    }
+	.badge
+	{
+		margin: 0.40rem;
+		padding: 0.5rem 0.75rem;
+		font-size: 1rem;
+	}
 
-    h2{
-        font-size: 1.5rem;
-        font-style: italic;
-        color: $light-grey;
-    }
+	h2
+	{
+		font-size: 1.5rem;
+		font-style: italic;
+		color: $light-grey;
+	}
 
 }
 
-.action-buttons{
-    display: flex;
-    justify-content: flex-start;
+.action-buttons
+{
+	display: flex;
+	justify-content: flex-start;
+}
+
+.slick-slide
+{
+	transition: all 0.75s ease;
+	opacity: 0.25;
+	
+	.slick-slide__item
+	{
+		width: 100%;
+		height: auto;
+	}
+	
+	@include mq( 'lg' )
+	{
+		padding: 50px;
+	}
+}
+
+.slick-center
+{
+	opacity: 1;
+	transform: scale( 1.25 );
+}
+
+.slick-arrow
+{
+	position: absolute;
+	z-index: 1;
+	width: 45px;
+	height: 45px;
+	border-radius: 5px;
+	
+	&:before
+	{
+		font-size: 3rem;
+	}
+}
+
+.slick-next
+{
+	left: none;
+	right: 5%;
+	
+	@include mq( 'lg' )
+	{
+		right: 17.5%;
+	}
+}
+
+.slick-prev
+{
+	right: none;
+	left: 5%;
+	
+	@include mq( 'lg' )
+	{
+		left: 17.5%;
+	}
 }
