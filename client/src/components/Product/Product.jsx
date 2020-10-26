@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import { Card, Button, Carousel, Container, Col, Row, Badge } from 'react-bootstrap';
+import { Card, Button, Container, Col, Row, Badge } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 import { addProductToCart } from '../../redux/action-creators/cart';
