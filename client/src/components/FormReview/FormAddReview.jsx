@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import FloatingLabelInput from 'react-floating-label-input';
-import { Form, Button, Card } from 'react-bootstrap';
+import { Form, Button, Card, Figure } from 'react-bootstrap';
 import ReactStars from "react-rating-stars-component";
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { Row, Col, Container } from 'react-bootstrap';
 import defaultPortrait from '../../assets/portrait.jpg';
+import { toast } from 'react-toastify';
 
 const API_URL = process.env.REACT_APP_API_URL;
 const BASE_URL = process.env.REACT_APP_BASE_URL;
@@ -38,8 +38,29 @@ const FormAddReview = ({ productId }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         axios.post(`${API_URL}/products/${productId}/review/${userId}`, formInput, { withCredentials: true })
-            .then(response => console.log(response))
-            .catch(err => console.log(err))
+            .then(response => {
+                console.log(response);
+                toast.info( 'Review añadida con exito ;)', {
+                    position: "top-right",
+                    autoClose: 1500,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined
+                });
+            })
+            .catch(error => {
+            console.log(error)
+            const message = ( error.request.status === 409 ) ? 'No puede usar este campo para modificar su review :(' : 'Usted nunca ha adquirido este producto :|';
+			toast.error( message, {
+				position: "top-right",
+				autoClose: 5000,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined
+			});
+        })
     };
 
     const getProduct = () => {
@@ -51,22 +72,22 @@ const FormAddReview = ({ productId }) => {
     }
 
     const getProductPortrait = (media) => {
-		if ( !media || ( media.length === 0 ) ) {
-			return defaultPortrait;
-		}
-		
-		const portrait = media.find( m => m.type === 'portrait' );
-		
-		if ( !portrait ) {
-			return defaultPortrait;
-		}
-		
-		if ( !portrait.path.includes( '/' ) ) {
-			return `${ API_URL }/${ portrait.path }`;
-		}
-		
-		return portrait.path;
-	};
+        if (!media || (media.length === 0)) {
+            return defaultPortrait;
+        }
+
+        const portrait = media.find(m => m.type === 'portrait');
+
+        if (!portrait) {
+            return defaultPortrait;
+        }
+
+        if (!portrait.path.includes('/')) {
+            return `${API_URL}/${portrait.path}`;
+        }
+
+        return portrait.path;
+    };
 
     useEffect(() => {
         getProduct();
@@ -92,39 +113,49 @@ const FormAddReview = ({ productId }) => {
     } */
 
     return (
-        <Container>
-            <Card style={{ width: '18rem' }}>
-                <Card.Img variant="top" src={ getProductPortrait(product.media)} />
-                <Card.Body>
-                    <Card.Title>{product.name}</Card.Title>
-                    <Card.Text>{product.developer}</Card.Text>
-                </Card.Body>
-            </Card>
-            <Form onSubmit={(e) => handleSubmit(e)}>
-                <Form.Group>
-                    <Form.Label>¿Cuantos estrellas le darias?</Form.Label>
-                    <ReactStars
-                        count={5}
-                        onChange={newValue => setRatingStars(newValue)}
-                        size={24}
-                        isHalf={false}
-                        emptyIcon={<i className="far fa-star"></i>}
-                        halfIcon={<i className="fa fa-star-half-alt"></i>}
-                        fullIcon={<i className="fa fa-star"></i>}
-                        activeColor="#ffd700"
-                    />
-                </Form.Group>
+        <Container className='formReview-container'>
+            <Figure>
+                <Row>
+                    <Col xs={12} md={6}>
+                        <Figure.Image
+                            width={900}
+                            height={180}
+                            alt="171x180"
+                            src={getProductPortrait(product.media)}
+                        />
+                    </Col>
+                    <Col xs={12} md={6}>
+                        <Figure.Caption bsPrefix='review-productName'>{product.name}</Figure.Caption>
+                        <Figure.Caption bsPrefix='review-productDeveloper'>{product.developer}</Figure.Caption>
+                        <Form onSubmit={(e) => handleSubmit(e)}>
+                            <Form.Group>
+                                <ReactStars
+                                    count={5}
+                                    onChange={newValue => setRatingStars(newValue)}
+                                    size={50}
+                                    isHalf={false}
+                                    emptyIcon={<i className="far fa-star"></i>}
+                                    halfIcon={<i className="fa fa-star-half-alt"></i>}
+                                    fullIcon={<i className="fa fa-star"></i>}
+                                    activeColor="#ffd700"
+                                />
+                            </Form.Group>
 
-                <Form.Group>
-                    <FloatingLabelInput
-                        name='description'
-                        label='¿Que opinas del producto?'
-                        type='text'
-                        onChange={(e) => handleInputChange(e)}
-                    />
-                </Form.Group>
-                <Button variant="primary" type="submit">Submit</Button>
-            </Form>
+                            <Form.Group>
+                                <Form.Label>Danos tu opinión sobre el producto :D</Form.Label>
+                                <Form.Control
+                                    name='description'
+                                    type='text'
+                                    as="textarea"
+                                    rows={4} 
+                                    onChange={(e) => handleInputChange(e)}
+                                />
+                            </Form.Group>
+                            <Button variant="primary" type="submit">Subir</Button>
+                        </Form>
+                    </Col>
+                </Row>
+            </Figure>
         </Container>
     );
 };

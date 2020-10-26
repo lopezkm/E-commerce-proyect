@@ -4,15 +4,15 @@ import ReactStars from "react-rating-stars-component";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
-const Review = ({ title, description, date, user, stars, productId, userId, deleteReview }) => {
+const Review = ({ title, description, date, user, stars, productId, userId, deleteReview, actualUser }) => {
 
     const dateFormat = date.substring(0, 10).split('-').reverse().join('/');
 
 
     return (
-        <Card style = {{ color: "black"}}>
+        <Card className='review-container'>
             <Card.Header>
-                <Button onClick={() => deleteReview(productId, userId)}>X</Button>
+                {actualUser === userId ? <Button onClick={() => deleteReview(productId, userId)}>X</Button> : null } 
                 <Card.Title>{ user }</Card.Title>
                 <Card.Text>{ dateFormat }</Card.Text>
                 <ReactStars

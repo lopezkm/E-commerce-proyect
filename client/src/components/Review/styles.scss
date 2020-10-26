@@ -1,0 +1,10 @@
+.review-container {
+    background-color: $grey;
+    margin-bottom: 1rem;
+    color: $white;
+    border-radius: 10px;
+
+    .btn-primary {
+        float: right;
+    }
+}
