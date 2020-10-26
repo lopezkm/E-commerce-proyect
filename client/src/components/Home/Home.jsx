@@ -15,26 +15,26 @@ const Home = () => {
     const [products, setProducts] = React.useState([]);
     console.log(products)
 
-    let secondCards = products.sort( ( ) => Math.random( ) - 0.5 ).splice( 0, 4 );
+    let secondCards = products.sort(() => Math.random() - 0.5).splice(0, 4);
     console.log(secondCards)
 
     const getProducts = () => {
         axios.get(`${API_URL}/products`)
-        .then(response => setProducts(response.data))
-        .catch(err => console.log(err))
+            .then(response => setProducts(response.data))
+            .catch(err => console.log(err))
     }
 
-    useEffect( () => {
-		getProducts();
-	}, [] );
+    useEffect(() => {
+        getProducts();
+    }, []);
 
-    
+
 
     return (
         <Container className='home-container' fluid>
             <PrincipalCard />
             <Row className='home-secondCard-container'>
-                {
+                {/* {
                     secondCards.map((card, i) => (
 
                         <Col xs={6}>
@@ -49,37 +49,45 @@ const Home = () => {
                             </Link>
                         </Col>
                     ))
-                }
+                } */}
 
-                {/* <Col xs={6}>
+                <Col xs={6}>
+                    <Link to='/product/17'>
                     <SecondCard
-                        img={'https://steamcdn-a.akamaihd.net/steam/apps/287700/capsule_616x353.jpg?t=1591740509'}
-                        name={"Metal Gear Solid V: The Phantom Pain"}
+                        img={'https://cdn.cloudflare.steamstatic.com/steam/apps/739630/capsule_616x353.jpg?t=1602270061'}
+                        name={"Phasmophobia"}
                         offer={"30$"}
                         price={"50$"}
-
                     />
+                    </Link>
                 </Col>
                 <Col xs={6}>
-                    <SecondCard img={'https://cdn.cloudflare.steamstatic.com/steam/apps/1030840/capsule_616x353.jpg?t=1600210047'}
-                        name={"Mafia: Definitive Edition"}
-                        price={"50$"}
-                    />
+                    <Link to='/product/2'>
+                        <SecondCard img={'https://cdn.cloudflare.steamstatic.com/steam/apps/1030840/capsule_616x353.jpg?t=1600210047'}
+                            name={"Mafia: Definitive Edition"}
+                            price={"40$"}
+                            offer={"25$"}
+                        />
+                    </Link>
                 </Col>
                 <Col xs={6}>
                     <Link to='/product/6'>
                         <SecondCard img={'https://steamcdn-a.akamaihd.net/steam/apps/1222730/capsule_616x353.jpg?t=1593539249'}
                             name={"Star Wars: Squadrons"}
-                            price={"50$"}
+                            price={"60$"}
+                            offer={"40$"}
                         />
                     </Link>
                 </Col>
                 <Col xs={6}>
-                    <SecondCard img={'https://steamcdn-a.akamaihd.net/steam/apps/289650/capsule_616x353.jpg?t=1602601508'}
-                        name={"Assassin's Creed: Unity"}
-                        price={"50$"}
-                    />
-                </Col> */}
+                    <Link to='/product/7'>
+                        <SecondCard img={'https://cdn.cloudflare.steamstatic.com/steam/apps/292030/capsule_616x353.jpg?t=1602588729'}
+                            name={"The Witcher III: Wild Hunt"}
+                            price={"75$"}
+                            offer={"35$"}
+                        />
+                    </Link>
+                </Col>
             </Row>
             <div className='home-button-container'>
                 <FontAwesomeIcon icon={faGamepad} />

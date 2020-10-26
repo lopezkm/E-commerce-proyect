@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import FloatingLabelInput from 'react-floating-label-input';
 import { Form, Button, Card, Figure } from 'react-bootstrap';
 import ReactStars from "react-rating-stars-component";
 import axios from 'axios';
@@ -132,7 +131,7 @@ const FormModifyReview = ({ productId }) => {
                             </Form.Group>
 
                             <Form.Group>
-                                <Form.Label>Danos tu opinión sobre el producto :D</Form.Label>
+                                <Form.Label>¿Cambiaste de idea? Cuentanos! :)</Form.Label>
                                 <Form.Control
                                     value={formInput.description}
                                     name='description'

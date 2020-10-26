@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import FloatingLabelInput from 'react-floating-label-input';
 import { Form, Button, Card, Figure } from 'react-bootstrap';
 import ReactStars from "react-rating-stars-component";
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { Row, Col, Container } from 'react-bootstrap';
 import defaultPortrait from '../../assets/portrait.jpg';
+import { toast } from 'react-toastify';
 
 const API_URL = process.env.REACT_APP_API_URL;
 const BASE_URL = process.env.REACT_APP_BASE_URL;
@@ -38,8 +38,29 @@ const FormAddReview = ({ productId }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         axios.post(`${API_URL}/products/${productId}/review/${userId}`, formInput, { withCredentials: true })
-            .then(response => console.log(response))
-            .catch(err => console.log(err))
+            .then(response => {
+                console.log(response);
+                toast.info( 'Review añadida con exito ;)', {
+                    position: "top-right",
+                    autoClose: 1500,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined
+                });
+            })
+            .catch(error => {
+            console.log(error)
+            const message = ( error.request.status === 409 ) ? 'No puede usar este campo para modificar su review :(' : 'Usted nunca ha adquirido este producto :|';
+			toast.error( message, {
+				position: "top-right",
+				autoClose: 5000,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined
+			});
+        })
     };
 
     const getProduct = () => {

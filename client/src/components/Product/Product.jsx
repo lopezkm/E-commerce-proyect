@@ -237,15 +237,16 @@ function Product({ productId }) {
 						{/* Base de las reseñas */}
 
 						<Row>
-							<h2>Opiniones sobre {product.name}:</h2>
-							{
+							<h2 className='product-title-review-container'>Opiniones sobre {product.name}:</h2>
+							{users.length > 0 ?
 								users.map((user, i) => (
 									
-									<Col lg={8}>
+									<Col className='product-container-reviews' lg={8}>
 											<Review
 												deleteReview = { deleteReview }
 												user={ user.firstName + ' ' + user.lastName}
 												userId = {user.id}
+												actualUser = {userId}
 												productId = {product.id}
 												date={ user.review.createdAt }
 												stars={ user.review.qualification }
@@ -254,6 +255,8 @@ function Product({ productId }) {
 											/>
 									</Col>
 								))
+								:
+								<Col><h2 style={{color: 'white'}}>Vaya! Parece que nadie opino sobre el producto aún. Se el primero! :D</h2></Col>
 							}
 						</Row>
 					</div>
