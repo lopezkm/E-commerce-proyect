@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
@@ -27,6 +27,7 @@ import OrderTable from './components/FormAdmin/OrderTable/orderTable.jsx';
 import Cart from './components/Cart/Cart.jsx';
 import PanelAdmin from './components/PanelAdmin/PanelAdmin.jsx';
 import Home from './components/Home/Home.jsx'
+import ResetPassword from './components/ResetPassword/ResetPassword.jsx'
 import FormAddReview from './components/FormReview/FormAddReview.jsx';
 import FormModifyReview from './components/FormReview/FormModifyReview.jsx';
 import FormUserLogin from './components/FormUserLogin/FormUserLogin.jsx';
@@ -45,10 +46,16 @@ function App( )
 	
 	return (
 		<Container fluid className="app">
-			<Route exact path='/login/logued/shops' component={ UserShops } />
+			<Switch>
+				<Route exact path='/reset/:token' render={ ( { match } ) =>
+					<ResetPassword token={ match.params.token }/>
+				} />
+				<Route path='/' component={ ( ) => <NavBar/> }/>
+			</Switch>
 			
-			<Route path='/' component={ ( ) => <NavBar/> }/>
 			<Route exact path='/' component={ Home }/>
+			<Route exact path='/login' component={ FormUserLogin } />
+			<Route exact path='/register' component={ FormCreateUser } />
 			<Route exact path='/Admin' component={ PanelAdmin } />
 			<Route exact path='/Admin/create' component={ FormAdminCreate } />
 			<Route exact path='/Admin/delete' component={ FormAdminDelete } />
@@ -56,11 +63,10 @@ function App( )
 			<Route exact path="/Admin/categories" component={ FormAdd } />
 			<Route exact path="/Admin/categoriesD" component={ FormDelete } />
 			<Route exact path="/Admin/categoriesM" component={ FormModify } />
-			<Route exact path='/register' component={ FormCreateUser } />
-			<Route exact path='/login' component={ FormUserLogin } />
 			<Route exact path="/Admin/orders" component={ OrderTable } />
 			<Route exact path="/Admin/users" component={ FormManageUser } />
 			<Route exact path="/products" component={ Catalogue } />
+			<Route exact path='/purchases' component={ UserShops } />
 			<Route exact path ='/product/:productId/modifyReview' render={ ( { match } ) =>
 				<FormModifyReview productId={ match.params.productId }/>
 			} />

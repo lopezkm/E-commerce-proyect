@@ -158,7 +158,7 @@ server.post( '/forgot', ( request, response ) => {
 * 		[ Actualiza la contraseña de un usuario con un token de recuperación ]
 * ================================================================================= */
 
-server.get( '/reset/:token', ( request, response ) => {
+server.post( '/reset/:token', ( request, response ) => {
 	const { token } = request.params;
 	const { password } = request.body;
 	
