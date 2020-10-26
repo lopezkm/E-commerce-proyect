@@ -24,8 +24,12 @@
 @import './components/FormManageUser/styles.scss';
 @import './components/FormReview/styles.scss';
 @import './components/Review/styles.scss';
-/* @import './components/UserShops/styles.scss'; */
+@import './components/ResetPassword/ResetPassword.scss';
 
+html, body, .app, #root
+{
+	height: 100%;
+}
 
 body
 {
