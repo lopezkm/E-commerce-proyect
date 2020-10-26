@@ -44,7 +44,7 @@ function reducer( state = initialState, action )
 				count: productsCount
 			};
 		}
-		case actionTypes.VERIFY_CART_FAILED:
+		case actionTypes.CART_ERROR:
 		{
 			return state;
 		}
