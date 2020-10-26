@@ -2031,14 +2031,6 @@ const Order = [
 		userId: 1
 	},
 	{
-		status: 'created',
-		userId: 1
-	},
-	{
-		status: 'processing',
-		userId: 1
-	},
-	{
 		status: 'canceled',
 		userId: 1
 	},
@@ -2051,10 +2043,6 @@ const Order = [
 	*/
 	{
 		status: 'cart',
-		userId: 2
-	},
-	{
-		status: 'created',
 		userId: 2
 	},
 	{
@@ -2074,10 +2062,6 @@ const Order = [
 	*/
 	{
 		status: 'cart',
-		userId: 3
-	},
-	{
-		status: 'created',
 		userId: 3
 	},
 	{
@@ -2111,19 +2095,11 @@ const Order = [
 		status: 'canceled',
 		userId: 4
 	},
-	{
-		status: 'processing',
-		userId: 4
-	},
 	/*
 		Ordenes del usuario con id 5
 	*/
 	{
 		status: 'cart',
-		userId: 5
-	},
-	{
-		status: 'created',
 		userId: 5
 	},
 	{
@@ -2146,10 +2122,6 @@ const Order = [
 		userId: 6
 	},
 	{
-		status: 'created',
-		userId: 6
-	},
-	{
 		status: 'completed',
 		userId: 6
 	},
@@ -2169,15 +2141,7 @@ const Order = [
 		userId: 7
 	},
 	{
-		status: 'created',
-		userId: 7
-	},
-	{
 		status: 'completed',
-		userId: 7
-	},
-	{
-		status: 'processing',
 		userId: 7
 	},
 	{
@@ -2189,10 +2153,6 @@ const Order = [
 	*/
 	{
 		status: 'canceled',
-		userId: 8
-	},
-	{
-		status: 'created',
 		userId: 8
 	},
 	{
@@ -2219,10 +2179,6 @@ const Order = [
 		userId: 9
 	},
 	{
-		status: 'processing',
-		userId: 9
-	},
-	{
 		status: 'canceled',
 		userId: 9
 	},
@@ -2244,15 +2200,7 @@ const Order = [
 	{
 		status: 'canceled',
 		userId: 10
-	},
-	{
-		status: 'processing',
-		userId: 10
-	},
-	{
-		status: 'processing',
-		userId: 10
-	},
+	}
 ];
 
 /* =================================================================================
@@ -3258,357 +3206,6 @@ const OrderProduct = [
 		productId: 11,
 		quantity: 1,
 		price: 24.99
-	},
-	/*
-		Orden id 38
-	*/
-	{
-		orderId: 38,
-		productId: 19,
-		quantity: 2,
-		price: 18.84
-	}, 
-	{
-		orderId: 38,
-		productId: 15,
-		quantity: 1,
-		price: 26.63
-	}, 
-	{
-		orderId: 38,
-		productId: 12,
-		quantity: 3,
-		price: 21.35
-	}, 
-	{
-		orderId: 38,
-		productId: 1,
-		quantity: 2,
-		price: 22.42
-	},
-	/*
-		Orden id 39
-	*/
-	{
-		orderId: 39,
-		productId: 9,
-		quantity: 1,
-		price: 12.66
-	}, 
-	{
-		orderId: 39,
-		productId: 18,
-		quantity: 3,
-		price: 27.23
-	}, 
-	{
-		orderId: 39,
-		productId: 19,
-		quantity: 3,
-		price: 9.24
-	}, 
-	{
-		orderId: 39,
-		productId: 10,
-		quantity: 3,
-		price: 23.23
-	},
-	/*
-		Orden id 40
-	*/
-	{
-		orderId: 40,
-		productId: 19,
-		quantity: 1,
-		price: 13.85
-	}, 
-	{
-		orderId: 40,
-		productId: 2,
-		quantity: 1,
-		price: 25.16
-	}, 
-	{
-		orderId: 40,
-		productId: 9,
-		quantity: 1,
-		price: 19.13
-	}, 
-	{
-		orderId: 40,
-		productId: 7,
-		quantity: 2,
-		price: 16.77
-	},
-	/*
-		Orden id 41
-	*/
-	{
-		orderId: 41,
-		productId: 2,
-		quantity: 2,
-		price: 8.16
-	}, 
-	{
-		orderId: 41,
-		productId: 14,
-		quantity: 4,
-		price: 29.79
-	}, 
-	{
-		orderId: 41,
-		productId: 8,
-		quantity: 2,
-		price: 11.09
-	}, 
-	{
-		orderId: 41,
-		productId: 13,
-		quantity: 3,
-		price: 11.34
-	},
-	/*
-		Orden id 42
-	*/
-	{
-		orderId: 42,
-		productId: 6,
-		quantity: 3,
-		price: 24.3
-	}, 
-	{
-		orderId: 42,
-		productId: 19,
-		quantity: 2,
-		price: 8.92
-	}, 
-	{
-		orderId: 42,
-		productId: 3,
-		quantity: 1,
-		price: 10.94
-	}, 
-	{
-		orderId: 42,
-		productId: 11,
-		quantity: 4,
-		price: 17.63
-	},
-	/*
-		Orden id 43
-	*/
-	{
-		orderId: 43,
-		productId: 19,
-		quantity: 1,
-		price: 26.46
-	}, 
-	{
-		orderId: 43,
-		productId: 8,
-		quantity: 1,
-		price: 18.72
-	}, 
-	{
-		orderId: 43,
-		productId: 13,
-		quantity: 3,
-		price: 10.24
-	}, 
-	{
-		orderId: 43,
-		productId: 16,
-		quantity: 4,
-		price: 4.31
-	},
-	/*
-		Orden id 44
-	*/
-	{
-		orderId: 44,
-		productId: 14,
-		quantity: 2,
-		price: 26.63
-	}, 
-	{
-		orderId: 44,
-		productId: 12,
-		quantity: 4,
-		price: 15.04
-	}, 
-	{
-		orderId: 44,
-		productId: 4,
-		quantity: 4,
-		price: 2.09
-	}, 
-	{
-		orderId: 44,
-		productId: 18,
-		quantity: 1,
-		price: 14.02
-	},
-	/*
-		Orden id 45
-	*/
-	{
-		orderId: 45,
-		productId: 12,
-		quantity: 4,
-		price: 27.84
-	}, 
-	{
-		orderId: 45,
-		productId: 17,
-		quantity: 2,
-		price: 13.17
-	}, 
-	{
-		orderId: 45,
-		productId: 6,
-		quantity: 3,
-		price: 24.61
-	}, 
-	{
-		orderId: 45,
-		productId: 1,
-		quantity: 1,
-		price: 12.42
-	},
-	/*
-		Orden id 46
-	*/
-	{
-		orderId: 46,
-		productId: 5,
-		quantity: 1,
-		price: 29.57
-	}, 
-	{
-		orderId: 46,
-		productId: 1,
-		quantity: 3,
-		price: 21.57
-	}, 
-	{
-		orderId: 46,
-		productId: 2,
-		quantity: 2,
-		price: 8.65
-	}, 
-	{
-		orderId: 46,
-		productId: 18,
-		quantity: 3,
-		price: 3.59
-	},
-	/*
-		Orden id 47
-	*/
-	{
-		orderId: 47,
-		productId: 1,
-		quantity: 4,
-		price: 15.03
-	}, 
-	{
-		orderId: 47,
-		productId: 2,
-		quantity: 2,
-		price: 4.13
-	}, 
-	{
-		orderId: 47,
-		productId: 3,
-		quantity: 2,
-		price: 17.58
-	}, 
-	{
-		orderId: 47,
-		productId: 4,
-		quantity: 4,
-		price: 24.66
-	},
-	/*
-		Orden id 48
-	*/
-	{
-		orderId: 48,
-		productId: 1,
-		quantity: 1,
-		price: 9.82
-	}, 
-	{
-		orderId: 48,
-		productId: 3,
-		quantity: 1,
-		price: 11.86
-	}, 
-	{
-		orderId: 48,
-		productId: 2,
-		quantity: 3,
-		price: 1.51
-	}, 
-	{
-		orderId: 48,
-		productId: 19,
-		quantity: 1,
-		price: 6.81
-	},
-	/*
-		Orden id 49
-	*/
-	{
-		orderId: 49,
-		productId: 3,
-		quantity: 3,
-		price: 21.05
-	}, 
-	{
-		orderId: 49,
-		productId: 19,
-		quantity: 3,
-		price: 13.48
-	}, 
-	{
-		orderId: 49,
-		productId: 11,
-		quantity: 4,
-		price: 27.34
-	}, 
-	{
-		orderId: 49,
-		productId: 18,
-		quantity: 4,
-		price: 2.94
-	},
-	/*
-		Orden id 50
-	*/
-	{
-		orderId: 50,
-		productId: 15,
-		quantity: 1,
-		price: 29.32
-	}, 
-	{
-		orderId: 50,
-		productId: 2,
-		quantity: 4,
-		price: 5.54
-	}, 
-	{
-		orderId: 50,
-		productId: 8,
-		quantity: 1,
-		price: 21.63
-	}, 
-	{
-		orderId: 50,
-		productId: 17,
-		quantity: 2,
-		price: 24.74
 	}
 ];
 
