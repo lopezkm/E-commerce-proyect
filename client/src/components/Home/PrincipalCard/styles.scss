@@ -16,6 +16,13 @@
 	.card-title
 	{
 		font-size: 3.5rem;
+		margin-top: 1.5rem;	
+	}
+
+	@media (min-width: 1900px) {
+		.card-title {
+			font-size: 5rem;
+		}
 	}
 
 	.card-text
@@ -23,6 +30,14 @@
 		max-width: 27rem;
 		font-size: 1.1rem;
 		text-align: justify;
+	}
+
+	@media (min-width: 1900px) {
+			.card-text {
+			max-width: 44rem;
+			font-size: 1.8rem;
+			text-align: justify;
+		}
 	}
 
 	&:after
@@ -43,6 +58,7 @@
 		left: 3rem;
 		transition: 1.5s;
 		z-index: 1;
+		user-select: none;
 	}
 
 	.principalCard-text-two
@@ -52,6 +68,7 @@
 		transition: 1.5s;
 		color: transparent;
 		z-index: 1;
+		user-select: none;
 
 		.card-title
 		{
