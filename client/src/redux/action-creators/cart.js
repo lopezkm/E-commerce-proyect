@@ -34,6 +34,12 @@ export function verifyCart( userId )
 				type: actionTypes.VERIFY_CART_SUCCESS,
 				payload: mergedProducts
 			} );
+			
+			if ( products.length > 0 ) {
+				products.forEach( ( { productId, quantity } ) => {
+					dispatch( editProductInCart( userId, productId, quantity ) );
+				} );
+			}
 		} )
 		.catch( ( error ) => {
 			if ( !error.request || ( error.request.status !== 404 ) ) {
@@ -57,6 +63,10 @@ export function verifyCart( userId )
 			dispatch( {
 				type: actionTypes.VERIFY_CART_SUCCESS,
 				payload: products
+			} );
+			
+			products.forEach( ( { productId, quantity } ) => {
+				dispatch( editProductInCart( userId, productId, quantity ) );
 			} );
 		} )
 		.catch( ( error ) => {
