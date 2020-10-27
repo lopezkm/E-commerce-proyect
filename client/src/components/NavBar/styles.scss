@@ -5,296 +5,11 @@
 	min-height: 3.25rem;
 	background-color: $grey;
 	
-	.navbar-logo
+	.active
 	{
-		display: inline-block;
-		width: auto;
-		height: 35px;
-		
-		@include padding( $l: 1rem );
-	}
-	
-	.navbar-brand
-	{
-		padding: 0;
-	}
-	
-	.navbar-toggler
-	{
-		min-height: 3.25rem;
-		border: none;
-		border-radius: 0;
-		outline: none;
-		width: 3.5rem;
-		
-		.navbar-open-menu
+		.navbar-text, svg
 		{
-			display: none;
-			transform: scaleX( 1.33 );
-		}
-		
-		.navbar-close-menu
-		{
-			display: inline-block;
-		}
-		
-		&.collapsed
-		{
-			background-color: $blue;
-			
-			.navbar-open-menu { display: inline-block; }
-			.navbar-close-menu { display: none; }
-		}
-		
-		svg
-		{
-			font-size: 2rem;
-			color: #eee;
-		}
-	}
-	
-	.navbar-nav
-	{
-		padding: 1rem 0;
-		
-		@include mq( 'lg' )
-		{
-			padding: 0;
-		}
-	}
-	
-	.navbar-collapse
-	{
-		width: 50%;
-		
-		@include mq( 'lg' )
-		{
-			width: 100%;
-		}
-	}
-	
-	.navbar-nav
-	{
-		padding: 0;
-		
-		a:hover
-		{
-			color: #ccc;
-			
-			.navbar-text
-			{
-				color: #ccc;
-			}
-		}
-	}
-	
-	.navbar-nav-left a
-	{
-		display: inline-block;
-		position: relative;
-		padding: 0 1rem;
-		color: #ccc;
-		text-align: right;
-		
-		@include mq( 'lg' )
-		{
-			min-height: 3.25rem;
-			
-			&:before
-			{
-				content: '';
-				display: block;
-				position: absolute;
-				bottom: 0;
-				left: 0;
-				width: 100%;
-				height: 0;
-				background-color: $blue;
-				transition: height .2s ease-in-out;
-			}
-			
-			&:hover:before
-			{
-				height: 5px;
-			}
-		}
-	}
-	
-	.navbar-nav-left
-	{
-		margin-right: auto;
-	}
-	
-	.navbar-nav-right
-	{
-		align-items: center;
-		flex-flow: row wrap;
-		justify-content: space-around;
-		margin-top: 1rem;
-		
-		& a
-		{
-			display: flex;
-			align-items: center;
-			padding-left: 1rem;
-			padding-right: 1rem;
-			font-size: 1.25rem;
-			text-decoration: none;
-		}
-		
-		.navbar-nav-cart, .navbar-nav-user
-		{
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			width: 50%;
-			padding: .5rem 0;
-			
-			color: #ccc;
-			
-			.navbar-text
-			{
-				color: #ccc;
-			}
-
-			.cart-count
-			{
-				-moz-border-radius: 0.8em;
-				-webkit-border-radius: 0.8em;
-				background: red;
-				border-radius: 0.8em;
-			   color: #ffffff;
-			   display: inline-block;
-			   font-weight: bold;
-			   font-size: 90%;
-			   line-height: 1.52em;
-			   padding-right: 1px;
-			   text-align: center;
-			   width: 1.5em; 
-			}
-		}
-		
-		.navbar-nav-user { background-color: $blue; }
-		.navbar-nav-cart { background-color: $green; }
-		
-		@include mq( 'lg' )
-		{
-			.navbar-nav-cart, .navbar-nav-user
-			{
-				width: auto;
-				background-color: transparent;
-				color: rgba( 255, 255, 255, 0.5 );
-				
-				.navbar-text
-				{
-					color: rgba( 255, 255, 255, 0.5 );
-				}
-				
-				padding: 0 1rem;
-			}
-			
-			flex-flow: row nowrap;
-			margin-top: 0;
-		}
-	}
-	
-	.navbar-text
-	{
-		padding: 0.5rem;
-		margin: 0;
-		font-size: 0.9rem;
-		font-weight: 800;
-		font-family: 'Open Sans', sans-serif, arial;
-		text-transform: uppercase;
-	}
-
-	//Menu de usuario desplegable
-
-	.navbar-user-options {
-		margin: 0 1rem 0 0;
-		background-color: transparent;
-		
-
-		.btn-primary {
-			background-color: transparent;
-			border: none;
-		}
-
-		.dropdown-menu {
-			background-color: transparent;
-			border-color: transparent;
-		}
-
-		.card {
-			background-color: $grey;
-			font-family: $barlow;
-			color: $grey;
-			right: 2.4rem;
-			transition: 3s !important;
-			border: 1px solid $light-grey;
-		}
-
-		.card-header {
-			margin: 0 !important;
-			padding: 0 !important;
-			margin: 0 1rem 0 1rem;
-			border-bottom: 1px solid $light-grey;
-			background-color: $black;
-			text-align: center;
-			height: 3rem;
-		}
-
-		.card-title {
-			font-size: 1.5rem;
-			padding-bottom: 0;
-			margin-bottom: 0;
-			margin-top: 0.5rem;
-			color: white;
-		}
-
-		.card-body {
-			padding: 0;
-		}
-
-		.card-text {
-			padding: .7rem 0 .7rem 1rem;
-			font-weight: 500;
-			border: transparent 2px solid;
-			font-size: 1.2rem;
-			color: white;
-			border-bottom: 1px solid $light-grey;
-			width: 100%;
-				
-			&:hover {
-				color: $blue;
-			}
-		}
-
-		a {
-			text-decoration: none;
-			padding: 0 !important;
-		}
-
-		.card-footer {
-			margin: 0 0 .2rem 1rem;
-			padding: 0;
-		}
-
-		.card-button {
-			margin: .5rem 0 .5rem 0;
-			background-color: $blue;
-			width: 90%;
-		}
-
-	}
-	
-	.navbar-separator
-	{
-		border-bottom: 1px solid #3f3f3f;
-		
-		@include mq( 'lg' )
-		{
-			display: none;
+			color: white !important;
 		}
 	}
 	
@@ -313,14 +28,303 @@
 			transform: translateY( -50% );
 		}
 	}
+}
 
-	.active
+.navbar-logo
+{
+	display: inline-block;
+	width: auto;
+	height: 35px;
+	
+	@include padding( $l: 1rem );
+}
+
+.navbar-brand
+{
+	padding: 0;
+}
+
+.navbar-toggler
+{
+	min-height: 3.25rem;
+	border: none;
+	border-radius: 0;
+	outline: none;
+	width: 3.5rem;
+	
+	.navbar-open-menu
 	{
-		.navbar-text, svg
+		display: none;
+		transform: scaleX( 1.33 );
+	}
+	
+	.navbar-close-menu
+	{
+		display: inline-block;
+	}
+	
+	&.collapsed
+	{
+		background-color: $blue;
+		
+		.navbar-open-menu { display: inline-block; }
+		.navbar-close-menu { display: none; }
+	}
+	
+	svg
+	{
+		font-size: 2rem;
+		color: #eee;
+	}
+}
+
+.navbar-nav
+{
+	padding: 1rem 0;
+	
+	@include mq( 'lg' )
+	{
+		padding: 0;
+	}
+}
+
+.navbar-collapse
+{
+	width: 50%;
+	
+	@include mq( 'lg' )
+	{
+		width: 100%;
+	}
+}
+
+.navbar-nav
+{
+	padding: 0;
+	
+	a:hover
+	{
+		color: #ccc;
+		
+		.navbar-text
 		{
-			color: white !important;
+			color: #ccc;
 		}
 	}
+}
+
+.navbar-nav-left a
+{
+	display: inline-block;
+	position: relative;
+	padding: 0 1rem;
+	color: #ccc;
+	text-align: right;
+	
+	@include mq( 'lg' )
+	{
+		min-height: 3.25rem;
+		
+		&:before
+		{
+			content: '';
+			display: block;
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			width: 100%;
+			height: 0;
+			background-color: $blue;
+			transition: height .2s ease-in-out;
+		}
+		
+		&:hover:before
+		{
+			height: 5px;
+		}
+	}
+}
+
+.navbar-nav-left
+{
+	margin-right: auto;
+}
+
+.navbar-nav-right
+{
+	align-items: center;
+	flex-flow: row wrap;
+	justify-content: space-around;
+	margin-top: 1rem;
+	
+	& a
+	{
+		display: flex;
+		align-items: center;
+		padding-left: 1rem;
+		padding-right: 1rem;
+		font-size: 1.25rem;
+		text-decoration: none;
+	}
+	
+	.navbar-nav-cart, .navbar-nav-user
+	{
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 50%;
+		padding: .5rem 0;
+		
+		color: #ccc;
+		
+		.navbar-text
+		{
+			color: #ccc;
+		}
+
+		.cart-count
+		{
+			-moz-border-radius: 0.8em;
+			-webkit-border-radius: 0.8em;
+			background: red;
+			border-radius: 0.8em;
+			color: #ffffff;
+			display: inline-block;
+			font-weight: bold;
+			font-size: 90%;
+			line-height: 1.52em;
+			padding-right: 1px;
+			text-align: center;
+			width: 1.5em; 
+		}
+	}
+	
+	.navbar-nav-user { background-color: $blue; }
+	.navbar-nav-cart { background-color: $green; }
+	
+	@include mq( 'lg' )
+	{
+		.navbar-nav-cart, .navbar-nav-user
+		{
+			width: auto;
+			background-color: transparent;
+			color: rgba( 255, 255, 255, 0.5 );
+			
+			.navbar-text
+			{
+				color: rgba( 255, 255, 255, 0.5 );
+			}
+			
+			padding: 0 1rem;
+		}
+		
+		flex-flow: row nowrap;
+		margin-top: 0;
+	}
+}
+
+.navbar-text
+{
+	padding: 0.5rem;
+	margin: 0;
+	font-size: 0.9rem;
+	font-weight: 800;
+	font-family: 'Open Sans', sans-serif, arial;
+	text-transform: uppercase;
+}
+
+//Menu de usuario desplegable
+
+.navbar-user-options {
+	margin: 0 1rem 0 0;
+	background-color: transparent;
+	
+
+	.btn-primary {
+		background-color: transparent;
+		border: none;
+	}
+
+	.dropdown-menu {
+		background-color: transparent;
+		border-color: transparent;
+	}
+
+	.card {
+		background-color: $grey;
+		font-family: $barlow;
+		color: $grey;
+		right: 2.4rem;
+		transition: 3s !important;
+		border: 1px solid $light-grey;
+	}
+
+	.card-header {
+		margin: 0 !important;
+		padding: 0 !important;
+		margin: 0 1rem 0 1rem;
+		border-bottom: 1px solid $light-grey;
+		background-color: $black;
+		text-align: center;
+		height: 3rem;
+	}
+
+	.card-title {
+		font-size: 1.5rem;
+		padding-bottom: 0;
+		margin-bottom: 0;
+		margin-top: 0.5rem;
+		color: white;
+	}
+
+	.card-body {
+		padding: 0;
+	}
+
+	.card-text {
+		padding: .7rem 0 .7rem 1rem;
+		font-weight: 500;
+		border: transparent 2px solid;
+		font-size: 1.2rem;
+		color: white;
+		border-bottom: 1px solid $light-grey;
+		width: 100%;
+			
+		&:hover {
+			color: $blue;
+		}
+	}
+
+	a {
+		text-decoration: none;
+		padding: 0 !important;
+	}
+
+	.card-footer {
+		margin: 0 0 .2rem 1rem;
+		padding: 0;
+	}
+
+	.card-button {
+		margin: .5rem 0 .5rem 0;
+		background-color: $blue;
+		width: 90%;
+	}
+}
+
+.navbar-separator
+{
+	border-bottom: 1px solid #3f3f3f;
+	
+	@include mq( 'lg' )
+	{
+		display: none;
+	}
+}
+
+.navbar-top-spacing
+{
+	height: 3.25rem;
 }
 
 /*

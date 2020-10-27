@@ -58,82 +58,85 @@ function NavBar( )
 	}
 
 	return (
-		<Navbar collapseOnSelect expand="lg" fixed="top" variant="dark" className="navbar-main">
-			<Navbar.Brand>
-				<Nav.Link as={Link} to="/">
-					<Logo className="navbar-logo" />
-				</Nav.Link>
-			</Navbar.Brand>
-			<Navbar.Toggle aria-controls="navbarCollapse">
-				<FontAwesomeIcon icon={faBars} className="navbar-open-menu" />
-				<FontAwesomeIcon icon={faTimes} className="navbar-close-menu" />
-			</Navbar.Toggle>
-			<Navbar.Collapse id="navbarCollapse">
-				<Nav className="navbar-nav-left">
-					<NavLink as={Link} exact activeClassName="active" to="/products">
-						<p className="navbar-text navbar-text-outline">Tienda</p>
-					</NavLink>
-					<div className="navbar-separator"></div>
-					{userAccessLevel > 0 ?
-					 <NavLink as={Link} exact activeClassName="active" to="/admin">
-						<p className="navbar-text navbar-text-outline">Administración</p>
-					</NavLink> : null}
-				</Nav>
-				<Nav className="navbar-nav-right">
-					<NavLink as={Link} exact activeClassName="active" to="/cart" className="navbar-nav-cart">
-						<FontAwesomeIcon icon={faShoppingCart} />
-						<p className="navbar-text">
-							Carrito <span className="cart-count">{cartProductsCount && cartProductsCount}</span>
-						</p>
-					</NavLink>
-					{
-						userFirstName ?
-						<DropdownButton className="navbar-user-options"
-							as={ButtonGroup}
-							menuAlign={{ lg: 'right' }}
-							icon={<FontAwesomeIcon icon={faUser} />}
-							title={
-								<p className="navbar-text">
-									{userFirstName}
-								</p>}
-							id="dropdown-menu-align-responsive-1"
-						>
-							<Form onSubmit={(event) => handleSumbit (event)}>
-								<Card>
-									<Card.Header bsPrefix="card-header">
-										<Card.Title bsPrefix="card-title">Hola {userFirstName}</Card.Title>
-									</Card.Header>
-
-									<Card.Body bsPrefix="card-body">
-											<Link to="/login/logued/shops">
-												<Card.Text bsPrefix="card-text">Mis Compras</Card.Text>
-											</Link>
-											<Link>
-												<Card.Text>Mis Datos</Card.Text>
-											</Link>
-											<Link>
-												<Card.Text>Seguridad</Card.Text>
-											</Link>
-									</Card.Body>
-									<Card.Footer>
-										<Button type= "submit" className="card-button">
-											Salir
-										</Button>
-									</Card.Footer>
-								</Card>
-							</Form>
-						</DropdownButton> :
-						<NavLink as={ Link } className="navbar-nav-user" exact activeClassName="active" to="/login" >
-							<FontAwesomeIcon icon={ faUser }/>
+		<>
+			<div class="navbar-top-spacing"></div>
+			<Navbar collapseOnSelect expand="lg" fixed="top" variant="dark" className="navbar-main">
+				<Navbar.Brand>
+					<Nav.Link as={Link} to="/">
+						<Logo className="navbar-logo" />
+					</Nav.Link>
+				</Navbar.Brand>
+				<Navbar.Toggle aria-controls="navbarCollapse">
+					<FontAwesomeIcon icon={faBars} className="navbar-open-menu" />
+					<FontAwesomeIcon icon={faTimes} className="navbar-close-menu" />
+				</Navbar.Toggle>
+				<Navbar.Collapse id="navbarCollapse">
+					<Nav className="navbar-nav-left">
+						<NavLink as={Link} exact activeClassName="active" to="/products">
+							<p className="navbar-text navbar-text-outline">Tienda</p>
+						</NavLink>
+						<div className="navbar-separator"></div>
+						{userAccessLevel > 0 ?
+						<NavLink as={Link} exact activeClassName="active" to="/admin">
+							<p className="navbar-text navbar-text-outline">Administración</p>
+						</NavLink> : null}
+					</Nav>
+					<Nav className="navbar-nav-right">
+						<NavLink as={Link} exact activeClassName="active" to="/cart" className="navbar-nav-cart">
+							<FontAwesomeIcon icon={faShoppingCart} />
 							<p className="navbar-text">
-								{ userFirstName || 'Ingresar' }
+								Carrito <span className="cart-count">{cartProductsCount && cartProductsCount}</span>
 							</p>
 						</NavLink>
-					}
-					<SearchBar/>
-				</Nav>
-			</Navbar.Collapse>
-		</Navbar>
+						{
+							userFirstName ?
+							<DropdownButton className="navbar-user-options"
+								as={ButtonGroup}
+								menuAlign={{ lg: 'right' }}
+								icon={<FontAwesomeIcon icon={faUser} />}
+								title={
+									<p className="navbar-text">
+										{userFirstName}
+									</p>}
+								id="dropdown-menu-align-responsive-1"
+							>
+								<Form onSubmit={(event) => handleSumbit (event)}>
+									<Card>
+										<Card.Header bsPrefix="card-header">
+											<Card.Title bsPrefix="card-title">Hola {userFirstName}</Card.Title>
+										</Card.Header>
+
+										<Card.Body bsPrefix="card-body">
+												<Link to="/login/logued/shops">
+													<Card.Text bsPrefix="card-text">Mis Compras</Card.Text>
+												</Link>
+												<Link>
+													<Card.Text>Mis Datos</Card.Text>
+												</Link>
+												<Link>
+													<Card.Text>Seguridad</Card.Text>
+												</Link>
+										</Card.Body>
+										<Card.Footer>
+											<Button type= "submit" className="card-button">
+												Salir
+											</Button>
+										</Card.Footer>
+									</Card>
+								</Form>
+							</DropdownButton> :
+							<NavLink as={ Link } className="navbar-nav-user" exact activeClassName="active" to="/login" >
+								<FontAwesomeIcon icon={ faUser }/>
+								<p className="navbar-text">
+									{ userFirstName || 'Ingresar' }
+								</p>
+							</NavLink>
+						}
+						<SearchBar/>
+					</Nav>
+				</Navbar.Collapse>
+			</Navbar>
+		</>
 	);
 };
 
