@@ -382,7 +382,7 @@ server.post( '/:productId/review/:userId', isAuthenticated, ( request, response,
 		response.status( 201 ).send( review );
 	} )
 	.catch( ( error ) => {
-		next( 500 );
+		next( error );
 	} );
 } );
 
