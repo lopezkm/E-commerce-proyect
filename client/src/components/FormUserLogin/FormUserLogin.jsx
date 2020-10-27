@@ -15,7 +15,6 @@ function FormUserLogin( )
 {
 	const history = useHistory( );
 	const dispatch = useDispatch( );
-	const isLogged = useSelector( ( state ) => state.user.isLogged );
 	
 	const [ input, setInput ] = useState( {
 		email: '',

@@ -8,8 +8,6 @@ import axios from 'axios';
 import { ReactComponent as Logo } from '../../assets/logofull.svg';
 import { loadUser } from '../../redux/action-creators/user';
 
-
-
 function CreateUser( )
 {
 	const history = useHistory( );
