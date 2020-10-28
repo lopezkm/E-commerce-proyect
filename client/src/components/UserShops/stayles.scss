@@ -1,0 +1,50 @@
+.user-shop-container {
+    
+
+    .card {
+        background-color:$grey;
+        color: $white;
+        margin: 2rem 0;
+        padding: 1.5rem;
+        border-radius: 10px;
+
+            .col {
+                font-size: 0.7rem;
+            }
+            .user-shop-col-main {
+                margin: 1rem 0.5rem;
+
+                div {
+                    margin-bottom: 0.2rem;
+                }
+            }
+        
+        .row {
+            margin-right: 17rem;
+            
+            .user-shop-col-one {
+                text-align: center;
+                
+                h6 {
+                    font-size: 0.75rem;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    overflow: hidden;
+                }
+    
+                .figure {
+                    margin-bottom: 0 !important;
+                    
+                    .figure-img {
+                        margin-bottom: -0.2rem !important; 
+                    }
+                }
+    
+                span {
+                    font-size: 0.6rem;
+                }
+            }
+        }
+        
+    }
+}

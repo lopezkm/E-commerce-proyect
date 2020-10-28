@@ -1,50 +1,72 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Button, Container, Col, Row } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
+import { Card, Container, Col, Row, Figure } from 'react-bootstrap';
 import axios from 'axios';
 
-const UserShops = ({ userId }) => {
+const UserShops = () => {
 
     const [orders, setOrders] = useState();
     const [loading, setLoading] = useState();
+    const userId = useSelector(state => state.user.id);
 
-    /* useEffect( ( ) => {
-		axios.get( `http://localhost:3000/users/:${userId}` ).then( ( response ) => {
-			setUser( response.data );
-            setLoading( false ); 
-		} );
-	}, [] ); */  //ORDENES COMPLETADAS (PRODUCTOS)!!
+    const getOrders = ( ) => {
+        axios.get( `http://localhost:3000/users/${userId}/orders`, {withCredentials: true})
+        .then( ( response ) => {
+            let filteredOrders = response.data.filter( order => order.status !== 'cart' && order.status !== 'created' && order.status !== 'processing');
+            setOrders( filteredOrders );
+            return filteredOrders
+        } )
+        .then((res) => {
+            let array = res.map(order => order.products.map(product => product.id))
+            let process = array.reduce((acc, element) => acc.concat(element,[]));
+            let ids = process.filter(unique);
+            console.log(ids);
+            return axios.get(`http://localhost:3000/products/some`, ids)  
+        }) 
+        .then( products => { console.log(products)}); 
+    }
+
+    const unique = (value, index, self) => {
+        return self.indexOf(value) === index;
+    }
+    
+
+   
+    
+    useEffect( () => {
+        getOrders();
+        setLoading(false);
+    }, [loading])
 
     return (
-        <Container className='cart__container'>
-        <Row>
-            <Col xs={8}>
-                <Card className="cart__list">
-                    <Card.Header>
-                        <h1>Tus compras</h1>
-                    </Card.Header>
-                    <Card.Body>
-                       {/*  {
-                            products.map( ( p, i ) => (
-                                
-                        }  ) )}
-                        <Row key={ i }>
-                            <CartCard
-                                key={ i }
-                                id={ p.id }
-                                name={ p.name }
-                                description={ p.description }
-                                price={ p.price }
-                                quantity={ p.quantity }
-                                media={ p.media }
-                                onQuantityChange={ handleProductQuantityChange }
-                            />
-                        </Row>*/}
-                    </Card.Body>
+
+        <Container className='user-shop-container'>
+			{orders && orders.map( ( order, i ) =>  
+				<Card>
+                    <Row>
+                        <Col className="user-shop-col-main"> 
+                            <div>Número de orden: {order.id} </div>
+                            <div>Fecha de compra: {order.createdAt.substring( 0, 10 ).split( '-' ).reverse( ).join( '/' )} </div>
+                            <div>Oreden en estado: {order.status}</div>
+                        </Col>
+                        {order.products.map(product => 
+                                    <Col className="user-shop-col-one" xs={ 3 } lg={ 2 }>
+                                        <h6>{ product.name }</h6>
+                                        <Figure className="figure">
+                                            <Figure.Image bsPrefix="figure-img"
+                                                width={ 50 }
+                                                height={ 70 }
+                                                src={ product.media }
+                                            />
+                                        </Figure> 
+                                        <div> <span> Precio: { product.price } US$</span>  </div>
+                                    </Col>
+                    )}
+                    </Row>
                 </Card>
-            </Col>  
-        </Row>
-    </Container>
-);
+            )}
+		</Container>
+)
 }
 
 

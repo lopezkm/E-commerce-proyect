@@ -129,7 +129,7 @@ server.get( '/', ( request, response, next ) => {
 
 server.get( '/some', ( request, response, next ) => {
 	const { ids } = request.body;
-	
+	console.log('ruta', ids);
 	if ( !ids || !Array.isArray( ids ) || ids.some( id => isNaN( id ) ) ) {
 		return response.sendStatus( 400 );
 	}
