@@ -24,7 +24,7 @@ export function loadUser( user )
 * 		[ Verifica que el usuario esté autorizado ]
 * ================================================================================= */
 
-export function verifyUser( user )
+export function verifyUser( )
 {
 	return function( dispatch, getState ) {
 		const isLogged = getState( ).user.isLogged;

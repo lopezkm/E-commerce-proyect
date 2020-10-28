@@ -3,7 +3,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { Container, Form, Button, Col, Row } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 import axios from 'axios';
-import { ReactComponent as Logo } from '../../assets/logo.svg';
+import { ReactComponent as Logo } from '../../assets/logofull.svg';
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -103,7 +103,7 @@ function ResetPassword( { token } )
 	}
 
 	return (
-		<Container className="resetPassword__wrapper">
+		<Container className="resetPassword__wrapper" noGutters>
 			<div className="resetPassword__modal">
 				<Logo className='resetPassword__logo'/>
 				<p className="resetPassword__info">
@@ -114,6 +114,7 @@ function ResetPassword( { token } )
 						<Form.Control
 							name="password"
 							type="password"
+							value={ input.password }
 							placeholder="Ingresa tu nueva clave"
 							onChange={ handleInputChange }
 						/>
@@ -124,6 +125,7 @@ function ResetPassword( { token } )
 							name="confirm"
 							type="password"
 							placeholder="Repite la clave anterior"
+							value={ input.confirm }
 							onChange={ handleInputChange }
 						/>
 					</Form.Group>
@@ -132,7 +134,7 @@ function ResetPassword( { token } )
 					</Button>
 				</Form>
 				<div className="resetPassword__links">
-					<p>¿No necesitas cambiar tu clave? <Link to="/">Inicia sesión</Link></p>
+					<p>¿No necesitas cambiar tu clave? <Link to="/login">Iniciar sesión</Link></p>
 					<p>Si quieres puedes <Link to="/">volver al inicio</Link></p>
 				</div>
 			</div>
