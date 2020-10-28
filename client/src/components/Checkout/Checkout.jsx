@@ -3,6 +3,7 @@ import { Button, Form, Container, Col, Row, Figure } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { toast } from 'react-toastify';
 import defaultPortrait from '../../assets/portrait.jpg';
+import CreditCardInput from 'react-credit-card-input';
 import Promise from 'bluebird';
 import axios from 'axios';
 
@@ -16,38 +17,133 @@ const Checkout = () => {
 
     const [loading, setLoading] = useState(true);
     const [products, setProducts] = useState([]);
-
-    console.log(products)
+    const [emailValidation, setEmailValidation] = useState("");
+    const [checkoutInput, setCheckoutInput] = useState({
+        userEmail: "",
+        cardNumber: "",
+        expiration: "",
+        cvc: ""
+    })
 
     const productsPrice = useMemo(() => products.reduce((a, p) => a + (p.price * p.quantity), 0.0), [products]);
     const shippingCost = useMemo(() => (productsPrice && SHIPPING_COST), [productsPrice]);
     const taxesCost = useMemo(() => (productsPrice * TAXES_PERCENT), [productsPrice]);
     const totalPrice = useMemo(() => (productsPrice + shippingCost + taxesCost), [productsPrice, shippingCost, taxesCost]);
 
+    const optionOne = document.getElementById('optionOne');
+    const optionTwo = document.getElementById('optionTwo');
 
-    const handleCheckChangeOne = (e) => {
-        const { name } = e.target;
+    const formOne = document.getElementById('userEmail');
+    const formTwo = document.getElementById('otherEmail');
+    const formTwoConfirm = document.getElementById('otherEmailConfirm');
 
-        let formCheckOne = document.getElementById(name);
-        let formCheckTwo = document.getElementById("otherEmail");
-        let formCheckTwoConfirm = document.getElementById("otherEmailConfirm");
+    const handleCheckChangeOne = () => {
 
-        formCheckOne.disabled = !formCheckOne.disabled;
+        formOne.disabled = !formOne.disabled;
 
-        formCheckTwo.disabled = true;
-        formCheckTwoConfirm.disabled = true;
+        if(formTwo.disabled && formTwoConfirm.disabled) {
+            if(optionOne.checked) {
+                setCheckoutInput({
+                    ...checkoutInput,
+                    userEmail: user.email
+                });
+            }
+            else {
+                setCheckoutInput({
+                    ...checkoutInput,
+                    userEmail: ""
+                });
+            }
+
+            return;
+        }
+
+        else if(formOne.disabled) {
+            formTwo.disabled = false;
+            formTwoConfirm.disabled = false;
+            optionTwo.checked = true;
+        }
+
+        else {
+            formTwo.disabled = true;
+            formTwoConfirm.disabled = true;
+            optionTwo.checked = false;
+            setCheckoutInput({
+                ...checkoutInput,
+                userEmail: user.email
+            });
+        }
+
     };
 
     const handleCheckChangeTwo = () => {
 
-        let formCheckTwo = document.getElementById("otherEmail")
-        let formCheckTwoConfirm = document.getElementById("otherEmailConfirm")
-        let formCheckOne = document.getElementById("emailUser");
+        formTwo.disabled = !formTwo.disabled;
+        formTwoConfirm.disabled = !formTwoConfirm.disabled;
 
-        formCheckTwo.disabled = !formCheckTwo.disabled;
-        formCheckTwoConfirm.disabled = !formCheckTwoConfirm.disabled;
+        if(formOne.disabled) {
+            if(optionTwo.checked) {
+                setCheckoutInput({
+                    ...checkoutInput,
+                    userEmail: formTwo.value
+                });
+            }
+            else {
+                setCheckoutInput({
+                    ...checkoutInput,
+                    userEmail: ""
+                });
+            }
 
-        formCheckOne.disabled = true;
+            return;
+        }
+
+        else if(formTwo.disabled && formTwoConfirm.disabled) {
+            formOne.disabled = false;
+            optionOne.checked = true;
+        }
+
+        else {
+            formOne.disabled = true;
+            optionOne.checked = false;
+            setCheckoutInput({
+                ...checkoutInput,
+                userEmail: formTwo.value
+            });
+        }
+    };
+
+    const handleOtherEmailChange = (e) => {
+        const { name, value } = e.target;
+
+        if(name === "confirmEmail") setEmailValidation(value)
+
+        else {
+            setCheckoutInput({
+                ...checkoutInput,
+                [name] : value
+            });
+        }
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        if(checkoutInput.userEmail === emailValidation || checkoutInput.userEmail === user.email){
+            console.log(checkoutInput);
+            //PETICION A LA API DE MP :>
+        }
+        else {
+            toast.error(`¡Uy, verifique que los correos coincidan :o!`, {
+                position: 'top-right',
+                autoClose: 4000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: true,
+                progress: undefined
+            });
+        }
     };
 
     const getProductPortrait = (media) => {
@@ -107,22 +203,23 @@ const Checkout = () => {
         <Container>
             <Row>
                 <Col>
-                    <Form style={{ backgroundColor: "white" }}>
+                    <Form style={{ backgroundColor: "white" }} onSubmit={(e) => handleSubmit(e)}>
                         <h1>Finalizar compra</h1>
                         <Form.Group>
                             <Form.Label>Usar mi email</Form.Label>
                             <div style={{ display: 'flex', justifyContent: "space-around" }}>
                                 <Form.Check
-                                    type="radio"
-                                    name="emailUser"
-                                    onChange={(e) => handleCheckChangeOne(e)}
+                                    id="optionOne"
+                                    type="switch"
+                                    onChange={() => handleCheckChangeOne()}
+                                    name="switchOptionOne"
+                                    label=""
+
                                 />
                                 <Form.Control
                                     type="email"
-                                    placeholder="Enter email"
                                     value={user.email}
-                                    name="finalConsumerEmail"
-                                    id="emailUser"
+                                    id="userEmail"
                                     disabled
                                 />
                             </div>
@@ -132,19 +229,29 @@ const Checkout = () => {
                             <Form.Label>Usar otro email</Form.Label>
                             <div style={{ display: 'flex' }}>
                                 <Form.Check
-                                    type="radio"
-                                    name="otherEmail"
+                                    id="optionTwo"
+                                    type="switch"
+                                    name="switchOptionTwo"
+                                    label=""
                                     onChange={() => handleCheckChangeTwo()}
                                 />
                                 <div>
                                     <Form.Control
                                         type="email"
                                         id="otherEmail"
+                                        name="userEmail"
+                                        disabled
+                                        placeholder="Ingrese el email donde desea recibir los codigos"
+                                        onChange={(e) => handleOtherEmailChange(e)}
                                     />
                                     <Form.Label>Confirmar email</Form.Label>
                                     <Form.Control
                                         type="email"
                                         id="otherEmailConfirm"
+                                        name="confirmEmail"  
+                                        disabled  
+                                        placeholder="Por favor, confirme el email"  
+                                        onChange={(e) => handleOtherEmailChange(e)}              
                                     />
                                 </div>
                             </div>
@@ -152,8 +259,22 @@ const Checkout = () => {
 
                         <Form.Group>
                             <Form.Label>Pago mediante Mercado Pago</Form.Label>
+                            <CreditCardInput
+                                cardNumberInputProps={{ onChange: e => setCheckoutInput({...checkoutInput, cardNumber: e.target.value})}}
+                                cardExpiryInputProps={{ onChange: e => setCheckoutInput({...checkoutInput, expiration: e.target.value})}}
+                                cardCVCInputProps={{ onChange: e => setCheckoutInput({...checkoutInput, cvc: e.target.value})}}
+                                fieldClassName="input"
+                            />
                         </Form.Group>
-                        
+
+                        <div>
+                            <h3>Resumen de compra</h3>
+                            <p>Articulos({products.length}): {productsPrice.toFixed(2)}US$</p>
+                            <p>Envio: {shippingCost.toFixed(2)}US$</p>
+                            <p>Impuestos: {taxesCost.toFixed(2)}US$</p>
+                            <h4>Total a pagar:{totalPrice.toFixed(2)}US$</h4>
+                        </div>
+
                         <Button variant="primary" type="submit">Submit</Button>
                     </Form>
                 </Col>
@@ -166,7 +287,7 @@ const Checkout = () => {
                                         <Figure.Image
                                             width={60}
                                             height={60}
-                                            alt="50x50"
+                                            alt="60x60"
                                             src={getProductPortrait(product.media)}
                                         />
                                     </Col>
