@@ -65,6 +65,12 @@ function CreateUser( )
 		} );
 	};
 
+	const testGoogle = ( ) => {
+		axios.get( `http://localhost:3000/auth/google`, { withCredentials: true }).catch(
+			( error ) => console.log(error)
+		); 
+	}
+
 	return (
 		<Container className='containerUserCreate'>
 			<Row>
@@ -111,6 +117,9 @@ function CreateUser( )
 							Registrarse
 							</Button>
 						<Link to="/login" className="linkUserLogin">Prefiero iniciar sesión</Link>
+						<Button variant="primary" onClick={() => testGoogle()}>
+							Google
+						</Button>
 					</Form>
 				</Col>
 			</Row>
