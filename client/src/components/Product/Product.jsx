@@ -16,11 +16,17 @@ const API_URL = process.env.REACT_APP_API_URL;
 const slickSettings =
 {
 	centerMode: true,
-	centerPadding: '350px',
+	centerPadding: '600px',
 	slidesToShow: 1,
 	autoplay: true,
 	autoplaySpeed: 3000,
 	responsive: [
+		{
+			breakpoint: 1600,
+			settings: {
+				centerPadding: '350px'
+			}
+		},
 		{
 			breakpoint: 768,
 			settings: {
