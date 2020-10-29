@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { Card, Container, Col, Row, Figure } from 'react-bootstrap';
 import axios from 'axios';
-import Promise from 'bluebird';
+import defaultPortrait from '../../assets/portrait.jpg';
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -18,16 +19,21 @@ const UserShops = () => {
         .then( ( response ) => {
             let filteredOrders = response.data.filter( order => order.status !== 'cart' && order.status !== 'created' && order.status !== 'processing');
             setOrders( filteredOrders );
-            return filteredOrders
+            return filteredOrders;
         } )
         .then((res) => {
             let array = res.map(order => order.products.map(product =>  product.id));
             let process = array.reduce((acc, element) => acc.concat(element,[])); 
             let ids = process.filter(unique);
-            setProducts(ids);
             return ids;
         })
-        .then()  
+        .then(ids => (axios.post(`${API_URL}/products/some`, {ids}))
+         )
+        .then(response => {
+            let product = response.data.map( prod => [prod.id, prod.media]);
+            setProducts(product);
+
+        })          
         
     }
 
@@ -35,13 +41,29 @@ const UserShops = () => {
         return self.indexOf(value) === index;
     } 
     
-
-   
-    
     useEffect( () => {
         getOrders();
         setLoading(false);
     }, [loading])
+
+    const getProductPortrait = (media) => {
+        if (!media || (media.length === 0)) {
+            return defaultPortrait;
+        }
+
+        const portrait = media.find(m => m.type === 'portrait');
+
+        if (!portrait) {
+            return defaultPortrait;
+        }
+
+        if (!portrait.path.includes('/')) {
+            return `${API_URL}/${portrait.path}`;
+        }
+
+        return portrait.path;
+    };
+
 
     return (
 
@@ -54,19 +76,21 @@ const UserShops = () => {
                             <div>Fecha de compra: {order.createdAt.substring( 0, 10 ).split( '-' ).reverse( ).join( '/' )} </div>
                             <div>Oreden en estado: {order.status}</div>
                         </Col>
-                        {order.products.map(product => 
-                                    <Col className="user-shop-col-one" xs={ 3 } lg={ 2 }>
-                                        <h6>{ product.name }</h6>
-                                        <Figure className="figure">
+                        {products && order.products.map(product => products.map(prod => prod[0] === product.id ?
+                            <Col className="user-shop-col-one" xs={ 3 } lg={ 2 }>
+                                <Link className="link" to= {`/product/${product.id}`} >
+                                    <h6>{ product.name }</h6>
+                                    <Figure className="figure">
                                             <Figure.Image bsPrefix="figure-img"
                                                 width={ 50 }
                                                 height={ 70 }
-                                                src={ product.media }
-                                            />
-                                        </Figure> 
-                                        <div> <span> Precio: { product.price } US$</span>  </div>
-                                    </Col>
-                    )}
+                                                src={ getProductPortrait(prod[1]) }
+                                            />                
+                                    </Figure> 
+                                </Link>
+                                <div> <span> Precio: { product.price } US$ </span> </div>
+                            </Col> : null
+                        ))}
                     </Row>
                 </Card>
             )}

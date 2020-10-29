@@ -25,24 +25,35 @@
             .user-shop-col-one {
                 text-align: center;
                 
-                h6 {
-                    font-size: 0.75rem;
-                    text-overflow: ellipsis;
-                    white-space: nowrap;
-                    overflow: hidden;
-                }
-    
-                .figure {
-                    margin-bottom: 0 !important;
-                    
-                    .figure-img {
-                        margin-bottom: -0.2rem !important; 
+                
+
+                .link {
+
+                    text-decoration: none !important;
+
+                    h6 {
+                        font-size: 0.75rem;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        color: $white !important;
+                        
                     }
+
+                    .figure {
+                        margin-bottom: 0 !important;
+                        
+                        .figure-img {
+                            margin-bottom: -0.2rem !important; 
+                        }
+                    }
+
                 }
-    
+
                 span {
                     font-size: 0.6rem;
                 }
+    
             }
         }
         
