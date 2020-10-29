@@ -127,7 +127,7 @@ server.get( '/', ( request, response, next ) => {
 * 		[ Búsqueda de varios productos por identificador ]
 * ================================================================================= */
 
-server.get( '/some', ( request, response, next ) => {
+server.post( '/some', ( request, response, next ) => {
 	const { ids } = request.body;
 	console.log('ruta', ids);
 	if ( !ids || !Array.isArray( ids ) || ids.some( id => isNaN( id ) ) ) {
@@ -149,7 +149,7 @@ server.get( '/some', ( request, response, next ) => {
 		if ( !products ) {
 			return response.sendStatus( 404 );
 		}
-		
+		console.log('ruta back',products)
 		response.status( 200 ).send( products );
 	} );
 } );
