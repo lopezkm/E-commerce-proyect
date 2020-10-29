@@ -2,11 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Card, Container, Col, Row, Figure } from 'react-bootstrap';
 import axios from 'axios';
+import Promise from 'bluebird';
+
+const API_URL = process.env.REACT_APP_API_URL;
 
 const UserShops = () => {
 
     const [orders, setOrders] = useState();
     const [loading, setLoading] = useState();
+    const [products, setProducts] = useState();
     const userId = useSelector(state => state.user.id);
 
     const getOrders = ( ) => {
@@ -17,18 +21,19 @@ const UserShops = () => {
             return filteredOrders
         } )
         .then((res) => {
-            let array = res.map(order => order.products.map(product => product.id))
-            let process = array.reduce((acc, element) => acc.concat(element,[]));
+            let array = res.map(order => order.products.map(product =>  product.id));
+            let process = array.reduce((acc, element) => acc.concat(element,[])); 
             let ids = process.filter(unique);
-            console.log(ids);
-            return axios.get(`http://localhost:3000/products/some`, ids)  
-        }) 
-        .then( products => { console.log(products)}); 
+            setProducts(ids);
+            return ids;
+        })
+        .then()  
+        
     }
 
     const unique = (value, index, self) => {
         return self.indexOf(value) === index;
-    }
+    } 
     
 
    
