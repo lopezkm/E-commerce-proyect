@@ -12,6 +12,7 @@ import { toast } from 'react-toastify';
 
 function NavBar( )
 {
+
 	const history = useHistory( );
 	const dispatch = useDispatch( );
 	
@@ -57,6 +58,17 @@ function NavBar( )
 		} );
 	}
 
+	const changeParty = () => {
+		const PartyBar = document.getElementById('partyBar');
+
+		if(PartyBar.className ==  'navbar-party-mode'){
+			PartyBar.className='navbar-off-party-mode'
+		}
+		else {
+			PartyBar.className='navbar-party-mode'
+		}
+	}
+
 	return (
 		<>
 			<div class="navbar-top-spacing"></div>
@@ -80,6 +92,7 @@ function NavBar( )
 						<NavLink as={Link} exact activeClassName="active" to="/admin">
 							<p className="navbar-text navbar-text-outline">Administración</p>
 						</NavLink> : null}
+						<Button className='navbar-button-rgb' onClick={() => changeParty()}>RGB</Button>
 					</Nav>
 					<Nav className="navbar-nav-right">
 						<NavLink as={Link} exact activeClassName="active" to="/cart" className="navbar-nav-cart">
@@ -136,6 +149,7 @@ function NavBar( )
 					</Nav>
 				</Navbar.Collapse>
 			</Navbar>
+			<div className="navbar-party-mode" id="partyBar"></div>
 		</>
 	);
 };
