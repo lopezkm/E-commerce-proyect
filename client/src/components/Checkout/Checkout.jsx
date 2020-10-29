@@ -18,15 +18,19 @@ const Checkout = () => {
     const [loading, setLoading] = useState(true);
     const [products, setProducts] = useState([]);
     const [emailValidation, setEmailValidation] = useState("");
-    const [userData, setUserData] = useState(user)
     const [checkoutInput, setCheckoutInput] = useState({
-        userEmail: "",
-        cardNumber: "",
-        expiration: "",
-        cvc: ""
+        firstName: user.firstName,
+        lastName: user.lastName,
+        userEmail: '',
+        adressOne: '',
+        adressTwo: '',
+        country: '',
+        city: '',
+        zip: '',
+        cardNumber: '',
+        expiration: '',
+        cvc: ''
     })
-
-    console.log(userData);
 
     const productsPrice = useMemo(() => products.reduce((a, p) => a + (p.price * p.quantity), 0.0), [products]);
     const shippingCost = useMemo(() => (productsPrice && SHIPPING_COST), [productsPrice]);
@@ -54,7 +58,7 @@ const Checkout = () => {
             else {
                 setCheckoutInput({
                     ...checkoutInput,
-                    userEmail: ""
+                    userEmail: ''
                 });
             }
 
@@ -94,7 +98,7 @@ const Checkout = () => {
             else {
                 setCheckoutInput({
                     ...checkoutInput,
-                    userEmail: ""
+                    userEmail: ''
                 });
             }
 
@@ -116,10 +120,10 @@ const Checkout = () => {
         }
     };
 
-    const handleOtherEmailChange = (e) => {
+    const handleInputChange = (e) => {
         const { name, value } = e.target;
 
-        if (name === "confirmEmail") setEmailValidation(value)
+        if (name === 'confirmEmail') setEmailValidation(value)
 
         else {
             setCheckoutInput({
@@ -212,17 +216,17 @@ const Checkout = () => {
                             <Form.Label>Usar mi email</Form.Label>
                             <div style={{ display: 'flex', justifyContent: "space-around" }}>
                                 <Form.Check
-                                    id="optionOne"
-                                    type="switch"
+                                    id='optionOne'
+                                    type='switch'
                                     onChange={() => handleCheckChangeOne()}
                                     name="switchOptionOne"
                                     label=""
 
                                 />
                                 <Form.Control
-                                    type="email"
+                                    type='email'
                                     value={user.email}
-                                    id="userEmail"
+                                    id='userEmail'
                                     disabled
                                 />
                             </div>
@@ -232,29 +236,29 @@ const Checkout = () => {
                             <Form.Label>Usar otro email</Form.Label>
                             <div style={{ display: 'flex' }}>
                                 <Form.Check
-                                    id="optionTwo"
-                                    type="switch"
-                                    name="switchOptionTwo"
-                                    label=""
+                                    id='optionTwo'
+                                    type='switch'
+                                    name='switchOptionTwo'
+                                    label=''
                                     onChange={() => handleCheckChangeTwo()}
                                 />
                                 <div>
                                     <Form.Control
-                                        type="email"
-                                        id="otherEmail"
-                                        name="userEmail"
+                                        type='email'
+                                        id='otherEmail'
+                                        name='userEmail'
                                         disabled
-                                        placeholder="Ingrese el email donde desea recibir los codigos"
-                                        onChange={(e) => handleOtherEmailChange(e)}
+                                        placeholder='Ingrese el email donde desea recibir los codigos'
+                                        onChange={(e) => handleInputChange(e)}
                                     />
                                     <Form.Label>Confirmar email</Form.Label>
                                     <Form.Control
-                                        type="email"
-                                        id="otherEmailConfirm"
-                                        name="confirmEmail"
+                                        type='email'
+                                        id='otherEmailConfirm'
+                                        name='confirmEmail'
                                         disabled
-                                        placeholder="Por favor, confirme el email"
-                                        onChange={(e) => handleOtherEmailChange(e)}
+                                        placeholder='Por favor, confirme el email'
+                                        onChange={(e) => handleInputChange(e)}
                                     />
                                 </div>
                             </div>
@@ -264,43 +268,64 @@ const Checkout = () => {
                             <Col>
                                 <Form.Label>Nombre</Form.Label>
                                 <Form.Control 
-                                    placeholder="First name"
-                                    value={userData.firstName}
+                                    placeholder='First name'
+                                    value={checkoutInput.firstName}
+                                    name='firstName'
+                                    onChange={(e) => handleInputChange(e)}
                                 />
                             </Col>
                             <Col>
                                 <Form.Label>Apellido</Form.Label>
                                 <Form.Control 
                                     placeholder="Last name" 
-                                    value={userData.lastName}
+                                    value={checkoutInput.lastName}
+                                    name='lastName'
+                                    onChange={(e) => handleInputChange(e)}
                                 />
                             </Col>
                         </Form.Row>
 
                         <Form.Group controlId="formGridAddress1">
                             <Form.Label>Dirección de facturación</Form.Label>
-                            <Form.Control placeholder="1234 Main St" />
+                            <Form.Control 
+                                placeholder="1234 Main St" 
+                                name='adressOne'
+                                onChange={(e) => handleInputChange(e)}
+                            />
                         </Form.Group>
 
                         <Form.Group controlId="formGridAddress2">
                             <Form.Label>Segunda dirección de facturación (opcional)</Form.Label>
-                            <Form.Control placeholder="Departamento, estudio o piso..." />
+                            <Form.Control 
+                                placeholder="Departamento, estudio o piso..." 
+                                name='adressTwo'
+                                onChange={(e) => handleInputChange(e)}
+                            />
                         </Form.Group>
 
                         <Form.Row>
                             <Form.Group as={Col} controlId="formGridCity">
                                 <Form.Label>Ciudad</Form.Label>
-                                <Form.Control />
+                                <Form.Control 
+                                    name='city'
+                                    onChange={(e) => handleInputChange(e)}
+                                />
                             </Form.Group>
 
                             <Form.Group as={Col} controlId="formGridState">
                                 <Form.Label>Pais</Form.Label>
-                                <Form.Control/>
+                                <Form.Control
+                                    name='country'
+                                    onChange={(e) => handleInputChange(e)}
+                                />
                             </Form.Group>
 
                             <Form.Group as={Col} controlId="formGridZip">
                                 <Form.Label>Zip</Form.Label>
-                                <Form.Control />
+                                <Form.Control 
+                                    name='zip'
+                                    onChange={(e) => handleInputChange(e)}
+                                />
                             </Form.Group>
                         </Form.Row>
 
