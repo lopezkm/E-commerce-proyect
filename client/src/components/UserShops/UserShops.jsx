@@ -74,7 +74,9 @@ const UserShops = () => {
                         <Col className="user-shop-col-main"> 
                             <div>Número de orden: {order.id} </div>
                             <div>Fecha de compra: {order.createdAt.substring( 0, 10 ).split( '-' ).reverse( ).join( '/' )} </div>
-                            <div>Oreden en estado: {order.status}</div>
+                            {order.status === 'completed' ? 
+                            <div className="user-shop-div-completed">Orden en estado: {order.status} </div> :
+                            <div className="user-shop-div-canceled">Orden en estado: {order.status} </div>}
                         </Col>
                         {products && order.products.map(product => products.map(prod => prod[0] === product.id ?
                             <Col className="user-shop-col-one" xs={ 3 } lg={ 2 }>

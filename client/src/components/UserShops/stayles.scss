@@ -13,7 +13,12 @@
             }
             .user-shop-col-main {
                 margin: 1rem 0.5rem;
-
+                .user-shop-div-completed {
+                    color: $blue;
+                }
+                .user-shop-div-canceled {
+                    color: red;
+                }
                 div {
                     margin-bottom: 0.2rem;
                 }
