@@ -18,12 +18,15 @@ const Checkout = () => {
     const [loading, setLoading] = useState(true);
     const [products, setProducts] = useState([]);
     const [emailValidation, setEmailValidation] = useState("");
+    const [userData, setUserData] = useState(user)
     const [checkoutInput, setCheckoutInput] = useState({
         userEmail: "",
         cardNumber: "",
         expiration: "",
         cvc: ""
     })
+
+    console.log(userData);
 
     const productsPrice = useMemo(() => products.reduce((a, p) => a + (p.price * p.quantity), 0.0), [products]);
     const shippingCost = useMemo(() => (productsPrice && SHIPPING_COST), [productsPrice]);
@@ -41,8 +44,8 @@ const Checkout = () => {
 
         formOne.disabled = !formOne.disabled;
 
-        if(formTwo.disabled && formTwoConfirm.disabled) {
-            if(optionOne.checked) {
+        if (formTwo.disabled && formTwoConfirm.disabled) {
+            if (optionOne.checked) {
                 setCheckoutInput({
                     ...checkoutInput,
                     userEmail: user.email
@@ -58,7 +61,7 @@ const Checkout = () => {
             return;
         }
 
-        else if(formOne.disabled) {
+        else if (formOne.disabled) {
             formTwo.disabled = false;
             formTwoConfirm.disabled = false;
             optionTwo.checked = true;
@@ -81,8 +84,8 @@ const Checkout = () => {
         formTwo.disabled = !formTwo.disabled;
         formTwoConfirm.disabled = !formTwoConfirm.disabled;
 
-        if(formOne.disabled) {
-            if(optionTwo.checked) {
+        if (formOne.disabled) {
+            if (optionTwo.checked) {
                 setCheckoutInput({
                     ...checkoutInput,
                     userEmail: formTwo.value
@@ -98,7 +101,7 @@ const Checkout = () => {
             return;
         }
 
-        else if(formTwo.disabled && formTwoConfirm.disabled) {
+        else if (formTwo.disabled && formTwoConfirm.disabled) {
             formOne.disabled = false;
             optionOne.checked = true;
         }
@@ -116,12 +119,12 @@ const Checkout = () => {
     const handleOtherEmailChange = (e) => {
         const { name, value } = e.target;
 
-        if(name === "confirmEmail") setEmailValidation(value)
+        if (name === "confirmEmail") setEmailValidation(value)
 
         else {
             setCheckoutInput({
                 ...checkoutInput,
-                [name] : value
+                [name]: value
             });
         }
     };
@@ -129,7 +132,7 @@ const Checkout = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        if(checkoutInput.userEmail === emailValidation || checkoutInput.userEmail === user.email){
+        if (checkoutInput.userEmail === emailValidation || checkoutInput.userEmail === user.email) {
             console.log(checkoutInput);
             //PETICION A LA API DE MP :>
         }
@@ -248,21 +251,65 @@ const Checkout = () => {
                                     <Form.Control
                                         type="email"
                                         id="otherEmailConfirm"
-                                        name="confirmEmail"  
-                                        disabled  
-                                        placeholder="Por favor, confirme el email"  
-                                        onChange={(e) => handleOtherEmailChange(e)}              
+                                        name="confirmEmail"
+                                        disabled
+                                        placeholder="Por favor, confirme el email"
+                                        onChange={(e) => handleOtherEmailChange(e)}
                                     />
                                 </div>
                             </div>
                         </Form.Group>
 
+                        <Form.Row>
+                            <Col>
+                                <Form.Label>Nombre</Form.Label>
+                                <Form.Control 
+                                    placeholder="First name"
+                                    value={userData.firstName}
+                                />
+                            </Col>
+                            <Col>
+                                <Form.Label>Apellido</Form.Label>
+                                <Form.Control 
+                                    placeholder="Last name" 
+                                    value={userData.lastName}
+                                />
+                            </Col>
+                        </Form.Row>
+
+                        <Form.Group controlId="formGridAddress1">
+                            <Form.Label>Dirección de facturación</Form.Label>
+                            <Form.Control placeholder="1234 Main St" />
+                        </Form.Group>
+
+                        <Form.Group controlId="formGridAddress2">
+                            <Form.Label>Segunda dirección de facturación (opcional)</Form.Label>
+                            <Form.Control placeholder="Departamento, estudio o piso..." />
+                        </Form.Group>
+
+                        <Form.Row>
+                            <Form.Group as={Col} controlId="formGridCity">
+                                <Form.Label>Ciudad</Form.Label>
+                                <Form.Control />
+                            </Form.Group>
+
+                            <Form.Group as={Col} controlId="formGridState">
+                                <Form.Label>Pais</Form.Label>
+                                <Form.Control/>
+                            </Form.Group>
+
+                            <Form.Group as={Col} controlId="formGridZip">
+                                <Form.Label>Zip</Form.Label>
+                                <Form.Control />
+                            </Form.Group>
+                        </Form.Row>
+
                         <Form.Group>
                             <Form.Label>Pago mediante Mercado Pago</Form.Label>
                             <CreditCardInput
-                                cardNumberInputProps={{ onChange: e => setCheckoutInput({...checkoutInput, cardNumber: e.target.value})}}
-                                cardExpiryInputProps={{ onChange: e => setCheckoutInput({...checkoutInput, expiration: e.target.value})}}
-                                cardCVCInputProps={{ onChange: e => setCheckoutInput({...checkoutInput, cvc: e.target.value})}}
+                                cardNumberInputProps={{ onChange: e => setCheckoutInput({ ...checkoutInput, cardNumber: e.target.value }) }}
+                                cardExpiryInputProps={{ onChange: e => setCheckoutInput({ ...checkoutInput, expiration: e.target.value }) }}
+                                cardCVCInputProps={{ onChange: e => setCheckoutInput({ ...checkoutInput, cvc: e.target.value }) }}
                                 fieldClassName="input"
                             />
                         </Form.Group>
@@ -293,7 +340,7 @@ const Checkout = () => {
                                     </Col>
                                     <Col>
                                         <Row>
-                                            <div style={{display: 'flex', justifyContent: 'space-around'}}>
+                                            <div style={{ display: 'flex', justifyContent: 'space-around' }}>
                                                 <Figure.Caption>{product.name}</Figure.Caption>
                                                 <Figure.Caption>Cantidad: {product.quantity}</Figure.Caption>
                                                 <Figure.Caption>Precio: ${(product.quantity * product.price).toFixed(2)}</Figure.Caption>
@@ -306,7 +353,7 @@ const Checkout = () => {
                     }
                 </Col>
             </Row>
-        </Container>
+        </Container >
     );
 };
 
