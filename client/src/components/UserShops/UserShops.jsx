@@ -68,7 +68,7 @@ const UserShops = () => {
     return (
 
         <Container className='user-shop-container'>
-            <h1>Tu Historial de compras</h1>
+            <h1>Historial de compras</h1>
 			{orders && orders.map( ( order, i ) =>  
 				<Card>
                     <Row>
@@ -83,7 +83,6 @@ const UserShops = () => {
                         {products && order.products.map(product => products.map(prod => prod[0] === product.id ?
                             <Col className="user-shop-col-one" xs={ 3 } lg={ 2 }>
                                 <Link className="link" to= {`/product/${product.id}`} >
-                                    {console.log(order.products)}
                                     <h6>{ product.name }</h6>
                                     <Figure className="figure">
                                             <Figure.Image bsPrefix="figure-img"

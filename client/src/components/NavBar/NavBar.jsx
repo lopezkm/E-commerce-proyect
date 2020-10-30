@@ -110,7 +110,7 @@ function NavBar( )
 												<Link to="/login/logued/shops">
 													<Card.Text bsPrefix="card-text">Mis Compras</Card.Text>
 												</Link>
-												<Link>
+												<Link to="/login/logued/data">
 													<Card.Text>Mis Datos</Card.Text>
 												</Link>
 										</Card.Body>
