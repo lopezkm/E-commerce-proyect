@@ -11,6 +11,7 @@ import { ReactComponent as Logo } from '../../assets/logofull.svg';
 
 const API_URL = process.env.REACT_APP_API_URL;
 const API_URL_GOOGLE = API_URL + '/auth/google';
+const API_URL_FACEBOOK = API_URL + '/auth/facebook';
 
 function FormUserLogin( )
 {
@@ -43,9 +44,9 @@ function FormUserLogin( )
 			}, 1500 );
 			
 			toast.success( `¡Ingresaste correctamente en tu cuenta!`, {
-				position: 'top-right',
+				position: 'top-center',
 				autoClose: 1500,
-				hideProgressBar: false,
+				hideProgressBar: true,
 				closeOnClick: true,
 				pauseOnHover: false,
 				draggable: true,
@@ -54,9 +55,9 @@ function FormUserLogin( )
 		} )
 		.catch( ( error ) => {
 			toast.error( `¡Email o clave incorrectos!`, {
-				position: 'top-right',
+				position: 'top-center',
 				autoClose: 3000,
-				hideProgressBar: false,
+				hideProgressBar: true,
 				closeOnClick: true,
 				pauseOnHover: false,
 				draggable: true,
@@ -67,6 +68,10 @@ function FormUserLogin( )
 
 	const googleAuth = () => {
 		window.location.href = API_URL_GOOGLE;
+	}
+
+	const facebookAuth = () =>{
+		window.location.href = API_URL_FACEBOOK;
 	}
 
 	return (
@@ -98,6 +103,7 @@ function FormUserLogin( )
 						</Form.Group>
 						<Button variant="primary" type="submit">Ingresar</Button>
 						<Button variant="secondary" onClick={googleAuth}>Google</Button>
+						<Button variant="secondary" onClick={facebookAuth}>Facebook</Button>
 						<Link to="/register" className="linkUserLogin">Crear cuenta</Link>
 					</Form>
 				</Col>
