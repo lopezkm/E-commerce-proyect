@@ -327,6 +327,66 @@
 	height: 3.25rem;
 }
 
+.navbar-button-rgb
+{
+	background-color: transparent;
+	font-family: $barlow;
+	font-size: .8rem;
+	box-shadow: none;
+	border: none;
+	color: rgba( 255, 255, 255, 0.5 ) !important;
+	font-weight: 700;
+
+	&:hover 
+	{
+		background: $rgb;
+		background-size: 800% 500%;
+		animation: BgGradient 5s ease infinite;
+		box-shadow: none;
+		border: none;
+		color: $black !important;
+		height: 2rem;
+		margin-top: .64rem;
+	}
+	&:focus {
+		background-color: transparent;
+		box-shadow: none;
+	}
+	&:active{
+		background-color: transparent !important;
+		box-shadow: none !important;
+	}
+}
+
+.navbar-off-party-mode 
+{
+	transition: .5s;
+	height: 0%;
+	background: $rgb;
+    background-size: 400% 300%;
+	animation: BgGradient 5s ease infinite;
+	z-index: 2;
+}
+
+.navbar-party-mode 
+{
+	width: 100%;
+	height: .5%;
+	position: fixed;
+	z-index: 2;
+	background: $rgb;
+    background-size: 400% 300%;
+	animation: BgGradient 5s ease infinite;
+	transition: .5s;
+}
+
+@keyframes BgGradient {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+}
+
+
 /*
 
 .navbar-main
