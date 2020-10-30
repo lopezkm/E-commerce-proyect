@@ -59,7 +59,7 @@ function NavBar( )
 
 	return (
 		<>
-			<div class="navbar-top-spacing"></div>
+			<div className="navbar-top-spacing"></div>
 			<Navbar collapseOnSelect expand="lg" fixed="top" variant="dark" className="navbar-main">
 				<Navbar.Brand>
 					<Nav.Link as={Link} to="/">
@@ -92,7 +92,7 @@ function NavBar( )
 							userFirstName ?
 							<DropdownButton className="navbar-user-options"
 								as={ButtonGroup}
-								menuAlign={{ lg: 'right' }}
+								menualign={{ lg: 'right' }}
 								icon={<FontAwesomeIcon icon={faUser} />}
 								title={
 									<p className="navbar-text">

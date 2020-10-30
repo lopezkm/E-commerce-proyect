@@ -1879,8 +1879,8 @@ const User = [
 	{
 		firstName: 'Carlos',
 		lastName: 'Saballe',
-		email: 'me@againme.com',
-		password: '777777777',
+		email: 'carlos@saballe.com',
+		password: '7777',
 		accessLevel: 2
 	},
 	{
