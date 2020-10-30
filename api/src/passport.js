@@ -2,7 +2,9 @@ const passport 		= require( 'passport' );
 const LocalStrategy = require( 'passport-local' ).Strategy;
 const { User } 		= require( './db.js' );
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const FacebookStrategy = require('passport-facebook').Strategy;
 const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET } = process.env;
+const { FACEBOOK_APP_ID, FACEBOOK_APP_SECRET } = process.env;
 
 /* =================================================================================
 * 		[ Definimos los distintos niveles de acceso ]
@@ -68,11 +70,48 @@ passport.use(new GoogleStrategy({
 			}
 		} )
 		.then( ([ user, created ]) => {
-			
+
+			if ( !user.correctPassword( id ) ) {
+				return done( null, false );
+			}
 			done(null, user);
 
 		} )
 	}
+));
+
+/* =================================================================================
+* 		 Usamos Facebook para identificar usuarios 
+* ================================================================================= */
+
+passport.use(new FacebookStrategy({
+    clientID: FACEBOOK_APP_ID,
+    clientSecret: FACEBOOK_APP_SECRET,
+	callbackURL: "/auth/facebook/callback",
+	profileFields: ['id', 'name', 'email']
+  },
+  function(accessToken, refreshToken, profile, done) {
+	const { first_name, last_name, email, id } = profile._json;
+
+		User.findOrCreate( {
+			where: {
+				email
+			},
+			defaults: {
+				firstName: first_name,
+				lastName: last_name,
+				password: id
+			}
+		} )
+		.then( ([ user, created ]) => {
+
+			if ( !user.correctPassword( id ) ) {
+				return done( null, false );
+			}
+			done(null, user);
+
+		} )
+  }
 ));
 
 /* =================================================================================
