@@ -18,7 +18,7 @@ const { ACCESS_LEVEL_USER } = ACCESS_LEVELS;
 server.get( '/:id/orders', isAuthenticated, ( request, response ) => {
 	const { id } = request.params;
 	
-	if ( ( id !== request.user.id ) && ( request.user.accessLevel === ACCESS_LEVEL_USER ) ) {
+	if ( ( parseInt(id) !== request.user.id ) && ( request.user.accessLevel === ACCESS_LEVEL_USER ) ) {
 		return response.status( 401 ).send( 'Not allowed to visualize another user\'s orders' );
 	}
 	
