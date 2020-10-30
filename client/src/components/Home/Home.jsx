@@ -14,11 +14,9 @@ const API_URL = process.env.REACT_APP_API_URL;
 const Home = () => {
 
     const [products, setProducts] = React.useState([]);
-    console.log(products)
 
     let secondCards = products.sort(() => Math.random() - 0.5).splice(0, 4);
-    console.log(secondCards)
-
+   
     const getProducts = () => {
         axios.get(`${API_URL}/products`)
             .then(response => setProducts(response.data))

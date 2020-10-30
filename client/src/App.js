@@ -33,7 +33,6 @@ import FormModifyReview from './components/FormReview/FormModifyReview.jsx';
 import FormUserLogin from './components/FormUserLogin/FormUserLogin.jsx';
 import FormManageUser from './components/FormManageUser/FormManageUser.jsx';
 import Checkout from './components/Checkout/Checkout.jsx'
-
 import  UserShops from './components/UserShops/UserShops.jsx';
 
 function App( )
@@ -56,6 +55,7 @@ function App( )
 			
 			<Route exact path='/' component={ Home }/>
 			<Route exact path='/login' component={ FormUserLogin } />
+			<Route exact path='/login/logued/shops' component= { UserShops } />
 			<Route exact path='/register' component={ FormCreateUser } />
 			<Route exact path='/Admin' component={ PanelAdmin } />
 			<Route exact path='/Admin/create' component={ FormAdminCreate } />

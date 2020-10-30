@@ -19,10 +19,17 @@ const Checkout = () => {
     const [products, setProducts] = useState([]);
     const [emailValidation, setEmailValidation] = useState("");
     const [checkoutInput, setCheckoutInput] = useState({
-        userEmail: "",
-        cardNumber: "",
-        expiration: "",
-        cvc: ""
+        firstName: user.firstName,
+        lastName: user.lastName,
+        userEmail: '',
+        adressOne: '',
+        adressTwo: '',
+        country: '',
+        city: '',
+        zip: '',
+        cardNumber: '',
+        expiration: '',
+        cvc: ''
     })
 
     const productsPrice = useMemo(() => products.reduce((a, p) => a + (p.price * p.quantity), 0.0), [products]);
@@ -41,8 +48,8 @@ const Checkout = () => {
 
         formOne.disabled = !formOne.disabled;
 
-        if(formTwo.disabled && formTwoConfirm.disabled) {
-            if(optionOne.checked) {
+        if (formTwo.disabled && formTwoConfirm.disabled) {
+            if (optionOne.checked) {
                 setCheckoutInput({
                     ...checkoutInput,
                     userEmail: user.email
@@ -51,14 +58,14 @@ const Checkout = () => {
             else {
                 setCheckoutInput({
                     ...checkoutInput,
-                    userEmail: ""
+                    userEmail: ''
                 });
             }
 
             return;
         }
 
-        else if(formOne.disabled) {
+        else if (formOne.disabled) {
             formTwo.disabled = false;
             formTwoConfirm.disabled = false;
             optionTwo.checked = true;
@@ -81,8 +88,8 @@ const Checkout = () => {
         formTwo.disabled = !formTwo.disabled;
         formTwoConfirm.disabled = !formTwoConfirm.disabled;
 
-        if(formOne.disabled) {
-            if(optionTwo.checked) {
+        if (formOne.disabled) {
+            if (optionTwo.checked) {
                 setCheckoutInput({
                     ...checkoutInput,
                     userEmail: formTwo.value
@@ -91,14 +98,14 @@ const Checkout = () => {
             else {
                 setCheckoutInput({
                     ...checkoutInput,
-                    userEmail: ""
+                    userEmail: ''
                 });
             }
 
             return;
         }
 
-        else if(formTwo.disabled && formTwoConfirm.disabled) {
+        else if (formTwo.disabled && formTwoConfirm.disabled) {
             formOne.disabled = false;
             optionOne.checked = true;
         }
@@ -113,15 +120,15 @@ const Checkout = () => {
         }
     };
 
-    const handleOtherEmailChange = (e) => {
+    const handleInputChange = (e) => {
         const { name, value } = e.target;
 
-        if(name === "confirmEmail") setEmailValidation(value)
+        if (name === 'confirmEmail') setEmailValidation(value)
 
         else {
             setCheckoutInput({
                 ...checkoutInput,
-                [name] : value
+                [name]: value
             });
         }
     };
@@ -129,7 +136,7 @@ const Checkout = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        if(checkoutInput.userEmail === emailValidation || checkoutInput.userEmail === user.email){
+        if (checkoutInput.userEmail === emailValidation || checkoutInput.userEmail === user.email) {
             console.log(checkoutInput);
             //PETICION A LA API DE MP :>
         }
@@ -209,17 +216,17 @@ const Checkout = () => {
                             <Form.Label>Usar mi email</Form.Label>
                             <div style={{ display: 'flex', justifyContent: "space-around" }}>
                                 <Form.Check
-                                    id="optionOne"
-                                    type="switch"
+                                    id='optionOne'
+                                    type='switch'
                                     onChange={() => handleCheckChangeOne()}
                                     name="switchOptionOne"
                                     label=""
 
                                 />
                                 <Form.Control
-                                    type="email"
+                                    type='email'
                                     value={user.email}
-                                    id="userEmail"
+                                    id='userEmail'
                                     disabled
                                 />
                             </div>
@@ -229,40 +236,105 @@ const Checkout = () => {
                             <Form.Label>Usar otro email</Form.Label>
                             <div style={{ display: 'flex' }}>
                                 <Form.Check
-                                    id="optionTwo"
-                                    type="switch"
-                                    name="switchOptionTwo"
-                                    label=""
+                                    id='optionTwo'
+                                    type='switch'
+                                    name='switchOptionTwo'
+                                    label=''
                                     onChange={() => handleCheckChangeTwo()}
                                 />
                                 <div>
                                     <Form.Control
-                                        type="email"
-                                        id="otherEmail"
-                                        name="userEmail"
+                                        type='email'
+                                        id='otherEmail'
+                                        name='userEmail'
                                         disabled
-                                        placeholder="Ingrese el email donde desea recibir los codigos"
-                                        onChange={(e) => handleOtherEmailChange(e)}
+                                        placeholder='Ingrese el email donde desea recibir los codigos'
+                                        onChange={(e) => handleInputChange(e)}
                                     />
                                     <Form.Label>Confirmar email</Form.Label>
                                     <Form.Control
-                                        type="email"
-                                        id="otherEmailConfirm"
-                                        name="confirmEmail"  
-                                        disabled  
-                                        placeholder="Por favor, confirme el email"  
-                                        onChange={(e) => handleOtherEmailChange(e)}              
+                                        type='email'
+                                        id='otherEmailConfirm'
+                                        name='confirmEmail'
+                                        disabled
+                                        placeholder='Por favor, confirme el email'
+                                        onChange={(e) => handleInputChange(e)}
                                     />
                                 </div>
                             </div>
                         </Form.Group>
 
+                        <Form.Row>
+                            <Col>
+                                <Form.Label>Nombre</Form.Label>
+                                <Form.Control 
+                                    placeholder='First name'
+                                    value={checkoutInput.firstName}
+                                    name='firstName'
+                                    onChange={(e) => handleInputChange(e)}
+                                />
+                            </Col>
+                            <Col>
+                                <Form.Label>Apellido</Form.Label>
+                                <Form.Control 
+                                    placeholder="Last name" 
+                                    value={checkoutInput.lastName}
+                                    name='lastName'
+                                    onChange={(e) => handleInputChange(e)}
+                                />
+                            </Col>
+                        </Form.Row>
+
+                        <Form.Group controlId="formGridAddress1">
+                            <Form.Label>Dirección de facturación</Form.Label>
+                            <Form.Control 
+                                placeholder="1234 Main St" 
+                                name='adressOne'
+                                onChange={(e) => handleInputChange(e)}
+                            />
+                        </Form.Group>
+
+                        <Form.Group controlId="formGridAddress2">
+                            <Form.Label>Segunda dirección de facturación (opcional)</Form.Label>
+                            <Form.Control 
+                                placeholder="Departamento, estudio o piso..." 
+                                name='adressTwo'
+                                onChange={(e) => handleInputChange(e)}
+                            />
+                        </Form.Group>
+
+                        <Form.Row>
+                            <Form.Group as={Col} controlId="formGridCity">
+                                <Form.Label>Ciudad</Form.Label>
+                                <Form.Control 
+                                    name='city'
+                                    onChange={(e) => handleInputChange(e)}
+                                />
+                            </Form.Group>
+
+                            <Form.Group as={Col} controlId="formGridState">
+                                <Form.Label>Pais</Form.Label>
+                                <Form.Control
+                                    name='country'
+                                    onChange={(e) => handleInputChange(e)}
+                                />
+                            </Form.Group>
+
+                            <Form.Group as={Col} controlId="formGridZip">
+                                <Form.Label>Zip</Form.Label>
+                                <Form.Control 
+                                    name='zip'
+                                    onChange={(e) => handleInputChange(e)}
+                                />
+                            </Form.Group>
+                        </Form.Row>
+
                         <Form.Group>
                             <Form.Label>Pago mediante Mercado Pago</Form.Label>
                             <CreditCardInput
-                                cardNumberInputProps={{ onChange: e => setCheckoutInput({...checkoutInput, cardNumber: e.target.value})}}
-                                cardExpiryInputProps={{ onChange: e => setCheckoutInput({...checkoutInput, expiration: e.target.value})}}
-                                cardCVCInputProps={{ onChange: e => setCheckoutInput({...checkoutInput, cvc: e.target.value})}}
+                                cardNumberInputProps={{ onChange: e => setCheckoutInput({ ...checkoutInput, cardNumber: e.target.value }) }}
+                                cardExpiryInputProps={{ onChange: e => setCheckoutInput({ ...checkoutInput, expiration: e.target.value }) }}
+                                cardCVCInputProps={{ onChange: e => setCheckoutInput({ ...checkoutInput, cvc: e.target.value }) }}
                                 fieldClassName="input"
                             />
                         </Form.Group>
@@ -293,7 +365,7 @@ const Checkout = () => {
                                     </Col>
                                     <Col>
                                         <Row>
-                                            <div style={{display: 'flex', justifyContent: 'space-around'}}>
+                                            <div style={{ display: 'flex', justifyContent: 'space-around' }}>
                                                 <Figure.Caption>{product.name}</Figure.Caption>
                                                 <Figure.Caption>Cantidad: {product.quantity}</Figure.Caption>
                                                 <Figure.Caption>Precio: ${(product.quantity * product.price).toFixed(2)}</Figure.Caption>
@@ -306,7 +378,7 @@ const Checkout = () => {
                     }
                 </Col>
             </Row>
-        </Container>
+        </Container >
     );
 };
 
