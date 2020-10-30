@@ -1,0 +1,37 @@
+.user-data-container {
+    margin-top:3rem;
+    background-color: $grey;
+    border-radius: 10px;
+    padding-bottom:3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+
+    h1 {
+        margin: 2rem;
+        text-align: center;
+        color: $white;
+        font-family: $kanit;
+    }
+
+    .card {
+
+        width: 90%;
+        border-radius: 10px;
+        padding: 1rem;
+        font-family: $barlow;
+        color: $white;
+        background-color: $black;
+
+        
+        .user-data-cardTitle {
+            border-bottom: 1px solid $light-grey;
+            padding-bottom:0.5rem;
+        }
+
+        .user-data-cardTitle-under {
+            margin-bottom: 0rem;
+        }
+    }
+}
