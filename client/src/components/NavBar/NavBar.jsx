@@ -59,7 +59,7 @@ function NavBar( )
 
 	return (
 		<>
-			<div class="navbar-top-spacing"></div>
+			<div className="navbar-top-spacing"></div>
 			<Navbar collapseOnSelect expand="lg" fixed="top" variant="dark" className="navbar-main">
 				<Navbar.Brand>
 					<Nav.Link as={Link} to="/">
@@ -92,7 +92,7 @@ function NavBar( )
 							userFirstName ?
 							<DropdownButton className="navbar-user-options"
 								as={ButtonGroup}
-								menuAlign={{ lg: 'right' }}
+								menualign={{ lg: 'right' }}
 								icon={<FontAwesomeIcon icon={faUser} />}
 								title={
 									<p className="navbar-text">
@@ -110,8 +110,11 @@ function NavBar( )
 												<Link to="/login/logued/shops">
 													<Card.Text bsPrefix="card-text">Mis Compras</Card.Text>
 												</Link>
-												<Link to="/login/logued/data">
+												<Link to='#'>
 													<Card.Text>Mis Datos</Card.Text>
+												</Link>
+												<Link to='#'>
+													<Card.Text>Seguridad</Card.Text>
 												</Link>
 										</Card.Body>
 										<Card.Footer>

@@ -258,6 +258,23 @@ server.get( '/demote/:id', hasAccessLevel( ACCESS_LEVEL_SUPER ), ( request, resp
 } );
 
 /* =================================================================================
+* 		[ Google auth ]
+* ================================================================================= */
+server.get('/logged', (request, response)=>{
+	
+	response.send(request.isAuthenticated())
+})
+
+server.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }))
+
+server.get('/google/callback', passport.authenticate('google', { failureRedirect: process.env.FRONT_URL+'/login' }),
+  	(request, response) => {
+		//Successful authentication, redirect home.
+		response.redirect(process.env.FRONT_URL+'/products')
+  	}
+);
+
+/* =================================================================================
 * 		[ Se exportan las rutas ]
 * ================================================================================= */
 
