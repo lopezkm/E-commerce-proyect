@@ -10,6 +10,7 @@ import { loadUser } from '../../redux/action-creators/user';
 import { ReactComponent as Logo } from '../../assets/logofull.svg';
 
 const API_URL = process.env.REACT_APP_API_URL;
+const API_URL_GOOGLE = API_URL + '/auth/google';
 
 function FormUserLogin( )
 {
@@ -64,6 +65,10 @@ function FormUserLogin( )
 		} );
 	};
 
+	const googleAuth = () => {
+		window.location.href = API_URL_GOOGLE;
+	}
+
 	return (
 		<Container className='containerUserLogin'>
 			<Row>
@@ -91,9 +96,8 @@ function FormUserLogin( )
 								onChange={(event) => handleInputChange(event)}
 							/>
 						</Form.Group>
-						<Button variant="primary" type="submit">
-							Ingresar
-						</Button>
+						<Button variant="primary" type="submit">Ingresar</Button>
+						<Button variant="secondary" onClick={googleAuth}>Google</Button>
 						<Link to="/register" className="linkUserLogin">Crear cuenta</Link>
 					</Form>
 				</Col>
