@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import qs from 'query-string';
@@ -8,6 +8,7 @@ import ProductCard from '../ProductCard/ProductCard.jsx';
 import Checkable from '../Checkable/Checkable.jsx';
 import loadingCircle from '../../assets/loading.svg';
 import { loadUser } from '../../redux/action-creators/user';
+import { toast } from 'react-toastify';
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -21,6 +22,7 @@ function Catalogue( props )
 	const firstRender = useRef( true );
 	const categories = useSelector( ( state ) => state.category.categories );
 	const dispatch = useDispatch( );
+	const history = useHistory( );
 	
 	const onChangeHandler = useCallback( ( status, id ) => {
 		setChecked( ( state ) => {
@@ -66,6 +68,19 @@ function Catalogue( props )
 		.then(response => {
 			if (response) {
 				dispatch( loadUser( response.data ) )
+				
+				if (history.action === 'POP'){
+
+					toast.success( `¡Bienvenido ${response.data.firstName}!`, {
+						position: 'top-center',
+						autoClose: 1500,
+						hideProgressBar: true,
+						closeOnClick: true,
+						pauseOnHover: false,
+						draggable: true,
+						progress: undefined
+					} );
+				}
 			}
 		})
 		.catch(e => console.log(e))
