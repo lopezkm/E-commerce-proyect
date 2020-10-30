@@ -36,7 +36,7 @@ server.post( '/create',  hasAccessLevel( ),  ( request, response ) => {
 	
 	Offers.findOne( {
 		where: {
-			name: { [ Op.iLike ]: alias }
+			alias: { [ Op.iLike ]: alias }
 		}
 	} )
 	.then( offer => {
