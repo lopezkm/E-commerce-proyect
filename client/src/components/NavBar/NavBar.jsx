@@ -12,6 +12,7 @@ import { toast } from 'react-toastify';
 
 function NavBar( )
 {
+
 	const history = useHistory( );
 	const dispatch = useDispatch( );
 	
@@ -57,9 +58,20 @@ function NavBar( )
 		} );
 	}
 
+	const changeParty = () => {
+		const PartyBar = document.getElementById('partyBar');
+
+		if(PartyBar.className ==  'navbar-party-mode'){
+			PartyBar.className='navbar-off-party-mode'
+		}
+		else {
+			PartyBar.className='navbar-party-mode'
+		}
+	}
+
 	return (
 		<>
-			<div class="navbar-top-spacing"></div>
+			<div className="navbar-top-spacing"></div>
 			<Navbar collapseOnSelect expand="lg" fixed="top" variant="dark" className="navbar-main">
 				<Navbar.Brand>
 					<Nav.Link as={Link} to="/">
@@ -80,6 +92,7 @@ function NavBar( )
 						<NavLink as={Link} exact activeClassName="active" to="/admin">
 							<p className="navbar-text navbar-text-outline">Administración</p>
 						</NavLink> : null}
+						<Button className='navbar-button-rgb' onClick={() => changeParty()}>RGB</Button>
 					</Nav>
 					<Nav className="navbar-nav-right">
 						<NavLink as={Link} exact activeClassName="active" to="/cart" className="navbar-nav-cart">
@@ -92,7 +105,7 @@ function NavBar( )
 							userFirstName ?
 							<DropdownButton className="navbar-user-options"
 								as={ButtonGroup}
-								menuAlign={{ lg: 'right' }}
+								menualign={{ lg: 'right' }}
 								icon={<FontAwesomeIcon icon={faUser} />}
 								title={
 									<p className="navbar-text">
@@ -108,13 +121,10 @@ function NavBar( )
 
 										<Card.Body bsPrefix="card-body">
 												<Link to="/login/logued/shops">
-													<Card.Text bsPrefix="card-text">Mis Compras</Card.Text>
+													<Card.Text bsPrefix="card-text"> Mis Compras </Card.Text>
 												</Link>
-												<Link to='#'>
-													<Card.Text>Mis Datos</Card.Text>
-												</Link>
-												<Link to='#'>
-													<Card.Text>Seguridad</Card.Text>
+												<Link to="/login/logued/data">
+													<Card.Text> Mis Datos </Card.Text>
 												</Link>
 										</Card.Body>
 										<Card.Footer>
@@ -136,6 +146,7 @@ function NavBar( )
 					</Nav>
 				</Navbar.Collapse>
 			</Navbar>
+			<div className="navbar-party-mode" id="partyBar"></div>
 		</>
 	);
 };

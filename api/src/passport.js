@@ -1,6 +1,8 @@
 const passport 		= require( 'passport' );
 const LocalStrategy = require( 'passport-local' ).Strategy;
 const { User } 		= require( './db.js' );
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET } = process.env;
 
 /* =================================================================================
 * 		[ Definimos los distintos niveles de acceso ]
@@ -41,6 +43,37 @@ passport.use( new LocalStrategy( {
 		} );
 	}
 ) );
+
+/* =================================================================================
+* 		 Usamos Google Strategy para identificar usuarios 
+* ================================================================================= */
+
+passport.use(new GoogleStrategy({
+    clientID: GOOGLE_CLIENT_ID,
+    clientSecret: GOOGLE_CLIENT_SECRET,
+    callbackURL: '/auth/google/callback'
+	},
+  	function(accessToken, refreshToken, profile, done) {
+
+		const { given_name, family_name, email, sub } = profile._json;
+
+		User.findOrCreate( {
+			where: {
+				email
+			},
+			defaults: {
+				firstName: given_name,
+				lastName: family_name,
+				password: sub
+			}
+		} )
+		.then( ([ user, created ]) => {
+			
+			done(null, user);
+
+		} )
+	}
+));
 
 /* =================================================================================
 * 		[ Serializamos / deserializamos el usuario ]
