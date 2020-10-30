@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useMemo } from "react";
-import { Button, Form, Container, Col, Row, Figure } from "react-bootstrap";
+import { Button, Form, Container, Col, Row, Figure, Image } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { toast } from 'react-toastify';
 import defaultPortrait from '../../assets/portrait.jpg';
 import CreditCardInput from 'react-credit-card-input';
 import Promise from 'bluebird';
 import axios from 'axios';
+import mpLogo from '../../assets/mp-small.png'
 
 const TAXES_PERCENT = 0.75;
 const SHIPPING_COST = 3.0;
@@ -207,10 +208,10 @@ const Checkout = () => {
 
 
     return (
-        <Container>
+        <Container className='checkout-container'>
             <Row>
                 <Col>
-                    <Form style={{ backgroundColor: "white" }} onSubmit={(e) => handleSubmit(e)}>
+                    <Form className='checkout-form-container' onSubmit={(e) => handleSubmit(e)}>
                         <h1>Finalizar compra</h1>
                         <Form.Group>
                             <Form.Label>Usar mi email</Form.Label>
@@ -267,7 +268,7 @@ const Checkout = () => {
                         <Form.Row>
                             <Col>
                                 <Form.Label>Nombre</Form.Label>
-                                <Form.Control 
+                                <Form.Control
                                     placeholder='First name'
                                     value={checkoutInput.firstName}
                                     name='firstName'
@@ -276,8 +277,8 @@ const Checkout = () => {
                             </Col>
                             <Col>
                                 <Form.Label>Apellido</Form.Label>
-                                <Form.Control 
-                                    placeholder="Last name" 
+                                <Form.Control
+                                    placeholder="Last name"
                                     value={checkoutInput.lastName}
                                     name='lastName'
                                     onChange={(e) => handleInputChange(e)}
@@ -287,8 +288,8 @@ const Checkout = () => {
 
                         <Form.Group controlId="formGridAddress1">
                             <Form.Label>Dirección de facturación</Form.Label>
-                            <Form.Control 
-                                placeholder="1234 Main St" 
+                            <Form.Control
+                                placeholder="1234 Main St"
                                 name='adressOne'
                                 onChange={(e) => handleInputChange(e)}
                             />
@@ -296,8 +297,8 @@ const Checkout = () => {
 
                         <Form.Group controlId="formGridAddress2">
                             <Form.Label>Segunda dirección de facturación (opcional)</Form.Label>
-                            <Form.Control 
-                                placeholder="Departamento, estudio o piso..." 
+                            <Form.Control
+                                placeholder="Departamento, estudio o piso..."
                                 name='adressTwo'
                                 onChange={(e) => handleInputChange(e)}
                             />
@@ -306,7 +307,7 @@ const Checkout = () => {
                         <Form.Row>
                             <Form.Group as={Col} controlId="formGridCity">
                                 <Form.Label>Ciudad</Form.Label>
-                                <Form.Control 
+                                <Form.Control
                                     name='city'
                                     onChange={(e) => handleInputChange(e)}
                                 />
@@ -322,7 +323,7 @@ const Checkout = () => {
 
                             <Form.Group as={Col} controlId="formGridZip">
                                 <Form.Label>Zip</Form.Label>
-                                <Form.Control 
+                                <Form.Control
                                     name='zip'
                                     onChange={(e) => handleInputChange(e)}
                                 />
@@ -330,7 +331,10 @@ const Checkout = () => {
                         </Form.Row>
 
                         <Form.Group>
-                            <Form.Label>Pago mediante Mercado Pago</Form.Label>
+                            <div className='checkout-paymethod-title'>
+                                <Form.Label>Pago mediante</Form.Label>
+                                <Image src={mpLogo}/>
+                            </div>
                             <CreditCardInput
                                 cardNumberInputProps={{ onChange: e => setCheckoutInput({ ...checkoutInput, cardNumber: e.target.value }) }}
                                 cardExpiryInputProps={{ onChange: e => setCheckoutInput({ ...checkoutInput, expiration: e.target.value }) }}
@@ -347,7 +351,7 @@ const Checkout = () => {
                             <h4>Total a pagar:{totalPrice.toFixed(2)}US$</h4>
                         </div>
 
-                        <Button variant="primary" type="submit">Submit</Button>
+                        <Button variant="primary" type="submit">Comprar</Button>
                     </Form>
                 </Col>
                 <Col>

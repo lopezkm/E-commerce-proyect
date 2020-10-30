@@ -1,0 +1,22 @@
+.checkout-container {
+    padding: 2rem 0;
+    font-family: $barlow;
+
+    .checkout-form-container {
+        background-color: $grey;
+        padding: 1rem;
+        border-radius: 10px;
+        color: $white;
+    }
+
+    .checkout-paymethod-title {
+
+        display: flex;
+        align-items: center;
+        margin-bottom: 1rem;
+        
+        img {
+            margin-left: 1rem;
+        }
+    }
+}
