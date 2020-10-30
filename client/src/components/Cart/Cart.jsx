@@ -83,7 +83,6 @@ function Cart( )
 			const prodArray = responses.map( ( response, pos ) => {
 				return { ...response.data, quantity: cart.products[ pos ].quantity };
 			} );
-			
 			setProducts( prodArray );
 			setLoading( false );
 		} )

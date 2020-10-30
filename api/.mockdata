@@ -1852,7 +1852,7 @@ const User = [
 		firstName: 'Matias',
 		lastName: 'Lopez Klyver',
 		email: 'lopezk_matias@hotmail.com',
-		password: 'uracalva2020',
+		password: 'uc2020',
 		accessLevel: 2
 	},
 	{
@@ -1893,8 +1893,8 @@ const User = [
 	{
 		firstName: "Keen",
 		lastName: "Pohl",
-		email: "kpohl0@shop-pro.jp",
-		password: "Kannada",
+		email: "k@hotmail.com",
+		password: "kkk",
 		accessLevel: 0
 	},
 	{
