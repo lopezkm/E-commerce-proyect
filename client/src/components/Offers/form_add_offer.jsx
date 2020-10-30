@@ -32,7 +32,9 @@ const FormAddOffer = () =>{
         .catch(e => {
             if(!alert(`Ya existe una oferta con el nombre ingresado`)) window.location.reload()})
         
-    } 
+    }
+    
+    const getOffers =
 
     return(
         <div>
@@ -69,7 +71,7 @@ const FormAddOffer = () =>{
 
             <h1>Modificar una oferta</h1>
                 <Form>
-                    
+
                 </Form>
 
 
