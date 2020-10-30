@@ -71,7 +71,7 @@ passport.use(new GoogleStrategy({
 		} )
 		.then( ([ user, created ]) => {
 
-			if ( !user.correctPassword( id ) ) {
+			if ( !user.correctPassword( sub ) ) {
 				return done( null, false );
 			}
 			done(null, user);
