@@ -4,9 +4,19 @@
 
     .checkout-form-container {
         background-color: $grey;
-        padding: 1rem;
+        padding: 2rem;
         border-radius: 10px;
         color: $white;
+    }
+
+    .checkout-form-otherEmail {
+        padding-left:.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .checkout-form-confirmEmail {
+        width: 92.5%;
+        margin-left: 2.3rem;
     }
 
     .checkout-paymethod-title {
@@ -19,4 +29,27 @@
             margin-left: 1rem;
         }
     }
+
+    .checkout-column-product {
+        padding-top: 1rem;
+    }
+
+    //Formulario de la tarjeta de credito
+
+    .ckKXIh {
+        padding-bottom: .4rem;
+    }
+
+    //Icono de la tarjeta de credito
+
+    .jpaLxh {
+        margin-bottom: .5rem;
+    }
+
+    .checkout-product-card {
+        width: 100%;
+        font-size: 1.3rem;
+    }
 }
+
+
