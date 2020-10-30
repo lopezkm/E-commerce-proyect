@@ -113,9 +113,6 @@ function NavBar( )
 												<Link>
 													<Card.Text>Mis Datos</Card.Text>
 												</Link>
-												<Link>
-													<Card.Text>Seguridad</Card.Text>
-												</Link>
 										</Card.Body>
 										<Card.Footer>
 											<Button type= "submit" className="card-button">

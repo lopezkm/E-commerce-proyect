@@ -68,12 +68,14 @@ const UserShops = () => {
     return (
 
         <Container className='user-shop-container'>
+            <h1>Tu Historial de compras</h1>
 			{orders && orders.map( ( order, i ) =>  
 				<Card>
                     <Row>
                         <Col className="user-shop-col-main"> 
                             <div>Número de orden: {order.id} </div>
                             <div>Fecha de compra: {order.createdAt.substring( 0, 10 ).split( '-' ).reverse( ).join( '/' )} </div>
+                            <div>Hora de compra: {order.createdAt.substring( 11, 19 )} </div>
                             {order.status === 'completed' ? 
                             <div className="user-shop-div-completed">Orden en estado: {order.status} </div> :
                             <div className="user-shop-div-canceled">Orden en estado: {order.status} </div>}
@@ -81,16 +83,20 @@ const UserShops = () => {
                         {products && order.products.map(product => products.map(prod => prod[0] === product.id ?
                             <Col className="user-shop-col-one" xs={ 3 } lg={ 2 }>
                                 <Link className="link" to= {`/product/${product.id}`} >
+                                    {console.log(order.products)}
                                     <h6>{ product.name }</h6>
                                     <Figure className="figure">
                                             <Figure.Image bsPrefix="figure-img"
-                                                width={ 50 }
-                                                height={ 70 }
+                                                width={ 70 }
+                                                height={ 100 }
                                                 src={ getProductPortrait(prod[1]) }
                                             />                
                                     </Figure> 
                                 </Link>
-                                <div> <span> Precio: { product.price } US$ </span> </div>
+                                <div> 
+                                    <span> Precio: { product.price } US$ </span> 
+                                    <span> Cantidad: { product.OrderProduct.quantity } </span> 
+                                </div>
                             </Col> : null
                         ))}
                     </Row>
