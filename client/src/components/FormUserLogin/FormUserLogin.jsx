@@ -43,7 +43,7 @@ function FormUserLogin( )
 				history.push( '/products' );
 			}, 1500 );
 			
-			toast.success( `¡Ingresaste correctamente en tu cuenta!`, {
+			toast.success( `¡Bienvenido ${response.data.firstName}!`, {
 				position: 'top-center',
 				autoClose: 1500,
 				hideProgressBar: true,
@@ -56,7 +56,7 @@ function FormUserLogin( )
 		.catch( ( error ) => {
 			toast.error( `¡Email o clave incorrectos!`, {
 				position: 'top-center',
-				autoClose: 3000,
+				autoClose: 1500,
 				hideProgressBar: true,
 				closeOnClick: true,
 				pauseOnHover: false,
