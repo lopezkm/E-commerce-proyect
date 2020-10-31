@@ -29,7 +29,11 @@ const PaypalCheckoutButton = ({ order }) => {
                 {
                     amount: {
                         total: order.total,
-                        currency: paypaConf.currency
+                        currency: paypaConf.currency,
+                        details: {
+                            subtotal: order.subtotal,
+                            tax: order.tax,
+                        }
                     },
                     description: 'Compra en Six Games',
                     custom: order.customer || '',
@@ -63,7 +67,8 @@ const PaypalCheckoutButton = ({ order }) => {
     };
 
     const onCancel = (data, actions) => {
-        alert('Pago no realizado, usuario canceló el proceso');
+        console.log(data);
+        alert('Pago no realizado, usuario canceló el proceso: ', data);
     };
 
     return(
