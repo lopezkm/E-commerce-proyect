@@ -234,7 +234,7 @@ const Checkout = () => {
             <Redirect to="/"/>
         )
     };
-
+    
     return (
         <Container className='checkout-container'>
             <Row>
