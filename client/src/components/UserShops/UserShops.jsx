@@ -33,7 +33,8 @@ const UserShops = () => {
             let product = response.data.map( prod => [prod.id, prod.media]);
             setProducts(product);
 
-        })          
+        })
+        .catch(err => console.log(err));         
         
     }
 
@@ -69,7 +70,7 @@ const UserShops = () => {
 
         <Container className='user-shop-container'>
             <h1>Historial de compras</h1>
-			{orders && orders.map( ( order, i ) =>  
+			{orders ? orders.map( ( order, i ) =>  
 				<Card>
                     <Row>
                         <Col className="user-shop-col-main"> 
@@ -77,13 +78,13 @@ const UserShops = () => {
                             <div>Fecha de compra: {order.createdAt.substring( 0, 10 ).split( '-' ).reverse( ).join( '/' )} </div>
                             <div>Hora de compra: {order.createdAt.substring( 11, 19 )} </div>
                             {order.status === 'completed' ? 
-                            <div className="user-shop-div-completed">Orden en estado: {order.status} </div> :
-                            <div className="user-shop-div-canceled">Orden en estado: {order.status} </div>}
+                            <div className="user-shop-div-completed"> Orden en estado: {order.status} </div> :
+                            <div className="user-shop-div-canceled"> Orden en estado: {order.status} </div>}
                         </Col>
                         {products && order.products.map(product => products.map(prod => prod[0] === product.id ?
                             <Col className="user-shop-col-one" xs={ 3 } lg={ 2 }>
                                 <Link className="link" to= {`/product/${product.id}`} >
-                                    <h6>{ product.name }</h6>
+                                    <h6> { product.name } </h6>
                                     <Figure className="figure">
                                             <Figure.Image bsPrefix="figure-img"
                                                 width={ 70 }
@@ -100,7 +101,7 @@ const UserShops = () => {
                         ))}
                     </Row>
                 </Card>
-            )}
+            ) : <h1> No has realizado ninguna compra hasta el momento </h1> }
 		</Container>
 )
 }

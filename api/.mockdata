@@ -1851,7 +1851,7 @@ const User = [
 	{
 		firstName: 'Matias',
 		lastName: 'Lopez Klyver',
-		email: 'lopezk_matias@hotmail.com',
+		email: 'matias@tuculandia.com',
 		password: 'uc2020',
 		accessLevel: 2
 	},
