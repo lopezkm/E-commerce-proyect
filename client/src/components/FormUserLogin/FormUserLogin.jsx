@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Container, Form, Button, Col, Row } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 import FloatingLabelInput from 'react-floating-label-input';
 import axios from 'axios';
 import { loadUser } from '../../redux/action-creators/user';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {  faGoogle, faFacebook } from '@fortawesome/free-brands-svg-icons';
 import { ReactComponent as Logo } from '../../assets/logofull.svg';
 
 const API_URL = process.env.REACT_APP_API_URL;
@@ -102,8 +103,13 @@ function FormUserLogin( )
 							/>
 						</Form.Group>
 						<Button variant="primary" type="submit">Ingresar</Button>
-						<Button variant="secondary" onClick={googleAuth}>Google</Button>
-						<Button variant="secondary" onClick={facebookAuth}>Facebook</Button>
+						<h6>Continuar con:</h6>
+						<Button className="google-button" onClick={googleAuth}>
+							<FontAwesomeIcon className="button-space" icon={faGoogle} /> Google
+						</Button>
+						<Button className="facebook-button"  onClick={facebookAuth}>
+							<FontAwesomeIcon className="button-space" icon={faFacebook} /> Facebook
+						</Button>
 						<Link to="/register" className="linkUserLogin">Crear cuenta</Link>
 					</Form>
 				</Col>
