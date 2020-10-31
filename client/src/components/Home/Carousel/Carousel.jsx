@@ -14,7 +14,7 @@ const Carousel = () => {
             <div>
                 <Image src='https://images3.alphacoders.com/751/thumb-1920-751195.jpg' />
                 <div className='carousel-text'>
-                    <h2>Titan Fall 2</h2>
+                    <h2>TITANFALL 2</h2>
                     <span>$50</span>
                 </div>
             </div>
