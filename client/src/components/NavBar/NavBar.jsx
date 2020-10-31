@@ -36,9 +36,9 @@ function NavBar( )
 			}, 1500 );
 			
 			toast.success( `¡Cerraste sesión correctamente!`, {
-				position: 'top-right',
+				position: 'top-center',
 				autoClose: 1500,
-				hideProgressBar: false,
+				hideProgressBar: true,
 				closeOnClick: true,
 				pauseOnHover: false,
 				draggable: true,
@@ -47,9 +47,9 @@ function NavBar( )
 		} )
 		.catch( ( error ) => {
 			toast.error( `Ocurrió un error inesperado`, {
-				position: 'top-right',
-				autoClose: 3000,
-				hideProgressBar: false,
+				position: 'top-center',
+				autoClose: 2000,
+				hideProgressBar: true,
 				closeOnClick: true,
 				pauseOnHover: false,
 				draggable: true,
