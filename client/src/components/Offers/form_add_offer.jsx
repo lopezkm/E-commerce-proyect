@@ -14,6 +14,7 @@ const FormAddOffer = () =>{
     const [allOffers, setAllOffers] = useState ([])
     const [loading, setLoading] = useState(true);
     const [selectedOff, setSelectedOff] = useState({})
+    const [inputSearch, setInputSearch] = useState({ searchOfferInput: "" })
     const searchOfferInput = useRef(null);
 
 
@@ -47,6 +48,13 @@ const FormAddOffer = () =>{
         let clickedOption = selector.options[selector.selectedIndex].id;
         selectedOffer = allOffers.filter(item => item.id === parseInt(clickedOption))[0];
     } 
+
+    const handleInputChangeSearch = (event) => {
+        setInputSearch({
+            ...inputSearch,
+            [event.target.name]: event.target.value
+        });
+    };
     
     useEffect(() => {
         getOffers()
@@ -62,6 +70,7 @@ const FormAddOffer = () =>{
     }
 
 
+    let searchedOffer = allOffers.filter(offer => offer.alias.toLowerCase().includes(inputSearch.searchOfferInput.toLowerCase()))
 
 
     return(
@@ -106,11 +115,11 @@ const FormAddOffer = () =>{
                             placeholder="Seleccione la oferta que quiera modificar"
                             name="searchOfferInput"
                             ref={searchOfferInput}
-                            /* onChange={(event) => handleInputChangeSearch(event)}  *//>
+                            onChange={(event) => handleInputChangeSearch(event)}  />
 
                         <Form.Control as="select" multiple id="offerList"  onChange={(e) => handleSelectChange(e)} >
                             {
-                                allOffers.map((offer, i) => {
+                                searchedOffer.map((offer, i) => {
                                     return (
                                     <option key={i} id={offer.id} >
                                         {offer.alias}
