@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo } from "react";
+import { Redirect } from 'react-router-dom';
 import { Button, Form, Container, Col, Row, Figure, Image } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { toast } from 'react-toastify';
@@ -211,6 +212,12 @@ const Checkout = () => {
                 });
             });
     }, [cart.count, cart.products]);
+
+    if(user.id === 0) {
+        return (
+            <Redirect to="/"/>
+        )
+    };
 
 
     return (
