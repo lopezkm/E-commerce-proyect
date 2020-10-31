@@ -1,24 +1,33 @@
 import React, { useState, useEffect, useMemo } from "react";
-import { Button, Form, Container, Col, Row, Figure } from "react-bootstrap";
+import { Button, Form, Container, Col, Row, Figure, Image } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { toast } from 'react-toastify';
 import defaultPortrait from '../../assets/portrait.jpg';
 import CreditCardInput from 'react-credit-card-input';
 import Promise from 'bluebird';
 import axios from 'axios';
+import mpLogo from '../../assets/mp-small.png'
 
 const TAXES_PERCENT = 0.75;
 const SHIPPING_COST = 3.0;
 const API_URL = process.env.REACT_APP_API_URL;
 
 const Checkout = () => {
+
+    const [products, setProducts] = useState([]);
+
+    const productsPrice = useMemo(() => products.reduce((a, p) => a + (p.price * p.quantity), 0.0), [products]);
+    const shippingCost = useMemo(() => (productsPrice && SHIPPING_COST), [productsPrice]);
+    const taxesCost = useMemo(() => (productsPrice * TAXES_PERCENT), [productsPrice]);
+    const totalPrice = useMemo(() => (productsPrice + shippingCost + taxesCost), [productsPrice, shippingCost, taxesCost]);
+
     const cart = useSelector((state) => state.cart);
     const user = useSelector((state) => state.user);
 
     const [loading, setLoading] = useState(true);
-    const [products, setProducts] = useState([]);
     const [emailValidation, setEmailValidation] = useState("");
     const [checkoutInput, setCheckoutInput] = useState({
+        totalPrice,
         firstName: user.firstName,
         lastName: user.lastName,
         userEmail: '',
@@ -32,17 +41,14 @@ const Checkout = () => {
         cvc: ''
     })
 
-    const productsPrice = useMemo(() => products.reduce((a, p) => a + (p.price * p.quantity), 0.0), [products]);
-    const shippingCost = useMemo(() => (productsPrice && SHIPPING_COST), [productsPrice]);
-    const taxesCost = useMemo(() => (productsPrice * TAXES_PERCENT), [productsPrice]);
-    const totalPrice = useMemo(() => (productsPrice + shippingCost + taxesCost), [productsPrice, shippingCost, taxesCost]);
-
     const optionOne = document.getElementById('optionOne');
     const optionTwo = document.getElementById('optionTwo');
 
     const formOne = document.getElementById('userEmail');
     const formTwo = document.getElementById('otherEmail');
     const formTwoConfirm = document.getElementById('otherEmailConfirm');
+
+    const totalMount = document
 
     const handleCheckChangeOne = () => {
 
@@ -128,7 +134,8 @@ const Checkout = () => {
         else {
             setCheckoutInput({
                 ...checkoutInput,
-                [name]: value
+                [name]: value,
+                totalPrice
             });
         }
     };
@@ -207,10 +214,10 @@ const Checkout = () => {
 
 
     return (
-        <Container>
+        <Container className='checkout-container'>
             <Row>
                 <Col>
-                    <Form style={{ backgroundColor: "white" }} onSubmit={(e) => handleSubmit(e)}>
+                    <Form className='checkout-form-container' onSubmit={(e) => handleSubmit(e)}>
                         <h1>Finalizar compra</h1>
                         <Form.Group>
                             <Form.Label>Usar mi email</Form.Label>
@@ -234,15 +241,17 @@ const Checkout = () => {
 
                         <Form.Group>
                             <Form.Label>Usar otro email</Form.Label>
-                            <div style={{ display: 'flex' }}>
-                                <Form.Check
-                                    id='optionTwo'
-                                    type='switch'
-                                    name='switchOptionTwo'
-                                    label=''
-                                    onChange={() => handleCheckChangeTwo()}
-                                />
-                                <div>
+                            <Row>
+                                <Col xs={1}>
+                                    <Form.Check
+                                        id='optionTwo'
+                                        type='switch'
+                                        name='switchOptionTwo'
+                                        label=''
+                                        onChange={() => handleCheckChangeTwo()}
+                                    />
+                                </Col>
+                                <Col className='checkout-form-otherEmail'>
                                     <Form.Control
                                         type='email'
                                         id='otherEmail'
@@ -251,44 +260,46 @@ const Checkout = () => {
                                         placeholder='Ingrese el email donde desea recibir los codigos'
                                         onChange={(e) => handleInputChange(e)}
                                     />
-                                    <Form.Label>Confirmar email</Form.Label>
-                                    <Form.Control
-                                        type='email'
-                                        id='otherEmailConfirm'
-                                        name='confirmEmail'
-                                        disabled
-                                        placeholder='Por favor, confirme el email'
-                                        onChange={(e) => handleInputChange(e)}
-                                    />
-                                </div>
-                            </div>
+                                </Col>
+                            </Row>
+                            <Form.Control
+                                className='checkout-form-confirmEmail'
+                                type='email'
+                                id='otherEmailConfirm'
+                                name='confirmEmail'
+                                disabled
+                                placeholder='Por favor, confirme el email'
+                                onChange={(e) => handleInputChange(e)}
+                            />
                         </Form.Group>
 
-                        <Form.Row>
-                            <Col>
-                                <Form.Label>Nombre</Form.Label>
-                                <Form.Control 
-                                    placeholder='First name'
-                                    value={checkoutInput.firstName}
-                                    name='firstName'
-                                    onChange={(e) => handleInputChange(e)}
-                                />
-                            </Col>
-                            <Col>
-                                <Form.Label>Apellido</Form.Label>
-                                <Form.Control 
-                                    placeholder="Last name" 
-                                    value={checkoutInput.lastName}
-                                    name='lastName'
-                                    onChange={(e) => handleInputChange(e)}
-                                />
-                            </Col>
-                        </Form.Row>
+                        <Form.Group>
+                            <Form.Row>
+                                <Col>
+                                    <Form.Label>Nombre</Form.Label>
+                                    <Form.Control
+                                        placeholder='First name'
+                                        value={checkoutInput.firstName}
+                                        name='firstName'
+                                        onChange={(e) => handleInputChange(e)}
+                                    />
+                                </Col>
+                                <Col>
+                                    <Form.Label>Apellido</Form.Label>
+                                    <Form.Control
+                                        placeholder="Last name"
+                                        value={checkoutInput.lastName}
+                                        name='lastName'
+                                        onChange={(e) => handleInputChange(e)}
+                                    />
+                                </Col>
+                            </Form.Row>
+                        </Form.Group>
 
                         <Form.Group controlId="formGridAddress1">
                             <Form.Label>Dirección de facturación</Form.Label>
-                            <Form.Control 
-                                placeholder="1234 Main St" 
+                            <Form.Control
+                                placeholder="1234 Main St"
                                 name='adressOne'
                                 onChange={(e) => handleInputChange(e)}
                             />
@@ -296,8 +307,8 @@ const Checkout = () => {
 
                         <Form.Group controlId="formGridAddress2">
                             <Form.Label>Segunda dirección de facturación (opcional)</Form.Label>
-                            <Form.Control 
-                                placeholder="Departamento, estudio o piso..." 
+                            <Form.Control
+                                placeholder="Departamento, estudio o piso..."
                                 name='adressTwo'
                                 onChange={(e) => handleInputChange(e)}
                             />
@@ -306,7 +317,7 @@ const Checkout = () => {
                         <Form.Row>
                             <Form.Group as={Col} controlId="formGridCity">
                                 <Form.Label>Ciudad</Form.Label>
-                                <Form.Control 
+                                <Form.Control
                                     name='city'
                                     onChange={(e) => handleInputChange(e)}
                                 />
@@ -322,7 +333,7 @@ const Checkout = () => {
 
                             <Form.Group as={Col} controlId="formGridZip">
                                 <Form.Label>Zip</Form.Label>
-                                <Form.Control 
+                                <Form.Control
                                     name='zip'
                                     onChange={(e) => handleInputChange(e)}
                                 />
@@ -330,7 +341,10 @@ const Checkout = () => {
                         </Form.Row>
 
                         <Form.Group>
-                            <Form.Label>Pago mediante Mercado Pago</Form.Label>
+                            <div className='checkout-paymethod-title'>
+                                <Form.Label>Pago mediante</Form.Label>
+                                <Image src={mpLogo} />
+                            </div>
                             <CreditCardInput
                                 cardNumberInputProps={{ onChange: e => setCheckoutInput({ ...checkoutInput, cardNumber: e.target.value }) }}
                                 cardExpiryInputProps={{ onChange: e => setCheckoutInput({ ...checkoutInput, expiration: e.target.value }) }}
@@ -341,31 +355,31 @@ const Checkout = () => {
 
                         <div>
                             <h3>Resumen de compra</h3>
-                            <p>Articulos({products.length}): {productsPrice.toFixed(2)}US$</p>
+                            <p>Articulos ({products.length}): {productsPrice.toFixed(2)}US$</p>
                             <p>Envio: {shippingCost.toFixed(2)}US$</p>
                             <p>Impuestos: {taxesCost.toFixed(2)}US$</p>
-                            <h4>Total a pagar:{totalPrice.toFixed(2)}US$</h4>
+                            <h4 id='checkout-total'>Total:{totalPrice.toFixed(2)}US$</h4>
                         </div>
 
-                        <Button variant="primary" type="submit">Submit</Button>
+                        <Button variant="primary" type="submit">Comprar</Button>
                     </Form>
                 </Col>
-                <Col>
+                <Col className='checkout-column-product'>
                     {
                         products.map((product, i) => (
-                            <Figure>
+                            <Figure className='checkout-product-card'>
                                 <Row>
-                                    <Col>
+                                    <Col xs={2}>
                                         <Figure.Image
-                                            width={60}
-                                            height={60}
+                                            width={80}
+                                            height={80}
                                             alt="60x60"
                                             src={getProductPortrait(product.media)}
                                         />
                                     </Col>
                                     <Col>
                                         <Row>
-                                            <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+                                            <div>
                                                 <Figure.Caption>{product.name}</Figure.Caption>
                                                 <Figure.Caption>Cantidad: {product.quantity}</Figure.Caption>
                                                 <Figure.Caption>Precio: ${(product.quantity * product.price).toFixed(2)}</Figure.Caption>

@@ -36,9 +36,9 @@ function NavBar( )
 			}, 1500 );
 			
 			toast.success( `¡Cerraste sesión correctamente!`, {
-				position: 'top-right',
+				position: 'top-center',
 				autoClose: 1500,
-				hideProgressBar: false,
+				hideProgressBar: true,
 				closeOnClick: true,
 				pauseOnHover: false,
 				draggable: true,
@@ -47,9 +47,9 @@ function NavBar( )
 		} )
 		.catch( ( error ) => {
 			toast.error( `Ocurrió un error inesperado`, {
-				position: 'top-right',
-				autoClose: 3000,
-				hideProgressBar: false,
+				position: 'top-center',
+				autoClose: 2000,
+				hideProgressBar: true,
 				closeOnClick: true,
 				pauseOnHover: false,
 				draggable: true,
@@ -121,13 +121,10 @@ function NavBar( )
 
 										<Card.Body bsPrefix="card-body">
 												<Link to="/login/logued/shops">
-													<Card.Text bsPrefix="card-text">Mis Compras</Card.Text>
+													<Card.Text bsPrefix="card-text"> Mis Compras </Card.Text>
 												</Link>
-												<Link to='#'>
-													<Card.Text>Mis Datos</Card.Text>
-												</Link>
-												<Link to='#'>
-													<Card.Text>Seguridad</Card.Text>
+												<Link to="/login/logued/data">
+													<Card.Text> Mis Datos </Card.Text>
 												</Link>
 										</Card.Body>
 										<Card.Footer>
