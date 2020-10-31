@@ -13,6 +13,7 @@ const FormAddOffer = () =>{
 
     const [allOffers, setAllOffers] = useState ([])
     const [loading, setLoading] = useState(true);
+    const [selectedOff, setSelectedOff] = useState({})
     const searchOfferInput = useRef(null);
 
 
@@ -38,6 +39,14 @@ const FormAddOffer = () =>{
             if(!alert(`Ya existe una oferta con el nombre ingresado`)) window.location.reload()})
         
     }
+
+    let selectedOffer;
+
+    const handleSelectChange = (e) => {
+        let selector = document.getElementById("offerList");
+        let clickedOption = selector.options[selector.selectedIndex].id;
+        selectedOffer = allOffers.filter(item => item.id === parseInt(clickedOption))[0];
+    } 
     
     useEffect(() => {
         getOffers()
@@ -99,7 +108,7 @@ const FormAddOffer = () =>{
                             ref={searchOfferInput}
                             /* onChange={(event) => handleInputChangeSearch(event)}  *//>
 
-                        <Form.Control as="select" multiple id="offerList" /* onChange={(e) => handleSelectChange(e)} */>
+                        <Form.Control as="select" multiple id="offerList"  onChange={(e) => handleSelectChange(e)} >
                             {
                                 allOffers.map((offer, i) => {
                                     return (
