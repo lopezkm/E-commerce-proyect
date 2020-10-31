@@ -4,6 +4,7 @@ import axios from 'axios';
 
 const FormAddOffer = () =>{
 
+    /*Crear una nueva oferta */
     const [formInput, setformInput] = useState ({
         offerAlias: "",
         offerDiscount: 0,
@@ -11,12 +12,15 @@ const FormAddOffer = () =>{
         offerEndDate:"",
     })
 
+    const searchOfferInput = useRef(null);
+    /*Guardar todas las ofertas para mostrarlas */
     const [allOffers, setAllOffers] = useState ([])
     const [loading, setLoading] = useState(true);
-    const [selectedOff, setSelectedOff] = useState({})
+    /*Cuando una oferta es seleccionada se muestra el formulario para modificar */
+    const [isSelected, setIsSelected] = useState(false)
+    /*Guarda lo que escribe el usuario cuando busca una oferta */
     const [inputSearch, setInputSearch] = useState({ searchOfferInput: "" })
-    const searchOfferInput = useRef(null);
-
+    
 
     const handleformInputChange = (event) =>{
         setformInput({
@@ -24,8 +28,9 @@ const FormAddOffer = () =>{
           [event.target.name] : event.target.value
         });
     };
-
-    const handleSubmit = (e) => {
+    
+    /*Creacion de la nueva oferta */
+    const handleSubmitNewOffer = (e) => {
         e.preventDefault();
         axios.post('http://localhost:3000/offers/create', {
             alias: formInput.offerAlias,
@@ -34,21 +39,26 @@ const FormAddOffer = () =>{
             endDate: formInput.offerEndDate
         }, { withCredentials: true })
         .then(response => {
-            console.log("respuesta:",  response.data)
             if(!alert(`La oferta "${response.data.alias}" ha sido creada exitosamente`)) window.location.reload()})// Respuesta del servidor
         .catch(e => {
             if(!alert(`Ya existe una oferta con el nombre ingresado`)) window.location.reload()})
         
     }
-
-    let selectedOffer;
+    /*capturar los datos de una oferta seleccionada */
+    const [selectedOffer, setSelectedOffer] = useState ({})
+    
+    let selectedOff;
 
     const handleSelectChange = (e) => {
         let selector = document.getElementById("offerList");
         let clickedOption = selector.options[selector.selectedIndex].id;
-        selectedOffer = allOffers.filter(item => item.id === parseInt(clickedOption))[0];
+        selectedOff = allOffers.filter(item => item.id === parseInt(clickedOption))[0];
+        setSelectedOffer(selectedOff)
+        setIsSelected(true);
+        
     } 
 
+    /*Guarda lo que escribe la persona en la barra de busqueda para hacer el filtro */
     const handleInputChangeSearch = (event) => {
         setInputSearch({
             ...inputSearch,
@@ -56,27 +66,25 @@ const FormAddOffer = () =>{
         });
     };
     
-    useEffect(() => {
-        getOffers()
-        setLoading(false)
-    }, [loading])
+    let searchedOffer = allOffers.filter(offer => offer.alias.toLowerCase().includes(inputSearch.searchOfferInput.toLowerCase()))
 
-        
+    /* Obtener todas las ofertas y guardarlas en un estado para mostrarlas */
     const getOffers = () => {
         axios.get('http://localhost:3000/offers/')
         .then(response => {
             setAllOffers(response.data)
         });
     }
-
-
-    let searchedOffer = allOffers.filter(offer => offer.alias.toLowerCase().includes(inputSearch.searchOfferInput.toLowerCase()))
+    useEffect(() => {
+        getOffers()
+        setLoading(false)
+    }, [loading])
 
 
     return(
         <div>
             <h1>Nueva oferta</h1>
-                <Form onSubmit= {(e) => handleSubmit(e)}>
+                <Form onSubmit= {(e) => handleSubmitNewOffer(e)}>
                     <Form.Label>Alias de oferta</Form.Label>
                         <Form.Control type="text"
                             name="offerAlias"
@@ -122,7 +130,7 @@ const FormAddOffer = () =>{
                                 searchedOffer.map((offer, i) => {
                                     return (
                                     <option key={i} id={offer.id} >
-                                        {offer.alias}
+                                        {offer.alias} ({offer.discount}%)
                                     </option>)
                                 })
                             }
@@ -130,6 +138,102 @@ const FormAddOffer = () =>{
                     </Form.Group>
                 </Form>
             </Container>
+
+
+
+            { isSelected &&
+                (
+                    <Form /* onSubmit={() => handleSubmitModifyOffer(selectedOffer.id)} */>
+                        <Form.Group >
+                            <div>
+                                <label>Alias</label>
+                                <Form.Switch
+                                    type="switch"
+                                    id="switch-alias"
+                                    name="aliasSwitch"
+                                    label=""
+                                    /* onChange={(event) => handleCheckChange(event)} */
+                                />
+                            </div>
+                            
+                            <Form.Control type="text"
+                                placeholder="Nombre de la oferta"
+                                value={selectedOffer.alias} 
+                                name="alias"
+                                id="formAlias"
+                                onChange={(event) => handleformInputChange(event)} disabled />
+                            </Form.Group>
+
+                            <Form.Group >
+                            <div>
+                                <label>% de descuento</label>
+                                <Form.Switch
+                                    type="switch"
+                                    id="switch-discount"
+                                    name="discountSwitch"
+                                    label=""
+                                    /* onChange={(event) => handleCheckChange(event)} */
+                                />
+                            </div>
+                            
+                            <Form.Control type="text"
+                                placeholder="porcentaje de descuento"
+                                value={selectedOffer.discount} 
+                                name="discount"
+                                id="formDiscount"
+                                onChange={(event) => handleformInputChange(event)} disabled />
+                            </Form.Group>
+
+                            <Form.Group >
+                            <div>
+                                <label>Fecha de inicio</label>
+                                <Form.Switch
+                                    type="switch"
+                                    id="switch-startDate"
+                                    name="startDateSwitch"
+                                    label=""
+                                    /* onChange={(event) => handleCheckChange(event)} */
+                                />
+                            </div>
+                            
+                            <Form.Control type="text"
+                                placeholder="¿Cuando empieza la oferta?"
+                                value={selectedOffer.startDate} 
+                                name="startDate"
+                                id="formStartDate"
+                                onChange={(event) => handleformInputChange(event)} disabled />
+                            </Form.Group>
+
+                            <Form.Group >
+                            <div>
+                                <label>Fecha de finalización</label>
+                                <Form.Switch
+                                    type="switch"
+                                    id="switch-endDate"
+                                    name="endDateSwitch"
+                                    label=""
+                                    /* onChange={(event) => handleCheckChange(event)} */
+                                />
+                            </div>
+                            
+                            <Form.Control type="text"
+                                placeholder="¿Cuando termina la oferta?"
+                                value={selectedOffer.endDate} 
+                                name="endDate"
+                                id="formEndDate"
+                                onChange={(event) => handleformInputChange(event)} disabled />
+                            </Form.Group>
+
+                            
+                        
+                        <div>
+                            <Button variant="primary" type="submit">
+                                Modificar oferta
+                            </Button>
+                        </div>
+                    </Form>
+                )
+            }
         </div>
     )
 };
