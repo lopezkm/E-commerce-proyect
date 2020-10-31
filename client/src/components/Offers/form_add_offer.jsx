@@ -1,15 +1,20 @@
-import React from 'react';
-import { Form, Button } from 'react-bootstrap';
+import React, {useState,useEffect, useRef } from 'react';
+import { Form, Button, Container } from 'react-bootstrap';
 import axios from 'axios';
 
 const FormAddOffer = () =>{
 
-    const [formInput, setformInput] = React.useState ({
+    const [formInput, setformInput] = useState ({
         offerAlias: "",
         offerDiscount: 0,
         offerStartDate:"",
         offerEndDate:"",
     })
+
+    const [allOffers, setAllOffers] = useState ([])
+    const [loading, setLoading] = useState(true);
+    const searchOfferInput = useRef(null);
+
 
     const handleformInputChange = (event) =>{
         setformInput({
@@ -34,7 +39,21 @@ const FormAddOffer = () =>{
         
     }
     
-    const getOffers =
+    useEffect(() => {
+        getOffers()
+        setLoading(false)
+    }, [loading])
+
+        
+    const getOffers = () => {
+        axios.get('http://localhost:3000/offers/')
+        .then(response => {
+            setAllOffers(response.data)
+        });
+    }
+
+
+
 
     return(
         <div>
@@ -70,12 +89,29 @@ const FormAddOffer = () =>{
                 </Form>
 
             <h1>Modificar una oferta</h1>
+            <Container>
                 <Form>
+                    <Form.Group>
+                        <Form.Control
+                            type="text"
+                            placeholder="Seleccione la oferta que quiera modificar"
+                            name="searchOfferInput"
+                            ref={searchOfferInput}
+                            /* onChange={(event) => handleInputChangeSearch(event)}  *//>
 
+                        <Form.Control as="select" multiple id="offerList" /* onChange={(e) => handleSelectChange(e)} */>
+                            {
+                                allOffers.map((offer, i) => {
+                                    return (
+                                    <option key={i} id={offer.id} >
+                                        {offer.alias}
+                                    </option>)
+                                })
+                            }
+                        </Form.Control>
+                    </Form.Group>
                 </Form>
-
-
-
+            </Container>
         </div>
     )
 };
