@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import paypal from 'paypal-checkout';
 
-const { PAYPAL_CLIENT_ID } = process.env
+const  PAYPAL_CLIENT_ID = 'AUupUI17YSCIIUg94t3uJGxU3ycZgIobjEeA82gt-EQ4VR_ikydiB8-h-Cm935yN3_2_93WbyAIW16EF'
 
 const PaypalCheckoutButton = ({ order }) => {
 
@@ -10,18 +10,18 @@ const PaypalCheckoutButton = ({ order }) => {
         currency: 'USD',
         env: 'sandbox',
         client: {
-            sandbox: 'AUupUI17YSCIIUg94t3uJGxU3ycZgIobjEeA82gt-EQ4VR_ikydiB8-h-Cm935yN3_2_93WbyAIW16EF',
+            sandbox: PAYPAL_CLIENT_ID,
             production: '-- id --'
         },
         style: {
             color: 'silver',
             shape: 'pill',
-            size:  'medium',
+            size:  'small',
             label: 'pay'
         }
     };
 
-    const PayPalButton = paypal.Button.driver ('react', { React, ReactDOM});
+    const PaypalButton = paypal.Button.driver ('react', { React, ReactDOM});
 
     const payment = (data, actions) => {
         const payment = {
@@ -67,7 +67,7 @@ const PaypalCheckoutButton = ({ order }) => {
     };
 
     return(
-        <PayPalButton
+        <PaypalButton
             env={paypaConf.env}
             client={paypaConf.client}
             payment={(data, actions) => payment(data, actions)}

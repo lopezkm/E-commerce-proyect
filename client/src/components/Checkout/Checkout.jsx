@@ -17,19 +17,19 @@ const Checkout = () => {
 
     const order = {
         customer: '1234',
-        total: '550.00',
+        total: '10.00',
         items: [
             {
                 sku: '112',
                 name: 'Camisa A',
-                price: '300.00',
+                price: '5.00',
                 quantity: '1',
                 currency: 'USD' 
             },
             {
                 sku: '99',
                 name: 'Camisa B',
-                price: '125.00',
+                price: '2.50',
                 quantity: '2',
                 currency: 'USD' 
             }
@@ -373,7 +373,6 @@ const Checkout = () => {
                                 cardCVCInputProps={{ onChange: e => setCheckoutInput({ ...checkoutInput, cvc: e.target.value }) }}
                                 fieldClassName="input"
                             />
-                            <PaypalCheckoutButton order={order}/>
                         </Form.Group>
 
                         <div>
@@ -383,7 +382,7 @@ const Checkout = () => {
                             <p>Impuestos: {taxesCost.toFixed(2)}US$</p>
                             <h4 id='checkout-total'>Total:{totalPrice.toFixed(2)}US$</h4>
                         </div>
-
+                        <PaypalCheckoutButton order={order}/>
                         <Button variant="primary" type="submit">Comprar</Button>
                     </Form>
                 </Col>
