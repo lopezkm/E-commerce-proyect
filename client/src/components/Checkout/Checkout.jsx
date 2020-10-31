@@ -7,12 +7,34 @@ import CreditCardInput from 'react-credit-card-input';
 import Promise from 'bluebird';
 import axios from 'axios';
 import mpLogo from '../../assets/mp-small.png'
+import PaypalCheckoutButton from '../../components/Checkout/PayPal/Paypal.jsx'
 
 const TAXES_PERCENT = 0.75;
 const SHIPPING_COST = 3.0;
 const API_URL = process.env.REACT_APP_API_URL;
 
 const Checkout = () => {
+
+    const order = {
+        customer: '1234',
+        total: '550.00',
+        items: [
+            {
+                sku: '112',
+                name: 'Camisa A',
+                price: '300.00',
+                quantity: '1',
+                currency: 'USD' 
+            },
+            {
+                sku: '99',
+                name: 'Camisa B',
+                price: '125.00',
+                quantity: '2',
+                currency: 'USD' 
+            }
+        ]
+    }
 
     const [products, setProducts] = useState([]);
 
@@ -351,6 +373,7 @@ const Checkout = () => {
                                 cardCVCInputProps={{ onChange: e => setCheckoutInput({ ...checkoutInput, cvc: e.target.value }) }}
                                 fieldClassName="input"
                             />
+                            <PaypalCheckoutButton order={order}/>
                         </Form.Group>
 
                         <div>
