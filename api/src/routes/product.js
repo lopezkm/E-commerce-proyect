@@ -418,7 +418,7 @@ server.put( '/:productId/review/:userId', isAuthenticated, ( request, response )
 			return;
 		}
 		
-		response.status( 200 ).send( review );
+		response.status( 200 ).send( data );
 	} )
 	.catch( ( error ) => {
 		response.sendStatus( 500 );

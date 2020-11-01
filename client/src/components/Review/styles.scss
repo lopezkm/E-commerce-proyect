@@ -4,7 +4,14 @@
     color: $white;
     border-radius: 10px;
 
-    .btn-primary {
+    .review-delete-button, .review-modify-button {
         float: right;
+        margin-left: 10px;
+        font-size: 1.5rem;
+
+        &:hover {
+            color: $blue;
+            cursor: pointer;
+        }
     }
 }
