@@ -293,7 +293,7 @@ server.post( '/', hasAccessLevel( ), ( request, response ) => {
 * 		[ Modificación de un producto ]
 * ================================================================================= */
 
-server.put( '/:id', hasAccessLevel( ), ( request, response ) => {
+server.put( '/:id', /* hasAccessLevel( ), */ ( request, response ) => {
 	const { id } = request.params;
 	
 	Product.findByPk( id ).then( ( product ) => {
