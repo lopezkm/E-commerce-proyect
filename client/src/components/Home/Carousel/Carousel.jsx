@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import axios from 'axios';
 import { Container, Image } from 'react-bootstrap';
+import defaultCarousel from '../../../assets/portrait.jpg';
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -17,6 +18,24 @@ const Carousel = () => {
             .catch(err => console.log(err))
     }
 
+    const getProductCarousel = (media) => {
+        if (!media || (media.length === 0)) {
+            return defaultCarousel;
+        }
+
+        const portrait = media.find(m => m.type === 'carousel');
+
+        if (!portrait) {
+            return defaultCarousel;
+        }
+
+        if (!portrait.path.includes('/')) {
+            return `${API_URL}/${portrait.path}`;
+        }
+
+        return portrait.path;
+    }
+
     useEffect(() => {
         getProducts();
     }, []);
@@ -26,10 +45,10 @@ const Carousel = () => {
             {
                 itemCarousel.map(item => (
                     <div>
-                        <Image src='https://generacionxbox.com/wp-content/uploads/2017/12/assassinscreed_rougue.jpg' />
+                        <Image src={getProductCarousel(item.media)} />
                         <div className='carousel-text'>
                             <h2>{item.name}</h2>
-                            <span>{item.price}</span>
+                            <span>{item.price}US$</span>
                         </div>
                     </div>
                 ))
