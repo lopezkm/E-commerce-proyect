@@ -18,10 +18,10 @@ function Cart( )
 {
 	const [ products, setProducts ] = useState( [ ] );
 	const [ loading, setLoading ] = useState( true );
-	
+	const [ order, setOrder] = useState();
 	const cart = useSelector( ( state ) => state.cart );
 	const user = useSelector( ( state ) => state.user );
-	
+
 	const productsPrice = useMemo( ( ) => products.reduce( ( a, p ) => a + ( p.price * p.quantity ), 0.0 ), [ products ] );
 	const shippingCost = useMemo( ( ) => ( productsPrice && SHIPPING_COST ), [ productsPrice ] );
 	const taxesCost = useMemo( ( ) => ( productsPrice * TAXES_PERCENT ), [ productsPrice ] );
@@ -43,7 +43,17 @@ function Cart( )
 				progress: undefined
 			} );
 		}
-		window.location.href='/checkout'
+
+		axios.get(`${API_URL}/users/${user.id}/orders`, {withCredentials: true})
+		.then(response =>  { console.log('ordenes', response.data);
+			let CartOrder = response.data.filter(order => order.status === 'cart');
+			return CartOrder;
+			
+		})
+		.then(CartOrder => {
+			return axios.put(`${API_URL}/orders/${CartOrder[0].id}`, {status: 'created'}, {withCredentials: true})
+		})
+		.then(() => window.location.href='/checkout');
 	};
 	
 	const handleProductQuantityChange = ( id, value ) => {

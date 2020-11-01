@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import paypal from 'paypal-checkout';
+import { toast } from 'react-toastify';
 
 const  PAYPAL_CLIENT_ID = 'AUupUI17YSCIIUg94t3uJGxU3ycZgIobjEeA82gt-EQ4VR_ikydiB8-h-Cm935yN3_2_93WbyAIW16EF'
 
@@ -68,7 +69,16 @@ const PaypalCheckoutButton = ({ order }) => {
 
     const onCancel = (data, actions) => {
         console.log(data);
-        alert('Pago no realizado, usuario canceló el proceso: ', data);
+        toast.error( `¡Compra cancelada!`, {
+            position: 'top-center',
+            autoClose: 2000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined
+        } );
+        setTimeout(() => window.location.href= '/products', 2010);
     };
 
     return(
