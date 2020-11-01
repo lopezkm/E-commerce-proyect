@@ -5,6 +5,7 @@ import SecondCard from './SecondCard/SecondCard.jsx'
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGamepad } from '@fortawesome/free-solid-svg-icons';
+import Carousel from './Carousel/Carousel.jsx';
 import axios from 'axios';
 
 const API_URL = process.env.REACT_APP_API_URL;
@@ -13,10 +14,8 @@ const API_URL = process.env.REACT_APP_API_URL;
 const Home = () => {
 
     const [products, setProducts] = React.useState([]);
-    console.log(products)
 
     let secondCards = products.sort(() => Math.random() - 0.5).splice(0, 4);
-    console.log(secondCards)
 
     const getProducts = () => {
         axios.get(`${API_URL}/products`)
@@ -33,6 +32,7 @@ const Home = () => {
     return (
         <Container className='home-container' fluid>
             <PrincipalCard />
+            <Carousel/>
             <Row className='home-secondCard-container'>
                 {/* {
                     secondCards.map((card, i) => (

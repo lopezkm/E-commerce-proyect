@@ -258,6 +258,39 @@ server.get( '/demote/:id', hasAccessLevel( ACCESS_LEVEL_SUPER ), ( request, resp
 } );
 
 /* =================================================================================
+* 		[ Saber si alguien está logueado ]
+* ================================================================================= */
+server.get('/logged', (request, response)=>{
+	
+	response.send(request.isAuthenticated())
+})
+
+/* =================================================================================
+* 		[ Google auth ]
+* ================================================================================= */
+server.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }))
+
+server.get('/google/callback', passport.authenticate('google', { failureRedirect: process.env.FRONT_URL+'/login' }),
+  	(request, response) => {
+		//Successful authentication, redirect home.
+		response.redirect(process.env.FRONT_URL+'/products')
+  	}
+);
+
+/* =================================================================================
+* 		[ Facebook auth ]
+* ================================================================================= */
+
+server.get('/facebook', passport.authenticate('facebook', { scope: 'email' }));
+
+server.get('/facebook/callback', passport.authenticate('facebook', { 
+	failureRedirect: process.env.FRONT_URL+'/login'}),
+  	function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect(process.env.FRONT_URL+'/products');
+  });
+
+/* =================================================================================
 * 		[ Se exportan las rutas ]
 * ================================================================================= */
 

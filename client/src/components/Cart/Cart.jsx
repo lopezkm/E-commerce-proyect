@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { Container, Col, Row, Card, Button } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 import axios from 'axios';
@@ -31,7 +31,7 @@ function Cart( )
 	
 	const handleBuyCartClick = ( e ) => {
 		e.preventDefault( );
-		
+	
 		if ( user.id === 0 ) {
 			toast.error( `¡Regístrate o ingresa con tu cuenta para proceder a pagar!`, {
 				position: 'top-right',
@@ -43,6 +43,7 @@ function Cart( )
 				progress: undefined
 			} );
 		}
+		window.location.href='/checkout'
 	};
 	
 	const handleProductQuantityChange = ( id, value ) => {
@@ -83,7 +84,6 @@ function Cart( )
 			const prodArray = responses.map( ( response, pos ) => {
 				return { ...response.data, quantity: cart.products[ pos ].quantity };
 			} );
-			
 			setProducts( prodArray );
 			setLoading( false );
 		} )
@@ -162,7 +162,15 @@ function Cart( )
 							</Row>
 							<Row className="cart__button">
 								<Col xs={12}>
-									<Button className='cart__button-buy w-100' onClick={ handleBuyCartClick }>Proceder a pagar</Button>
+									{
+										user.id !== 0 ? 
+										<Button className='cart__button-buy w-100' onClick={ handleBuyCartClick }>Proceder a pagar</Button>
+										:
+										<div>
+										<p>Debe estar logueado para poder seguir con la compra ;)</p>
+										<Button className='cart__button-buy w-100' href='/login'>Ingresar</Button>
+										</div>
+									}
 								</Col>
 							</Row>    
 						</Card.Footer>
