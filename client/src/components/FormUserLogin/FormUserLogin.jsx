@@ -7,7 +7,7 @@ import FloatingLabelInput from 'react-floating-label-input';
 import axios from 'axios';
 import { loadUser } from '../../redux/action-creators/user';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {  faGoogle, faFacebook } from '@fortawesome/free-brands-svg-icons';
+import {  faGoogle, faFacebookF } from '@fortawesome/free-brands-svg-icons';
 import { ReactComponent as Logo } from '../../assets/logofull.svg';
 
 const API_URL = process.env.REACT_APP_API_URL;
@@ -108,7 +108,7 @@ function FormUserLogin( )
 							<FontAwesomeIcon className="button-space" icon={faGoogle} /> Google
 						</Button>
 						<Button className="facebook-button"  onClick={facebookAuth}>
-							<FontAwesomeIcon className="button-space" icon={faFacebook} /> Facebook
+							<FontAwesomeIcon className="button-space" icon={faFacebookF} /> Facebook
 						</Button>
 						<Link to="/register" className="linkUserLogin">Crear cuenta</Link>
 					</Form>

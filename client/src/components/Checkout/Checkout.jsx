@@ -4,10 +4,10 @@ import { Button, Form, Container, Col, Row, Figure, Image } from "react-bootstra
 import { useSelector } from "react-redux";
 import { toast } from 'react-toastify';
 import defaultPortrait from '../../assets/portrait.jpg';
-import CreditCardInput from 'react-credit-card-input';
+/* import CreditCardInput from 'react-credit-card-input'; */
 import Promise from 'bluebird';
 import axios from 'axios';
-import mpLogo from '../../assets/mp-small.png'
+/* import mpLogo from '../../assets/mp-small.png' */
 import PaypalCheckoutButton from '../../components/Checkout/PayPal/Paypal.jsx'
 
 const TAXES_PERCENT = 0.25;
@@ -178,6 +178,7 @@ const Checkout = () => {
 
         return portrait.path;
     };
+
 
     useEffect(() => {
         if (!cart.products || (cart.products.length === 0)) {
@@ -362,7 +363,7 @@ const Checkout = () => {
                             </Form.Group>
                         </Form.Row>
 
-                        <Form.Group>
+                        {/* <Form.Group>
                             <div className='checkout-paymethod-title'>
                                 <Form.Label>Pago mediante</Form.Label>
                                 <Image src={mpLogo} />
@@ -373,7 +374,7 @@ const Checkout = () => {
                                 cardCVCInputProps={{ onChange: e => setCheckoutInput({ ...checkoutInput, cvc: e.target.value }) }}
                                 fieldClassName="input"
                             />
-                        </Form.Group>
+                        </Form.Group> */}
 
                         <div>
                             <h3>Resumen de compra</h3>
@@ -382,8 +383,10 @@ const Checkout = () => {
                             <p>Impuestos: {tax.toFixed(2)}US$</p>
                             <h4 id='checkout-total'>Total:{totalPrice.toFixed(2)}US$</h4>
                         </div>
+                        
                         <PaypalCheckoutButton order={order}/>
-                        <Button variant="primary" type="submit">Comprar</Button>
+                        
+                         {/* <Button variant="primary" onClick={updateOrderStatus}>Comprar</Button>  */}
                     </Form>
                 </Col>
                 <Col className='checkout-column-product'>
