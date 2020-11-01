@@ -54,6 +54,7 @@ const FormModifyCategory = () => {
     const handleCheckChange = (event) => {
         let formCheck = document.getElementById(event.target.name);
         formCheck.disabled = !formCheck.disabled
+        console.log(formCheck)
     }
 
     let searchedCategory = categories.filter(category => category.name.toLowerCase().includes(inputSearch.searchInput.toLowerCase()))

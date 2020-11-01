@@ -54,6 +54,29 @@ server.post( '/create',  hasAccessLevel( ),  ( request, response ) => {
 	} );
 } );
 
+/* =================================================================================
+* 		[ Modificación de una oferta ]
+* ================================================================================= */
+
+server.put( '/:id', hasAccessLevel( ), ( request, response ) => {
+	const { id } = request.params;
+	
+	Offers.findByPk( id ).then( ( offer ) => {
+		if ( !offer ) {
+			return response.status( 404 ).send( 'Oferta inexistente' );
+		}
+		
+		offer.update( {
+			...request.body
+		}, {
+			fields: [ 'alias', 'discount', 'startDate', 'endDate' ]
+		} )
+		.then( ( offer ) => {
+			response.status( 200 ).send( console.log(offer));
+		} );
+	} );
+} );
+
 module.exports = server;
 
 
