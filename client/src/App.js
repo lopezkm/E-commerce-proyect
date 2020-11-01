@@ -35,7 +35,6 @@ import FormManageUser from './components/FormManageUser/FormManageUser.jsx';
 import ManageOffers from './components/Offers/ManageOffers.jsx'
 import  UserShops from './components/UserShops/UserShops.jsx';
 import Checkout from './components/Checkout/Checkout.jsx';
-import UserShops from './components/UserShops/UserShops.jsx';
 import UserData from './components/UserData/UserData.jsx';
 
 function App( )
