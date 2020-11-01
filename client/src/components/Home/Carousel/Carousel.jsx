@@ -1,10 +1,49 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import axios from 'axios';
 import { Container, Image } from 'react-bootstrap';
 
+const API_URL = process.env.REACT_APP_API_URL;
+
+
 const Carousel = () => {
+
+    const [products, setProducts] = React.useState([]);
+
+    let itemCarousel = products.sort(() => Math.random() - 0.5).splice(0, 4);
+    
+    const getProducts = () => {
+        axios.get(`${API_URL}/products`)
+            .then(response => setProducts(response.data))
+            .catch(err => console.log(err))
+    }
+
+    useEffect(() => {
+        getProducts();
+    }, []);
+
     return (
         <Container className='carousel-container'>
-            <div>
+            {
+                itemCarousel.map(item => (
+                    <div>
+                        <Image src='https://generacionxbox.com/wp-content/uploads/2017/12/assassinscreed_rougue.jpg' />
+                        <div className='carousel-text'>
+                            <h2>{item.name}</h2>
+                            <span>{item.price}</span>
+                        </div>
+                    </div>
+                ))
+            }
+        </Container>
+    );
+};
+
+export default Carousel;
+
+
+            //Codigo de prueba//
+
+            {/*<div>
                 <Image src='https://generacionxbox.com/wp-content/uploads/2017/12/assassinscreed_rougue.jpg' />
                 <div className='carousel-text'>
                     <h2>Assassin's Creed Rogue</h2>
@@ -31,9 +70,4 @@ const Carousel = () => {
                     <h2>PLAYERUNKNOWN'S BATTLEGROUNDS</h2>
                     <span>$50</span>
                 </div>
-            </div>
-        </Container>
-    );
-};
-
-export default Carousel;
+            </div> */}

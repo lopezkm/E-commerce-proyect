@@ -27,11 +27,24 @@ const Home = () => {
         getProducts();
     }, []);
 
+    const titleLeft = '"UNA OBRA MAESTRA"  9.3/10 - IGN"';
+    const imgLeft = 'https://wallpapercave.com/wp/wp1897911.jpg';
+    const textLeft = 'Disfruta de una experiencia de juego de rol intensa y gratificante que incluye un combate táctico muy variado. Fusiona equipamiento primitivo con tecnología de avanzada para elaborar dispositivos que conviertan a los depredadores en presas. Desarrolla estrategias únicas para acabar con diferentes Máquinas, y apodérate de los especímenes atrapados para doblegar su voluntad.';
+    const titleRight = 'Horizon Zero Dawn';
+    const imgRight = 'https://wallpaperset.com/w/full/2/1/2/453698.jpg';
+    const textRight = 'Un estimulante y nuevo juego de acción y de rol exclusivo para el sistema PlayStation® 4, desarrollado por la galardonada empresa Guerrilla Games, creadores de la venerada franquicia Killzone de PlayStation.';
 
 
     return (
         <Container className='home-container' fluid>
-            <PrincipalCard />
+            <PrincipalCard 
+                titleLeft   = {titleLeft}
+                imgLeft     = {imgLeft}
+                textLeft    = {textLeft}
+                titleRight  = {titleRight}
+                imgRight    = {imgRight}
+                textRight   = {textRight}
+            />
             <Carousel/>
             <Row className='home-secondCard-container'>
                 {/* {
