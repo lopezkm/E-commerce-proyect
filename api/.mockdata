@@ -325,6 +325,11 @@ const Media = [
 		path: 'a9984673292011dc3450053978e95962.jpg',
 		productId: 1
 	},
+	{
+		type: 'carousel',
+		path: 'iad-carousel.jpg',
+		productId: 1
+	},
 
 	/*
 		MAFIA
@@ -372,6 +377,11 @@ const Media = [
 	{
 		type: 'image-big',
 		path: '30f0e8ae45453591b5382e63fb981b83.jpg',
+		productId: 2
+	},
+	{
+		type: 'carousel',
+		path: 'mde-carousel.jpg',
 		productId: 2
 	},
 
@@ -423,6 +433,11 @@ const Media = [
 		path: '904ff520dfdf821ba0d03687f136538f.jpg',
 		productId: 3
 	},
+	{
+		type: 'carousel',
+		path: 'rl-carousel.jpg',
+		productId: 3
+	},
 
 	/*
 		PUBG
@@ -470,6 +485,11 @@ const Media = [
 	{
 		type: 'image-big',
 		path: '04d180c08830ff5bd8caf96628504509.jpg',
+		productId: 4
+	},
+	{
+		type: 'carousel',
+		path: 'pugb-carousel.jpg',
 		productId: 4
 	},
 
@@ -521,6 +541,11 @@ const Media = [
 		path: '0e8c1bd759f21b0ece10fa2dda985e5f.jpg',
 		productId: 5
 	},
+	{
+		type: 'carousel',
+		path: 'sot-carousel.jpg',
+		productId: 5
+	},
 
 	/*
 		Star Wars
@@ -568,6 +593,11 @@ const Media = [
 	{
 		type: 'image-big',
 		path: '6ba9036a9463927903d12c4732ee4dd4.jpg',
+		productId: 6
+	},
+	{
+		type: 'carousel',
+		path: 'sws-carousel.png',
 		productId: 6
 	},
 
@@ -619,6 +649,11 @@ const Media = [
 		path: '63214b2b114edadc128dfd3ff0344ce8.jpg',
 		productId: 7
 	},
+	{
+		type: 'carousel',
+		path: 'tw3-carousel.jpg',
+		productId: 7
+	},
 
 	/*
 		GTA V
@@ -666,6 +701,11 @@ const Media = [
 	{
 		type: 'image-big',
 		path: '60ba3a7b364399caf1869ff3b2e1c480.jpg',
+		productId: 8
+	},
+	{
+		type: 'carousel',
+		path: 'gtav-carousel.jpg',
 		productId: 8
 	},
 
@@ -717,6 +757,11 @@ const Media = [
 		path: '228362402849bc383cb38e59b8c037e1.jpg',
 		productId: 9
 	},
+	{
+		type: 'carousel',
+		path: 'c4-carousel.jpg',
+		productId: 9
+	},
 
 	/*
 		GRIP
@@ -764,6 +809,11 @@ const Media = [
 	{
 		type: 'image-big',
 		path: '3c1bfb3fe3f402753e4defe8dd916df5.jpg',
+		productId: 10
+	},
+	{
+		type: 'carousel',
+		path: 'g2-carousel.jpg',
 		productId: 10
 	},
 
@@ -815,6 +865,11 @@ const Media = [
 		path: '6f8e355eca4d00697a233d182d49fd1e.jpg',
 		productId: 11
 	},
+	{
+		type: 'carousel',
+		path: 'acr-carousel.jpg',
+		productId: 11
+	},
 
 	/*
 		Borderlands 2
@@ -862,6 +917,11 @@ const Media = [
 	{
 		type: 'image-big',
 		path: '76c534da821d09d7452a1c922b93e3e0.jpg',
+		productId: 12
+	},
+	{
+		type: 'carousel',
+		path: 'b2-carousel.jpg',
 		productId: 12
 	},
 
@@ -913,6 +973,11 @@ const Media = [
 		path: 'b0ec745753213d41ff145eb7d8cda5ca.jpg',
 		productId: 13
 	},
+	{
+		type: 'carousel',
+		path: 'pm-carousel.png',
+		productId: 13
+	},
 
 	/*
 		Raft
@@ -960,6 +1025,11 @@ const Media = [
 	{
 		type: 'image-big',
 		path: '49fb5559879f22c707a7c490f8930f0a.jpg',
+		productId: 14
+	},
+	{
+		type: 'carousel',
+		path: 'raft-carousel.jpg',
 		productId: 14
 	},
 
@@ -1011,6 +1081,11 @@ const Media = [
 		path: '70328664021056555dca804aca73d1fa.jpg',
 		productId: 15
 	},
+	{
+		type: 'carousel',
+		path: 'tf2-carousel.jpg',
+		productId: 15
+	},
 
 	/*
 		Fall Guys
@@ -1058,6 +1133,11 @@ const Media = [
 	{
 		type: 'image-big',
 		path: 'd06273f6afab732acf8d6c87c5695336.jpg',
+		productId: 16
+	},
+	{
+		type: 'carousel',
+		path: 'fg-carousel.jpg',
 		productId: 16
 	},
 
@@ -1109,6 +1189,11 @@ const Media = [
 		path: '7d825cbc0c223c35568f1484c7692533.jpg',
 		productId: 17
 	},
+	{
+		type: 'carousel',
+		path: 'p-carousel.jpg',
+		productId: 17
+	},
 
 	/*
 		Among Us
@@ -1156,6 +1241,11 @@ const Media = [
 	{
 		type: 'image-big',
 		path: 'e2c1d5a49a7e555df2394680421237c3.jpg',
+		productId: 18
+	},
+	{
+		type: 'carousel',
+		path: 'au-carousel.jpg',
 		productId: 18
 	},
 
@@ -1207,6 +1297,11 @@ const Media = [
 		path: '8500ee33a84041d52ad1f19b4dd2d5cd.jpg',
 		productId: 19
 	},
+	{
+		type: 'carousel',
+		path: 'ww-carousel.jpg',
+		productId: 19
+	},
 
 	/*
 		Rust
@@ -1255,7 +1350,12 @@ const Media = [
 		type: 'image-big',
 		path: '5484a53f800d383decc36e8318b5843b.jpg',
 		productId: 20
-	}
+	},
+	{
+		type: 'carousel',
+		path: 'rust-carousel.jpg',
+		productId: 20
+	},
 ];
 
 /* =================================================================================

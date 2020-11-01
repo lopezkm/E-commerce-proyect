@@ -5,6 +5,7 @@ import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { Row, Col, Container } from 'react-bootstrap';
 import defaultPortrait from '../../assets/portrait.jpg';
+import { toast } from 'react-toastify';
 
 const API_URL = process.env.REACT_APP_API_URL;
 const BASE_URL = process.env.REACT_APP_BASE_URL;
@@ -37,8 +38,28 @@ const FormModifyReview = ({ productId }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         axios.put(`${API_URL}/products/${productId}/review/${userId}`, formInput, { withCredentials: true })
-            .then(response => console.log(response))
-            .catch(err => console.log(err))
+        .then(() => {
+            toast.info( 'Review modificada con exito ;)', {
+                position: "top-center",
+                autoClose: 1500,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined
+            });
+            setTimeout(() => window.location.href=`/product/${productId}`, 1510 );
+        })
+        .catch(() => {
+            toast.error( 'Ocurrio un error inesperado! :(', {
+				position: "top-center",
+				autoClose: 2000,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined
+            });
+            setTimeout(() => window.location.href=`/product/${productId}`, 2010 );
+        })
     };
 
     const getProduct = () => {

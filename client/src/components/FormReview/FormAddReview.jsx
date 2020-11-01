@@ -38,10 +38,9 @@ const FormAddReview = ({ productId }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         axios.post(`${API_URL}/products/${productId}/review/${userId}`, formInput, { withCredentials: true })
-            .then(response => {
-                console.log(response);
+            .then(() => {
                 toast.info( 'Review añadida con exito ;)', {
-                    position: "top-right",
+                    position: "top-center",
                     autoClose: 1500,
                     closeOnClick: true,
                     pauseOnHover: true,
@@ -53,7 +52,7 @@ const FormAddReview = ({ productId }) => {
             console.log(error)
             const message = ( error.request.status === 409 ) ? 'No puede usar este campo para modificar su review :(' : 'Usted nunca ha adquirido este producto :|';
 			toast.error( message, {
-				position: "top-right",
+				position: "top-center",
 				autoClose: 5000,
 				closeOnClick: true,
 				pauseOnHover: true,
@@ -61,6 +60,8 @@ const FormAddReview = ({ productId }) => {
 				progress: undefined
 			});
         })
+
+        setTimeout(() => window.location.href=`/product/${productId}`, 1510 );
     };
 
     const getProduct = () => {
