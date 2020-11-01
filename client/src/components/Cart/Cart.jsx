@@ -11,21 +11,20 @@ import loadingCircle from '../../assets/loading.svg';
 
 const API_URL = process.env.REACT_APP_API_URL;
 
-const TAXES_PERCENT = 0.75;
-const SHIPPING_COST = 3.0;
+const TAXES_PERCENT = 0.25;
+/* const SHIPPING_COST = 3.0; */
 
 function Cart( )
 {
 	const [ products, setProducts ] = useState( [ ] );
 	const [ loading, setLoading ] = useState( true );
-	const [ order, setOrder] = useState();
 	const cart = useSelector( ( state ) => state.cart );
 	const user = useSelector( ( state ) => state.user );
 
 	const productsPrice = useMemo( ( ) => products.reduce( ( a, p ) => a + ( p.price * p.quantity ), 0.0 ), [ products ] );
-	const shippingCost = useMemo( ( ) => ( productsPrice && SHIPPING_COST ), [ productsPrice ] );
+	/* const shippingCost = useMemo( ( ) => ( productsPrice && SHIPPING_COST ), [ productsPrice ] ); */
 	const taxesCost = useMemo( ( ) => ( productsPrice * TAXES_PERCENT ), [ productsPrice ] );
-	const totalPrice = useMemo( ( ) => ( productsPrice + shippingCost + taxesCost ), [ productsPrice, shippingCost, taxesCost ] );
+	const totalPrice = useMemo( ( ) => ( productsPrice /* + shippingCost  */+ taxesCost ), [ productsPrice/* , shippingCost */, taxesCost ] );
 	
 	const dispatch = useDispatch( );
 	
@@ -45,13 +44,13 @@ function Cart( )
 		}
 
 		axios.get(`${API_URL}/users/${user.id}/orders`, {withCredentials: true})
-		.then(response =>  { console.log('ordenes', response.data);
+		.then(response =>  { 
 			let CartOrder = response.data.filter(order => order.status === 'cart');
 			return CartOrder;
 			
 		})
 		.then(CartOrder => {
-			return axios.put(`${API_URL}/orders/${CartOrder[0].id}`, {status: 'created'}, {withCredentials: true})
+			return axios.put(`${API_URL}/orders/${CartOrder[0].id}`, {status: 'processing'}, {withCredentials: true})
 		})
 		.then(() => window.location.href='/checkout');
 	};
@@ -156,10 +155,10 @@ function Cart( )
 								<Col><span>Articulos ({ cart.count }):</span></Col>
 								<Col><span>{ productsPrice.toFixed( 2 ) } US$</span></Col>
 							</Row>
-							<Row>
+							{/* <Row>
 								<Col><span>Envio:</span></Col>
 								<Col><span>{ shippingCost.toFixed( 2 ) } US$</span></Col>
-							</Row>
+							</Row> */}
 							<Row>
 								<Col><span>Impuestos:</span></Col>
 								<Col><span>{ taxesCost.toFixed( 2 ) } US$</span></Col>
