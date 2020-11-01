@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import ReactDOM from 'react-dom';
 import paypal from 'paypal-checkout';
 import { toast } from 'react-toastify';
 import axios from 'axios';
+import Promise from 'bluebird';
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -11,6 +12,9 @@ const  PAYPAL_CLIENT_ID = 'AUupUI17YSCIIUg94t3uJGxU3ycZgIobjEeA82gt-EQ4VR_ikydiB
 
 const PaypalCheckoutButton = ({ order }) => {
 
+    const [ products, setProducts ] = useState( [ ] );
+	const [ loading, setLoading ] = useState( true );
+	const cart = useSelector( ( state ) => state.cart );
     const userId = useSelector( ( state ) => state.user.id );
 
     const paypaConf = {
@@ -128,9 +132,47 @@ const PaypalCheckoutButton = ({ order }) => {
 		})
 		.then(CartOrder => { console.log('filtre la orden')
 			return axios.put(`${API_URL}/orders/${CartOrder[0].id}`, {status: 'canceled'}, {withCredentials: true})
+        })
+        .then(() => {
+			return Promise.map( products, ( { id, stock, quantity } ) => {
+				 return axios.put( `${ API_URL }/products/${ id }`,{ stock: stock + quantity}, {withCredentials: true});
+			})
 		})
 		.then((res) => console.log('termine', res.status), setTimeout(() => window.location.href= '/', 2010)) 
     };
+
+    useEffect( ( ) => {
+		if ( !cart.products || ( cart.products.length === 0 ) ) {
+			setProducts( [ ] );
+			setLoading( false );
+			
+			return;
+		}
+		
+		setLoading( true );
+		
+		Promise.map( cart.products, ( { productId } ) => {
+			return axios.get( `${ API_URL }/products/${ productId }` );
+		} )
+		.then( ( responses ) => {
+			const prodArray = responses.map( ( response, pos ) => {
+				return { ...response.data, quantity: cart.products[ pos ].quantity };
+			} );
+			setProducts( prodArray );
+			setLoading( false );
+		} )
+		.catch( ( ) => {
+			toast.error( `¡Ha ocurrido un error al recuperar la información de los productos!`, {
+				position: 'top-right',
+				autoClose: 3000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: false,
+				draggable: true,
+				progress: undefined
+			} );
+		} );
+	}, [ cart.count, cart.products ] );
 
     return(
         <PaypalButton

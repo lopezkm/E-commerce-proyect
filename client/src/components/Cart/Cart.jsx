@@ -52,6 +52,11 @@ function Cart( )
 		.then(CartOrder => {
 			return axios.put(`${API_URL}/orders/${CartOrder[0].id}`, {status: 'processing'}, {withCredentials: true})
 		})
+		.then(() => {
+			return Promise.map( products, ( { id, stock, quantity } ) => {
+				 return axios.put( `${ API_URL }/products/${ id }`,{ stock: stock - quantity}, {withCredentials: true});
+			})
+		})
 		.then(() => window.location.href='/checkout');
 	};
 	
