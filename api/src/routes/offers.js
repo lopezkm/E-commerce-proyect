@@ -77,6 +77,24 @@ server.put( '/:id', hasAccessLevel( ), ( request, response ) => {
 	} );
 } );
 
+/* =================================================================================
+* 		[ Eliminación de una oferta ]
+* ================================================================================= */
+
+server.delete( '/:id', hasAccessLevel( ), ( request, response ) => {
+	const { id } = request.params;
+	
+	Offers.findByPk( id ).then( offer => {
+		if ( !offer ) {
+			return response.status( 404 ).send( 'Categoría inexistente' );
+		}
+
+		offer.destroy( ).then( ( ) => {
+			response.sendStatus( 204 );
+		} );
+	} );
+} );
+
 module.exports = server;
 
 

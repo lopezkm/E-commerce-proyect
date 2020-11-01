@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Form, Button, Container } from 'react-bootstrap';
 import axios from 'axios';
 
-const FormAddOffer = () => {
+const ManageOffers = () => {
 
     /*Crear una nueva oferta */
     const [formInput, setformInput] = useState({
@@ -29,6 +29,17 @@ const FormAddOffer = () => {
             startDate: selectedOffer.startDate,
             endDate: selectedOffer.endDate,
         }, { withCredentials: true }).then(() => window.location.reaload())
+    }
+
+    /*Eliminar una oferta */
+
+    const handleDeleteOnClick = (id) => {
+        if(!id)
+        {
+            return alert("Seleccione la oferta que quiere eliminar")     
+        }
+        axios.delete(`http://localhost:3000/offers/${id}`, { withCredentials: true })
+        .then(window.location.reload())
     }
 
     const searchOfferInput = useRef(null);
@@ -143,7 +154,7 @@ return (
 
         </Form>
 
-        <h1>Modificar una oferta</h1>
+        <h1>Modificar o borrar una oferta</h1>
         <Container>
             <Form>
                 <Form.Group>
@@ -258,13 +269,20 @@ return (
                     <div>
                         <Button variant="primary" type="submit">
                             Modificar oferta
-                            </Button>
+                        </Button>
+
+                        <Button type="button" variant="danger" onClick= {() => handleDeleteOnClick(selectedOffer.id)}>
+                            Eliminar oferta
+                        </Button>
+
+
                     </div>
                 </Form>
+
             )
         }
     </div>
 )
 };
 
-export default FormAddOffer;
+export default ManageOffers;
