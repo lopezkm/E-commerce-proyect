@@ -293,7 +293,7 @@ server.post( '/', hasAccessLevel( ), ( request, response ) => {
 * 		[ Modificación de un producto ]
 * ================================================================================= */
 
-server.put( '/:id', hasAccessLevel( ), ( request, response ) => {
+server.put( '/:id', /* hasAccessLevel( ), */ ( request, response ) => {
 	const { id } = request.params;
 	
 	Product.findByPk( id ).then( ( product ) => {
@@ -418,7 +418,7 @@ server.put( '/:productId/review/:userId', isAuthenticated, ( request, response )
 			return;
 		}
 		
-		response.status( 200 ).send( review );
+		response.status( 200 ).send( data );
 	} )
 	.catch( ( error ) => {
 		response.sendStatus( 500 );
