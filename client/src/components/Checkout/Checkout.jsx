@@ -1,26 +1,27 @@
 import React, { useState, useEffect, useMemo } from "react";
+import { Redirect } from 'react-router-dom';
 import { Button, Form, Container, Col, Row, Figure, Image } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { toast } from 'react-toastify';
 import defaultPortrait from '../../assets/portrait.jpg';
-import CreditCardInput from 'react-credit-card-input';
+/* import CreditCardInput from 'react-credit-card-input'; */
 import Promise from 'bluebird';
 import axios from 'axios';
-import mpLogo from '../../assets/mp-small.png'
+/* import mpLogo from '../../assets/mp-small.png' */
+import PaypalCheckoutButton from '../../components/Checkout/PayPal/Paypal.jsx'
 
-const TAXES_PERCENT = 0.75;
-const SHIPPING_COST = 3.0;
+const TAXES_PERCENT = 0.25;
+//const SHIPPING_COST = 3.00;
 const API_URL = process.env.REACT_APP_API_URL;
 
 const Checkout = () => {
 
     const [products, setProducts] = useState([]);
-
     const productsPrice = useMemo(() => products.reduce((a, p) => a + (p.price * p.quantity), 0.0), [products]);
-    const shippingCost = useMemo(() => (productsPrice && SHIPPING_COST), [productsPrice]);
-    const taxesCost = useMemo(() => (productsPrice * TAXES_PERCENT), [productsPrice]);
-    const totalPrice = useMemo(() => (productsPrice + shippingCost + taxesCost), [productsPrice, shippingCost, taxesCost]);
-
+    
+    const subtotal = productsPrice;
+    const tax = subtotal * TAXES_PERCENT;
+    const totalPrice = subtotal + tax;
     const cart = useSelector((state) => state.cart);
     const user = useSelector((state) => state.user);
 
@@ -178,6 +179,7 @@ const Checkout = () => {
         return portrait.path;
     };
 
+
     useEffect(() => {
         if (!cart.products || (cart.products.length === 0)) {
             setProducts([]);
@@ -212,7 +214,28 @@ const Checkout = () => {
             });
     }, [cart.count, cart.products]);
 
+    const order = {
+        customer: user.id.toString(),
+        subtotal: subtotal.toFixed(2),
+        tax: tax.toFixed(2),
+        total: totalPrice.toFixed(2),
+        items: products.map(prod => (
+            {
+                sku: prod.id.toString(),
+                name: prod.name,
+                price: prod.price,
+                quantity: prod.quantity.toString(),
+                currency: 'USD',
+            }
+        ))  
+    };
 
+    if(user.id === 0) {
+        return (
+            <Redirect to="/"/>
+        )
+    };
+    
     return (
         <Container className='checkout-container'>
             <Row>
@@ -340,7 +363,7 @@ const Checkout = () => {
                             </Form.Group>
                         </Form.Row>
 
-                        <Form.Group>
+                        {/* <Form.Group>
                             <div className='checkout-paymethod-title'>
                                 <Form.Label>Pago mediante</Form.Label>
                                 <Image src={mpLogo} />
@@ -351,23 +374,25 @@ const Checkout = () => {
                                 cardCVCInputProps={{ onChange: e => setCheckoutInput({ ...checkoutInput, cvc: e.target.value }) }}
                                 fieldClassName="input"
                             />
-                        </Form.Group>
+                        </Form.Group> */}
 
                         <div>
                             <h3>Resumen de compra</h3>
-                            <p>Articulos ({products.length}): {productsPrice.toFixed(2)}US$</p>
-                            <p>Envio: {shippingCost.toFixed(2)}US$</p>
-                            <p>Impuestos: {taxesCost.toFixed(2)}US$</p>
+                            <p>Articulos ({products.length}): {subtotal.toFixed(2)}US$</p>
+                            {/* <p>Envio: {shippingCost.toFixed(2)}US$</p> */}
+                            <p>Impuestos: {tax.toFixed(2)}US$</p>
                             <h4 id='checkout-total'>Total:{totalPrice.toFixed(2)}US$</h4>
                         </div>
-
-                        <Button variant="primary" type="submit">Comprar</Button>
+                        
+                        <PaypalCheckoutButton order={order}/>
+                        
+                         {/* <Button variant="primary" onClick={updateOrderStatus}>Comprar</Button>  */}
                     </Form>
                 </Col>
                 <Col className='checkout-column-product'>
                     {
                         products.map((product, i) => (
-                            <Figure className='checkout-product-card'>
+                            <Figure className='checkout-product-card' key={i}>
                                 <Row>
                                     <Col xs={2}>
                                         <Figure.Image
