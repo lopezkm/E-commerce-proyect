@@ -9,16 +9,20 @@ import Checkable from '../Checkable/Checkable.jsx';
 import loadingCircle from '../../assets/loading.svg';
 import { loadUser } from '../../redux/action-creators/user';
 import { toast } from 'react-toastify';
+import Promise from 'bluebird';
 
 const API_URL = process.env.REACT_APP_API_URL;
 
 function Catalogue( props )
 {
+	const [ product, setProduct ] = useState( [ ] );
 	const [ products, setProducts ] = useState( [ ] );
 	const [ checked, setChecked ] = useState( [ ] );
 	const [ expanded, setExpanded ] = useState( false );
 	const [ loading, setLoading ] = useState( { products: true, categories: true } );
 	
+	const user = useSelector( ( state ) => state.user );
+	const cart = useSelector( ( state ) => state.cart );
 	const firstRender = useRef( true );
 	const categories = useSelector( ( state ) => state.category.categories );
 	const dispatch = useDispatch( );
@@ -29,8 +33,61 @@ function Catalogue( props )
 			return status ? [ ...state, id ] : state.filter( c => c !== id );
 		} );
 	}, [ ] );
+
+	const SetOrderToCarStatus = () => {
+		axios.get(`${API_URL}/users/${user.id}/orders`, {withCredentials: true})
+		.then(response =>  { 
+			let CartOrder = response.data.filter(order => order.status === 'processing');
+			return CartOrder;
+			
+		})
+		.then(CartOrder => { if(CartOrder.length === 0) return; 
+			return axios.put(`${API_URL}/orders/${CartOrder[0].id}`, {status: 'cart'}, {withCredentials: true})
+		})
+		.then(() => {
+			return Promise.map( product, ( { id, stock, quantity } ) => {
+				 return axios.put( `${ API_URL }/products/${ id }`,{ stock: stock + quantity}, { withCredentials: true });
+			})
+		})
+	}
+
+	useEffect( ( ) => {
+		if ( !cart.products || ( cart.products.length === 0 ) ) {
+			setProduct( [ ] );
+			setLoading( false );
+			
+			return;
+		}
+		
+		setLoading( true );
+		
+		Promise.map( cart.products, ( { productId } ) => {
+			return axios.get( `${ API_URL }/products/${ productId }` );
+		} )
+		.then( ( responses ) => {
+			const prodArray = responses.map( ( response, pos ) => {
+				return { ...response.data, quantity: cart.products[ pos ].quantity };
+			} );
+			setProduct( prodArray );
+			setLoading( false );
+		} )
+		.catch( ( ) => {
+			toast.error( `¡Ha ocurrido un error al recuperar la información de los productos!`, {
+				position: 'top-center',
+				autoClose: 3000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: false,
+				draggable: true,
+				progress: undefined
+			} );
+		} );
+	}, [ cart.count, cart.products ] );
 	
 	useEffect( ( ) => {
+
+		SetOrderToCarStatus();
+
 		if ( categories && ( categories.length > 0 ) ) {
 			setLoading( ( state ) => ( { ...state, categories: false } ) );
 		}
@@ -92,6 +149,7 @@ function Catalogue( props )
 	{
 		return renderLoadingCircle( );
 	}
+	
 			
 	return (
 		<Container className='catalogue__container'>

@@ -71,7 +71,7 @@ server.get( '/:id', isAuthenticated, ( request, response ) => {
 	- Se pasan por body las propiedades a cambiar con sus respectivos valores
 */
 
-server.put( '/:id',/*  hasAccessLevel( ) */ ( request, response ) => {
+server.put( '/:id', isAuthenticated,/*  hasAccessLevel( ) */ ( request, response ) => {
 	const { id } = request.params;
 	
 	Order.findByPk( id, {
@@ -93,9 +93,9 @@ server.put( '/:id',/*  hasAccessLevel( ) */ ( request, response ) => {
 		.then( ( order ) => {
 			response.status( 200 ).send( order );
 		} )
-		.catch( ( error ) => {
+		/* .catch( ( error ) => {
 			response.status( 500 ).send( error.message );
-		} );
+		} ); */
 	} );
 } );
 
