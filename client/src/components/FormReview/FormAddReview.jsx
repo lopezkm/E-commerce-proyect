@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import { Row, Col, Container } from 'react-bootstrap';
 import defaultPortrait from '../../assets/portrait.jpg';
 import { toast } from 'react-toastify';
+import { Redirect } from 'react-router-dom';
 
 const API_URL = process.env.REACT_APP_API_URL;
 const BASE_URL = process.env.REACT_APP_BASE_URL;
@@ -94,24 +95,11 @@ const FormAddReview = ({ productId }) => {
         getProduct();
     }, []);
 
-
-    //Validacion en caso que el usuario no este logueado (UserId = 0);
-    //El post no va a funcionar cuando el UserId sea = 0;
-
-    /* if(!userId) {
+    if(userId === 0) {
         return (
-           <Container>
-               <Row>
-                   <Col>
-                   <img style={{ width: "50rem", height: "25rem"}} src='https://i.pinimg.com/736x/3f/35/dc/3f35dcddc7162660ed561a2f5faa99bb.jpg'></img>
-                    <h1 style={{color: "white", padding: "4px"}}>Uy! Debes comprar algo para acceder a este sitio.<br/> 
-                        ¿Porque no le echas un vistazo a nuestro
-                        <Button href={`${BASE_URL}/products`}>Catalogo</Button>  :)</h1>
-                   </Col>
-               </Row>
-           </Container>
+            <Redirect to="/"/>
         )
-    } */
+    };
 
     return (
         <Container className='formReview-container'>
