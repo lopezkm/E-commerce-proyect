@@ -75,6 +75,18 @@ function FormUserLogin( )
 		window.location.href = API_URL_FACEBOOK;
 	}
 
+	if(history.location.search === '?not') {
+		toast.error( `¡Contraseña no coincide!`, {
+			position: 'top-center',
+			autoClose: 1500,
+			hideProgressBar: true,
+			closeOnClick: true,
+			pauseOnHover: false,
+			draggable: true,
+			progress: undefined
+		} );
+	}
+
 	return (
 		<Container className='containerUserLogin'>
 			<Row>

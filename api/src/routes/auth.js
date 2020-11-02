@@ -270,7 +270,7 @@ server.get('/logged', (request, response)=>{
 * ================================================================================= */
 server.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }))
 
-server.get('/google/callback', passport.authenticate('google', { failureRedirect: process.env.FRONT_URL+'/login' }),
+server.get('/google/callback', passport.authenticate('google', { failureRedirect: process.env.FRONT_URL+'/login?not' }),
   	(request, response) => {
 		//Successful authentication, redirect home.
 		response.redirect(process.env.FRONT_URL+'/products?third')
@@ -284,7 +284,7 @@ server.get('/google/callback', passport.authenticate('google', { failureRedirect
 server.get('/facebook', passport.authenticate('facebook', { scope: 'email' }));
 
 server.get('/facebook/callback', passport.authenticate('facebook', { 
-	failureRedirect: process.env.FRONT_URL+'/login'}),
+	failureRedirect: process.env.FRONT_URL+'/login?not'}),
   	function(req, res) {
     // Successful authentication, redirect home.
     res.redirect(process.env.FRONT_URL+'/products?third');
