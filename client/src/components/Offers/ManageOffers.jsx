@@ -58,8 +58,6 @@ const ManageOffers = () => {
             [event.target.name]: event.target.value
             
         });
-
-        console.log(event)
     };
 
     /*Creacion de la nueva oferta */
