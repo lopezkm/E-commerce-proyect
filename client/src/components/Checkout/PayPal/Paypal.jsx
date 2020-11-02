@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import ReactDOM from 'react-dom';
 import paypal from 'paypal-checkout';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 import Promise from 'bluebird';
+import { removeProductsFromCart } from '../../../redux/action-creators/cart';
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -16,6 +17,7 @@ const PaypalCheckoutButton = ({ order }) => {
 	const [ loading, setLoading ] = useState( true );
 	const cart = useSelector( ( state ) => state.cart );
     const userId = useSelector( ( state ) => state.user.id );
+    const dispatch = useDispatch( );
 
     const paypaConf = {
         currency: 'USD',
@@ -32,7 +34,7 @@ const PaypalCheckoutButton = ({ order }) => {
         }
     };
 
-    const PaypalButton = paypal.Button.driver ('react', { React, ReactDOM});
+    const PaypalButton = paypal.Button.driver ('react', { React, ReactDOM });
 
     const payment = (data, actions) => {
         const payment = {
@@ -62,9 +64,8 @@ const PaypalCheckoutButton = ({ order }) => {
     const onAuthorize = (data, actions) => {
         return actions.payment.execute()
         .then(response => {
-            //respuesta de paypal
-            console.log(response);
-            toast.success( 'El pago se procesó correctamente, ID: ', response.id, {
+
+            toast.success( `El pago se procesó correctamente, ID: ${response.id}`, {
 				position: 'top-center',
 				autoClose: 2000,
 				hideProgressBar: true,
@@ -74,20 +75,21 @@ const PaypalCheckoutButton = ({ order }) => {
 				progress: undefined
             } );
            
-            return axios.get(`${API_URL}/users/${userId}/orders`, {withCredentials: true})
+            return axios.get(`${API_URL}/users/${userId}/orders`, { withCredentials: true })
         })
         .then(response =>  { 
+
 			let CartOrder = response.data.filter(order => order.status === 'processing');
-			return CartOrder;
-			
+            return axios.put(`${API_URL}/orders/${CartOrder[0].id}`, { status: 'completed' }, { withCredentials: true })
 		})
-	 	.then(CartOrder => {
-			return axios.put(`${API_URL}/orders/${CartOrder[0].id}`, {status: 'completed'}, {withCredentials: true})
-		})
-		.then(() => setTimeout(() => window.location.href= '/', 2010))
+        .then(() => {
+
+            dispatch(removeProductsFromCart(order.customer));
+            setTimeout(() => window.location.href= '/', 2010);
+        })
         .catch(error =>{
             console.log(error);
-            toast.error( `¡Ocurrio un error al procesar el pago con Paypal!`, {
+            toast.error( `¡Ocurrió un error al procesar el pago con Paypal!`, {
                 position: 'top-center',
                 autoClose: 2000,
                 hideProgressBar: true,
@@ -125,20 +127,22 @@ const PaypalCheckoutButton = ({ order }) => {
                 draggable: true,
                 progress: undefined
             } );
-            return axios.get(`${API_URL}/users/${userId}/orders`, {withCredentials: true})
+            return axios.get(`${API_URL}/users/${userId}/orders`, { withCredentials: true })
         .then(response =>  { console.log('estoy en la respuesta de axios')
+
 			let CartOrder = response.data.filter(order => order.status === 'processing');
-			return CartOrder;
+            return axios.put(`${API_URL}/orders/${CartOrder[0].id}`, {status: 'canceled'}, { withCredentials: true })
 		})
-		.then(CartOrder => { console.log('filtre la orden')
-			return axios.put(`${API_URL}/orders/${CartOrder[0].id}`, {status: 'canceled'}, {withCredentials: true})
-        })
         .then(() => {
 			return Promise.map( products, ( { id, stock, quantity } ) => {
-				 return axios.put( `${ API_URL }/products/${ id }`,{ stock: stock + quantity}, {withCredentials: true});
+				 return axios.put( `${ API_URL }/products/${ id }`,{ stock: stock + quantity}, { withCredentials: true });
 			})
 		})
-		.then((res) => console.log('termine', res.status), setTimeout(() => window.location.href= '/', 2010)) 
+        .then(() => {
+
+            dispatch(removeProductsFromCart(order.customer));
+            setTimeout(() => window.location.href= '/', 2010);
+        })
     };
 
     useEffect( ( ) => {
@@ -163,7 +167,7 @@ const PaypalCheckoutButton = ({ order }) => {
 		} )
 		.catch( ( ) => {
 			toast.error( `¡Ha ocurrido un error al recuperar la información de los productos!`, {
-				position: 'top-right',
+				position: 'top-center',
 				autoClose: 3000,
 				hideProgressBar: false,
 				closeOnClick: true,
