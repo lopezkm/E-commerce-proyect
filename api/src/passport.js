@@ -50,7 +50,7 @@ passport.use( new LocalStrategy( {
 * 		 Usamos Google Strategy para identificar usuarios 
 * ================================================================================= */
 
-/* passport.use(new GoogleStrategy({
+  passport.use(new GoogleStrategy({
     clientID: GOOGLE_CLIENT_ID,
     clientSecret: GOOGLE_CLIENT_SECRET,
     callbackURL: '/auth/google/callback'
@@ -79,12 +79,12 @@ passport.use( new LocalStrategy( {
 		} )
 	}
 ));
- */
+ 
 /* =================================================================================
 * 		 Usamos Facebook para identificar usuarios 
 * ================================================================================= */
 
-/* passport.use(new FacebookStrategy({
+ passport.use(new FacebookStrategy({
     clientID: FACEBOOK_APP_ID,
     clientSecret: FACEBOOK_APP_SECRET,
 	callbackURL: "/auth/facebook/callback",
@@ -112,7 +112,7 @@ passport.use( new LocalStrategy( {
 
 		} )
   }
-)); */
+)); 
 
 /* =================================================================================
 * 		[ Serializamos / deserializamos el usuario ]
