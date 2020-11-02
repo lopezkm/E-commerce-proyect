@@ -96,6 +96,13 @@ function Product( { productId } )
 		dispatch( addProductToCart( userId, product.id ) );
 	}
 
+	const handleBuyClick = ( e ) => {
+		e.preventDefault();
+
+		dispatch( addProductToCart( userId, product.id ) );
+		window.location.href = '/cart';
+	}
+
 	const deleteReview = ( productId, userId ) => {
 		axios.delete( `${API_URL}/products/${productId}/review/${userId}`, { withCredentials: true } )
 			.then( () => {
@@ -159,7 +166,7 @@ function Product( { productId } )
 								<Col sm={ 4 }>
 									{ product.stock > 0 ?
 										<div className="action-buttons">
-											<Button className="d-flex ml-auto mr-3">Comprar por ${ product.price }</Button>
+											<Button className="d-flex ml-auto mr-3" onClick={handleBuyClick}>Comprar por ${ product.price }</Button>
 											<Button variant="success" onClick={ handleAddToCartClick }>Agregar al carrito</Button>
 										</div>
 										:
