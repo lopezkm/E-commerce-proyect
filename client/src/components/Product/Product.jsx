@@ -100,7 +100,7 @@ function Product( { productId } )
 		e.preventDefault();
 
 		dispatch( addProductToCart( userId, product.id ) );
-		window.location.href = '/cart';
+		setTimeout(()=> {window.location.href = '/cart'}, 200);
 	}
 
 	const deleteReview = ( productId, userId ) => {
