@@ -57,10 +57,12 @@
         }
 
         .carousel-text {
+            padding-left: 1.2rem;
             user-select: none;
             background-color: none;
             color: transparent;
             font-family: $barlow;
+            font-style: italic;
             position: absolute;
             top: 0;
             display: flex;
@@ -85,6 +87,12 @@
 
             span {
                 margin-top: 1rem;
+            }
+
+            //Condicion para borrar el pseudoelemento after generado automaticamente al pasar el puntero
+
+            &:after {
+                background-color: transparent;
             }
         }
     }

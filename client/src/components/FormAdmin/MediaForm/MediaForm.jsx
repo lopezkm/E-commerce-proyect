@@ -109,6 +109,8 @@ function MediaUploader( { productId, productMedias } )
 										<option value="video-small">Video chico</option>
 										<option value="image-big">Imagen grande</option>
 										<option value="video-big">Video grande</option>
+										<option value="carousel">Carrusel home</option>
+										<option value="home">Imagen home</option>
 									</Form.Control>
 								</Form.Group>
 							</Col>

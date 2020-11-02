@@ -330,6 +330,11 @@ const Media = [
 		path: 'iad-carousel.jpg',
 		productId: 1
 	},
+	{
+		type: 'home',
+		path: 'iad-home.jpg',
+		productId: 1
+	},
 
 	/*
 		MAFIA
@@ -382,6 +387,11 @@ const Media = [
 	{
 		type: 'carousel',
 		path: 'mde-carousel.jpg',
+		productId: 2
+	},
+	{
+		type: 'home',
+		path: 'mde-home.jpg',
 		productId: 2
 	},
 
@@ -438,6 +448,11 @@ const Media = [
 		path: 'rl-carousel.jpg',
 		productId: 3
 	},
+	{
+		type: 'home',
+		path: 'rl-home.jpg',
+		productId: 3
+	},
 
 	/*
 		PUBG
@@ -490,6 +505,11 @@ const Media = [
 	{
 		type: 'carousel',
 		path: 'pugb-carousel.jpg',
+		productId: 4
+	},
+	{
+		type: 'home',
+		path: 'pugb-home.jpg',
 		productId: 4
 	},
 
@@ -546,6 +566,11 @@ const Media = [
 		path: 'sot-carousel.jpg',
 		productId: 5
 	},
+	{
+		type: 'home',
+		path: 'sot-home.jpg',
+		productId: 5
+	},
 
 	/*
 		Star Wars
@@ -598,6 +623,11 @@ const Media = [
 	{
 		type: 'carousel',
 		path: 'sws-carousel.png',
+		productId: 6
+	},
+	{
+		type: 'home',
+		path: 'sws-home.jpg',
 		productId: 6
 	},
 
@@ -654,6 +684,11 @@ const Media = [
 		path: 'tw3-carousel.jpg',
 		productId: 7
 	},
+	{
+		type: 'home',
+		path: 'tw3-home.jpg',
+		productId: 7
+	},
 
 	/*
 		GTA V
@@ -706,6 +741,11 @@ const Media = [
 	{
 		type: 'carousel',
 		path: 'gtav-carousel.jpg',
+		productId: 8
+	},
+	{
+		type: 'home',
+		path: 'gtav-home.png',
 		productId: 8
 	},
 
@@ -762,6 +802,11 @@ const Media = [
 		path: 'c4-carousel.jpg',
 		productId: 9
 	},
+	{
+		type: 'home',
+		path: 'c4-home.jpg',
+		productId: 9
+	},
 
 	/*
 		GRIP
@@ -814,6 +859,11 @@ const Media = [
 	{
 		type: 'carousel',
 		path: 'g2-carousel.jpg',
+		productId: 10
+	},
+	{
+		type: 'home',
+		path: 'g2-home.jpeg',
 		productId: 10
 	},
 
@@ -870,6 +920,11 @@ const Media = [
 		path: 'acr-carousel.jpg',
 		productId: 11
 	},
+	{
+		type: 'home',
+		path: 'acr-home.jpg',
+		productId: 11
+	},
 
 	/*
 		Borderlands 2
@@ -922,6 +977,11 @@ const Media = [
 	{
 		type: 'carousel',
 		path: 'b2-carousel.jpg',
+		productId: 12
+	},
+	{
+		type: 'home',
+		path: 'b2-home.jpg',
 		productId: 12
 	},
 
@@ -978,6 +1038,11 @@ const Media = [
 		path: 'pm-carousel.png',
 		productId: 13
 	},
+	{
+		type: 'home',
+		path: 'pm-home.jpg',
+		productId: 13
+	},
 
 	/*
 		Raft
@@ -1030,6 +1095,11 @@ const Media = [
 	{
 		type: 'carousel',
 		path: 'raft-carousel.jpg',
+		productId: 14
+	},
+	{
+		type: 'home',
+		path: 'raft-home.jpg',
 		productId: 14
 	},
 
@@ -1086,6 +1156,11 @@ const Media = [
 		path: 'tf2-carousel.jpg',
 		productId: 15
 	},
+	{
+		type: 'home',
+		path: 'tf2-home.jpg',
+		productId: 15
+	},
 
 	/*
 		Fall Guys
@@ -1138,6 +1213,11 @@ const Media = [
 	{
 		type: 'carousel',
 		path: 'fg-carousel.jpg',
+		productId: 16
+	},
+	{
+		type: 'home',
+		path: 'fg-home.jpg',
 		productId: 16
 	},
 
@@ -1194,6 +1274,11 @@ const Media = [
 		path: 'p-carousel.jpg',
 		productId: 17
 	},
+	{
+		type: 'home',
+		path: 'p-home.jpg',
+		productId: 17
+	},
 
 	/*
 		Among Us
@@ -1246,6 +1331,11 @@ const Media = [
 	{
 		type: 'carousel',
 		path: 'au-carousel.jpg',
+		productId: 18
+	},
+	{
+		type: 'home',
+		path: 'au-home.jpg',
 		productId: 18
 	},
 
@@ -1302,6 +1392,11 @@ const Media = [
 		path: 'ww-carousel.jpg',
 		productId: 19
 	},
+	{
+		type: 'home',
+		path: 'ww-home.jpg',
+		productId: 19
+	},
 
 	/*
 		Rust
@@ -1354,6 +1449,11 @@ const Media = [
 	{
 		type: 'carousel',
 		path: 'rust-carousel.jpg',
+		productId: 20
+	},
+	{
+		type: 'home',
+		path: 'rust-home.jpg',
 		productId: 20
 	},
 ];

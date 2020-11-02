@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Row, Col } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 
 const SecondCard = ({ img, price, name, offer }) => {
     return (
@@ -9,8 +9,7 @@ const SecondCard = ({ img, price, name, offer }) => {
             </Card.Header>
             <Card.Body>
                     <Card.Title>{name}</Card.Title>
-                    <Card.Text className='seconCard-price-offer'>{offer}</Card.Text>
-                    <Card.Text className='seconCard-price-original'>{price}</Card.Text>
+                    <Card.Text className='seconCard-price-offer'>{price}US$</Card.Text>
             </Card.Body>
         </Card>
     );
