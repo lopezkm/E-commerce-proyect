@@ -18,12 +18,18 @@
 
         &:after {
             content: "";
-            width: 45%;
+            width: 50%;
             height: 25%;
             left: -2.2rem;
             background-color: transparent;
             position: absolute;
             transform: skewX( -20deg );;
+
+            @media (min-width: 1900px) {
+                height: 20%;
+                width: 50%;
+                left: -3rem;
+            }
         }
 
         &:hover {
@@ -73,11 +79,11 @@
 
             @media (min-width: 1900px) {
                 font-size: 3rem;
-                width: max-content;
+                width: 50%;
 
                 h2 {
                     font-size: 3rem;
-                    width: 100%;
+                    min-width: 40rem;
                 }
             }
 

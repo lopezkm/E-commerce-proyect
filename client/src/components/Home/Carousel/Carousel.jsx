@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import axios from 'axios';
 import { Container, Image } from 'react-bootstrap';
 import defaultCarousel from '../../../assets/portrait.jpg';
+import { Link } from 'react-router-dom';
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -11,7 +12,7 @@ const Carousel = () => {
     const [products, setProducts] = React.useState([]);
 
     let itemCarousel = products.sort(() => Math.random() - 0.5).splice(0, 4);
-    
+
     const getProducts = () => {
         axios.get(`${API_URL}/products`)
             .then(response => setProducts(response.data))
@@ -44,13 +45,13 @@ const Carousel = () => {
         <Container className='carousel-container'>
             {
                 itemCarousel.map(item => (
-                    <div>
-                        <Image src={getProductCarousel(item.media)} />
-                        <div className='carousel-text'>
-                            <h2>{item.name}</h2>
-                            <span>{item.price}US$</span>
+                        <div onClick={() => window.location.href=`/product/${item.id}`}>
+                            <Image src={getProductCarousel(item.media)} />
+                            <div className='carousel-text'>
+                                <h2>{item.name}</h2>
+                                <span>{item.price}US$</span>
+                            </div>
                         </div>
-                    </div>
                 ))
             }
         </Container>
@@ -60,9 +61,9 @@ const Carousel = () => {
 export default Carousel;
 
 
-            //Codigo de prueba//
+//Codigo de prueba//
 
-            {/*<div>
+{/*<div>
                 <Image src='https://generacionxbox.com/wp-content/uploads/2017/12/assassinscreed_rougue.jpg' />
                 <div className='carousel-text'>
                     <h2>Assassin's Creed Rogue</h2>
