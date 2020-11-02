@@ -273,7 +273,7 @@ server.get('/google', passport.authenticate('google', { scope: ['profile', 'emai
 server.get('/google/callback', passport.authenticate('google', { failureRedirect: process.env.FRONT_URL+'/login' }),
   	(request, response) => {
 		//Successful authentication, redirect home.
-		response.redirect(process.env.FRONT_URL+'/products')
+		response.redirect(process.env.FRONT_URL+'/products?third')
   	}
 );
 
@@ -287,7 +287,7 @@ server.get('/facebook/callback', passport.authenticate('facebook', {
 	failureRedirect: process.env.FRONT_URL+'/login'}),
   	function(req, res) {
     // Successful authentication, redirect home.
-    res.redirect(process.env.FRONT_URL+'/products');
+    res.redirect(process.env.FRONT_URL+'/products?third');
   });
 
 /* =================================================================================

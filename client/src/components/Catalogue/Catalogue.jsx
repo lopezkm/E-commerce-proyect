@@ -61,6 +61,7 @@ function Catalogue( props )
 
 		axios.get( `${ API_URL }/auth/logged`, { withCredentials: true })
 		.then ( response => {	
+			
 			if (response.data) {
 				return axios.get( `${ API_URL }/auth/me`, { withCredentials: true });
 			}
@@ -68,8 +69,8 @@ function Catalogue( props )
 		.then(response => {
 			if (response) {
 				dispatch( loadUser( response.data ) )
-				
-				if (history.action === 'POP'){
+
+				if (history.location.search === '?third'){
 
 					toast.success( `¡Bienvenido ${response.data.firstName}!`, {
 						position: 'top-center',
