@@ -32,8 +32,9 @@ import FormAddReview from './components/FormReview/FormAddReview.jsx';
 import FormModifyReview from './components/FormReview/FormModifyReview.jsx';
 import FormUserLogin from './components/FormUserLogin/FormUserLogin.jsx';
 import FormManageUser from './components/FormManageUser/FormManageUser.jsx';
+import ManageOffers from './components/Offers/ManageOffers.jsx'
+import  UserShops from './components/UserShops/UserShops.jsx';
 import Checkout from './components/Checkout/Checkout.jsx';
-import UserShops from './components/UserShops/UserShops.jsx';
 import UserData from './components/UserData/UserData.jsx';
 
 function App( )
@@ -68,8 +69,10 @@ function App( )
 			<Route exact path="/Admin/categoriesM" component={ FormModify } />
 			<Route exact path="/Admin/orders" component={ OrderTable } />
 			<Route exact path="/Admin/users" component={ FormManageUser } />
+			<Route exact path= '/offers/manage' component= { ManageOffers }/>
 			<Route exact path="/products" component={ Catalogue } />
 			<Route exact path='/purchases' component={ UserShops } />
+
 			<Route exact path='/checkout' component={ Checkout } />
 			<Route exact path ='/product/:productId/modifyReview' render={ ( { match } ) =>
 				<FormModifyReview productId={ match.params.productId }/>

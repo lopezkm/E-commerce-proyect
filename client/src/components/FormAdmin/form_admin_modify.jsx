@@ -98,7 +98,6 @@ const FormAdminModify = () => {
     }
 
     const handleCheckChange = (event) => {
-        console.log('EVENT', event.target.name);
         let formCheck = document.getElementById(event.target.name);
         formCheck.disabled = !formCheck.disabled
     }

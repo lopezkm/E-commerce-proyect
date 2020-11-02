@@ -1,9 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Form, Button, FormControl, Container} from 'react-bootstrap';
 import axios from 'axios';
-import store from '../../redux/store/store.js';
-import { useSelector, useDispatch } from 'react-redux';
-import { GetCategories } from '../../redux/action-creators/category.js';
+import { useSelector } from 'react-redux';
+
 
 const FormModifyCategory = () => {
 
@@ -55,6 +54,7 @@ const FormModifyCategory = () => {
     const handleCheckChange = (event) => {
         let formCheck = document.getElementById(event.target.name);
         formCheck.disabled = !formCheck.disabled
+        console.log(formCheck)
     }
 
     let searchedCategory = categories.filter(category => category.name.toLowerCase().includes(inputSearch.searchInput.toLowerCase()))
