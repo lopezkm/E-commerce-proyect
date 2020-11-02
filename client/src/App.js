@@ -36,6 +36,7 @@ import ManageOffers from './components/Offers/ManageOffers.jsx'
 import  UserShops from './components/UserShops/UserShops.jsx';
 import Checkout from './components/Checkout/Checkout.jsx';
 import UserData from './components/UserData/UserData.jsx';
+import ConfirmCancelOrder from './components/ConfirmCancelOrder/ConfirmCancelOrder.jsx';
 
 function App( )
 {
@@ -56,6 +57,7 @@ function App( )
 			</Switch>
 			
 			<Route exact path='/' component={ Home }/>
+			<Route exact path='/cancel' component={ ConfirmCancelOrder }/>
 			<Route exact path='/login' component={ FormUserLogin } />
 			<Route exact path='/login/logued/shops' component= { UserShops } />
 			<Route exact path='/login/logued/data' component= { UserData } />

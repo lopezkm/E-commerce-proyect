@@ -20,7 +20,7 @@ function validateUpdate( order, options )
 	const oldStatus = orderStatuses.findIndex( ( e ) => order._previousDataValues.status === e );
 	const newStatus = orderStatuses.findIndex( ( e ) => order.dataValues.status === e );
 	
-	if ( ( newStatus < 0 ) || ( newStatus < oldStatus ) || ( oldStatus > 2 ) || ( newStatus > ( oldStatus + ( ( oldStatus > 0 ) ? 2 : 3 ) ) ) )
+	if ( ( newStatus < 0 )  /* || ( newStatus < oldStatus )*/  ||  ( oldStatus > 2 ) || ( newStatus > ( oldStatus + ( ( oldStatus > 0 ) ? 2 : 3 ) ) ) )
 	{
 		return Promise.reject( new Error( 'Can\'t change to that status' ) );
 	}

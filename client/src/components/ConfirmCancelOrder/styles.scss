@@ -1,0 +1,45 @@
+.confirm-cancel-container {
+    margin-top: 3rem;
+    
+    .card {
+        color: $white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: $grey;
+        font-family: $barlow;
+        border-radius: 20px;
+        padding: 3rem 0rem;
+
+        h4 {
+            font-family: $kanit;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+
+        .button  {
+            font-size: 1.5rem;
+            width: 60%;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border-radius: 10px;
+        }
+
+        .button-cancel {
+            font-size: 1.5rem;
+            width: 60%;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border-radius: 10px;
+            background-color: red;
+            border: red;
+            &:hover{
+                background-color: rgb(184, 29, 29);
+                border: rgb(184, 29, 29);
+            }
+        }
+
+        
+    }
+    
+}

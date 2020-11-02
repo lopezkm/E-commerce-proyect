@@ -22,11 +22,27 @@ function Cart( )
 	const user = useSelector( ( state ) => state.user );
 
 	const productsPrice = useMemo( ( ) => products.reduce( ( a, p ) => a + ( p.price * p.quantity ), 0.0 ), [ products ] );
-	/* const shippingCost = useMemo( ( ) => ( productsPrice && SHIPPING_COST ), [ productsPrice ] ); */
+	/* const shippingCost =const API_URL = process.env.REACT_APP_API_URL; useMemo( ( ) => ( productsPrice && SHIPPING_COST ), [ productsPrice ] ); */
 	const taxesCost = useMemo( ( ) => ( productsPrice * TAXES_PERCENT ), [ productsPrice ] );
 	const totalPrice = useMemo( ( ) => ( productsPrice /* + shippingCost  */+ taxesCost ), [ productsPrice/* , shippingCost */, taxesCost ] );
 	
 	const dispatch = useDispatch( );
+
+	const SetOrderToCarStatus = (prod) => {
+		axios.get(`${API_URL}/users/${user.id}/orders`, {withCredentials: true})
+		.then(response =>  { 
+			let CartOrder = response.data.filter(order => order.status === 'processing');
+			return CartOrder;
+		})
+		.then(CartOrder => { if(CartOrder.length === 0) return; 
+			return axios.put(`${API_URL}/orders/${CartOrder[0].id}`, {status: 'cart'}, {withCredentials: true})
+		})
+		/* .then(() => {
+			return Promise.map( prod, ( { id, stock, quantity } ) => {
+				return axios.put( `${ API_URL }/products/${ id }`,{ stock: stock + quantity}, { withCredentials: true });
+			})
+		}) */
+	}
 	
 	const handleBuyCartClick = ( e ) => {
 		e.preventDefault( );
@@ -82,6 +98,8 @@ function Cart( )
 	}
 	
 	useEffect( ( ) => {
+
+
 		if ( !cart.products || ( cart.products.length === 0 ) ) {
 			setProducts( [ ] );
 			setLoading( false );
@@ -100,7 +118,9 @@ function Cart( )
 			} );
 			setProducts( prodArray );
 			setLoading( false );
+			return prodArray;
 		} )
+		.then((prod) => SetOrderToCarStatus(prod))
 		.catch( ( ) => {
 			toast.error( `¡Ha ocurrido un error al recuperar la información de los productos!`, {
 				position: 'top-right',
@@ -112,6 +132,7 @@ function Cart( )
 				progress: undefined
 			} );
 		} );
+
 	}, [ cart.count, cart.products ] );
 	
 	if ( loading ) {
@@ -181,7 +202,7 @@ function Cart( )
 										<Button className='cart__button-buy w-100' onClick={ handleBuyCartClick }>Proceder a pagar</Button>
 										:
 										<div>
-										<p>Debe estar logueado para poder seguir con la compra ;)</p>
+										<p>Debe estar logueado para poder seguir con la compra </p>
 										<Button className='cart__button-buy w-100' href='/login'>Ingresar</Button>
 										</div>
 									}
